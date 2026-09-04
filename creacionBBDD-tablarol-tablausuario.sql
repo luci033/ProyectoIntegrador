@@ -20,6 +20,7 @@ CREATE TABLE Usuarios (
     NombreUsuario VARCHAR(100),
     ApellidoUsuario VARCHAR(100),
     Contrasena VARCHAR(100) NOT NULL,
+    Foto_Perfil VARCHAR(255),
     IdRol INT NOT NULL,
     Activo BIT DEFAULT 1, -- un booleano (1 = Activo, 0 = Desactivado)
     
