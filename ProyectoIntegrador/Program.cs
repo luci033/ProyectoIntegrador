@@ -21,9 +21,13 @@ namespace ProyectoIntegrador
 
             FormLogin login = new FormLogin();
 
+            Application.Run(new FormPrincipalAdministrador());
+            
+            /*
             // Si el usuario se loguea correctamente
             if (login.ShowDialog() == DialogResult.OK)
             {
+
                 // Lees la propiedad pública que creaste en el Login
                 string rol = login.RolUsuario;
 
@@ -34,7 +38,7 @@ namespace ProyectoIntegrador
                     Application.Run(new FormPrincipalVendedor());
                 else if (rol == "Logistica")
                     Application.Run(new FormPrincipalLogistica());
-            }
+            }*/
         }
     }
 }

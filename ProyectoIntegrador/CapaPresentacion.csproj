@@ -62,6 +62,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Formularios\Clientes\FormClientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Clientes\FormClientes.Designer.cs">
+      <DependentUpon>FormClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Clientes\FormClientesABM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Clientes\FormClientesABM.Designer.cs">
+      <DependentUpon>FormClientesABM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Compras\FormCompras.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Compras\FormCompras.Designer.cs">
+      <DependentUpon>FormCompras.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Compras\FormComprasABM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Compras\FormComprasABM.Designer.cs">
+      <DependentUpon>FormComprasABM.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\Devoluciones\FormDevoluciones.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +133,18 @@
     </Compile>
     <Compile Include="Formularios\Productos\FormProductos.Designer.cs">
       <DependentUpon>FormProductos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Proveedores\FormProveedorABM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Proveedores\FormProveedorABM.Designer.cs">
+      <DependentUpon>FormProveedorABM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Proveedores\FormProveedores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Proveedores\FormProveedores.Designer.cs">
+      <DependentUpon>FormProveedores.cs</DependentUpon>
     </Compile>
     <Compile Include="Formularios\Usuarios\FormUsuarioABM.cs">
       <SubType>Form</SubType>

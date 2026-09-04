@@ -97,5 +97,10 @@ namespace ProyectoIntegrador
         {
 
         }
+
+        private void BCrearUsuario_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

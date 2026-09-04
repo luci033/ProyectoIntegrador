@@ -75,5 +75,30 @@ namespace ProyectoIntegrador.Formularios.Principal
             frmCategorias.WindowState = FormWindowState.Maximized;
             frmCategorias.Show();
         }
+
+        private void gestiónDeDevolucionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listarProveedoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void altaProveedorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void registrarCompraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listarDevolucionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

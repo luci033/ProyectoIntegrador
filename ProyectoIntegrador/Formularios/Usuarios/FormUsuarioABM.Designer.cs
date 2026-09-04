@@ -194,7 +194,7 @@
             this.BCrearUsuario.TabIndex = 15;
             this.BCrearUsuario.Text = "Crear Usuario";
             this.BCrearUsuario.UseVisualStyleBackColor = true;
-           // this.BCrearUsuario.Click += new System.EventHandler(this.button1_Click);
+            this.BCrearUsuario.Click += new System.EventHandler(this.BCrearUsuario_Click);
             // 
             // BCancelar
             // 

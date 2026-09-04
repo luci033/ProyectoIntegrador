@@ -16,5 +16,10 @@ namespace ProyectoIntegrador.Formularios.Principal
         {
             InitializeComponent();
         }
+
+        private void FormPrincipalLogistica_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
