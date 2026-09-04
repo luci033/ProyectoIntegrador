@@ -19,6 +19,8 @@ namespace CapaEntidades
         public int IdRol { get; set; }
         public bool Activo { get; set; }
 
+        // agregar el campo foto perfil
+
         // Propiedad de navegación (Trae el objeto Rol completo por si necesitas su nombre)
         public Rol ObjRol { get; set; }
     }
