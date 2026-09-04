@@ -12,6 +12,7 @@ namespace ProyectoIntegrador.Formularios.Usuarios
 {
     public partial class FormLogin : Form
     {
+        //Es necesario?
         public string RolUsuario { get; set; } = "Admin";
 
         public FormLogin()
