@@ -67,7 +67,7 @@
             // listarProductosToolStripMenuItem
             // 
             this.listarProductosToolStripMenuItem.Name = "listarProductosToolStripMenuItem";
-            this.listarProductosToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.listarProductosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.listarProductosToolStripMenuItem.Text = "Listar Productos";
             // 
             // ventasToolStripMenuItem
@@ -82,14 +82,16 @@
             // registrarVentaToolStripMenuItem
             // 
             this.registrarVentaToolStripMenuItem.Name = "registrarVentaToolStripMenuItem";
-            this.registrarVentaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.registrarVentaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.registrarVentaToolStripMenuItem.Text = "Registrar Venta";
+            this.registrarVentaToolStripMenuItem.Click += new System.EventHandler(this.registrarVentaToolStripMenuItem_Click);
             // 
             // listarVentasToolStripMenuItem
             // 
             this.listarVentasToolStripMenuItem.Name = "listarVentasToolStripMenuItem";
-            this.listarVentasToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.listarVentasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.listarVentasToolStripMenuItem.Text = "Listar Ventas";
+            this.listarVentasToolStripMenuItem.Click += new System.EventHandler(this.listarVentasToolStripMenuItem_Click);
             // 
             // devolucionesToolStripMenuItem
             // 
@@ -124,13 +126,13 @@
             // registrarClienteToolStripMenuItem
             // 
             this.registrarClienteToolStripMenuItem.Name = "registrarClienteToolStripMenuItem";
-            this.registrarClienteToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.registrarClienteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.registrarClienteToolStripMenuItem.Text = "Registrar Cliente";
             // 
             // listarClientesToolStripMenuItem
             // 
             this.listarClientesToolStripMenuItem.Name = "listarClientesToolStripMenuItem";
-            this.listarClientesToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.listarClientesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.listarClientesToolStripMenuItem.Text = "Listar Clientes";
             // 
             // FormPrincipalVendedor

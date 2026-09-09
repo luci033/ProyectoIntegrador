@@ -103,7 +103,7 @@ namespace ProyectoIntegrador.Formularios.Usuarios
             // 1. Ignorar si tiene la marca de agua
             if (TBUsuario.Text == "Usuario") return;
 
-            // 2. Validar que no esté vacío y (opcional) que sean letras o números
+            // 2. Validar que no este vacio y (opcional) que sean letras o numeros
             if (string.IsNullOrWhiteSpace(TBUsuario.Text) || !TBUsuario.Text.All(char.IsLetterOrDigit))
             {
                 e.Cancel = true;
@@ -153,23 +153,17 @@ namespace ProyectoIntegrador.Formularios.Usuarios
             if (usuario == "admin" && clave == "1234")
             {
                 // Abre el formulario del Administrador
-                FormPrincipalAdministrador menuAdmin = new FormPrincipalAdministrador();
-                menuAdmin.Show();
-                this.Hide(); // Oculta la pantalla de login
+                RolUsuario = "Administrador";
             }
             else if (usuario == "vendedor" && clave == "1234")
             {
                 // Abre el formulario del Vendedor
-                FormPrincipalVendedor menuVendedor = new FormPrincipalVendedor();
-                menuVendedor.Show();
-                this.Hide();
+                RolUsuario = "Vendedor";
             }
             else if (usuario == "logistica" && clave == "1234")
             {
                 // Abre el formulario de Logística
-                FormPrincipalLogistica menuLogistica = new FormPrincipalLogistica();
-                menuLogistica.Show();
-                this.Hide();
+                RolUsuario = "Logistica";
             }
             else
             {

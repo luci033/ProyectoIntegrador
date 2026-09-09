@@ -67,7 +67,7 @@
             this.detalle});
             this.DataGridHistorialVenta.Location = new System.Drawing.Point(2, 252);
             this.DataGridHistorialVenta.Name = "DataGridHistorialVenta";
-            this.DataGridHistorialVenta.Size = new System.Drawing.Size(460, 110);
+            this.DataGridHistorialVenta.Size = new System.Drawing.Size(446, 110);
             this.DataGridHistorialVenta.TabIndex = 2;
             this.DataGridHistorialVenta.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridHistorialVenta_CellContentClick);
             // 
@@ -99,7 +99,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(634, 361);
+            this.ClientSize = new System.Drawing.Size(620, 394);
             this.Controls.Add(this.DataGridHistorialVenta);
             this.Controls.Add(this.TBBuscar);
             this.Controls.Add(this.LBuscar);

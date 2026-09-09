@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProyectoIntegrador.Formularios.Ventas;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,6 +21,22 @@ namespace ProyectoIntegrador.Formularios.Principal
         private void s(object sender, EventArgs e)
         {
 
+        }
+
+        private void listarVentasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //instanciamos la pantalla de historial y buscador
+            FHistorialVentas pantallaHistorial = new FHistorialVentas();
+            pantallaHistorial.ShowDialog();
+        }
+
+        private void registrarVentaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //instanciamos la pantalla de carga y cobro
+            FormVentas pantallaVentas = new FormVentas();
+
+            //lo abrimos como modal para que termine la vetna antes de vovler al menu
+            pantallaVentas.ShowDialog();
         }
     }
 }

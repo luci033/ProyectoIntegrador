@@ -19,27 +19,31 @@ namespace ProyectoIntegrador
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            FormLogin login = new FormLogin();
-            Application.Run(new FormLogin());
+            //FormLogin login = new FormLogin();
+            //Application.Run(new FormLogin());
 
             //Application.Run(new FormPrincipalAdministrador());
 
-            /*
-            // Si el usuario se loguea correctamente
-            if (login.ShowDialog() == DialogResult.OK)
+
+            using (FormLogin login = new FormLogin())
             {
-
-                // Lees la propiedad pública que creaste en el Login
-                string rol = login.RolUsuario;
-
-                // Abrís el MDI correspondiente según el rol
-                if (rol == "Admin")
-                    Application.Run(new FormPrincipalAdministrador());
-                else if (rol == "Vendedor")
-                    Application.Run(new FormPrincipalVendedor());
-                else if (rol == "Logistica")
-                    Application.Run(new FormPrincipalLogistica());
-            }*/
-        }
+                // si el login fue exitoso, el Login devuelve DialogResult.OK
+                if (login.ShowDialog() == DialogResult.OK)
+                {
+                    // determina que rol accedio y muestra su formulario
+                    if (login.RolUsuario == "Vendedor")
+                    {
+                        Application.Run(new FormPrincipalVendedor());
+                    }
+                    else if (login.RolUsuario == "Administrador")
+                    {
+                        Application.Run(new FormPrincipalAdministrador());
+                    }
+                    else if (login.RolUsuario == "Logistica")
+                    {
+                        Application.Run(new FormPrincipalLogistica());
+                    }
+                }
+            }
     }
 }
