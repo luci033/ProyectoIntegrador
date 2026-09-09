@@ -37,11 +37,11 @@
             this.ventasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.geToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.devolucionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listarDevolucionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comprasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.registrarCompraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.proveedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.altaProveedorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listarDevolucionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestionDeClientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
@@ -126,6 +126,13 @@
             this.devolucionesToolStripMenuItem.Text = "Devoluciones";
             this.devolucionesToolStripMenuItem.Click += new System.EventHandler(this.devolucionesToolStripMenuItem_Click);
             // 
+            // listarDevolucionesToolStripMenuItem
+            // 
+            this.listarDevolucionesToolStripMenuItem.Name = "listarDevolucionesToolStripMenuItem";
+            this.listarDevolucionesToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.listarDevolucionesToolStripMenuItem.Text = "Gestión de Devoluciones";
+            this.listarDevolucionesToolStripMenuItem.Click += new System.EventHandler(this.listarDevolucionesToolStripMenuItem_Click);
+            // 
             // comprasToolStripMenuItem
             // 
             this.comprasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -156,13 +163,6 @@
             this.altaProveedorToolStripMenuItem.Text = "Gestión de Proveedores";
             this.altaProveedorToolStripMenuItem.Click += new System.EventHandler(this.altaProveedorToolStripMenuItem_Click);
             // 
-            // listarDevolucionesToolStripMenuItem
-            // 
-            this.listarDevolucionesToolStripMenuItem.Name = "listarDevolucionesToolStripMenuItem";
-            this.listarDevolucionesToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.listarDevolucionesToolStripMenuItem.Text = "Gestión de Devoluciones";
-            this.listarDevolucionesToolStripMenuItem.Click += new System.EventHandler(this.listarDevolucionesToolStripMenuItem_Click);
-            // 
             // clientesToolStripMenuItem
             // 
             this.clientesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -174,7 +174,7 @@
             // gestionDeClientesToolStripMenuItem
             // 
             this.gestionDeClientesToolStripMenuItem.Name = "gestionDeClientesToolStripMenuItem";
-            this.gestionDeClientesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gestionDeClientesToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.gestionDeClientesToolStripMenuItem.Text = "Gestion de Clientes";
             // 
             // FormPrincipalAdministrador
@@ -188,6 +188,7 @@
             this.Name = "FormPrincipalAdministrador";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Joyería ALBA";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FormPrincipal_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

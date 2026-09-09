@@ -148,6 +148,7 @@
             this.Controls.Add(this.DGProveedores);
             this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "FormProveedores";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Proveedores";
             ((System.ComponentModel.ISupportInitialize)(this.DGProveedores)).EndInit();
             this.ResumeLayout(false);
