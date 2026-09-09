@@ -28,14 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.LCLiente = new System.Windows.Forms.Label();
             this.TBCliente = new System.Windows.Forms.TextBox();
             this.LTelefono = new System.Windows.Forms.Label();
             this.LDni = new System.Windows.Forms.Label();
             this.TBTelefono = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.TBDni = new System.Windows.Forms.TextBox();
             this.BAgregarProducto = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridProducto = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NombreJoya = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PrecioUnitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,14 +47,20 @@
             this.BCobrar = new System.Windows.Forms.Button();
             this.LTotal = new System.Windows.Forms.Label();
             this.TBTotal = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProvider3 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridProducto)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider3)).BeginInit();
             this.SuspendLayout();
             // 
             // LCLiente
             // 
             this.LCLiente.AutoSize = true;
-            this.LCLiente.Location = new System.Drawing.Point(23, 17);
+            this.LCLiente.Location = new System.Drawing.Point(23, 24);
             this.LCLiente.Name = "LCLiente";
             this.LCLiente.Size = new System.Drawing.Size(39, 13);
             this.LCLiente.TabIndex = 0;
@@ -62,15 +69,16 @@
             // 
             // TBCliente
             // 
-            this.TBCliente.Location = new System.Drawing.Point(87, 10);
+            this.TBCliente.Location = new System.Drawing.Point(87, 17);
             this.TBCliente.Name = "TBCliente";
             this.TBCliente.Size = new System.Drawing.Size(100, 20);
             this.TBCliente.TabIndex = 1;
+            this.TBCliente.Validating += new System.ComponentModel.CancelEventHandler(this.TBCliente_Validating);
             // 
             // LTelefono
             // 
             this.LTelefono.AutoSize = true;
-            this.LTelefono.Location = new System.Drawing.Point(23, 52);
+            this.LTelefono.Location = new System.Drawing.Point(23, 55);
             this.LTelefono.Name = "LTelefono";
             this.LTelefono.Size = new System.Drawing.Size(49, 13);
             this.LTelefono.TabIndex = 2;
@@ -79,7 +87,7 @@
             // LDni
             // 
             this.LDni.AutoSize = true;
-            this.LDni.Location = new System.Drawing.Point(23, 87);
+            this.LDni.Location = new System.Drawing.Point(23, 91);
             this.LDni.Name = "LDni";
             this.LDni.Size = new System.Drawing.Size(26, 13);
             this.LDni.TabIndex = 3;
@@ -91,13 +99,15 @@
             this.TBTelefono.Name = "TBTelefono";
             this.TBTelefono.Size = new System.Drawing.Size(100, 20);
             this.TBTelefono.TabIndex = 4;
+            this.TBTelefono.Validating += new System.ComponentModel.CancelEventHandler(this.TBTelefono_Validating);
             // 
-            // textBox2
+            // TBDni
             // 
-            this.textBox2.Location = new System.Drawing.Point(87, 84);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 5;
+            this.TBDni.Location = new System.Drawing.Point(87, 84);
+            this.TBDni.Name = "TBDni";
+            this.TBDni.Size = new System.Drawing.Size(100, 20);
+            this.TBDni.TabIndex = 5;
+            this.TBDni.Validating += new System.ComponentModel.CancelEventHandler(this.TBDni_Validating);
             // 
             // BAgregarProducto
             // 
@@ -107,20 +117,21 @@
             this.BAgregarProducto.TabIndex = 6;
             this.BAgregarProducto.Text = "Agregar Producto";
             this.BAgregarProducto.UseVisualStyleBackColor = true;
+            this.BAgregarProducto.Click += new System.EventHandler(this.BAgregarProducto_Click);
             // 
-            // dataGridView1
+            // dataGridProducto
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridProducto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridProducto.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
             this.NombreJoya,
             this.PrecioUnitario,
             this.Cantidad,
             this.SubTotal});
-            this.dataGridView1.Location = new System.Drawing.Point(8, 248);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(544, 121);
-            this.dataGridView1.TabIndex = 7;
+            this.dataGridProducto.Location = new System.Drawing.Point(8, 248);
+            this.dataGridProducto.Name = "dataGridProducto";
+            this.dataGridProducto.Size = new System.Drawing.Size(544, 121);
+            this.dataGridProducto.TabIndex = 7;
             // 
             // Id
             // 
@@ -149,7 +160,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.textBox2);
+            this.panel1.Controls.Add(this.TBDni);
             this.panel1.Controls.Add(this.TBTelefono);
             this.panel1.Controls.Add(this.LDni);
             this.panel1.Controls.Add(this.LTelefono);
@@ -157,7 +168,7 @@
             this.panel1.Controls.Add(this.LCLiente);
             this.panel1.Location = new System.Drawing.Point(12, 28);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(211, 124);
+            this.panel1.Size = new System.Drawing.Size(282, 128);
             this.panel1.TabIndex = 8;
             // 
             // BCancelar
@@ -168,6 +179,7 @@
             this.BCancelar.TabIndex = 9;
             this.BCancelar.Text = "Cancelar";
             this.BCancelar.UseVisualStyleBackColor = true;
+            this.BCancelar.Click += new System.EventHandler(this.BCancelar_Click);
             // 
             // BCobrar
             // 
@@ -177,6 +189,7 @@
             this.BCobrar.TabIndex = 10;
             this.BCobrar.Text = "Cobrar";
             this.BCobrar.UseVisualStyleBackColor = true;
+            this.BCobrar.Click += new System.EventHandler(this.BCobrar_Click);
             // 
             // LTotal
             // 
@@ -194,6 +207,18 @@
             this.TBTotal.Size = new System.Drawing.Size(100, 20);
             this.TBTotal.TabIndex = 6;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // errorProvider2
+            // 
+            this.errorProvider2.ContainerControl = this;
+            // 
+            // errorProvider3
+            // 
+            this.errorProvider3.ContainerControl = this;
+            // 
             // FormVentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -204,14 +229,17 @@
             this.Controls.Add(this.BCobrar);
             this.Controls.Add(this.BCancelar);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridProducto);
             this.Controls.Add(this.BAgregarProducto);
             this.Name = "FormVentas";
-            this.Text = "Ñgit ";
+            this.Text = "Registro de venta";
             this.Load += new System.EventHandler(this.FormRegistrarVenta_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridProducto)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -224,9 +252,9 @@
         private System.Windows.Forms.Label LTelefono;
         private System.Windows.Forms.Label LDni;
         private System.Windows.Forms.TextBox TBTelefono;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox TBDni;
         private System.Windows.Forms.Button BAgregarProducto;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridProducto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn NombreJoya;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrecioUnitario;
@@ -237,5 +265,8 @@
         private System.Windows.Forms.Button BCobrar;
         private System.Windows.Forms.Label LTotal;
         private System.Windows.Forms.TextBox TBTotal;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.ErrorProvider errorProvider2;
+        private System.Windows.Forms.ErrorProvider errorProvider3;
     }
 }
