@@ -205,6 +205,12 @@
     <EmbeddedResource Include="Formularios\Productos\FormProductos.resx">
       <DependentUpon>FormProductos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Proveedores\FormProveedorABM.resx">
+      <DependentUpon>FormProveedorABM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Proveedores\FormProveedores.resx">
+      <DependentUpon>FormProveedores.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Usuarios\FormUsuarioABM.resx">
       <DependentUpon>FormUsuarioABM.cs</DependentUpon>
     </EmbeddedResource>
