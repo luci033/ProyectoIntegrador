@@ -154,16 +154,22 @@ namespace ProyectoIntegrador.Formularios.Usuarios
             {
                 // Abre el formulario del Administrador
                 RolUsuario = "Administrador";
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
             else if (usuario == "vendedor" && clave == "1234")
             {
                 // Abre el formulario del Vendedor
                 RolUsuario = "Vendedor";
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
             else if (usuario == "logistica" && clave == "1234")
             {
                 // Abre el formulario de Logística
                 RolUsuario = "Logistica";
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
             else
             {

@@ -22,12 +22,23 @@ namespace ProyectoIntegrador.Formularios.Compras
 
         }
 
-        private void BAgregarProveedor_Click(object sender, EventArgs e)
+        private void BAgregarOrden_Click(object sender, EventArgs e)
+        {
+            using (FormOrdenCompra formOrdenCompra = new FormOrdenCompra())
+            {
+                if (formOrdenCompra.ShowDialog() == DialogResult.OK)
+                {
+                    // Aquí procesas los datos devueltos por la orden cuando se confirme
+                }
+            }
+        }
+
+        private void DGProveedores_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
 
-        private void DGProveedores_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void BRegistrarCompra_Click(object sender, EventArgs e)
         {
 
         }

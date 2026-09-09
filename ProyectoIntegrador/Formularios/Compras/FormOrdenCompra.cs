@@ -22,11 +22,6 @@ namespace ProyectoIntegrador.Formularios.Compras
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void label3_Click(object sender, EventArgs e)
         {
 
@@ -43,6 +38,36 @@ namespace ProyectoIntegrador.Formularios.Compras
         }
 
         private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BRegistrarCompra_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BSeleccionarProveedor_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BAgregarProducto_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BCancelar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BGenerarOrden_Click(object sender, EventArgs e)
         {
 
         }

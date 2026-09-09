@@ -34,7 +34,7 @@
             this.IDVenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.detalle = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.colDetalle = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridHistorialVenta)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,15 +59,17 @@
             // 
             this.DataGridHistorialVenta.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.DataGridHistorialVenta.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DataGridHistorialVenta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DataGridHistorialVenta.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IDVenta,
             this.Fecha,
             this.total,
-            this.detalle});
+            this.colDetalle});
             this.DataGridHistorialVenta.Location = new System.Drawing.Point(2, 252);
             this.DataGridHistorialVenta.Name = "DataGridHistorialVenta";
-            this.DataGridHistorialVenta.Size = new System.Drawing.Size(446, 110);
+            this.DataGridHistorialVenta.RowHeadersVisible = false;
+            this.DataGridHistorialVenta.Size = new System.Drawing.Size(621, 139);
             this.DataGridHistorialVenta.TabIndex = 2;
             this.DataGridHistorialVenta.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridHistorialVenta_CellContentClick);
             // 
@@ -86,14 +88,14 @@
             this.total.HeaderText = "Total";
             this.total.Name = "total";
             // 
-            // detalle
+            // colDetalle
             // 
-            this.detalle.HeaderText = "";
-            this.detalle.Name = "detalle";
-            this.detalle.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.detalle.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.detalle.Text = "Detalle";
-            this.detalle.UseColumnTextForButtonValue = true;
+            this.colDetalle.HeaderText = "";
+            this.colDetalle.Name = "colDetalle";
+            this.colDetalle.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colDetalle.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colDetalle.Text = "Detalle";
+            this.colDetalle.UseColumnTextForButtonValue = true;
             // 
             // FHistorialVentas
             // 
@@ -120,6 +122,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn IDVenta;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn total;
-        private System.Windows.Forms.DataGridViewButtonColumn detalle;
+        private System.Windows.Forms.DataGridViewButtonColumn colDetalle;
     }
 }

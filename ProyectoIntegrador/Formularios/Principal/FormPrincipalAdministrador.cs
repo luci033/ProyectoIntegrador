@@ -1,4 +1,5 @@
-﻿using ProyectoIntegrador.Formularios.Devoluciones;
+﻿using ProyectoIntegrador.Formularios.Compras;
+using ProyectoIntegrador.Formularios.Devoluciones;
 using ProyectoIntegrador.Formularios.Productos;
 using ProyectoIntegrador.Formularios.Proveedores;
 using ProyectoIntegrador.Formularios.Usuarios;
@@ -108,7 +109,21 @@ namespace ProyectoIntegrador.Formularios.Principal
 
         private void registrarCompraToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // 1. Recorremos los formularios hijos abiertos
+            foreach (Form formulario in this.MdiChildren)
+            {
+                if (formulario is FormProveedores)
+                {
+                    // Si ya está abierto, lo traemos al frente y cortamos la ejecución
+                    formulario.BringToFront();
+                    return;
+                }
+            }
 
+            // 2. Si el bucle termina sin encontrarlo, lo creamos
+            FormCompras formCompras = new FormCompras();
+            formCompras.MdiParent = this;
+            formCompras.Show();
         }
 
         private void listarDevolucionesToolStripMenuItem_Click(object sender, EventArgs e)

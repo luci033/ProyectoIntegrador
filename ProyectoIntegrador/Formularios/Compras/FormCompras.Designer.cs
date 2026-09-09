@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.LCompras = new System.Windows.Forms.Label();
-            this.BRegistrarCompra = new System.Windows.Forms.Button();
+            this.BAgregarOrden = new System.Windows.Forms.Button();
             this.DGCompras = new System.Windows.Forms.DataGridView();
             this.idCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fechaCompa = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,18 +54,18 @@
             this.LCompras.Text = "Gestión de Compras";
             this.LCompras.Click += new System.EventHandler(this.LProveedores_Click);
             // 
-            // BRegistrarCompra
+            // BAgregarOrden
             // 
-            this.BRegistrarCompra.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.BAgregarOrden.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.BRegistrarCompra.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BRegistrarCompra.Location = new System.Drawing.Point(525, 30);
-            this.BRegistrarCompra.Name = "BRegistrarCompra";
-            this.BRegistrarCompra.Size = new System.Drawing.Size(215, 91);
-            this.BRegistrarCompra.TabIndex = 8;
-            this.BRegistrarCompra.Text = "Registrar Compra";
-            this.BRegistrarCompra.UseVisualStyleBackColor = true;
-            this.BRegistrarCompra.Click += new System.EventHandler(this.BAgregarProveedor_Click);
+            this.BAgregarOrden.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BAgregarOrden.Location = new System.Drawing.Point(525, 30);
+            this.BAgregarOrden.Name = "BAgregarOrden";
+            this.BAgregarOrden.Size = new System.Drawing.Size(215, 91);
+            this.BAgregarOrden.TabIndex = 8;
+            this.BAgregarOrden.Text = "Agregar Orden";
+            this.BAgregarOrden.UseVisualStyleBackColor = true;
+            this.BAgregarOrden.Click += new System.EventHandler(this.BAgregarOrden_Click);
             // 
             // DGCompras
             // 
@@ -151,7 +151,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.LCompras);
-            this.Controls.Add(this.BRegistrarCompra);
+            this.Controls.Add(this.BAgregarOrden);
             this.Controls.Add(this.DGCompras);
             this.Name = "FormCompras";
             this.Text = "Compras";
@@ -164,7 +164,7 @@
         #endregion
 
         private System.Windows.Forms.Label LCompras;
-        private System.Windows.Forms.Button BRegistrarCompra;
+        private System.Windows.Forms.Button BAgregarOrden;
         private System.Windows.Forms.DataGridView DGCompras;
         private System.Windows.Forms.DataGridViewTextBoxColumn idCompra;
         private System.Windows.Forms.DataGridViewTextBoxColumn fechaCompa;

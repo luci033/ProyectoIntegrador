@@ -31,11 +31,15 @@
             this.BSeleccionarProveedor = new System.Windows.Forms.Button();
             this.LCUIT = new System.Windows.Forms.Label();
             this.LRazonSocial = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.TBRazonSocial = new System.Windows.Forms.TextBox();
+            this.TBCUIT = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.TBFecha = new System.Windows.Forms.TextBox();
+            this.LFecha = new System.Windows.Forms.Label();
             this.LDatosProveedor = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.LDetalleOrden = new System.Windows.Forms.Label();
+            this.LTotal = new System.Windows.Forms.Label();
             this.BAgregarProducto = new System.Windows.Forms.Button();
             this.DGDetalleOrden = new System.Windows.Forms.DataGridView();
             this.idDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,10 +47,6 @@
             this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CostoUnitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LTotal = new System.Windows.Forms.Label();
-            this.LDetalleOrden = new System.Windows.Forms.Label();
-            this.LFecha = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.BGenerarOrden = new System.Windows.Forms.Button();
             this.BCancelar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
@@ -62,7 +62,7 @@
             this.BSeleccionarProveedor.TabIndex = 0;
             this.BSeleccionarProveedor.Text = "Seleccionar Proveedor";
             this.BSeleccionarProveedor.UseVisualStyleBackColor = true;
-            this.BSeleccionarProveedor.Click += new System.EventHandler(this.button1_Click);
+            this.BSeleccionarProveedor.Click += new System.EventHandler(this.BSeleccionarProveedor_Click);
             // 
             // LCUIT
             // 
@@ -82,34 +82,51 @@
             this.LRazonSocial.TabIndex = 2;
             this.LRazonSocial.Text = "Razón Social:";
             // 
-            // textBox1
+            // TBRazonSocial
             // 
-            this.textBox1.Location = new System.Drawing.Point(319, 40);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(145, 20);
-            this.textBox1.TabIndex = 3;
+            this.TBRazonSocial.Location = new System.Drawing.Point(319, 40);
+            this.TBRazonSocial.Name = "TBRazonSocial";
+            this.TBRazonSocial.Size = new System.Drawing.Size(145, 20);
+            this.TBRazonSocial.TabIndex = 3;
+            this.TBRazonSocial.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // textBox2
+            // TBCUIT
             // 
-            this.textBox2.Location = new System.Drawing.Point(319, 77);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(145, 20);
-            this.textBox2.TabIndex = 4;
+            this.TBCUIT.Location = new System.Drawing.Point(319, 77);
+            this.TBCUIT.Name = "TBCUIT";
+            this.TBCUIT.Size = new System.Drawing.Size(145, 20);
+            this.TBCUIT.TabIndex = 4;
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.textBox3);
+            this.panel1.Controls.Add(this.TBFecha);
             this.panel1.Controls.Add(this.LFecha);
             this.panel1.Controls.Add(this.LDatosProveedor);
-            this.panel1.Controls.Add(this.textBox2);
+            this.panel1.Controls.Add(this.TBCUIT);
             this.panel1.Controls.Add(this.LRazonSocial);
             this.panel1.Controls.Add(this.BSeleccionarProveedor);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.TBRazonSocial);
             this.panel1.Controls.Add(this.LCUIT);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(776, 106);
             this.panel1.TabIndex = 6;
+            // 
+            // TBFecha
+            // 
+            this.TBFecha.Location = new System.Drawing.Point(562, 40);
+            this.TBFecha.Name = "TBFecha";
+            this.TBFecha.Size = new System.Drawing.Size(145, 20);
+            this.TBFecha.TabIndex = 8;
+            // 
+            // LFecha
+            // 
+            this.LFecha.AutoSize = true;
+            this.LFecha.Location = new System.Drawing.Point(516, 43);
+            this.LFecha.Name = "LFecha";
+            this.LFecha.Size = new System.Drawing.Size(40, 13);
+            this.LFecha.TabIndex = 7;
+            this.LFecha.Text = "Fecha:";
             // 
             // LDatosProveedor
             // 
@@ -132,6 +149,27 @@
             this.panel2.Size = new System.Drawing.Size(776, 290);
             this.panel2.TabIndex = 7;
             // 
+            // LDetalleOrden
+            // 
+            this.LDetalleOrden.AutoSize = true;
+            this.LDetalleOrden.Location = new System.Drawing.Point(3, 10);
+            this.LDetalleOrden.Name = "LDetalleOrden";
+            this.LDetalleOrden.Size = new System.Drawing.Size(72, 13);
+            this.LDetalleOrden.TabIndex = 7;
+            this.LDetalleOrden.Text = "Detalle Orden";
+            this.LDetalleOrden.Click += new System.EventHandler(this.label1_Click_1);
+            // 
+            // LTotal
+            // 
+            this.LTotal.AutoSize = true;
+            this.LTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LTotal.Location = new System.Drawing.Point(537, 269);
+            this.LTotal.Name = "LTotal";
+            this.LTotal.Size = new System.Drawing.Size(45, 18);
+            this.LTotal.TabIndex = 7;
+            this.LTotal.Text = "Total:";
+            this.LTotal.Click += new System.EventHandler(this.label3_Click);
+            // 
             // BAgregarProducto
             // 
             this.BAgregarProducto.Location = new System.Drawing.Point(37, 26);
@@ -140,6 +178,7 @@
             this.BAgregarProducto.TabIndex = 7;
             this.BAgregarProducto.Text = "Agregar Producto";
             this.BAgregarProducto.UseVisualStyleBackColor = true;
+            this.BAgregarProducto.Click += new System.EventHandler(this.BAgregarProducto_Click);
             // 
             // DGDetalleOrden
             // 
@@ -194,43 +233,6 @@
             this.Subtotal.Name = "Subtotal";
             this.Subtotal.ReadOnly = true;
             // 
-            // LTotal
-            // 
-            this.LTotal.AutoSize = true;
-            this.LTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LTotal.Location = new System.Drawing.Point(537, 269);
-            this.LTotal.Name = "LTotal";
-            this.LTotal.Size = new System.Drawing.Size(45, 18);
-            this.LTotal.TabIndex = 7;
-            this.LTotal.Text = "Total:";
-            this.LTotal.Click += new System.EventHandler(this.label3_Click);
-            // 
-            // LDetalleOrden
-            // 
-            this.LDetalleOrden.AutoSize = true;
-            this.LDetalleOrden.Location = new System.Drawing.Point(3, 10);
-            this.LDetalleOrden.Name = "LDetalleOrden";
-            this.LDetalleOrden.Size = new System.Drawing.Size(72, 13);
-            this.LDetalleOrden.TabIndex = 7;
-            this.LDetalleOrden.Text = "Detalle Orden";
-            this.LDetalleOrden.Click += new System.EventHandler(this.label1_Click_1);
-            // 
-            // LFecha
-            // 
-            this.LFecha.AutoSize = true;
-            this.LFecha.Location = new System.Drawing.Point(516, 43);
-            this.LFecha.Name = "LFecha";
-            this.LFecha.Size = new System.Drawing.Size(40, 13);
-            this.LFecha.TabIndex = 7;
-            this.LFecha.Text = "Fecha:";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(562, 40);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(145, 20);
-            this.textBox3.TabIndex = 8;
-            // 
             // BGenerarOrden
             // 
             this.BGenerarOrden.Location = new System.Drawing.Point(650, 420);
@@ -239,6 +241,7 @@
             this.BGenerarOrden.TabIndex = 9;
             this.BGenerarOrden.Text = "Generar Orden";
             this.BGenerarOrden.UseVisualStyleBackColor = true;
+            this.BGenerarOrden.Click += new System.EventHandler(this.BGenerarOrden_Click);
             // 
             // BCancelar
             // 
@@ -248,6 +251,7 @@
             this.BCancelar.TabIndex = 10;
             this.BCancelar.Text = "Cancelar";
             this.BCancelar.UseVisualStyleBackColor = true;
+            this.BCancelar.Click += new System.EventHandler(this.BCancelar_Click);
             // 
             // FormOrdenCompra
             // 
@@ -259,6 +263,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "FormOrdenCompra";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Nueva Orden de Compra";
             this.Load += new System.EventHandler(this.FormOrdenCompra_Load);
             this.panel1.ResumeLayout(false);
@@ -275,8 +280,8 @@
         private System.Windows.Forms.Button BSeleccionarProveedor;
         private System.Windows.Forms.Label LCUIT;
         private System.Windows.Forms.Label LRazonSocial;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox TBRazonSocial;
+        private System.Windows.Forms.TextBox TBCUIT;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label LDatosProveedor;
         private System.Windows.Forms.Panel panel2;
@@ -289,7 +294,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Subtotal;
         private System.Windows.Forms.Label LTotal;
         private System.Windows.Forms.Label LDetalleOrden;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox TBFecha;
         private System.Windows.Forms.Label LFecha;
         private System.Windows.Forms.Button BGenerarOrden;
         private System.Windows.Forms.Button BCancelar;

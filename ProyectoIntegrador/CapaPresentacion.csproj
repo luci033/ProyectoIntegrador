@@ -80,6 +80,12 @@
     <Compile Include="Formularios\Compras\FormCompras.Designer.cs">
       <DependentUpon>FormCompras.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\Compras\FormOrdenCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Compras\FormOrdenCompra.Designer.cs">
+      <DependentUpon>FormOrdenCompra.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\Devoluciones\FormDevoluciones.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,6 +170,12 @@
     <Compile Include="Formularios\Usuarios\FormUsuarios.Designer.cs">
       <DependentUpon>FormUsuarios.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\Ventas\FDetalleVenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Ventas\FDetalleVenta.Designer.cs">
+      <DependentUpon>FDetalleVenta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\Ventas\FormFinalVenta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -184,6 +196,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Formularios\Compras\FormCompras.resx">
+      <DependentUpon>FormCompras.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Compras\FormOrdenCompra.resx">
+      <DependentUpon>FormOrdenCompra.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Devoluciones\FormDevoluciones.resx">
       <DependentUpon>FormDevoluciones.cs</DependentUpon>
     </EmbeddedResource>
@@ -222,6 +240,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Usuarios\FormUsuarios.resx">
       <DependentUpon>FormUsuarios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Ventas\FDetalleVenta.resx">
+      <DependentUpon>FDetalleVenta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Ventas\FormFinalVenta.resx">
       <DependentUpon>FormFinalVenta.cs</DependentUpon>

@@ -35,6 +35,16 @@ namespace ProyectoIntegrador.Formularios.Ventas
             // Verificamos que el clic sea en la columna del botón (colDetalle)
             if (e.RowIndex >= 0 && DataGridHistorialVenta.Columns[e.ColumnIndex].Name == "colDetalle")
             {
+                
+                //se obtiene el ID de la fila seleccionada y se lo convierte a numero
+                int IdVentaSeleccionada = Convert.ToInt32(DataGridHistorialVenta.Rows[e.RowIndex].Cells[0].Value);
+
+                //se abre el modla pasandole el id como argumento
+                FDetalleVenta modalDetalle = new FDetalleVenta(IdVentaSeleccionada);
+                modalDetalle.ShowDialog();
+                
+
+                /*
                 // Obtenemos el ID de la venta seleccionada leyendo la primera celda del renglón
                 string idVentaSeleccionada = DataGridHistorialVenta.Rows[e.RowIndex].Cells[0].Value.ToString();
 
@@ -44,8 +54,11 @@ namespace ProyectoIntegrador.Formularios.Ventas
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information
                 );
+                */
+                
             }
         }
+
 
         // metodo auxiliar: recibe una lista de ventas y las dibuja en el DataGridView
         private void CargarGrilla(List<VentaResumen> ventas)
