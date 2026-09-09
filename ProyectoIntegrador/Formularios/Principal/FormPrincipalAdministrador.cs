@@ -1,4 +1,5 @@
-﻿using ProyectoIntegrador.Formularios.Compras;
+﻿using ProyectoIntegrador.Formularios.Clientes;
+using ProyectoIntegrador.Formularios.Compras;
 using ProyectoIntegrador.Formularios.Devoluciones;
 using ProyectoIntegrador.Formularios.Productos;
 using ProyectoIntegrador.Formularios.Proveedores;
@@ -135,6 +136,25 @@ namespace ProyectoIntegrador.Formularios.Principal
         {
             // cierra definitivamente toda la aplicación al cerrar la ventana principal
             Application.Exit();
+        }
+
+        private void gestionDeClientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // 1. Recorremos los formularios hijos abiertos
+            foreach (Form formulario in this.MdiChildren)
+            {
+                if (formulario is FormClientes)
+                {
+                    // Si ya está abierto, lo traemos al frente y cortamos la ejecución
+                    formulario.BringToFront();
+                    return;
+                }
+            }
+
+            // 2. Si el bucle termina sin encontrarlo, lo creamos
+            FormClientes formClientes = new FormClientes();
+            formClientes.MdiParent = this;
+            formClientes.Show();
         }
     }
 }

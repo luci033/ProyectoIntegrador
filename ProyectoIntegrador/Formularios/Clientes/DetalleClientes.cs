@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace ProyectoIntegrador.Formularios.Clientes
 {
-    public partial class FormClientes : Form
+    public partial class DetalleClientes : Form
     {
-        public FormClientes()
+        public DetalleClientes()
         {
             InitializeComponent();
         }
 
-        private void FormClientes_Load(object sender, EventArgs e)
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

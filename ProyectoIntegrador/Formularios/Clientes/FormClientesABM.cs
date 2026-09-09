@@ -16,5 +16,25 @@ namespace ProyectoIntegrador.Formularios.Clientes
         {
             InitializeComponent();
         }
+
+        private void FormClientesABM_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BCancelar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BRegistrar_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
