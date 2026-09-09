@@ -10,11 +10,21 @@ using System.Windows.Forms;
 
 namespace ProyectoIntegrador.Formularios.Compras
 {
-    public partial class FormComprasABM : Form
+    public partial class FormOrdenCompra : Form
     {
-        public FormComprasABM()
+        public FormOrdenCompra()
         {
             InitializeComponent();
+        }
+
+        private void FormOrdenCompra_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

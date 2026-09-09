@@ -16,5 +16,20 @@ namespace ProyectoIntegrador.Formularios.Compras
         {
             InitializeComponent();
         }
+
+        private void LProveedores_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BAgregarProveedor_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DGProveedores_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

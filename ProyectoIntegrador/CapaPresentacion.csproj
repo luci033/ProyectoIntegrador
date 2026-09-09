@@ -80,12 +80,6 @@
     <Compile Include="Formularios\Compras\FormCompras.Designer.cs">
       <DependentUpon>FormCompras.cs</DependentUpon>
     </Compile>
-    <Compile Include="Formularios\Compras\FormComprasABM.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Formularios\Compras\FormComprasABM.Designer.cs">
-      <DependentUpon>FormComprasABM.cs</DependentUpon>
-    </Compile>
     <Compile Include="Formularios\Devoluciones\FormDevoluciones.cs">
       <SubType>Form</SubType>
     </Compile>
