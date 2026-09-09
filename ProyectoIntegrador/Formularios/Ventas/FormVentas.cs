@@ -116,6 +116,30 @@ namespace ProyectoIntegrador.Formularios.Ventas
                 MessageBox.Show("Debe agregar al menos un producto antes de cobrar", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            // 2. ABRIR EL MODAL DE COBRO
+            // Le pasamos el texto del cliente y el total general
+            using (FormCobro formCobro = new FormCobro(TBCliente.Text, TBTotal.Text))
+            {
+                DialogResult resultado = formCobro.ShowDialog();
+
+                // CASO A: Confirmó la compra
+                if (resultado == DialogResult.OK)
+                {
+                    string metodo = formCobro.MetodoPagoSeleccionado;
+
+                    MessageBox.Show($"¡Venta registrada con éxito!\nMétodo de pago: {metodo}", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Acá es donde usamos el método auxiliar para limpiar todo para el próximo cliente:
+                    LimpiarFormularioVenta();
+                }
+                // CASO B: Hizo clic en Cancelar (anular todo)
+                else if (resultado == DialogResult.Abort)
+                {
+                    LimpiarFormularioVenta();
+                }
+                // CASO C: Hizo clic en "Volver" (DialogResult.Cancel) -> no hace nada, mantiene la grilla como estaba
+            }
         }
 
         private void ActualizarTotalGeneral()
