@@ -30,14 +30,15 @@
         {
             this.LCompras = new System.Windows.Forms.Label();
             this.BRegistrarCompra = new System.Windows.Forms.Button();
-            this.DGProveedores = new System.Windows.Forms.DataGridView();
-            this.ProveedoNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CUIT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.correo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProveedorModificar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.ProveedorDesactivar = new System.Windows.Forms.DataGridViewButtonColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.DGProveedores)).BeginInit();
+            this.DGCompras = new System.Windows.Forms.DataGridView();
+            this.idCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fechaCompa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fechaRecepcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Observacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DetalleOrden = new System.Windows.Forms.DataGridViewButtonColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.DGCompras)).BeginInit();
             this.SuspendLayout();
             // 
             // LCompras
@@ -66,77 +67,83 @@
             this.BRegistrarCompra.UseVisualStyleBackColor = true;
             this.BRegistrarCompra.Click += new System.EventHandler(this.BAgregarProveedor_Click);
             // 
-            // DGProveedores
+            // DGCompras
             // 
-            this.DGProveedores.AllowUserToAddRows = false;
-            this.DGProveedores.AllowUserToDeleteRows = false;
-            this.DGProveedores.AllowUserToResizeColumns = false;
-            this.DGProveedores.AllowUserToResizeRows = false;
-            this.DGProveedores.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.DGCompras.AllowUserToAddRows = false;
+            this.DGCompras.AllowUserToDeleteRows = false;
+            this.DGCompras.AllowUserToResizeColumns = false;
+            this.DGCompras.AllowUserToResizeRows = false;
+            this.DGCompras.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.DGProveedores.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.DGProveedores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGProveedores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ProveedoNombre,
-            this.CUIT,
-            this.telefono,
-            this.correo,
-            this.ProveedorModificar,
-            this.ProveedorDesactivar});
-            this.DGProveedores.Location = new System.Drawing.Point(12, 169);
-            this.DGProveedores.Name = "DGProveedores";
-            this.DGProveedores.ReadOnly = true;
-            this.DGProveedores.RowHeadersVisible = false;
-            this.DGProveedores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGProveedores.Size = new System.Drawing.Size(776, 252);
-            this.DGProveedores.TabIndex = 7;
-            this.DGProveedores.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGProveedores_CellContentClick);
+            this.DGCompras.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DGCompras.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGCompras.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idCompra,
+            this.fechaCompa,
+            this.proveedor,
+            this.fechaRecepcion,
+            this.Observacion,
+            this.Total,
+            this.DetalleOrden});
+            this.DGCompras.Location = new System.Drawing.Point(12, 169);
+            this.DGCompras.Name = "DGCompras";
+            this.DGCompras.ReadOnly = true;
+            this.DGCompras.RowHeadersVisible = false;
+            this.DGCompras.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DGCompras.Size = new System.Drawing.Size(776, 252);
+            this.DGCompras.TabIndex = 7;
+            this.DGCompras.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGProveedores_CellContentClick);
             // 
-            // ProveedoNombre
+            // idCompra
             // 
-            this.ProveedoNombre.FillWeight = 60F;
-            this.ProveedoNombre.HeaderText = "Razón Social";
-            this.ProveedoNombre.Name = "ProveedoNombre";
-            this.ProveedoNombre.ReadOnly = true;
+            this.idCompra.FillWeight = 20F;
+            this.idCompra.HeaderText = "Nro.";
+            this.idCompra.Name = "idCompra";
+            this.idCompra.ReadOnly = true;
             // 
-            // CUIT
+            // fechaCompa
             // 
-            this.CUIT.FillWeight = 40F;
-            this.CUIT.HeaderText = "CUIT";
-            this.CUIT.Name = "CUIT";
-            this.CUIT.ReadOnly = true;
+            this.fechaCompa.FillWeight = 30F;
+            this.fechaCompa.HeaderText = "Fecha";
+            this.fechaCompa.Name = "fechaCompa";
+            this.fechaCompa.ReadOnly = true;
             // 
-            // telefono
+            // proveedor
             // 
-            this.telefono.FillWeight = 40F;
-            this.telefono.HeaderText = "Teléfono";
-            this.telefono.Name = "telefono";
-            this.telefono.ReadOnly = true;
+            this.proveedor.FillWeight = 50F;
+            this.proveedor.HeaderText = "Proveedor";
+            this.proveedor.Name = "proveedor";
+            this.proveedor.ReadOnly = true;
             // 
-            // correo
+            // fechaRecepcion
             // 
-            this.correo.FillWeight = 45F;
-            this.correo.HeaderText = "Correo";
-            this.correo.Name = "correo";
-            this.correo.ReadOnly = true;
+            this.fechaRecepcion.FillWeight = 30F;
+            this.fechaRecepcion.HeaderText = "Fecha Recepción";
+            this.fechaRecepcion.Name = "fechaRecepcion";
+            this.fechaRecepcion.ReadOnly = true;
             // 
-            // ProveedorModificar
+            // Observacion
             // 
-            this.ProveedorModificar.FillWeight = 20F;
-            this.ProveedorModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ProveedorModificar.HeaderText = "Modificar";
-            this.ProveedorModificar.Name = "ProveedorModificar";
-            this.ProveedorModificar.ReadOnly = true;
-            this.ProveedorModificar.Text = "Editar";
+            this.Observacion.FillWeight = 60F;
+            this.Observacion.HeaderText = "Observación";
+            this.Observacion.Name = "Observacion";
+            this.Observacion.ReadOnly = true;
             // 
-            // ProveedorDesactivar
+            // Total
             // 
-            this.ProveedorDesactivar.FillWeight = 20F;
-            this.ProveedorDesactivar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ProveedorDesactivar.HeaderText = "Desactivar";
-            this.ProveedorDesactivar.Name = "ProveedorDesactivar";
-            this.ProveedorDesactivar.ReadOnly = true;
-            this.ProveedorDesactivar.Text = "Desactivar";
+            this.Total.FillWeight = 40F;
+            this.Total.HeaderText = "Total";
+            this.Total.Name = "Total";
+            this.Total.ReadOnly = true;
+            // 
+            // DetalleOrden
+            // 
+            this.DetalleOrden.FillWeight = 30F;
+            this.DetalleOrden.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DetalleOrden.HeaderText = "Detalle";
+            this.DetalleOrden.Name = "DetalleOrden";
+            this.DetalleOrden.ReadOnly = true;
+            this.DetalleOrden.Text = "Ver...";
             // 
             // FormCompras
             // 
@@ -145,10 +152,10 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.LCompras);
             this.Controls.Add(this.BRegistrarCompra);
-            this.Controls.Add(this.DGProveedores);
+            this.Controls.Add(this.DGCompras);
             this.Name = "FormCompras";
             this.Text = "Compras";
-            ((System.ComponentModel.ISupportInitialize)(this.DGProveedores)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGCompras)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -158,12 +165,13 @@
 
         private System.Windows.Forms.Label LCompras;
         private System.Windows.Forms.Button BRegistrarCompra;
-        private System.Windows.Forms.DataGridView DGProveedores;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProveedoNombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CUIT;
-        private System.Windows.Forms.DataGridViewTextBoxColumn telefono;
-        private System.Windows.Forms.DataGridViewTextBoxColumn correo;
-        private System.Windows.Forms.DataGridViewButtonColumn ProveedorModificar;
-        private System.Windows.Forms.DataGridViewButtonColumn ProveedorDesactivar;
+        private System.Windows.Forms.DataGridView DGCompras;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idCompra;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fechaCompa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proveedor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fechaRecepcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Observacion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Total;
+        private System.Windows.Forms.DataGridViewButtonColumn DetalleOrden;
     }
 }
