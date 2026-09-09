@@ -74,6 +74,7 @@
             this.BLogin.TabIndex = 13;
             this.BLogin.Text = "Iniciar Sesión";
             this.BLogin.UseVisualStyleBackColor = true;
+            this.BLogin.Click += new System.EventHandler(this.BLogin_Click);
             // 
             // TBUsuario
             // 

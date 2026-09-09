@@ -20,9 +20,10 @@ namespace ProyectoIntegrador
             Application.SetCompatibleTextRenderingDefault(false);
 
             FormLogin login = new FormLogin();
+            Application.Run(new FormLogin());
 
-            Application.Run(new FormPrincipalAdministrador());
-            
+            //Application.Run(new FormPrincipalAdministrador());
+
             /*
             // Si el usuario se loguea correctamente
             if (login.ShowDialog() == DialogResult.OK)

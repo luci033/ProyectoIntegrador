@@ -16,5 +16,10 @@ namespace ProyectoIntegrador.Formularios.Principal
         {
             InitializeComponent();
         }
+
+        private void s(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -115,5 +115,11 @@ namespace ProyectoIntegrador.Formularios.Principal
         {
 
         }
+
+        private void FormPrincipalAdministrador_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            // cierra definitivamente toda la aplicación al cerrar la ventana principal
+            Application.Exit();
+        }
     }
 }

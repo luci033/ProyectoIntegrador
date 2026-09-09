@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProyectoIntegrador.Formularios.Principal;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -134,6 +135,49 @@ namespace ProyectoIntegrador.Formularios.Usuarios
         private void BVerContraena_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void BLogin_Click(object sender, EventArgs e)
+        {
+            string usuario = TBUsuario.Text.Trim();
+            string clave = TBContrasena.Text.Trim();
+
+            // se valida que no haya campos vacios
+            if (string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(clave))
+            {
+                MessageBox.Show("Por favor, ingrese su usuario y contraseña.", "Campos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // comprobamos las credenciales y abrimos la pantalla correspondiente
+            if (usuario == "admin" && clave == "1234")
+            {
+                // Abre el formulario del Administrador
+                FormPrincipalAdministrador menuAdmin = new FormPrincipalAdministrador();
+                menuAdmin.Show();
+                this.Hide(); // Oculta la pantalla de login
+            }
+            else if (usuario == "vendedor" && clave == "1234")
+            {
+                // Abre el formulario del Vendedor
+                FormPrincipalVendedor menuVendedor = new FormPrincipalVendedor();
+                menuVendedor.Show();
+                this.Hide();
+            }
+            else if (usuario == "logistica" && clave == "1234")
+            {
+                // Abre el formulario de Logística
+                FormPrincipalLogistica menuLogistica = new FormPrincipalLogistica();
+                menuLogistica.Show();
+                this.Hide();
+            }
+            else
+            {
+                // Si no coincide con ninguno
+                MessageBox.Show("Usuario o contraseña incorrectos.", "Error de acceso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                TBContrasena.Clear();
+                TBContrasena.Focus();
+            }
         }
     }
 }
