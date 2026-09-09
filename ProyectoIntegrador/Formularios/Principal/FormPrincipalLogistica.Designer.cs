@@ -62,6 +62,7 @@
             this.listarProductosToolStripMenuItem.Name = "listarProductosToolStripMenuItem";
             this.listarProductosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.listarProductosToolStripMenuItem.Text = "Listar Productos";
+            this.listarProductosToolStripMenuItem.Click += new System.EventHandler(this.listarProductosToolStripMenuItem_Click);
             // 
             // registrarAjusteToolStripMenuItem
             // 
@@ -80,7 +81,7 @@
             // listarComprasToolStripMenuItem
             // 
             this.listarComprasToolStripMenuItem.Name = "listarComprasToolStripMenuItem";
-            this.listarComprasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.listarComprasToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.listarComprasToolStripMenuItem.Text = "Listar Compras";
             // 
             // FormPrincipalLogistica
@@ -92,7 +93,7 @@
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormPrincipalLogistica";
-            this.Text = "FormPrincipalLogistica";
+            this.Text = "Joyería ALBA - Logística";
             this.Load += new System.EventHandler(this.FormPrincipalLogistica_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

@@ -21,5 +21,10 @@ namespace ProyectoIntegrador.Formularios.Principal
         {
 
         }
+
+        private void listarProductosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
