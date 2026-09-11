@@ -12,9 +12,12 @@ namespace ProyectoIntegrador.Formularios.Compras
 {
     public partial class FormRegistrarRecepcion : Form
     {
-        public FormRegistrarRecepcion()
+        public FormRegistrarRecepcion(string nroOrden, string proveedor, string fechaOrden)
         {
             InitializeComponent();
+            TBNroOrden.Text = nroOrden;
+            TBProveedor.Text = proveedor;
+            TBFechaOrden.Text = fechaOrden;
         }
 
         public string FechaSeleccionada { get; private set; }
@@ -28,6 +31,21 @@ namespace ProyectoIntegrador.Formularios.Compras
 
         private void BAceptar_Click(object sender, EventArgs e)
         {
+            foreach (DataGridViewRow fila in DGDetalleRecepcion.Rows)
+            {
+                // se toman los valores
+                string codigo = fila.Cells[0].Value.ToString();
+                int cantPedida = Convert.ToInt32(fila.Cells[3].Value ?? 0);
+                int cantRecibida = Convert.ToInt32(fila.Cells[4].Value ?? 0);
+
+                if (cantRecibida < cantPedida)
+                {
+                    // aca va el cambio de estado si el proveedor entregó de menos
+                }
+
+                //aca se ajustarán las actualizaciones de stock
+            }
+
             FechaSeleccionada = TBFechaRecepcion.Text;
             Observacion = TBObservacion.Text;
 
@@ -39,6 +57,36 @@ namespace ProyectoIntegrador.Formularios.Compras
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        private void TBNroOrden_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LFecha_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TBFechaRecepcion_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TBObservacion_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

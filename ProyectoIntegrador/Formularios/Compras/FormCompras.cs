@@ -29,7 +29,7 @@ namespace ProyectoIntegrador.Formularios.Compras
                 if (formNueva.ShowDialog() == DialogResult.OK)
                 {
                     int nro = DGCompras.Rows.Count + 1;
-                    // Agrega la fila. Los botones tomarán el texto que le pases acá.
+                    // agregar fila 
                     DGCompras.Rows.Add(nro, formNueva.Fecha, formNueva.Proveedor, "Registrar Recepción", "", formNueva.Total, "Ver...");
                 }
             }
@@ -42,7 +42,10 @@ namespace ProyectoIntegrador.Formularios.Compras
             // fecha recepción es columna 3
             if (e.ColumnIndex == 3 && DGCompras.Rows[e.RowIndex].Cells[3].Value.ToString() == "Registrar Recepción")
             {
-                using (FormRegistrarRecepcion formRecepcion = new FormRegistrarRecepcion())
+                string nro = DGCompras.Rows[e.RowIndex].Cells[1].Value.ToString();
+                string fecha = DGCompras.Rows[e.RowIndex].Cells[2].Value.ToString();
+                string prov = DGCompras.Rows[e.RowIndex].Cells[3].Value.ToString();
+                using (FormRegistrarRecepcion formRecepcion = new FormRegistrarRecepcion(nro, prov, fecha))
                 {
                     if (formRecepcion.ShowDialog() == DialogResult.OK)
                     {
@@ -52,7 +55,7 @@ namespace ProyectoIntegrador.Formularios.Compras
                     }
                 }
             }
-            // Supongamos que "Detalle" es la columna 6
+            // detalle es la col index 6
             else if (e.ColumnIndex == 6)
             {
                 DataGridViewRow fila = DGCompras.Rows[e.RowIndex];

@@ -141,11 +141,24 @@ namespace ProyectoIntegrador.Formularios.Compras
 
         private void BGenerarOrden_Click(object sender, EventArgs e)
         {
+            // verifica que haya proveedor y al menos un producto
             if (string.IsNullOrWhiteSpace(Proveedor) || DGDetalleOrden.Rows.Count == 0)
             {
                 MessageBox.Show("Faltan datos o productos.");
                 return;
             }
+
+            // verificamos q no sea 0 la cantidad
+            foreach (DataGridViewRow fila in DGDetalleOrden.Rows)
+            {
+                // convierte a decimal y verifica
+                if (Convert.ToDecimal(fila.Cells[5].Value ?? 0) <= 0)
+                {
+                    MessageBox.Show("No podés generar una orden con productos en cantidad 0.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return; // corta tood
+                }
+            }
+
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
