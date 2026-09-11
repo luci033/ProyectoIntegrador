@@ -34,7 +34,7 @@
             this.idCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fechaCompa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fechaRecepcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fechaRecepcion = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Observacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DetalleOrden = new System.Windows.Forms.DataGridViewButtonColumn();
@@ -117,10 +117,12 @@
             // 
             // fechaRecepcion
             // 
-            this.fechaRecepcion.FillWeight = 30F;
+            this.fechaRecepcion.FillWeight = 40F;
             this.fechaRecepcion.HeaderText = "Fecha Recepción";
             this.fechaRecepcion.Name = "fechaRecepcion";
             this.fechaRecepcion.ReadOnly = true;
+            this.fechaRecepcion.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.fechaRecepcion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // Observacion
             // 
@@ -169,7 +171,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn idCompra;
         private System.Windows.Forms.DataGridViewTextBoxColumn fechaCompa;
         private System.Windows.Forms.DataGridViewTextBoxColumn proveedor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fechaRecepcion;
+        private System.Windows.Forms.DataGridViewButtonColumn fechaRecepcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Observacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total;
         private System.Windows.Forms.DataGridViewButtonColumn DetalleOrden;

@@ -28,27 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.BSeleccionarProveedor = new System.Windows.Forms.Button();
             this.LCUIT = new System.Windows.Forms.Label();
             this.LRazonSocial = new System.Windows.Forms.Label();
             this.TBRazonSocial = new System.Windows.Forms.TextBox();
             this.TBCUIT = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.TBCorreo = new System.Windows.Forms.TextBox();
+            this.LCorreo = new System.Windows.Forms.Label();
+            this.TBContacto = new System.Windows.Forms.TextBox();
+            this.LTelefono = new System.Windows.Forms.Label();
             this.TBFecha = new System.Windows.Forms.TextBox();
             this.LFecha = new System.Windows.Forms.Label();
             this.LDatosProveedor = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.TBTotal = new System.Windows.Forms.TextBox();
             this.LDetalleOrden = new System.Windows.Forms.Label();
             this.LTotal = new System.Windows.Forms.Label();
             this.BAgregarProducto = new System.Windows.Forms.Button();
             this.DGDetalleOrden = new System.Windows.Forms.DataGridView();
-            this.idDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BGenerarOrden = new System.Windows.Forms.Button();
+            this.BCancelar = new System.Windows.Forms.Button();
+            this.colIdProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colGenero = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CostoUnitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BGenerarOrden = new System.Windows.Forms.Button();
-            this.BCancelar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGDetalleOrden)).BeginInit();
@@ -57,6 +67,8 @@
             // BSeleccionarProveedor
             // 
             this.BSeleccionarProveedor.Location = new System.Drawing.Point(37, 43);
+            this.BSeleccionarProveedor.MaximumSize = new System.Drawing.Size(135, 43);
+            this.BSeleccionarProveedor.MinimumSize = new System.Drawing.Size(135, 43);
             this.BSeleccionarProveedor.Name = "BSeleccionarProveedor";
             this.BSeleccionarProveedor.Size = new System.Drawing.Size(135, 43);
             this.BSeleccionarProveedor.TabIndex = 0;
@@ -86,6 +98,7 @@
             // 
             this.TBRazonSocial.Location = new System.Drawing.Point(319, 40);
             this.TBRazonSocial.Name = "TBRazonSocial";
+            this.TBRazonSocial.ReadOnly = true;
             this.TBRazonSocial.Size = new System.Drawing.Size(145, 20);
             this.TBRazonSocial.TabIndex = 3;
             this.TBRazonSocial.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
@@ -94,11 +107,16 @@
             // 
             this.TBCUIT.Location = new System.Drawing.Point(319, 77);
             this.TBCUIT.Name = "TBCUIT";
+            this.TBCUIT.ReadOnly = true;
             this.TBCUIT.Size = new System.Drawing.Size(145, 20);
             this.TBCUIT.TabIndex = 4;
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.TBCorreo);
+            this.panel1.Controls.Add(this.LCorreo);
+            this.panel1.Controls.Add(this.TBContacto);
+            this.panel1.Controls.Add(this.LTelefono);
             this.panel1.Controls.Add(this.TBFecha);
             this.panel1.Controls.Add(this.LFecha);
             this.panel1.Controls.Add(this.LDatosProveedor);
@@ -112,17 +130,54 @@
             this.panel1.Size = new System.Drawing.Size(776, 106);
             this.panel1.TabIndex = 6;
             // 
+            // TBCorreo
+            // 
+            this.TBCorreo.Location = new System.Drawing.Point(572, 77);
+            this.TBCorreo.Name = "TBCorreo";
+            this.TBCorreo.ReadOnly = true;
+            this.TBCorreo.Size = new System.Drawing.Size(145, 20);
+            this.TBCorreo.TabIndex = 12;
+            // 
+            // LCorreo
+            // 
+            this.LCorreo.AutoSize = true;
+            this.LCorreo.Location = new System.Drawing.Point(513, 80);
+            this.LCorreo.Name = "LCorreo";
+            this.LCorreo.Size = new System.Drawing.Size(41, 13);
+            this.LCorreo.TabIndex = 11;
+            this.LCorreo.Text = "Correo:";
+            // 
+            // TBContacto
+            // 
+            this.TBContacto.Location = new System.Drawing.Point(572, 40);
+            this.TBContacto.Name = "TBContacto";
+            this.TBContacto.ReadOnly = true;
+            this.TBContacto.Size = new System.Drawing.Size(145, 20);
+            this.TBContacto.TabIndex = 10;
+            this.TBContacto.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
+            // 
+            // LTelefono
+            // 
+            this.LTelefono.AutoSize = true;
+            this.LTelefono.Location = new System.Drawing.Point(513, 43);
+            this.LTelefono.Name = "LTelefono";
+            this.LTelefono.Size = new System.Drawing.Size(52, 13);
+            this.LTelefono.TabIndex = 9;
+            this.LTelefono.Text = "Telefono:";
+            this.LTelefono.Click += new System.EventHandler(this.label1_Click_2);
+            // 
             // TBFecha
             // 
-            this.TBFecha.Location = new System.Drawing.Point(562, 40);
+            this.TBFecha.Location = new System.Drawing.Point(628, 6);
             this.TBFecha.Name = "TBFecha";
+            this.TBFecha.ReadOnly = true;
             this.TBFecha.Size = new System.Drawing.Size(145, 20);
             this.TBFecha.TabIndex = 8;
             // 
             // LFecha
             // 
             this.LFecha.AutoSize = true;
-            this.LFecha.Location = new System.Drawing.Point(516, 43);
+            this.LFecha.Location = new System.Drawing.Point(569, 9);
             this.LFecha.Name = "LFecha";
             this.LFecha.Size = new System.Drawing.Size(40, 13);
             this.LFecha.TabIndex = 7;
@@ -140,14 +195,26 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.TBTotal);
             this.panel2.Controls.Add(this.LDetalleOrden);
             this.panel2.Controls.Add(this.LTotal);
             this.panel2.Controls.Add(this.BAgregarProducto);
             this.panel2.Controls.Add(this.DGDetalleOrden);
             this.panel2.Location = new System.Drawing.Point(12, 124);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(776, 290);
+            this.panel2.Size = new System.Drawing.Size(776, 301);
             this.panel2.TabIndex = 7;
+            // 
+            // TBTotal
+            // 
+            this.TBTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TBTotal.Location = new System.Drawing.Point(588, 267);
+            this.TBTotal.Multiline = true;
+            this.TBTotal.Name = "TBTotal";
+            this.TBTotal.ReadOnly = true;
+            this.TBTotal.Size = new System.Drawing.Size(185, 31);
+            this.TBTotal.TabIndex = 13;
+            this.TBTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // LDetalleOrden
             // 
@@ -163,7 +230,7 @@
             // 
             this.LTotal.AutoSize = true;
             this.LTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LTotal.Location = new System.Drawing.Point(537, 269);
+            this.LTotal.Location = new System.Drawing.Point(537, 274);
             this.LTotal.Name = "LTotal";
             this.LTotal.Size = new System.Drawing.Size(45, 18);
             this.LTotal.TabIndex = 7;
@@ -182,62 +249,37 @@
             // 
             // DGDetalleOrden
             // 
+            this.DGDetalleOrden.AllowUserToAddRows = false;
+            this.DGDetalleOrden.AllowUserToDeleteRows = false;
             this.DGDetalleOrden.AllowUserToResizeColumns = false;
             this.DGDetalleOrden.AllowUserToResizeRows = false;
             this.DGDetalleOrden.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DGDetalleOrden.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
             this.DGDetalleOrden.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGDetalleOrden.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idDetalle,
+            this.colIdProducto,
+            this.colCodigo,
             this.nombre,
+            this.colCategoria,
+            this.colGenero,
             this.cantidad,
             this.CostoUnitario,
             this.Subtotal});
+            this.DGDetalleOrden.GridColor = System.Drawing.Color.Silver;
             this.DGDetalleOrden.Location = new System.Drawing.Point(3, 75);
             this.DGDetalleOrden.Name = "DGDetalleOrden";
             this.DGDetalleOrden.RowHeadersVisible = false;
             this.DGDetalleOrden.Size = new System.Drawing.Size(770, 191);
             this.DGDetalleOrden.TabIndex = 8;
-            // 
-            // idDetalle
-            // 
-            this.idDetalle.FillWeight = 20F;
-            this.idDetalle.HeaderText = "Nro.";
-            this.idDetalle.Name = "idDetalle";
-            this.idDetalle.ReadOnly = true;
-            // 
-            // nombre
-            // 
-            this.nombre.FillWeight = 60F;
-            this.nombre.HeaderText = "Nombre";
-            this.nombre.Name = "nombre";
-            this.nombre.ReadOnly = true;
-            // 
-            // cantidad
-            // 
-            this.cantidad.FillWeight = 30F;
-            this.cantidad.HeaderText = "Cantidad";
-            this.cantidad.Name = "cantidad";
-            this.cantidad.ReadOnly = true;
-            // 
-            // CostoUnitario
-            // 
-            this.CostoUnitario.FillWeight = 50F;
-            this.CostoUnitario.HeaderText = "Costo Unitario";
-            this.CostoUnitario.Name = "CostoUnitario";
-            this.CostoUnitario.ReadOnly = true;
-            // 
-            // Subtotal
-            // 
-            this.Subtotal.FillWeight = 50F;
-            this.Subtotal.HeaderText = "Subtotal ";
-            this.Subtotal.Name = "Subtotal";
-            this.Subtotal.ReadOnly = true;
+            this.DGDetalleOrden.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGDetalleOrden_CellContentClick);
+            this.DGDetalleOrden.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGDetalleOrden_CellValueChanged);
+            this.DGDetalleOrden.CurrentCellDirtyStateChanged += new System.EventHandler(this.DGDetalleOrden_CurrentCellDirtyStateChanged);
             // 
             // BGenerarOrden
             // 
-            this.BGenerarOrden.Location = new System.Drawing.Point(650, 420);
+            this.BGenerarOrden.Location = new System.Drawing.Point(650, 431);
             this.BGenerarOrden.Name = "BGenerarOrden";
-            this.BGenerarOrden.Size = new System.Drawing.Size(135, 43);
+            this.BGenerarOrden.Size = new System.Drawing.Size(135, 32);
             this.BGenerarOrden.TabIndex = 9;
             this.BGenerarOrden.Text = "Generar Orden";
             this.BGenerarOrden.UseVisualStyleBackColor = true;
@@ -245,13 +287,70 @@
             // 
             // BCancelar
             // 
-            this.BCancelar.Location = new System.Drawing.Point(509, 420);
+            this.BCancelar.Location = new System.Drawing.Point(509, 431);
             this.BCancelar.Name = "BCancelar";
-            this.BCancelar.Size = new System.Drawing.Size(135, 43);
+            this.BCancelar.Size = new System.Drawing.Size(135, 32);
             this.BCancelar.TabIndex = 10;
             this.BCancelar.Text = "Cancelar";
             this.BCancelar.UseVisualStyleBackColor = true;
             this.BCancelar.Click += new System.EventHandler(this.BCancelar_Click);
+            // 
+            // colIdProducto
+            // 
+            this.colIdProducto.HeaderText = "Id Producto";
+            this.colIdProducto.Name = "colIdProducto";
+            this.colIdProducto.Visible = false;
+            // 
+            // colCodigo
+            // 
+            this.colCodigo.FillWeight = 23.23369F;
+            this.colCodigo.HeaderText = "Cod.";
+            this.colCodigo.Name = "colCodigo";
+            this.colCodigo.ReadOnly = true;
+            // 
+            // nombre
+            // 
+            this.nombre.FillWeight = 69.70107F;
+            this.nombre.HeaderText = "Nombre";
+            this.nombre.Name = "nombre";
+            this.nombre.ReadOnly = true;
+            // 
+            // colCategoria
+            // 
+            this.colCategoria.FillWeight = 69.70107F;
+            this.colCategoria.HeaderText = "Categoría";
+            this.colCategoria.Name = "colCategoria";
+            this.colCategoria.ReadOnly = true;
+            // 
+            // colGenero
+            // 
+            this.colGenero.FillWeight = 56.34518F;
+            this.colGenero.HeaderText = "Género";
+            this.colGenero.Name = "colGenero";
+            // 
+            // cantidad
+            // 
+            this.cantidad.FillWeight = 34.85054F;
+            this.cantidad.HeaderText = "Cantidad";
+            this.cantidad.Name = "cantidad";
+            // 
+            // CostoUnitario
+            // 
+            dataGridViewCellStyle1.Format = "C2";
+            this.CostoUnitario.DefaultCellStyle = dataGridViewCellStyle1;
+            this.CostoUnitario.FillWeight = 55F;
+            this.CostoUnitario.HeaderText = "Costo Unitario";
+            this.CostoUnitario.Name = "CostoUnitario";
+            this.CostoUnitario.ReadOnly = true;
+            // 
+            // Subtotal
+            // 
+            dataGridViewCellStyle2.Format = "C2";
+            this.Subtotal.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Subtotal.FillWeight = 58.08423F;
+            this.Subtotal.HeaderText = "Subtotal ";
+            this.Subtotal.Name = "Subtotal";
+            this.Subtotal.ReadOnly = true;
             // 
             // FormOrdenCompra
             // 
@@ -262,6 +361,8 @@
             this.Controls.Add(this.BGenerarOrden);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.MaximumSize = new System.Drawing.Size(816, 516);
+            this.MinimumSize = new System.Drawing.Size(816, 516);
             this.Name = "FormOrdenCompra";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Nueva Orden de Compra";
@@ -287,16 +388,24 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView DGDetalleOrden;
         private System.Windows.Forms.Button BAgregarProducto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idDetalle;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CostoUnitario;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Subtotal;
         private System.Windows.Forms.Label LTotal;
         private System.Windows.Forms.Label LDetalleOrden;
         private System.Windows.Forms.TextBox TBFecha;
         private System.Windows.Forms.Label LFecha;
         private System.Windows.Forms.Button BGenerarOrden;
         private System.Windows.Forms.Button BCancelar;
+        private System.Windows.Forms.TextBox TBContacto;
+        private System.Windows.Forms.Label LTelefono;
+        private System.Windows.Forms.TextBox TBCorreo;
+        private System.Windows.Forms.Label LCorreo;
+        private System.Windows.Forms.TextBox TBTotal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIdProducto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCodigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCategoria;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colGenero;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CostoUnitario;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Subtotal;
     }
 }

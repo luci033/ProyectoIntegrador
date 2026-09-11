@@ -74,6 +74,24 @@
     <Compile Include="Formularios\Clientes\FormClientesABM.Designer.cs">
       <DependentUpon>FormClientesABM.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\Compras\FormRegistrarRecepcion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Compras\FormRegistrarRecepcion.Designer.cs">
+      <DependentUpon>FormRegistrarRecepcion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Compras\FormVerDetalle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Compras\FormVerDetalle.Designer.cs">
+      <DependentUpon>FormVerDetalle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Proveedores\FormBuscarProveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Proveedores\FormBuscarProveedor.Designer.cs">
+      <DependentUpon>FormBuscarProveedor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\Compras\FormCompras.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +133,12 @@
     </Compile>
     <Compile Include="Formularios\Principal\FormPrincipalVendedor.Designer.cs">
       <DependentUpon>FormPrincipalVendedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Productos\FormBuscarProducto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Productos\FormBuscarProducto.Designer.cs">
+      <DependentUpon>FormBuscarProducto.cs</DependentUpon>
     </Compile>
     <Compile Include="Formularios\Productos\FormCategorias.cs">
       <SubType>Form</SubType>
@@ -202,6 +226,15 @@
     <EmbeddedResource Include="Formularios\Clientes\FormClientesABM.resx">
       <DependentUpon>FormClientesABM.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Compras\FormRegistrarRecepcion.resx">
+      <DependentUpon>FormRegistrarRecepcion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Compras\FormVerDetalle.resx">
+      <DependentUpon>FormVerDetalle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Proveedores\FormBuscarProveedor.resx">
+      <DependentUpon>FormBuscarProveedor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Compras\FormCompras.resx">
       <DependentUpon>FormCompras.cs</DependentUpon>
     </EmbeddedResource>
@@ -219,6 +252,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Principal\FormPrincipalVendedor.resx">
       <DependentUpon>FormPrincipalVendedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Productos\FormBuscarProducto.resx">
+      <DependentUpon>FormBuscarProducto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Productos\FormCategorias.resx">
       <DependentUpon>FormCategorias.cs</DependentUpon>
