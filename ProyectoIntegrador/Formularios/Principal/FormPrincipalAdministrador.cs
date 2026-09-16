@@ -59,11 +59,7 @@ namespace ProyectoIntegrador.Formularios.Principal
 
         private void devolucionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CerrarFormulariosHijos();
-            FormDevoluciones frmDevoluciones = new FormDevoluciones();
-            frmDevoluciones.MdiParent = this;
-            frmDevoluciones.WindowState = FormWindowState.Maximized;
-            frmDevoluciones.Show();
+
         }
 
         private void FormPrincipal_Load(object sender, EventArgs e)
@@ -129,7 +125,11 @@ namespace ProyectoIntegrador.Formularios.Principal
 
         private void listarDevolucionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            CerrarFormulariosHijos();
+            Devoluciones.FormDevoluciones frmDevoluciones = new Devoluciones.FormDevoluciones();
+            frmDevoluciones.MdiParent = this;
+            frmDevoluciones.WindowState = FormWindowState.Maximized;
+            frmDevoluciones.Show();
         }
 
         private void FormPrincipalAdministrador_FormClosed(object sender, FormClosedEventArgs e)
