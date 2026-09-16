@@ -247,6 +247,9 @@
     <EmbeddedResource Include="Formularios\Compras\FormVerDetalle.resx">
       <DependentUpon>FormVerDetalle.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Devoluciones\FormRegistrarDevolucion.resx">
+      <DependentUpon>FormRegistrarDevolucion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Proveedores\FormBuscarProveedor.resx">
       <DependentUpon>FormBuscarProveedor.cs</DependentUpon>
     </EmbeddedResource>
