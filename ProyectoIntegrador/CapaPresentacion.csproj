@@ -93,6 +93,12 @@
     <Compile Include="Formularios\Compras\FormVerDetalle.Designer.cs">
       <DependentUpon>FormVerDetalle.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\Inventario\FormAjusteStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Inventario\FormAjusteStock.Designer.cs">
+      <DependentUpon>FormAjusteStock.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\Proveedores\FormBuscarProveedor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -247,6 +253,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Compras\FormVerDetalle.resx">
       <DependentUpon>FormVerDetalle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Devoluciones\FormRegistrarDevolucion.resx">
+      <DependentUpon>FormRegistrarDevolucion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Inventario\FormAjusteStock.resx">
+      <DependentUpon>FormAjusteStock.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Proveedores\FormBuscarProveedor.resx">
       <DependentUpon>FormBuscarProveedor.cs</DependentUpon>
