@@ -10,7 +10,7 @@ namespace CapaNegocio
         private CD_Usuario objCapaDato = new CD_Usuario();
 
         // Usamos "out string mensaje" para devolver errores al formulario
-        public void Registrar(Usuario obj, out string mensaje)
+        public bool Registrar(Usuario obj, out string mensaje)
         {
             mensaje = string.Empty;
 
@@ -18,17 +18,32 @@ namespace CapaNegocio
             if (string.IsNullOrWhiteSpace(obj.User))
             {
                 mensaje = "El nombre de usuario no puede estar vacío.";
-                return; // Corta la ejecución acá
+                return false; // Corta la ejecución acá
             }
 
             if (string.IsNullOrWhiteSpace(obj.Contrasena))
             {
                 mensaje = "Debe ingresar una contraseña.";
-                return;
+                return false;
             }
 
             // Si pasa las validaciones, le pasa el objeto a la Capa de Datos
-            objCapaDato.Registrar(obj);
+            return objCapaDato.RegistrarUsuario(obj, out mensaje);
         }
     }
-}
+
+    public Usuario Login(string usuario, string contrasena, out string mensaje)
+        {
+            mensaje = string.Empty;
+
+            // Validación básica de seguridad
+            if (string.IsNullOrWhiteSpace(usuario) || string.IsNullOrWhiteSpace(contrasena))
+            {
+                mensaje = "Debe ingresar el usuario y la contraseña.";
+                return null;
+            }
+
+            // Si todo está ok, le pasa la pelota a la Capa de Datos
+            return objCapaDato.Login(usuario, contrasena);
+        }
+    }

@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormUsuarioABM));
             this.LNombre = new System.Windows.Forms.Label();
             this.LApellido = new System.Windows.Forms.Label();
-            this.LCorreo = new System.Windows.Forms.Label();
+            this.LUsuario = new System.Windows.Forms.Label();
             this.LConstraseña = new System.Windows.Forms.Label();
             this.LRepetirContraseña = new System.Windows.Forms.Label();
             this.LDNI = new System.Windows.Forms.Label();
@@ -40,7 +40,7 @@
             this.TBNombre = new System.Windows.Forms.TextBox();
             this.TBDni = new System.Windows.Forms.TextBox();
             this.TBApellido = new System.Windows.Forms.TextBox();
-            this.TBCorreo = new System.Windows.Forms.TextBox();
+            this.TBUsuario = new System.Windows.Forms.TextBox();
             this.TBContraseña = new System.Windows.Forms.TextBox();
             this.TBContraseñaRepetir = new System.Windows.Forms.TextBox();
             this.L = new System.Windows.Forms.Label();
@@ -74,14 +74,15 @@
             this.LApellido.TabIndex = 1;
             this.LApellido.Text = "Apellido";
             // 
-            // LCorreo
+            // LUsuario
             // 
-            this.LCorreo.AutoSize = true;
-            this.LCorreo.Location = new System.Drawing.Point(57, 162);
-            this.LCorreo.Name = "LCorreo";
-            this.LCorreo.Size = new System.Drawing.Size(38, 13);
-            this.LCorreo.TabIndex = 2;
-            this.LCorreo.Text = "Correo";
+            this.LUsuario.AutoSize = true;
+            this.LUsuario.Location = new System.Drawing.Point(57, 162);
+            this.LUsuario.Name = "LUsuario";
+            this.LUsuario.Size = new System.Drawing.Size(43, 13);
+            this.LUsuario.TabIndex = 2;
+            this.LUsuario.Text = "Usuario";
+            this.LUsuario.Click += new System.EventHandler(this.LCorreo_Click);
             // 
             // LConstraseña
             // 
@@ -144,13 +145,14 @@
             this.TBApellido.TabIndex = 9;
             this.TBApellido.Validating += new System.ComponentModel.CancelEventHandler(this.TBApellido_Validating);
             // 
-            // TBCorreo
+            // TBUsuario
             // 
-            this.TBCorreo.Location = new System.Drawing.Point(201, 159);
-            this.TBCorreo.Name = "TBCorreo";
-            this.TBCorreo.Size = new System.Drawing.Size(121, 20);
-            this.TBCorreo.TabIndex = 10;
-            this.TBCorreo.Validating += new System.ComponentModel.CancelEventHandler(this.TBCorreo_Validating);
+            this.TBUsuario.Location = new System.Drawing.Point(201, 159);
+            this.TBUsuario.Name = "TBUsuario";
+            this.TBUsuario.Size = new System.Drawing.Size(121, 20);
+            this.TBUsuario.TabIndex = 10;
+            this.TBUsuario.TextChanged += new System.EventHandler(this.TBUsuario_TextChanged);
+            this.TBUsuario.Validating += new System.ComponentModel.CancelEventHandler(this.TBUsuario_Validating);
             // 
             // TBContraseña
             // 
@@ -263,7 +265,7 @@
             this.Controls.Add(this.L);
             this.Controls.Add(this.TBContraseñaRepetir);
             this.Controls.Add(this.TBContraseña);
-            this.Controls.Add(this.TBCorreo);
+            this.Controls.Add(this.TBUsuario);
             this.Controls.Add(this.TBApellido);
             this.Controls.Add(this.TBDni);
             this.Controls.Add(this.TBNombre);
@@ -271,7 +273,7 @@
             this.Controls.Add(this.LDNI);
             this.Controls.Add(this.LRepetirContraseña);
             this.Controls.Add(this.LConstraseña);
-            this.Controls.Add(this.LCorreo);
+            this.Controls.Add(this.LUsuario);
             this.Controls.Add(this.LApellido);
             this.Controls.Add(this.LNombre);
             this.Name = "FormUsuarioABM";
@@ -289,7 +291,7 @@
 
         private System.Windows.Forms.Label LNombre;
         private System.Windows.Forms.Label LApellido;
-        private System.Windows.Forms.Label LCorreo;
+        private System.Windows.Forms.Label LUsuario;
         private System.Windows.Forms.Label LConstraseña;
         private System.Windows.Forms.Label LRepetirContraseña;
         private System.Windows.Forms.Label LDNI;
@@ -297,7 +299,7 @@
         private System.Windows.Forms.TextBox TBNombre;
         private System.Windows.Forms.TextBox TBDni;
         private System.Windows.Forms.TextBox TBApellido;
-        private System.Windows.Forms.TextBox TBCorreo;
+        private System.Windows.Forms.TextBox TBUsuario;
         private System.Windows.Forms.TextBox TBContraseña;
         private System.Windows.Forms.TextBox TBContraseñaRepetir;
         private System.Windows.Forms.Label L;

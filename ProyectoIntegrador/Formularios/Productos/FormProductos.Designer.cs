@@ -47,8 +47,8 @@
             this.LCategoria = new System.Windows.Forms.Label();
             this.LCatalogoProductos = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.LBuscarProd = new System.Windows.Forms.Label();
             this.TBBuscarProd = new System.Windows.Forms.TextBox();
+            this.LBuscarProd = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridCatalogoProd)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -67,7 +67,7 @@
             this.BModificar.TabIndex = 0;
             this.BModificar.Text = "Modificar";
             this.BModificar.UseVisualStyleBackColor = false;
-            this.BModificar.Click += new System.EventHandler(this.button1_Click);
+            this.BModificar.Click += new System.EventHandler(this.BModificar_Click);
             // 
             // textBox1
             // 
@@ -96,7 +96,6 @@
             this.combCategoriaForm.Name = "combCategoriaForm";
             this.combCategoriaForm.Size = new System.Drawing.Size(116, 23);
             this.combCategoriaForm.TabIndex = 5;
-            this.combCategoriaForm.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // dataGridCatalogoProd
             // 
@@ -110,7 +109,7 @@
             this.dataGridCatalogoProd.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F);
             dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -201,7 +200,7 @@
             this.BEliminar.TabIndex = 9;
             this.BEliminar.Text = "Eliminar";
             this.BEliminar.UseVisualStyleBackColor = false;
-            this.BEliminar.Click += new System.EventHandler(this.button1_Click_1);
+            this.BEliminar.Click += new System.EventHandler(this.BEliminar_Click);
             // 
             // BNuevo
             // 
@@ -256,6 +255,14 @@
             this.panel1.Size = new System.Drawing.Size(589, 155);
             this.panel1.TabIndex = 16;
             // 
+            // TBBuscarProd
+            // 
+            this.TBBuscarProd.Location = new System.Drawing.Point(137, 14);
+            this.TBBuscarProd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.TBBuscarProd.Name = "TBBuscarProd";
+            this.TBBuscarProd.Size = new System.Drawing.Size(116, 23);
+            this.TBBuscarProd.TabIndex = 15;
+            // 
             // LBuscarProd
             // 
             this.LBuscarProd.AutoSize = true;
@@ -267,14 +274,6 @@
             this.LBuscarProd.Size = new System.Drawing.Size(109, 19);
             this.LBuscarProd.TabIndex = 0;
             this.LBuscarProd.Text = "Buscar Producto";
-            // 
-            // TBBuscarProd
-            // 
-            this.TBBuscarProd.Location = new System.Drawing.Point(137, 14);
-            this.TBBuscarProd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.TBBuscarProd.Name = "TBBuscarProd";
-            this.TBBuscarProd.Size = new System.Drawing.Size(116, 23);
-            this.TBBuscarProd.TabIndex = 15;
             // 
             // FormProductos
             // 

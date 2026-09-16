@@ -6,6 +6,14 @@ namespace ProyectoIntegrador
 {
     public partial class FormProductoABM : Form
     {
+        public string Codigo => textCodigo.Text.Trim();
+        public string Nombre => textNombre.Text.Trim();
+        //public string ImagenRuta => textImagen.ImageLocation ?? ""; // O la variable donde guardes la ruta de la foto
+        public string Categoria => cmbCategoria.Text.Trim();
+        public string Genero => combGenero.Text.Trim();
+        public string Precio => textPrecio.Text.Trim();
+        public string Stock=> textStockInicial.Text.Trim();
+    
         public FormProductoABM()
         {
             InitializeComponent();

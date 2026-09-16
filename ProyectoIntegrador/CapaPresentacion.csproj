@@ -371,6 +371,10 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CapaDatos\CapaDatos.csproj">
+      <Project>{70ca901f-562b-85de-cb5b-638070a6560a}</Project>
+      <Name>CapaDatos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CapaEntidades\CapaEntidades.csproj">
       <Project>{03932adb-0032-4d68-8599-2aa6b21e9d91}</Project>
       <Name>CapaEntidades</Name>

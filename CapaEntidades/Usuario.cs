@@ -23,5 +23,7 @@ namespace CapaEntidades
 
         // Propiedad de navegación (Trae el objeto Rol completo por si necesitas su nombre)
         public Rol ObjRol { get; set; }
+        public string Dni { get; set; }
+        public string Foto_Perfil { get; set; }
     }
 }

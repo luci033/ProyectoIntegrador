@@ -1,4 +1,5 @@
-﻿using CapaEntidades;
+﻿using CapaDatos;
+using CapaEntidades;
 using CapaNegocio;
 using ProyectoIntegrador.Properties;
 using System;
@@ -22,7 +23,7 @@ namespace ProyectoIntegrador
         public string Nombre => TBNombre.Text.Trim();
         public string Apellido => TBApellido.Text.Trim();
         public string Dni => TBDni.Text.Trim();
-        public string Correo => TBCorreo.Text.Trim();
+        public string Correo => TBUsuario.Text.Trim();
         //public string nombreUsuario => 
         public string Rol => CBRol.Text;
         //public string Rol => CBRol.SelectedItem?.ToString() ?? "";
@@ -34,7 +35,21 @@ namespace ProyectoIntegrador
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // Pedimos los roles a la base de datos
+            CD_Rol datosRol = new CD_Rol();
+            List<Rol> listaRoles = datosRol.ListarRoles();
 
+            // Le inyectamos la lista al ComboBox
+            CBRol.DataSource = listaRoles;
+
+            // Le decimos qué propiedad va a MOSTRAR visualmente al usuario
+            CBRol.DisplayMember = "NombreRol";
+
+            // Le decimos qué propiedad va a GUARDAR ocultamente (el ID)
+            CBRol.ValueMember = "IdRol";
+
+            // Lo dejamos en blanco para que el usuario tenga que elegir uno sí o sí
+            CBRol.SelectedIndex = -1;
         }
 
 
@@ -60,17 +75,32 @@ namespace ProyectoIntegrador
 
         private void BCrearUsuario_Click(object sender, EventArgs e)
         {
-            //  se hacen las validaciones
+            // 1. Ejecutar validaciones automáticas de los controles
             if (!this.ValidateChildren()) return;
 
-            // validacion de campos vacios
+            // 2. Validación de campos obligatorios
             if (string.IsNullOrWhiteSpace(TBNombre.Text) || string.IsNullOrWhiteSpace(TBApellido.Text))
             {
                 MessageBox.Show("Debe completar Nombre y Apellido.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            //se valida la seleccion del rol
+            if (string.IsNullOrWhiteSpace(TBUsuario.Text) || string.IsNullOrWhiteSpace(TBDni.Text))
+            {
+                MessageBox.Show("Debe completar Usuario y DNI.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 3. Validación de coincidencia de contraseñas
+            if (TBContraseña.Text != TBContraseñaRepetir.Text)
+            {
+                errorProvider1.SetError(TBContraseñaRepetir, "Las contraseñas no coinciden.");
+                MessageBox.Show("Las contraseñas no coinciden.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            errorProvider1.SetError(TBContraseñaRepetir, "");
+
+            // 4. Validación de selección de rol
             if (CBRol.SelectedIndex == -1)
             {
                 errorProvider1.SetError(CBRol, "Debe seleccionar un rol para el usuario.");
@@ -79,11 +109,11 @@ namespace ProyectoIntegrador
             }
             errorProvider1.SetError(CBRol, "");
 
-            // se comprueba si quedo algun error pendiente en el ErrorProvider
+            // 5. Comprobar si quedó algún error pendiente en el ErrorProvider
             if (!string.IsNullOrEmpty(errorProvider1.GetError(TBNombre)) ||
                 !string.IsNullOrEmpty(errorProvider1.GetError(TBApellido)) ||
                 !string.IsNullOrEmpty(errorProvider1.GetError(TBDni)) ||
-                !string.IsNullOrEmpty(errorProvider1.GetError(TBCorreo)) ||
+                !string.IsNullOrEmpty(errorProvider1.GetError(TBUsuario)) ||
                 !string.IsNullOrEmpty(errorProvider1.GetError(TBContraseña)) ||
                 !string.IsNullOrEmpty(errorProvider1.GetError(TBContraseñaRepetir)))
             {
@@ -91,56 +121,37 @@ namespace ProyectoIntegrador
                 return;
             }
 
-            // se mapea los el texto del ComboBox al ID de rol correspondiente en tu base de datos
-            int idRolSeleccionado = 1;
-            string rolTexto = CBRol.Text.Trim();
+            // Atrapamos directamente el ID oculto que configuramos en ValueMember
+            int idRolSeleccionado = Convert.ToInt32(CBRol.SelectedValue);
 
-            if (rolTexto == "Administrador")
-            {
-                idRolSeleccionado = 1;
-            }
-            else if (rolTexto == "Vendedor")
-            {
-                idRolSeleccionado = 2;
-            }
-            else if (rolTexto == "Logistica" || rolTexto == "Logística")
-            {
-                idRolSeleccionado = 3;
-            }
-
-            // 5. Instanciar Entidad y Capa de Negocio
+            // 7. Instanciar el objeto (Nos aseguramos que la propiedad sea DNI en mayúscula)
             Usuario nuevoUsuario = new Usuario()
             {
-                User = TBDni.Text.Trim(), // O el campo de usuario que uses
+                User = TBUsuario.Text.Trim(),
                 NombreUsuario = TBNombre.Text.Trim(),
                 ApellidoUsuario = TBApellido.Text.Trim(),
+                Dni = TBDni.Text.Trim(),
                 Contrasena = TBContraseña.Text.Trim(),
-                //Correo = TBCorreo.Text.Trim(),
+                Foto_Perfil = "",
                 IdRol = idRolSeleccionado
             };
 
-            //DESCOMENTAR DESPUES DE HACER LA CONEXION CON LA BD
-            /*
-            CN_Usuario negocioUsuario = new CN_Usuario();
+            // 8. Llamar directo a Capa de Datos (Cero puentes, como querías)
+            CD_Usuario datosUsuario = new CD_Usuario();
             string mensaje;
+            bool resultado = datosUsuario.RegistrarUsuario(nuevoUsuario, out mensaje);
 
-            negocioUsuario.Registrar(nuevoUsuario, out mensaje);
-            
-            // 6. Evaluar respuesta de la Base de Datos
-            if (string.IsNullOrEmpty(mensaje))
+            // 9. Evaluar respuesta de la base de datos
+            if (resultado)
             {
-                MessageBox.Show("Usuario registrado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Usuario registrado con éxito en la base de datos.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             else
             {
-                MessageBox.Show(mensaje, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("No se pudo registrar el usuario: " + mensaje, "Error al guardar", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            */
-            MessageBox.Show("Usuario registrado con éxito (Modo diseño).", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.DialogResult = DialogResult.OK;
-            this.Close();
         }
 
         private void BBuscarArchivo_Click(object sender, EventArgs e)
@@ -173,26 +184,6 @@ namespace ProyectoIntegrador
             }
 
             errorProvider1.SetError(TBDni, "");
-        }
-
-        private void TBCorreo_Validating(object sender, CancelEventArgs e)
-        {
-            string email = TBCorreo.Text.Trim();
-            if (string.IsNullOrEmpty(email))
-            {
-                errorProvider1.SetError(TBCorreo, "El correo electrónico es obligatorio.");
-                return;
-            }
-
-            // expesion regular estandar para comprobar formato x@x.com
-            string patron = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
-            if (!Regex.IsMatch(email, patron))
-            {
-                errorProvider1.SetError(TBCorreo, "Ingrese un correo electrónico válido (ej: usuario@mail.com).");
-                return;
-            }
-
-            errorProvider1.SetError(TBCorreo, "");
         }
 
         private void TBContraseña_Validating(object sender, CancelEventArgs e)
@@ -240,6 +231,39 @@ namespace ProyectoIntegrador
             }
 
             errorProvider1.SetError(TBApellido, "");
+        }
+
+        private void LCorreo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TBUsuario_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TBUsuario_Validating(object sender, CancelEventArgs e)
+        {
+            // Obtenemos el texto ingresado sin espacios al inicio ni al final
+            string usuario = TBUsuario.Text.Trim();
+
+            // 1. Validación de campo obligatorio
+            if (string.IsNullOrEmpty(usuario))
+            {
+                errorProvider1.SetError(TBUsuario, "El nombre de usuario es obligatorio.");
+                return;
+            }
+
+            // 2. Validación de longitud mínima (mínimo 5 caracteres)
+            if (usuario.Length < 5)
+            {
+                errorProvider1.SetError(TBUsuario, "El usuario debe tener al menos 5 caracteres.");
+                return;
+            }
+
+            // Si pasó todas las validaciones, limpiamos el ícono de error
+            errorProvider1.SetError(TBUsuario, "");
         }
     }
 }

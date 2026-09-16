@@ -35,7 +35,7 @@
             this.colDni = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colApellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCorreo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridRegistroUsuario)).BeginInit();
             this.SuspendLayout();
@@ -69,7 +69,7 @@
             this.colDni,
             this.colNombre,
             this.colApellido,
-            this.colCorreo,
+            this.colUsuario,
             this.colRol});
             this.dataGridRegistroUsuario.Location = new System.Drawing.Point(0, 158);
             this.dataGridRegistroUsuario.Name = "dataGridRegistroUsuario";
@@ -120,12 +120,12 @@
             this.colApellido.Name = "colApellido";
             this.colApellido.ReadOnly = true;
             // 
-            // colCorreo
+            // colUsuario
             // 
-            this.colCorreo.FillWeight = 30F;
-            this.colCorreo.HeaderText = "Correo";
-            this.colCorreo.Name = "colCorreo";
-            this.colCorreo.ReadOnly = true;
+            this.colUsuario.FillWeight = 30F;
+            this.colUsuario.HeaderText = "Usuario";
+            this.colUsuario.Name = "colUsuario";
+            this.colUsuario.ReadOnly = true;
             // 
             // colRol
             // 
@@ -163,7 +163,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDni;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn colApellido;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCorreo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUsuario;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRol;
     }
 }

@@ -33,4 +33,8 @@ CREATE TABLE Usuarios (
 );
 
 -- insertamos los roles definidos
-INSERT INTO Roles (NombreRol) VALUES ('Admin'), ('Vendedor'), ('Logistica');
+INSERT INTO Roles (NombreRol) VALUES ('Administrador'), ('Vendedor'), ('Logistica');
+
+ALTER TABLE dbo.Usuarios
+ADD DNI VARCHAR(10) NOT NULL,
+CONSTRAINT UQ_Usuario_DNI UNIQUE (DNI);
