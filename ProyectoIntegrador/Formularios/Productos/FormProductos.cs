@@ -12,6 +12,7 @@ namespace ProyectoIntegrador.Formularios.Productos
 {
     public partial class FormProductos : Form
     {
+
         public FormProductos()
         {
             InitializeComponent();
@@ -19,6 +20,8 @@ namespace ProyectoIntegrador.Formularios.Productos
 
         private void FormProductos_Load(object sender, EventArgs e)
         {
+            EstiloUI.AplicarEstiloGrilla(dataGridCatalogoProd);
+
             combCategoriaForm.Items.Clear();
             combCategoriaForm.Items.AddRange(new string[] { "Anillos", "Collares", "Pulseras", "Aros", "Relojes" });
             combCategoriaForm.SelectedIndex = -1;

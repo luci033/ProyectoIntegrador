@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormUsuarioABM));
             this.LNombre = new System.Windows.Forms.Label();
             this.LApellido = new System.Windows.Forms.Label();
@@ -43,13 +44,15 @@
             this.TBContraseña = new System.Windows.Forms.TextBox();
             this.TBContraseñaRepetir = new System.Windows.Forms.TextBox();
             this.L = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxUsuario = new System.Windows.Forms.PictureBox();
             this.BCrearUsuario = new System.Windows.Forms.Button();
             this.BCancelar = new System.Windows.Forms.Button();
             this.CBRol = new System.Windows.Forms.ComboBox();
             this.BBuscarArchivo = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUsuario)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // LNombre
@@ -61,7 +64,6 @@
             this.LNombre.Size = new System.Drawing.Size(44, 13);
             this.LNombre.TabIndex = 0;
             this.LNombre.Text = "Nombre";
-            this.LNombre.Click += new System.EventHandler(this.label1_Click);
             // 
             // LApellido
             // 
@@ -108,7 +110,6 @@
             this.LDNI.Size = new System.Drawing.Size(26, 13);
             this.LDNI.TabIndex = 5;
             this.LDNI.Text = "DNI";
-            this.LDNI.Click += new System.EventHandler(this.LDNI_Click);
             // 
             // label1
             // 
@@ -118,7 +119,6 @@
             this.label1.Size = new System.Drawing.Size(124, 13);
             this.label1.TabIndex = 6;
             this.label1.Text = "Seleccionar foto de perfil";
-            this.label1.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // TBNombre
             // 
@@ -126,7 +126,6 @@
             this.TBNombre.Name = "TBNombre";
             this.TBNombre.Size = new System.Drawing.Size(121, 20);
             this.TBNombre.TabIndex = 7;
-            this.TBNombre.TextChanged += new System.EventHandler(this.TBNombre_TextChanged);
             this.TBNombre.Validating += new System.ComponentModel.CancelEventHandler(this.TBNombre_Validating);
             // 
             // TBDni
@@ -135,6 +134,7 @@
             this.TBDni.Name = "TBDni";
             this.TBDni.Size = new System.Drawing.Size(121, 20);
             this.TBDni.TabIndex = 8;
+            this.TBDni.Validating += new System.ComponentModel.CancelEventHandler(this.TBDni_Validating);
             // 
             // TBApellido
             // 
@@ -142,6 +142,7 @@
             this.TBApellido.Name = "TBApellido";
             this.TBApellido.Size = new System.Drawing.Size(121, 20);
             this.TBApellido.TabIndex = 9;
+            this.TBApellido.Validating += new System.ComponentModel.CancelEventHandler(this.TBApellido_Validating);
             // 
             // TBCorreo
             // 
@@ -149,6 +150,7 @@
             this.TBCorreo.Name = "TBCorreo";
             this.TBCorreo.Size = new System.Drawing.Size(121, 20);
             this.TBCorreo.TabIndex = 10;
+            this.TBCorreo.Validating += new System.ComponentModel.CancelEventHandler(this.TBCorreo_Validating);
             // 
             // TBContraseña
             // 
@@ -156,6 +158,8 @@
             this.TBContraseña.Name = "TBContraseña";
             this.TBContraseña.Size = new System.Drawing.Size(121, 20);
             this.TBContraseña.TabIndex = 11;
+            this.TBContraseña.UseSystemPasswordChar = true;
+            this.TBContraseña.Validating += new System.ComponentModel.CancelEventHandler(this.TBContraseña_Validating);
             // 
             // TBContraseñaRepetir
             // 
@@ -163,6 +167,7 @@
             this.TBContraseñaRepetir.Name = "TBContraseñaRepetir";
             this.TBContraseñaRepetir.Size = new System.Drawing.Size(121, 20);
             this.TBContraseñaRepetir.TabIndex = 12;
+            this.TBContraseñaRepetir.Validating += new System.ComponentModel.CancelEventHandler(this.TBContraseñaRepetir_Validating);
             // 
             // L
             // 
@@ -172,42 +177,56 @@
             this.L.Size = new System.Drawing.Size(131, 13);
             this.L.TabIndex = 13;
             this.L.Text = "Seleccionar rol del usuario";
-            this.L.Click += new System.EventHandler(this.label2_Click);
             // 
-            // pictureBox1
+            // pictureBoxUsuario
             // 
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
-            this.pictureBox1.Location = new System.Drawing.Point(359, 63);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(210, 200);
-            this.pictureBox1.TabIndex = 14;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.pictureBoxUsuario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.pictureBoxUsuario.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxUsuario.BackgroundImage")));
+            this.pictureBoxUsuario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pictureBoxUsuario.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxUsuario.InitialImage")));
+            this.pictureBoxUsuario.Location = new System.Drawing.Point(359, 63);
+            this.pictureBoxUsuario.Name = "pictureBoxUsuario";
+            this.pictureBoxUsuario.Size = new System.Drawing.Size(210, 200);
+            this.pictureBoxUsuario.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxUsuario.TabIndex = 14;
+            this.pictureBoxUsuario.TabStop = false;
             // 
             // BCrearUsuario
             // 
+            this.BCrearUsuario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.BCrearUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BCrearUsuario.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BCrearUsuario.ForeColor = System.Drawing.Color.White;
             this.BCrearUsuario.Location = new System.Drawing.Point(106, 343);
             this.BCrearUsuario.Name = "BCrearUsuario";
-            this.BCrearUsuario.Size = new System.Drawing.Size(130, 23);
+            this.BCrearUsuario.Size = new System.Drawing.Size(136, 34);
             this.BCrearUsuario.TabIndex = 15;
             this.BCrearUsuario.Text = "Crear Usuario";
-            this.BCrearUsuario.UseVisualStyleBackColor = true;
+            this.BCrearUsuario.UseVisualStyleBackColor = false;
             this.BCrearUsuario.Click += new System.EventHandler(this.BCrearUsuario_Click);
             // 
             // BCancelar
             // 
+            this.BCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.BCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BCancelar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BCancelar.ForeColor = System.Drawing.Color.White;
             this.BCancelar.Location = new System.Drawing.Point(359, 343);
             this.BCancelar.Name = "BCancelar";
-            this.BCancelar.Size = new System.Drawing.Size(130, 23);
+            this.BCancelar.Size = new System.Drawing.Size(136, 34);
             this.BCancelar.TabIndex = 16;
             this.BCancelar.Text = "Cancelar y Salir";
-            this.BCancelar.UseVisualStyleBackColor = true;
+            this.BCancelar.UseVisualStyleBackColor = false;
+            this.BCancelar.Click += new System.EventHandler(this.BCancelar_Click);
             // 
             // CBRol
             // 
+            this.CBRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CBRol.FormattingEnabled = true;
+            this.CBRol.Items.AddRange(new object[] {
+            "Administrador",
+            "Vendedor",
+            "Logistica"});
             this.CBRol.Location = new System.Drawing.Point(201, 273);
             this.CBRol.Name = "CBRol";
             this.CBRol.Size = new System.Drawing.Size(121, 21);
@@ -221,10 +240,15 @@
             this.BBuscarArchivo.TabIndex = 18;
             this.BBuscarArchivo.Text = "Buscar Archivo";
             this.BBuscarArchivo.UseVisualStyleBackColor = true;
+            this.BBuscarArchivo.Click += new System.EventHandler(this.BBuscarArchivo_Click);
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // FormUsuarioABM
             // 
@@ -235,7 +259,7 @@
             this.Controls.Add(this.CBRol);
             this.Controls.Add(this.BCancelar);
             this.Controls.Add(this.BCrearUsuario);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pictureBoxUsuario);
             this.Controls.Add(this.L);
             this.Controls.Add(this.TBContraseñaRepetir);
             this.Controls.Add(this.TBContraseña);
@@ -254,7 +278,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Nuevo Usuario";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUsuario)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -276,12 +301,13 @@
         private System.Windows.Forms.TextBox TBContraseña;
         private System.Windows.Forms.TextBox TBContraseñaRepetir;
         private System.Windows.Forms.Label L;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBoxUsuario;
         private System.Windows.Forms.Button BCrearUsuario;
         private System.Windows.Forms.Button BCancelar;
         private System.Windows.Forms.ComboBox CBRol;
         private System.Windows.Forms.Button BBuscarArchivo;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
 
