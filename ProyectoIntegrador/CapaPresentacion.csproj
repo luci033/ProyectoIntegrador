@@ -218,6 +218,12 @@
     <Compile Include="Formularios\Ventas\FormHistorialVentas.Designer.cs">
       <DependentUpon>FormHistorialVentas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\Ventas\FormRegistroVentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Ventas\FormRegistroVentas.Designer.cs">
+      <DependentUpon>FormRegistroVentas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\Ventas\FormVentas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -300,6 +306,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Ventas\FormHistorialVentas.resx">
       <DependentUpon>FormHistorialVentas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Ventas\FormRegistroVentas.resx">
+      <DependentUpon>FormRegistroVentas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Ventas\FormVentas.resx">
       <DependentUpon>FormVentas.cs</DependentUpon>

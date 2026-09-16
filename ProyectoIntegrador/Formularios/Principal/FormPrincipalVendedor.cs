@@ -33,7 +33,7 @@ namespace ProyectoIntegrador.Formularios.Principal
         private void registrarVentaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //instanciamos la pantalla de carga y cobro
-            FormVentas pantallaVentas = new FormVentas();
+            FormRegistroVentas pantallaVentas = new FormRegistroVentas();
 
             //lo abrimos como modal para que termine la vetna antes de vovler al menu
             pantallaVentas.ShowDialog();
