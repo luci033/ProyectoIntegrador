@@ -49,7 +49,7 @@ namespace CapaDatos
         {
             Usuario objUsuario = null; // Arranca nulo por si no encuentra a nadie
 
-            // Buscamos a alguien que coincida exactamente y que esté Activo
+            // se busca a alguien que coincida exactamente y que este Activo
             string query = "SELECT IdUsuario, Usuario, NombreUsuario, ApellidoUsuario, IdRol FROM Usuarios WHERE Usuario = @usuario AND Contrasena = @contrasena AND Activo = 1";
 
             try
@@ -63,7 +63,7 @@ namespace CapaDatos
 
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            if (reader.Read()) // Si encontró una fila que coincide
+                            if (reader.Read()) // si encontro una fila que coincide
                             {
                                 objUsuario = new Usuario()
                                 {
@@ -71,7 +71,8 @@ namespace CapaDatos
                                     User = reader["Usuario"].ToString(),
                                     NombreUsuario = reader["NombreUsuario"].ToString(),
                                     ApellidoUsuario = reader["ApellidoUsuario"].ToString(),
-                                    IdRol = Convert.ToInt32(reader["IdRol"])
+                                    IdRol = Convert.ToInt32(reader["IdRol"]),
+                                    Contrasena = contrasena
                                 };
                             }
                         }

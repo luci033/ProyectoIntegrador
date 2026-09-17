@@ -18,7 +18,7 @@ namespace CapaNegocio
             if (string.IsNullOrWhiteSpace(obj.User))
             {
                 mensaje = "El nombre de usuario no puede estar vacío.";
-                return false; // Corta la ejecución acá
+                return false; // aca, corta la ejecucion
             }
 
             if (string.IsNullOrWhiteSpace(obj.Contrasena))
@@ -30,20 +30,21 @@ namespace CapaNegocio
             // Si pasa las validaciones, le pasa el objeto a la Capa de Datos
             return objCapaDato.RegistrarUsuario(obj, out mensaje);
         }
-    }
 
-    public Usuario Login(string usuario, string contrasena, out string mensaje)
-        {
-            mensaje = string.Empty;
-
-            // Validación básica de seguridad
-            if (string.IsNullOrWhiteSpace(usuario) || string.IsNullOrWhiteSpace(contrasena))
+        //puente a la capa de negocio, se validan primero que los campos no esten vacios antes de ir a la BD
+        public Usuario Login(string usuario, string contrasena, out string mensaje)
             {
-                mensaje = "Debe ingresar el usuario y la contraseña.";
-                return null;
-            }
+                mensaje = string.Empty;
 
-            // Si todo está ok, le pasa la pelota a la Capa de Datos
-            return objCapaDato.Login(usuario, contrasena);
+                // Validación básica de seguridad
+                if (string.IsNullOrWhiteSpace(usuario) || string.IsNullOrWhiteSpace(contrasena))
+                {
+                    mensaje = "Debe ingresar el usuario y la contraseña.";
+                    return null;
+                }
+
+                // Si todo está ok, se pasa a la Capa de Datos
+                return objCapaDato.Login(usuario, contrasena);
+            }
         }
     }

@@ -1,4 +1,6 @@
-﻿using ProyectoIntegrador.Formularios.Principal;
+﻿using CapaNegocio;
+using CapaEntidades; 
+using ProyectoIntegrador.Formularios.Principal;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -139,8 +141,58 @@ namespace ProyectoIntegrador.Formularios.Usuarios
 
         private void BLogin_Click(object sender, EventArgs e)
         {
+            /*
             string usuario = TBUsuario.Text.Trim();
             string clave = TBContrasena.Text.Trim();
+            string mensajeError = string.Empty;
+
+            // se valida que no haya campos vacios
+            if (string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(clave))
+            {
+                MessageBox.Show("Por favor, ingrese su usuario y contraseña.", "Campos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            //se llama a la capa de negocio para ppreguntar a la base de datos
+            CN_Usuario negocio = new CN_Usuario();
+            Usuario usuarioLogueado = negocio.Login(usuario, clave, out mensajeError);
+
+            //se comprueba si las credenciales son correctas (si encontro al usuario)
+            if (usuarioLogueado != null)
+            {
+                //se evalua el numero de tol que se trajo de la bd
+                if (usuarioLogueado.IdRol == 1)
+                {
+                    RolUsuario = "Administrador";
+                }
+                else if (usuarioLogueado.IdRol == 2)
+                {
+                    RolUsuario = "Vendedor";
+                }
+                else if (usuarioLogueado.IdRol == 3)
+                {
+                    RolUsuario = "Logistica";
+                }
+
+                // se cierra el login y damos el ok apra abrir el sistema
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                //en caso de que no coincida o la contraseña este mal
+                string errorMostrar = string.IsNullOrEmpty(mensajeError) ? "Usuario o contraseña incorrectos." : mensajeError;
+                MessageBox.Show(errorMostrar, "Error de acceso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                TBContrasena.Clear();
+                TBContrasena.Focus();
+            }
+            */
+
+
+            string usuario = TBUsuario.Text.Trim();
+            string clave = TBContrasena.Text.Trim();
+            string mensajeError;
 
             // se valida que no haya campos vacios
             if (string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(clave))
@@ -181,3 +233,10 @@ namespace ProyectoIntegrador.Formularios.Usuarios
         }
     }
 }
+
+
+            
+        
+        
+     
+
