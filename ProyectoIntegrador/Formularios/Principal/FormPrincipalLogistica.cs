@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProyectoIntegrador.Formularios.Inventario;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,6 +26,14 @@ namespace ProyectoIntegrador.Formularios.Principal
         private void listarProductosToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void ajusteStockToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FormAjusteStock formAjuste = new FormAjusteStock())
+            {
+                formAjuste.ShowDialog();
+            }
         }
     }
 }

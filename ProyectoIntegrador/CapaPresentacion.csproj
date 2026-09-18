@@ -93,12 +93,6 @@
     <Compile Include="Formularios\Compras\FormVerDetalle.Designer.cs">
       <DependentUpon>FormVerDetalle.cs</DependentUpon>
     </Compile>
-    <Compile Include="Formularios\Inventario\FormAjusteStock.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Formularios\Inventario\FormAjusteStock.Designer.cs">
-      <DependentUpon>FormAjusteStock.cs</DependentUpon>
-    </Compile>
     <Compile Include="Formularios\Proveedores\FormBuscarProveedor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -257,9 +251,6 @@
     <EmbeddedResource Include="Formularios\Devoluciones\FormRegistrarDevolucion.resx">
       <DependentUpon>FormRegistrarDevolucion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Formularios\Inventario\FormAjusteStock.resx">
-      <DependentUpon>FormAjusteStock.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Proveedores\FormBuscarProveedor.resx">
       <DependentUpon>FormBuscarProveedor.cs</DependentUpon>
     </EmbeddedResource>
@@ -383,6 +374,9 @@
       <Project>{9dd46d45-f59a-4adb-ade4-7a31e9a5e635}</Project>
       <Name>CapaNegocio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Formularios\Inventario\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

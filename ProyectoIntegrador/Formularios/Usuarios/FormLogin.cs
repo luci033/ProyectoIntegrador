@@ -21,6 +21,8 @@ namespace ProyectoIntegrador.Formularios.Usuarios
         public FormLogin()
         {
             InitializeComponent();
+            // Reemplaza 'panel1' por el nombre real de tu panel en el diseñador
+            panel1.BackColor = Color.FromArgb(120, 90, 30, 30);
         }
 
         private void Login_Load(object sender, EventArgs e)
