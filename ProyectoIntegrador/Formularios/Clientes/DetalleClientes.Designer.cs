@@ -37,9 +37,8 @@
             this.TBCorreo = new System.Windows.Forms.TextBox();
             this.LCorreo = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.DTPHasta = new System.Windows.Forms.DateTimePicker();
             this.cmbDMedioPago = new System.Windows.Forms.ComboBox();
-            this.TBDesde = new System.Windows.Forms.TextBox();
             this.BFiltrar = new System.Windows.Forms.Button();
             this.LMedioPago = new System.Windows.Forms.Label();
             this.LHasta = new System.Windows.Forms.Label();
@@ -53,6 +52,7 @@
             this.BPDF = new System.Windows.Forms.Button();
             this.BCerrar = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.DTPDesde = new System.Windows.Forms.DateTimePicker();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridDetalleCliente)).BeginInit();
             this.panel2.SuspendLayout();
@@ -62,6 +62,7 @@
             // 
             this.TBNombre.Location = new System.Drawing.Point(134, 18);
             this.TBNombre.Name = "TBNombre";
+            this.TBNombre.ReadOnly = true;
             this.TBNombre.Size = new System.Drawing.Size(100, 20);
             this.TBNombre.TabIndex = 8;
             // 
@@ -79,6 +80,7 @@
             // 
             this.TBDni.Location = new System.Drawing.Point(359, 62);
             this.TBDni.Name = "TBDni";
+            this.TBDni.ReadOnly = true;
             this.TBDni.Size = new System.Drawing.Size(100, 20);
             this.TBDni.TabIndex = 10;
             // 
@@ -114,6 +116,7 @@
             // 
             this.TBCorreo.Location = new System.Drawing.Point(134, 58);
             this.TBCorreo.Name = "TBCorreo";
+            this.TBCorreo.ReadOnly = true;
             this.TBCorreo.Size = new System.Drawing.Size(100, 20);
             this.TBCorreo.TabIndex = 19;
             // 
@@ -129,9 +132,9 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.dateTimePicker1);
+            this.panel1.Controls.Add(this.DTPDesde);
+            this.panel1.Controls.Add(this.DTPHasta);
             this.panel1.Controls.Add(this.cmbDMedioPago);
-            this.panel1.Controls.Add(this.TBDesde);
             this.panel1.Controls.Add(this.BFiltrar);
             this.panel1.Controls.Add(this.LMedioPago);
             this.panel1.Controls.Add(this.LHasta);
@@ -141,13 +144,13 @@
             this.panel1.Size = new System.Drawing.Size(612, 38);
             this.panel1.TabIndex = 20;
             // 
-            // dateTimePicker1
+            // DTPHasta
             // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(176, 8);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(94, 20);
-            this.dateTimePicker1.TabIndex = 26;
+            this.DTPHasta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.DTPHasta.Location = new System.Drawing.Point(176, 8);
+            this.DTPHasta.Name = "DTPHasta";
+            this.DTPHasta.Size = new System.Drawing.Size(94, 20);
+            this.DTPHasta.TabIndex = 26;
             // 
             // cmbDMedioPago
             // 
@@ -157,13 +160,6 @@
             this.cmbDMedioPago.Size = new System.Drawing.Size(95, 21);
             this.cmbDMedioPago.TabIndex = 25;
             // 
-            // TBDesde
-            // 
-            this.TBDesde.Location = new System.Drawing.Point(42, 8);
-            this.TBDesde.Name = "TBDesde";
-            this.TBDesde.Size = new System.Drawing.Size(83, 20);
-            this.TBDesde.TabIndex = 23;
-            // 
             // BFiltrar
             // 
             this.BFiltrar.Location = new System.Drawing.Point(520, 4);
@@ -172,6 +168,7 @@
             this.BFiltrar.TabIndex = 22;
             this.BFiltrar.Text = "Filtrar";
             this.BFiltrar.UseVisualStyleBackColor = true;
+            this.BFiltrar.Click += new System.EventHandler(this.BFiltrar_Click);
             // 
             // LMedioPago
             // 
@@ -288,6 +285,14 @@
             this.panel2.Size = new System.Drawing.Size(497, 102);
             this.panel2.TabIndex = 24;
             // 
+            // DTPDesde
+            // 
+            this.DTPDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.DTPDesde.Location = new System.Drawing.Point(40, 9);
+            this.DTPDesde.Name = "DTPDesde";
+            this.DTPDesde.Size = new System.Drawing.Size(94, 20);
+            this.DTPDesde.TabIndex = 27;
+            // 
             // DetalleClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -321,9 +326,8 @@
         private System.Windows.Forms.TextBox TBCorreo;
         private System.Windows.Forms.Label LCorreo;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker DTPHasta;
         private System.Windows.Forms.ComboBox cmbDMedioPago;
-        private System.Windows.Forms.TextBox TBDesde;
         private System.Windows.Forms.Button BFiltrar;
         private System.Windows.Forms.Label LMedioPago;
         private System.Windows.Forms.Label LHasta;
@@ -337,5 +341,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colMedioPago;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
         private System.Windows.Forms.DataGridViewButtonColumn colDetalle;
+        private System.Windows.Forms.DateTimePicker DTPDesde;
     }
 }

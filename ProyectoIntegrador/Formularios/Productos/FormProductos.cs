@@ -22,57 +22,77 @@ namespace ProyectoIntegrador.Formularios.Productos
         {
             EstiloUI.AplicarEstiloGrilla(dataGridCatalogoProd);
 
+            /*
             combCategoriaForm.Items.Clear();
             combCategoriaForm.Items.AddRange(new string[] { "Anillos", "Collares", "Pulseras", "Aros", "Relojes" });
             combCategoriaForm.SelectedIndex = -1;
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
+            */
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0) return;
 
+            string nombreColumna = dataGridCatalogoProd.Columns[e.ColumnIndex].Name;
+
+            // Atrapamos el código del producto (Columna 0)
+            string codigo = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[0].Value);
+
+            // Escudo anti-filas vacías
+            if (string.IsNullOrWhiteSpace(codigo)) return;
+
+            // --- ACCIÓN: BOTÓN MODIFICAR ---
+            if (nombreColumna == "colModificar")
+            {
+                string nombre = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[2].Value);
+                string categoria = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[3].Value);
+                string genero = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[4].Value);
+                string precio = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[5].Value);
+                string stock = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[6].Value);
+
+                FormProductoABM modalABM = new FormProductoABM();
+                modalABM.ConfigurarModoEdicion(codigo, nombre, categoria, genero, precio, stock);
+
+                if (modalABM.ShowDialog() == DialogResult.OK)
+                {
+                    MessageBox.Show("Producto modificado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+
+            // --- ACCIÓN: BOTÓN ELIMINAR ---
+            else if (nombreColumna == "colEliminar")
+            {
+                string nombre = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[1].Value);
+                DialogResult respuesta = MessageBox.Show($"¿Seguro que deseas eliminar el producto {nombre}?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (respuesta == DialogResult.Yes)
+                {
+                    MessageBox.Show("Producto eliminado de la vista.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // dataGridProductos.Rows.RemoveAt(e.RowIndex); // Esta línea borraría la fila visualmente
+                }
+            }
         }
 
         private void BNuevo_Click(object sender, EventArgs e)
         {
-            // 1. se instancia la ventana de carga de productos
-            using (FormProductoABM ventanaABM = new FormProductoABM())
+            // 1. Instanciamos la ventana del ABM
+            FormProductoABM modalProducto = new FormProductoABM();
+
+            // 2. Si el usuario le dio a "Crear" y el ABM devolvió el sello de "OK"...
+            if (modalProducto.ShowDialog() == DialogResult.OK)
             {
-                if (ventanaABM.ShowDialog() == DialogResult.OK)
-                {
-
-                    //se hace un control de duplicado por codigo antes de insertar
-                    foreach (DataGridViewRow fila in dataGridCatalogoProd.Rows)
-                    {
-                        if (fila.Cells[0].Value != null && fila.Cells[0].Value.ToString() == ventanaABM.Codigo.ToUpper())
-                        {
-                            MessageBox.Show("Ya existe un producto con el código: " + ventanaABM.Codigo,
-                                            "Producto duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return; // para y no agrega el duplicado
-                        }
-                    }
-
-                    // insercion en el orden de las columnas de la grilla
-                    dataGridCatalogoProd.Rows.Add(
-                        ventanaABM.Codigo,
-                        ventanaABM.Nombre,
-                        //ventanaABM.ImagenRuta,
-                        ventanaABM.Categoria,
-                        ventanaABM.Genero,
-                        ventanaABM.Precio,
-                        ventanaABM.Stock
-                    );
-                }
+                // 3. Cargamos los datos en la grilla respetando tu orden exacto de columnas:
+                dataGridCatalogoProd.Rows.Add(
+                    "",                            // [0] IdProducto (oculto, lo dejamos vacío)
+                    modalProducto.Codigo,          // [1] Codigo
+                    modalProducto.Nombre,          // [2] Nombre
+                    modalProducto.Categoria,       // [3] Categoría
+                    modalProducto.Genero,          // [4] Género
+                    modalProducto.Precio,          // [5] Precio
+                    modalProducto.Stock,           // [6] Stock (Inicial)
+                    modalProducto.StockMinimo      // [7] Stock Mínimo
+                );
             }
-
-            // 2. La mostramos en modo modal (bloquea la ventana de atrás hasta que se cierre)
-
-
-
         }
 
         private void BEliminar_Click(object sender, EventArgs e)
@@ -115,6 +135,12 @@ namespace ProyectoIntegrador.Formularios.Productos
                 }
 
             }
+        }
+
+        private void BBuscarProducto_Click(object sender, EventArgs e)
+        {
+            FormBuscarProducto modalBusqueda = new FormBuscarProducto();
+            modalBusqueda.ShowDialog();
         }
     }
 }

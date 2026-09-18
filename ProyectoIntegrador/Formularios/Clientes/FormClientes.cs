@@ -7,11 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static ProyectoIntegrador.Formularios.Clientes.FormClientesABM;
 
 namespace ProyectoIntegrador.Formularios.Clientes
 {
     public partial class FormClientes : Form
     {
+        private List<ClienteSimulado> listaTemporalClientes = new List<ClienteSimulado>();
+
         public FormClientes()
         {
             InitializeComponent();
@@ -24,11 +27,38 @@ namespace ProyectoIntegrador.Formularios.Clientes
 
         private void BNuevoCliente_Click(object sender, EventArgs e)
         {
-            // instanciamos el formulario de ABM
-            FormClientesABM formNuevoCliente = new FormClientesABM();
+            // Instanciamos el formulario y le ponemos de nombre modalCliente
+            FormClientesABM modalCliente = new FormClientesABM();
 
-            // se de forma modal (bloquea el fondo hasta que se termine de registrar o cancelar)
-            formNuevoCliente.ShowDialog();
+            // Si el ABM se cerró correctamente con el botón Registrar...
+            if (modalCliente.ShowDialog() == DialogResult.OK)
+            {
+                // Atrapamos el paquete y lo guardamos en la lista
+                listaTemporalClientes.Add(modalCliente.ClienteCreado);
+
+                // Mandamos a dibujar la tabla
+                CargarGrillaClientes();
+            }
+        }
+
+        private void CargarGrillaClientes()
+        {
+            dataGridHistorialClientes.Rows.Clear(); // Limpiamos para no duplicar datos
+            int numeroFila = 1;
+
+            foreach (var cliente in listaTemporalClientes)
+            {
+                dataGridHistorialClientes.Rows.Add(
+                    "",                   // [0] ID Oculto 
+                    numeroFila,           // [1] Nro
+                    cliente.Nombre,       // [2] Nombre
+                    cliente.Apellido,     // [3] Apellido
+                    cliente.DNI,          // [4] DNI
+                    cliente.Correo,       // [5] Correo
+                    "", "", ""            // [6, 7, 8] Los botones vacíos
+                );
+                numeroFila++;
+            }
         }
 
         private void dataGridHistorialClientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -65,23 +95,40 @@ namespace ProyectoIntegrador.Formularios.Clientes
                 }
             }
 
-            // --- ACCIÓN: BOTÓN HISTORIAL ---
+            // --- ACCIÓN: boton historial ---
             else if (nombreColumna == "colHistorial")
             {
-                string dniParaHistorial = Convert.ToString(dataGridHistorialClientes.Rows[e.RowIndex].Cells[4].Value);
-                if (!string.IsNullOrWhiteSpace(dniParaHistorial))
-                {
-                    MessageBox.Show($"Abriendo el historial del DNI: {dniParaHistorial}");
-                }
-            }
+                // 1. Atrapamos todos los datos de la fila seleccionada
+                string nombre = Convert.ToString(dataGridHistorialClientes.Rows[e.RowIndex].Cells[2].Value);
+                string apellido = Convert.ToString(dataGridHistorialClientes.Rows[e.RowIndex].Cells[3].Value);
+                string dni = Convert.ToString(dataGridHistorialClientes.Rows[e.RowIndex].Cells[4].Value);
+                string correo = Convert.ToString(dataGridHistorialClientes.Rows[e.RowIndex].Cells[5].Value);
 
-            // --- ACCIÓN: BOTÓN DESACTIVAR ---
-            else if (nombreColumna == "colDesactivar")
-            {
-                string dniParaDesactivar = Convert.ToString(dataGridHistorialClientes.Rows[e.RowIndex].Cells[4].Value);
-                if (!string.IsNullOrWhiteSpace(dniParaDesactivar))
+                // Escudo: Verificamos que no sea una fila vacía
+                if (!string.IsNullOrWhiteSpace(dni))
                 {
-                    DialogResult respuesta = MessageBox.Show($"¿Seguro que deseas desactivar al cliente con DNI {dniParaDesactivar}?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    // 2. Instanciamos tu formulario de detalle
+                    DetalleClientes formDetalle = new DetalleClientes();
+                    formDetalle.Text = "Historial de Compras - DNI: " + dni;
+
+                    // 3. Unimos el nombre y apellido para que se vea más completo en la caja de texto
+                    string nombreCompleto = nombre + " " + apellido;
+
+
+                    formDetalle.CargarDatosCliente(nombreCompleto, correo, "Consumidor Final", dni);
+
+                    // 5. Mostramos la pantalla
+                    formDetalle.ShowDialog();
+                }
+
+                // --- ACCIÓN: boton desactivar ---
+                else if (nombreColumna == "colDesactivar")
+                {
+                    string dniParaDesactivar = Convert.ToString(dataGridHistorialClientes.Rows[e.RowIndex].Cells[4].Value);
+                    if (!string.IsNullOrWhiteSpace(dniParaDesactivar))
+                    {
+                        DialogResult respuesta = MessageBox.Show($"¿Seguro que deseas desactivar al cliente con DNI {dniParaDesactivar}?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    }
                 }
             }
         }

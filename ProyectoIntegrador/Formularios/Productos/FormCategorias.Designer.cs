@@ -41,7 +41,11 @@
             // 
             // DGCategoria
             // 
-            this.DGCategoria.AllowDrop = true;
+            this.DGCategoria.AllowUserToAddRows = false;
+            this.DGCategoria.AllowUserToDeleteRows = false;
+            this.DGCategoria.AllowUserToOrderColumns = true;
+            this.DGCategoria.AllowUserToResizeColumns = false;
+            this.DGCategoria.AllowUserToResizeRows = false;
             this.DGCategoria.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DGCategoria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGCategoria.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -118,7 +122,7 @@
             // CategoriaModificar
             // 
             this.CategoriaModificar.FillWeight = 20F;
-            this.CategoriaModificar.HeaderText = "Modificar";
+            this.CategoriaModificar.HeaderText = "";
             this.CategoriaModificar.Name = "CategoriaModificar";
             this.CategoriaModificar.ReadOnly = true;
             this.CategoriaModificar.Text = "Editar";
@@ -127,7 +131,7 @@
             // CategoriaDesactivar
             // 
             this.CategoriaDesactivar.FillWeight = 15F;
-            this.CategoriaDesactivar.HeaderText = "Desactivar";
+            this.CategoriaDesactivar.HeaderText = "";
             this.CategoriaDesactivar.Name = "CategoriaDesactivar";
             this.CategoriaDesactivar.ReadOnly = true;
             this.CategoriaDesactivar.Text = "Eliminar";

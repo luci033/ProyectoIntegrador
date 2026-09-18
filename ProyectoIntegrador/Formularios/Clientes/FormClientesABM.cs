@@ -13,6 +13,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
 {
     public partial class FormClientesABM : Form
     {
+        public ClienteSimulado ClienteCreado { get; private set; }
         public FormClientesABM()
         {
             InitializeComponent();
@@ -42,6 +43,14 @@ namespace ProyectoIntegrador.Formularios.Clientes
 
                 // si todo estta bien muestra este mensaje
                 MessageBox.Show("¡Cliente validado y listo para guardar en la Base de Datos!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                ClienteCreado = new ClienteSimulado
+                {
+                    Nombre = TBNombre.Text,
+                    Apellido = TBApellido.Text,
+                    DNI = TBDni.Text,
+                    Correo = TBCorreo.Text
+                };
 
                 // Aquí llamaremos a  CN_Cliente...  REVISAR
                 this.DialogResult = DialogResult.OK;
@@ -123,7 +132,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
         private void TBCorreo_Validating(object sender, CancelEventArgs e)
         {
             string email = TBCorreo.Text.Trim();
-            
+
             //En caso de que el correo sea obligatorio REVISAR
             if (string.IsNullOrWhiteSpace(email))
             {
@@ -134,7 +143,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
 
             try
             {
-               
+
                 MailAddress m = new MailAddress(email);
                 e.Cancel = false;
                 errorProvider1.SetError(TBCorreo, "");
@@ -151,16 +160,22 @@ namespace ProyectoIntegrador.Formularios.Clientes
         {
             this.Text = "Modificar Cliente"; // Cambiamos el título de la ventana
 
-            // Si tienes un Label de título arriba, cambialo acá (ej: LTitulo.Text = "Modificar Cliente";)
-
             // Rellenamos las cajas de texto con los datos que nos mandan
             TBNombre.Text = nombre;
             TBApellido.Text = apellido;
             TBDni.Text = dni;
             TBCorreo.Text = correo;
 
-            // Bloqueamos el DNI para que no lo puedan cambiar (regla de oro en bases de datos)
+            // Bloqueamos el DNI para que no lo puedan cambiar 
             TBDni.Enabled = false;
+        }
+
+        public class ClienteSimulado
+        {
+            public string Nombre { get; set; }
+            public string Apellido { get; set; }
+            public string DNI { get; set; }
+            public string Correo { get; set; }
         }
     }
 }

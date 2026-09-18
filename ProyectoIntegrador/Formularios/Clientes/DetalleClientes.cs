@@ -27,5 +27,30 @@ namespace ProyectoIntegrador.Formularios.Clientes
             EstiloUI.AplicarEstiloGrilla(dataGridDetalleCliente);
 
         }
+
+        public void CargarDatosCliente(string nombre, string correo, string condicionIva, string dni)
+        {
+            TBNombre.Text = nombre;
+            TBCorreo.Text = correo;
+            cmbCondicionIVA.Text = condicionIva;
+            TBDni.Text = dni;
+        }
+
+        private void BFiltrar_Click(object sender, EventArgs e)
+        {
+          
+            DateTime fechaInicio = DTPDesde.Value.Date;
+            DateTime fechaFin = DTPHasta.Value.Date;
+
+            // validamos que el rango de fechas tenga sentido lógico
+            if (fechaInicio > fechaFin)
+            {
+                MessageBox.Show("La fecha 'Desde' no puede ser mayor a la fecha 'Hasta'.", "Filtro inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return; // Cortamos la ejecución para que no intente buscar nada
+            }
+
+            // si pasa las validaciones realiza la busqueda
+            MessageBox.Show("Fechas correctas. Buscando historial...", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }

@@ -8,12 +8,12 @@ namespace ProyectoIntegrador
     {
         public string Codigo => textCodigo.Text.Trim();
         public string Nombre => textNombre.Text.Trim();
-        //public string ImagenRuta => textImagen.ImageLocation ?? ""; // O la variable donde guardes la ruta de la foto
         public string Categoria => cmbCategoria.Text.Trim();
-        public string Genero => combGenero.Text.Trim();
+        public string Genero => combGenero.Text.Trim(); // Revisá si le pusiste comGenero o combGenero
         public string Precio => textPrecio.Text.Trim();
-        public string Stock=> textStockInicial.Text.Trim();
-    
+        public string Stock => textStockInicial.Text.Trim();
+        public string StockMinimo => textStockMinimo.Text.Trim(); // <- Agregá esta línea
+
         public FormProductoABM()
         {
             InitializeComponent();
@@ -111,6 +111,7 @@ namespace ProyectoIntegrador
             if(confirmacion == DialogResult.Yes)
             {
                 MessageBox.Show("Producto registrado correctamente.", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.DialogResult = DialogResult.OK;
                 this.Close();
             }
         }
@@ -125,6 +126,21 @@ namespace ProyectoIntegrador
             {
                 this.Close();
             }
+        }
+
+        public void ConfigurarModoEdicion(string codigo, string nombre, string categoria, string genero, string precio, string stock)
+        {
+            this.Text = "Modificar Producto"; // Cambiamos el título
+
+            // Llenamos las cajas con los nombres de tus variables
+            textCodigo.Text = codigo;
+            textCodigo.Enabled = false; // El código no se toca
+
+            textNombre.Text = nombre;
+            cmbCategoria.Text = categoria;
+            combGenero.Text = genero;
+            textPrecio.Text = precio;
+            textStockInicial.Text = stock;
         }
 
     }
