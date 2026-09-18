@@ -29,19 +29,6 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-<<<<<<< HEAD
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.LStockActual = new System.Windows.Forms.Label();
-            this.TBNombre = new System.Windows.Forms.TextBox();
-            this.LNombre = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.LCodigoProducto = new System.Windows.Forms.Label();
-            this.BBuscarProducto = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.labe = new System.Windows.Forms.DataGridView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-=======
             this.TBCodigoProducto = new System.Windows.Forms.TextBox();
             this.LCodigoProducto = new System.Windows.Forms.Label();
             this.BBuscarProducto = new System.Windows.Forms.Button();
@@ -60,7 +47,6 @@
             this.TBObservaciones = new System.Windows.Forms.TextBox();
             this.LObservaciones = new System.Windows.Forms.Label();
             this.BCancelar = new System.Windows.Forms.Button();
->>>>>>> e6b42fcf9267a8717810ba0fd554b869cfcde1ef
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -77,55 +63,12 @@
             this.panel1.Size = new System.Drawing.Size(776, 130);
             this.panel1.TabIndex = 0;
             // 
-<<<<<<< HEAD
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(129, 107);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(136, 20);
-            this.textBox2.TabIndex = 7;
-            // 
-            // LStockActual
-            // 
-            this.LStockActual.AutoSize = true;
-            this.LStockActual.Location = new System.Drawing.Point(34, 110);
-            this.LStockActual.Name = "LStockActual";
-            this.LStockActual.Size = new System.Drawing.Size(71, 13);
-            this.LStockActual.TabIndex = 6;
-            this.LStockActual.Text = "Stock Actual:";
-            // 
-            // TBNombre
-            // 
-            this.TBNombre.Location = new System.Drawing.Point(129, 75);
-            this.TBNombre.Name = "TBNombre";
-            this.TBNombre.ReadOnly = true;
-            this.TBNombre.Size = new System.Drawing.Size(136, 20);
-            this.TBNombre.TabIndex = 5;
-            // 
-            // LNombre
-            // 
-            this.LNombre.AutoSize = true;
-            this.LNombre.Location = new System.Drawing.Point(34, 75);
-            this.LNombre.Name = "LNombre";
-            this.LNombre.Size = new System.Drawing.Size(50, 13);
-            this.LNombre.TabIndex = 4;
-            this.LNombre.Text = "Nombre: ";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(129, 41);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(136, 20);
-            this.textBox1.TabIndex = 3;
-=======
             // TBCodigoProducto
             // 
             this.TBCodigoProducto.Location = new System.Drawing.Point(129, 75);
             this.TBCodigoProducto.Name = "TBCodigoProducto";
             this.TBCodigoProducto.Size = new System.Drawing.Size(136, 20);
             this.TBCodigoProducto.TabIndex = 3;
->>>>>>> e6b42fcf9267a8717810ba0fd554b869cfcde1ef
             // 
             // LCodigoProducto
             // 
@@ -147,16 +90,6 @@
             this.BBuscarProducto.Text = "Buscar Producto";
             this.BBuscarProducto.UseVisualStyleBackColor = true;
             this.BBuscarProducto.Click += new System.EventHandler(this.BBuscarProducto_Click);
-            // 
-            // BBuscarProducto
-            // 
-            this.BBuscarProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BBuscarProducto.Location = new System.Drawing.Point(420, 61);
-            this.BBuscarProducto.Name = "BBuscarProducto";
-            this.BBuscarProducto.Size = new System.Drawing.Size(148, 44);
-            this.BBuscarProducto.TabIndex = 0;
-            this.BBuscarProducto.Text = "Buscar Producto";
-            this.BBuscarProducto.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
@@ -205,8 +138,6 @@
             this.LUsuarioActivo.TabIndex = 8;
             this.LUsuarioActivo.Text = "Usuario Activo:";
             // 
-<<<<<<< HEAD
-=======
             // TBUsuarioActivo
             // 
             this.TBUsuarioActivo.Location = new System.Drawing.Point(129, 32);
@@ -304,7 +235,6 @@
             this.BCancelar.UseVisualStyleBackColor = true;
             this.BCancelar.Click += new System.EventHandler(this.BCancelar_Click);
             // 
->>>>>>> e6b42fcf9267a8717810ba0fd554b869cfcde1ef
             // FormAjusteStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);

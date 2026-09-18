@@ -28,52 +28,6 @@ namespace ProyectoIntegrador.Formularios.Clientes
 
         }
 
-        private bool ValidarCampos()
-        {
-            // validacion para los campos vacios
-            if (string.IsNullOrWhiteSpace(TBNombre.Text) ||
-                string.IsNullOrWhiteSpace(TBApellido.Text) ||
-                string.IsNullOrWhiteSpace(TBDni.Text) ||
-                string.IsNullOrWhiteSpace(TBTelefono.Text) ||
-                string.IsNullOrWhiteSpace(TBCorreo.Text))
-            {
-                MessageBox.Show("Por favor, complete todos los campos de texto.", "Campos Incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-
-            // validacion del IVA
-            // Si el SelectedIndex es -1, significa que se eligio nada de la lista desplegable
-            if (cmbCondicionIVA.SelectedIndex == -1)
-            {
-                MessageBox.Show("Seleccione una Condición frente al IVA.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-
-            if (!int.TryParse(TBDni.Text.Trim(), out _) || TBDni.Text.Trim().Length < 7)
-            {
-                MessageBox.Show("El DNI debe contener solo números y tener al menos 7 dígitos.", "Error de Formato", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                TBDni.Focus();
-                return false;
-            }
-
-            if (!long.TryParse(TBTelefono.Text.Trim(), out _))
-            {
-                MessageBox.Show("El teléfono debe contener solo números, sin guiones ni espacios.", "Error de Formato", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                TBTelefono.Focus();
-                return false;
-            }
-            
-            if (!TBCorreo.Text.Contains("@") || !TBCorreo.Text.Contains("."))
-            {
-                MessageBox.Show("Ingrese un correo electrónico válido (debe contener '@' y un punto).", "Error en Correo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                TBCorreo.Focus();
-                return false;
-            }
-
-            //si paso todas las validaciones sin devolver 'false', sigue
-            return true;
-        }
-
         private void BRegistrarCliente_Click(object sender, EventArgs e)
         {
           
@@ -190,6 +144,23 @@ namespace ProyectoIntegrador.Formularios.Clientes
                 e.Cancel = true;
                 errorProvider1.SetError(TBCorreo, "El formato del correo no es válido (ej: nombre@dominio.com).");
             }
+        }
+
+        
+        public void ConfigurarModoEdicion(string nombre, string apellido, string dni, string correo)
+        {
+            this.Text = "Modificar Cliente"; // Cambiamos el título de la ventana
+
+            // Si tienes un Label de título arriba, cambialo acá (ej: LTitulo.Text = "Modificar Cliente";)
+
+            // Rellenamos las cajas de texto con los datos que nos mandan
+            TBNombre.Text = nombre;
+            TBApellido.Text = apellido;
+            TBDni.Text = dni;
+            TBCorreo.Text = correo;
+
+            // Bloqueamos el DNI para que no lo puedan cambiar (regla de oro en bases de datos)
+            TBDni.Enabled = false;
         }
     }
 }

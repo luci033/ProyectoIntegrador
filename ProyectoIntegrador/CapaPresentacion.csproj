@@ -384,5 +384,9 @@
       <Name>CapaNegocio</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Formularios\Inventario\FormAjusteStock.cs.txt" />
+    <Content Include="Formularios\Inventario\FormAjusteStock.Designer.cs.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

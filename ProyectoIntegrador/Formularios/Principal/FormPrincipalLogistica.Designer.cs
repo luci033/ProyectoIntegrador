@@ -34,6 +34,7 @@
             this.registrarAjusteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comprasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listarComprasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ajusteStockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -41,7 +42,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.productosToolStripMenuItem,
-            this.comprasToolStripMenuItem});
+            this.comprasToolStripMenuItem,
+            this.ajusteStockToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -81,8 +83,15 @@
             // listarComprasToolStripMenuItem
             // 
             this.listarComprasToolStripMenuItem.Name = "listarComprasToolStripMenuItem";
-            this.listarComprasToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.listarComprasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.listarComprasToolStripMenuItem.Text = "Listar Compras";
+            // 
+            // ajusteStockToolStripMenuItem
+            // 
+            this.ajusteStockToolStripMenuItem.Name = "ajusteStockToolStripMenuItem";
+            this.ajusteStockToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
+            this.ajusteStockToolStripMenuItem.Text = "Ajuste Stock";
+            this.ajusteStockToolStripMenuItem.Click += new System.EventHandler(this.ajusteStockToolStripMenuItem_Click);
             // 
             // FormPrincipalLogistica
             // 
@@ -110,5 +119,6 @@
         private System.Windows.Forms.ToolStripMenuItem registrarAjusteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem comprasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listarComprasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ajusteStockToolStripMenuItem;
     }
 }
