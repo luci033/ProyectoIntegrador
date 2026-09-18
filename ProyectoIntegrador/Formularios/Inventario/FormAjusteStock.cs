@@ -16,10 +16,5 @@ namespace ProyectoIntegrador.Formularios.Inventario
         {
             InitializeComponent();
         }
-
-        private void FormAjusteStock_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
