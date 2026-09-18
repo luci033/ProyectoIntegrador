@@ -54,6 +54,8 @@
             // 
             // dataGridHistorialClientes
             // 
+            this.dataGridHistorialClientes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridHistorialClientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridHistorialClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridHistorialClientes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -66,11 +68,12 @@
             this.colHistorial,
             this.colModificar,
             this.colDesactivar});
-            this.dataGridHistorialClientes.Location = new System.Drawing.Point(0, 177);
+            this.dataGridHistorialClientes.Location = new System.Drawing.Point(2, 217);
             this.dataGridHistorialClientes.Name = "dataGridHistorialClientes";
             this.dataGridHistorialClientes.RowHeadersVisible = false;
-            this.dataGridHistorialClientes.Size = new System.Drawing.Size(802, 154);
+            this.dataGridHistorialClientes.Size = new System.Drawing.Size(748, 154);
             this.dataGridHistorialClientes.TabIndex = 2;
+            this.dataGridHistorialClientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridHistorialClientes_CellContentClick);
             // 
             // IdCliente
             // 
@@ -129,7 +132,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(803, 343);
+            this.ClientSize = new System.Drawing.Size(751, 383);
             this.Controls.Add(this.dataGridHistorialClientes);
             this.Controls.Add(this.BNuevoCliente);
             this.Name = "FormClientes";
