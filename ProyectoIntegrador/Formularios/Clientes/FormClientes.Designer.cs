@@ -30,6 +30,7 @@
         {
             this.BNuevoCliente = new System.Windows.Forms.Button();
             this.dataGridHistorialClientes = new System.Windows.Forms.DataGridView();
+            this.IdCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNro = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colApellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,12 +50,14 @@
             this.BNuevoCliente.TabIndex = 1;
             this.BNuevoCliente.Text = "Nuevo Cliente";
             this.BNuevoCliente.UseVisualStyleBackColor = true;
+            this.BNuevoCliente.Click += new System.EventHandler(this.BNuevoCliente_Click);
             // 
             // dataGridHistorialClientes
             // 
             this.dataGridHistorialClientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridHistorialClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridHistorialClientes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IdCliente,
             this.colNro,
             this.colNombre,
             this.colApellido,
@@ -68,6 +71,13 @@
             this.dataGridHistorialClientes.RowHeadersVisible = false;
             this.dataGridHistorialClientes.Size = new System.Drawing.Size(802, 154);
             this.dataGridHistorialClientes.TabIndex = 2;
+            // 
+            // IdCliente
+            // 
+            this.IdCliente.HeaderText = "IDCliente";
+            this.IdCliente.Name = "IdCliente";
+            this.IdCliente.ReadOnly = true;
+            this.IdCliente.Visible = false;
             // 
             // colNro
             // 
@@ -133,6 +143,7 @@
         #endregion
         private System.Windows.Forms.Button BNuevoCliente;
         private System.Windows.Forms.DataGridView dataGridHistorialClientes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdCliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNro;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn colApellido;

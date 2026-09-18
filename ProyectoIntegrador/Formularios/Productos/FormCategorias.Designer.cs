@@ -41,11 +41,7 @@
             // 
             // DGCategoria
             // 
-            this.DGCategoria.AllowUserToAddRows = false;
-            this.DGCategoria.AllowUserToDeleteRows = false;
-            this.DGCategoria.AllowUserToResizeColumns = false;
-            this.DGCategoria.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DGCategoria.AllowDrop = true;
             this.DGCategoria.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DGCategoria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGCategoria.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -53,11 +49,15 @@
             this.CategoriaNombre,
             this.CategoriaModificar,
             this.CategoriaDesactivar});
-            this.DGCategoria.Location = new System.Drawing.Point(12, 186);
+            this.DGCategoria.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.DGCategoria.EnableHeadersVisualStyles = false;
+            this.DGCategoria.Location = new System.Drawing.Point(0, 212);
+            this.DGCategoria.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.DGCategoria.Name = "DGCategoria";
             this.DGCategoria.ReadOnly = true;
+            this.DGCategoria.RowHeadersVisible = false;
             this.DGCategoria.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGCategoria.Size = new System.Drawing.Size(776, 252);
+            this.DGCategoria.Size = new System.Drawing.Size(807, 291);
             this.DGCategoria.TabIndex = 0;
             this.DGCategoria.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGCategoria_CellContentClick);
             // 
@@ -65,9 +65,10 @@
             // 
             this.BAgregarCategoria.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.BAgregarCategoria.Location = new System.Drawing.Point(525, 47);
+            this.BAgregarCategoria.Location = new System.Drawing.Point(550, 120);
+            this.BAgregarCategoria.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.BAgregarCategoria.Name = "BAgregarCategoria";
-            this.BAgregarCategoria.Size = new System.Drawing.Size(215, 91);
+            this.BAgregarCategoria.Size = new System.Drawing.Size(204, 51);
             this.BAgregarCategoria.TabIndex = 1;
             this.BAgregarCategoria.Text = "Agregar Categoría";
             this.BAgregarCategoria.UseVisualStyleBackColor = true;
@@ -79,7 +80,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.LCategorias.AutoSize = true;
             this.LCategorias.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LCategorias.Location = new System.Drawing.Point(12, 62);
+            this.LCategorias.Location = new System.Drawing.Point(14, 55);
+            this.LCategorias.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LCategorias.Name = "LCategorias";
             this.LCategorias.Size = new System.Drawing.Size(411, 42);
             this.LCategorias.TabIndex = 2;
@@ -92,7 +94,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(15, 118);
+            this.label1.Location = new System.Drawing.Point(17, 120);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(164, 20);
             this.label1.TabIndex = 3;
@@ -107,7 +110,7 @@
             // 
             // CategoriaNombre
             // 
-            this.CategoriaNombre.FillWeight = 75F;
+            this.CategoriaNombre.FillWeight = 30F;
             this.CategoriaNombre.HeaderText = "Nombre Categoría";
             this.CategoriaNombre.Name = "CategoriaNombre";
             this.CategoriaNombre.ReadOnly = true;
@@ -132,13 +135,17 @@
             // 
             // FormCategorias
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AllowDrop = true;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(807, 503);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.LCategorias);
             this.Controls.Add(this.BAgregarCategoria);
             this.Controls.Add(this.DGCategoria);
+            this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "FormCategorias";
             this.Text = "Categorías";
             this.Load += new System.EventHandler(this.FCategorias_Load);

@@ -31,32 +31,6 @@ namespace ProyectoIntegrador
             combGenero.SelectedIndex = -1;
         }
 
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox9_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private bool ValidarCampos()
         {
             // 1. valida el nombre
@@ -121,21 +95,6 @@ namespace ProyectoIntegrador
             return true; // s todo es correcto, retorna verdadero
         }
 
-        private void cobGenero_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textNombre_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void BCrearProducto_Click(object sender, EventArgs e)
         {
             if (!ValidarCampos())
@@ -168,10 +127,6 @@ namespace ProyectoIntegrador
             }
         }
 
-        private void pbImagenProducto_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
 

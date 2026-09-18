@@ -64,5 +64,33 @@ namespace ProyectoIntegrador.Formularios.Usuarios
         {
 
         }
+
+        private void TBBuscar_TextChanged(object sender, EventArgs e)
+        {
+            // se atrapa el texto y se lo pasa a minuscula para que no importe si se escribe en mayuscula
+            string textoFiltro = TBBuscar.Text.Trim().ToLower();
+
+            // recorremos cada fila de la tabla 
+            foreach (DataGridViewRow fila in dataGridRegistroUsuario.Rows)
+            {
+                // se ignora la fila en blanco que a veces aparece al final
+                if (fila.IsNewRow) continue;
+
+                bool contieneTexto = false;
+
+                // revisamos cada celda dentro de esa fila (DNI, Nombre, Usuario...)
+                foreach (DataGridViewCell celda in fila.Cells)
+                {
+                    if (celda.Value != null && celda.Value.ToString().ToLower().Contains(textoFiltro))
+                    {
+                        contieneTexto = true;
+                        break; // si ya se encontro coincidencia en esta fila, dejamos de buscar en las demas columnas
+                    }
+                }
+
+                // si encontro el texto, muestra la fila. si no, la oculta.
+                fila.Visible = contieneTexto;
+            }
+        }
     }
 }

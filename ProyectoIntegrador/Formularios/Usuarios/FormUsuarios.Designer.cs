@@ -37,6 +37,8 @@
             this.colUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LGestionUsuario = new System.Windows.Forms.Label();
+            this.TBBuscar = new System.Windows.Forms.TextBox();
+            this.LBuscar = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridRegistroUsuario)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,7 +47,7 @@
             this.BAgregarUsuario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
             this.BAgregarUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BAgregarUsuario.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BAgregarUsuario.Location = new System.Drawing.Point(432, 93);
+            this.BAgregarUsuario.Location = new System.Drawing.Point(459, 120);
             this.BAgregarUsuario.Name = "BAgregarUsuario";
             this.BAgregarUsuario.Size = new System.Drawing.Size(139, 32);
             this.BAgregarUsuario.TabIndex = 0;
@@ -60,6 +62,7 @@
             this.dataGridRegistroUsuario.AllowUserToResizeRows = false;
             this.dataGridRegistroUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridRegistroUsuario.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridRegistroUsuario.BackgroundColor = System.Drawing.Color.White;
             this.dataGridRegistroUsuario.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dataGridRegistroUsuario.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -70,12 +73,13 @@
             this.colApellido,
             this.colUsuario,
             this.colRol});
+            this.dataGridRegistroUsuario.EnableHeadersVisualStyles = false;
             this.dataGridRegistroUsuario.Location = new System.Drawing.Point(0, 158);
             this.dataGridRegistroUsuario.Name = "dataGridRegistroUsuario";
             this.dataGridRegistroUsuario.ReadOnly = true;
             this.dataGridRegistroUsuario.RowHeadersVisible = false;
             this.dataGridRegistroUsuario.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridRegistroUsuario.Size = new System.Drawing.Size(598, 110);
+            this.dataGridRegistroUsuario.Size = new System.Drawing.Size(633, 159);
             this.dataGridRegistroUsuario.TabIndex = 1;
             this.dataGridRegistroUsuario.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridRegistroUsuario_CellContentClick);
             // 
@@ -92,7 +96,6 @@
             this.colDni.HeaderText = "DNI";
             this.colDni.Name = "colDni";
             this.colDni.ReadOnly = true;
-            this.colDni.Width = 89;
             // 
             // colNombre
             // 
@@ -100,7 +103,6 @@
             this.colNombre.HeaderText = "Nombre";
             this.colNombre.Name = "colNombre";
             this.colNombre.ReadOnly = true;
-            this.colNombre.Width = 119;
             // 
             // colApellido
             // 
@@ -108,7 +110,6 @@
             this.colApellido.HeaderText = "Apellido";
             this.colApellido.Name = "colApellido";
             this.colApellido.ReadOnly = true;
-            this.colApellido.Width = 119;
             // 
             // colUsuario
             // 
@@ -116,7 +117,6 @@
             this.colUsuario.HeaderText = "Usuario";
             this.colUsuario.Name = "colUsuario";
             this.colUsuario.ReadOnly = true;
-            this.colUsuario.Width = 179;
             // 
             // colRol
             // 
@@ -124,26 +124,45 @@
             this.colRol.HeaderText = "Rol";
             this.colRol.Name = "colRol";
             this.colRol.ReadOnly = true;
-            this.colRol.Width = 89;
             // 
             // LGestionUsuario
             // 
             this.LGestionUsuario.AutoSize = true;
             this.LGestionUsuario.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LGestionUsuario.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(105)))), ((int)(((byte)(100)))));
-            this.LGestionUsuario.Location = new System.Drawing.Point(40, 39);
+            this.LGestionUsuario.Location = new System.Drawing.Point(12, 9);
             this.LGestionUsuario.Name = "LGestionUsuario";
             this.LGestionUsuario.Size = new System.Drawing.Size(279, 32);
             this.LGestionUsuario.TabIndex = 2;
             this.LGestionUsuario.Text = "GESTIÓN DE USUARIOS";
             this.LGestionUsuario.Click += new System.EventHandler(this.label1_Click);
             // 
+            // TBBuscar
+            // 
+            this.TBBuscar.Location = new System.Drawing.Point(61, 130);
+            this.TBBuscar.Name = "TBBuscar";
+            this.TBBuscar.Size = new System.Drawing.Size(100, 20);
+            this.TBBuscar.TabIndex = 3;
+            this.TBBuscar.TextChanged += new System.EventHandler(this.TBBuscar_TextChanged);
+            // 
+            // LBuscar
+            // 
+            this.LBuscar.AutoSize = true;
+            this.LBuscar.ForeColor = System.Drawing.Color.Black;
+            this.LBuscar.Location = new System.Drawing.Point(15, 130);
+            this.LBuscar.Name = "LBuscar";
+            this.LBuscar.Size = new System.Drawing.Size(40, 13);
+            this.LBuscar.TabIndex = 4;
+            this.LBuscar.Text = "Buscar";
+            // 
             // FormUsuarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(232)))));
-            this.ClientSize = new System.Drawing.Size(599, 315);
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.ClientSize = new System.Drawing.Size(634, 319);
+            this.Controls.Add(this.LBuscar);
+            this.Controls.Add(this.TBBuscar);
             this.Controls.Add(this.LGestionUsuario);
             this.Controls.Add(this.dataGridRegistroUsuario);
             this.Controls.Add(this.BAgregarUsuario);
@@ -169,5 +188,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colApellido;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUsuario;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRol;
+        private System.Windows.Forms.TextBox TBBuscar;
+        private System.Windows.Forms.Label LBuscar;
     }
 }
