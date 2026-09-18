@@ -21,5 +21,11 @@ namespace ProyectoIntegrador.Formularios.Clientes
         {
 
         }
+
+        private void DetalleClientes_Load(object sender, EventArgs e)
+        {
+            EstiloUI.AplicarEstiloGrilla(dataGridDetalleCliente);
+
+        }
     }
 }

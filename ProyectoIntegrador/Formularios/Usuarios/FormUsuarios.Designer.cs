@@ -30,13 +30,13 @@
         {
             this.BAgregarUsuario = new System.Windows.Forms.Button();
             this.dataGridRegistroUsuario = new System.Windows.Forms.DataGridView();
-            this.LGestionUsuario = new System.Windows.Forms.Label();
             this.colIdUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDni = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colApellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LGestionUsuario = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridRegistroUsuario)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,7 +60,6 @@
             this.dataGridRegistroUsuario.AllowUserToResizeRows = false;
             this.dataGridRegistroUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridRegistroUsuario.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridRegistroUsuario.BackgroundColor = System.Drawing.Color.White;
             this.dataGridRegistroUsuario.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dataGridRegistroUsuario.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -76,21 +75,9 @@
             this.dataGridRegistroUsuario.ReadOnly = true;
             this.dataGridRegistroUsuario.RowHeadersVisible = false;
             this.dataGridRegistroUsuario.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridRegistroUsuario.Size = new System.Drawing.Size(685, 110);
+            this.dataGridRegistroUsuario.Size = new System.Drawing.Size(598, 110);
             this.dataGridRegistroUsuario.TabIndex = 1;
             this.dataGridRegistroUsuario.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridRegistroUsuario_CellContentClick);
-            // 
-            // LGestionUsuario
-            // 
-            this.LGestionUsuario.AutoSize = true;
-            this.LGestionUsuario.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LGestionUsuario.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(105)))), ((int)(((byte)(100)))));
-            this.LGestionUsuario.Location = new System.Drawing.Point(40, 39);
-            this.LGestionUsuario.Name = "LGestionUsuario";
-            this.LGestionUsuario.Size = new System.Drawing.Size(279, 32);
-            this.LGestionUsuario.TabIndex = 2;
-            this.LGestionUsuario.Text = "GESTIÓN DE USUARIOS";
-            this.LGestionUsuario.Click += new System.EventHandler(this.label1_Click);
             // 
             // colIdUsuario
             // 
@@ -105,6 +92,7 @@
             this.colDni.HeaderText = "DNI";
             this.colDni.Name = "colDni";
             this.colDni.ReadOnly = true;
+            this.colDni.Width = 89;
             // 
             // colNombre
             // 
@@ -112,6 +100,7 @@
             this.colNombre.HeaderText = "Nombre";
             this.colNombre.Name = "colNombre";
             this.colNombre.ReadOnly = true;
+            this.colNombre.Width = 119;
             // 
             // colApellido
             // 
@@ -119,6 +108,7 @@
             this.colApellido.HeaderText = "Apellido";
             this.colApellido.Name = "colApellido";
             this.colApellido.ReadOnly = true;
+            this.colApellido.Width = 119;
             // 
             // colUsuario
             // 
@@ -126,6 +116,7 @@
             this.colUsuario.HeaderText = "Usuario";
             this.colUsuario.Name = "colUsuario";
             this.colUsuario.ReadOnly = true;
+            this.colUsuario.Width = 179;
             // 
             // colRol
             // 
@@ -133,13 +124,26 @@
             this.colRol.HeaderText = "Rol";
             this.colRol.Name = "colRol";
             this.colRol.ReadOnly = true;
+            this.colRol.Width = 89;
+            // 
+            // LGestionUsuario
+            // 
+            this.LGestionUsuario.AutoSize = true;
+            this.LGestionUsuario.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LGestionUsuario.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(105)))), ((int)(((byte)(100)))));
+            this.LGestionUsuario.Location = new System.Drawing.Point(40, 39);
+            this.LGestionUsuario.Name = "LGestionUsuario";
+            this.LGestionUsuario.Size = new System.Drawing.Size(279, 32);
+            this.LGestionUsuario.TabIndex = 2;
+            this.LGestionUsuario.Text = "GESTIÓN DE USUARIOS";
+            this.LGestionUsuario.Click += new System.EventHandler(this.label1_Click);
             // 
             // FormUsuarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(232)))));
-            this.ClientSize = new System.Drawing.Size(686, 347);
+            this.ClientSize = new System.Drawing.Size(599, 315);
             this.Controls.Add(this.LGestionUsuario);
             this.Controls.Add(this.dataGridRegistroUsuario);
             this.Controls.Add(this.BAgregarUsuario);

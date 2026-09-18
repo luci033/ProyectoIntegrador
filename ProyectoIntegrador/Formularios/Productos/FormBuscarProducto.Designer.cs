@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DGProductos = new System.Windows.Forms.DataGridView();
             this.colIdProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,8 +91,8 @@
             // 
             // colCostoCompra
             // 
-            dataGridViewCellStyle3.Format = "C2";
-            this.colCostoCompra.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Format = "C2";
+            this.colCostoCompra.DefaultCellStyle = dataGridViewCellStyle6;
             this.colCostoCompra.FillWeight = 60F;
             this.colCostoCompra.HeaderText = "Costo de Compra";
             this.colCostoCompra.Name = "colCostoCompra";
@@ -114,23 +114,29 @@
             // 
             // BCancelar
             // 
+            this.BCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.BCancelar.FlatAppearance.BorderSize = 0;
+            this.BCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BCancelar.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.BCancelar.ForeColor = System.Drawing.Color.White;
             this.BCancelar.Location = new System.Drawing.Point(697, 399);
             this.BCancelar.Name = "BCancelar";
             this.BCancelar.Size = new System.Drawing.Size(91, 39);
             this.BCancelar.TabIndex = 1;
             this.BCancelar.Text = "Cancelar";
-            this.BCancelar.UseVisualStyleBackColor = true;
+            this.BCancelar.UseVisualStyleBackColor = false;
             this.BCancelar.Click += new System.EventHandler(this.BCancelar_Click);
             // 
             // LSeleccionarProducto
             // 
             this.LSeleccionarProducto.AutoSize = true;
-            this.LSeleccionarProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LSeleccionarProducto.Location = new System.Drawing.Point(200, 94);
+            this.LSeleccionarProducto.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LSeleccionarProducto.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(105)))), ((int)(((byte)(100)))));
+            this.LSeleccionarProducto.Location = new System.Drawing.Point(12, 25);
             this.LSeleccionarProducto.Name = "LSeleccionarProducto";
-            this.LSeleccionarProducto.Size = new System.Drawing.Size(367, 39);
+            this.LSeleccionarProducto.Size = new System.Drawing.Size(477, 50);
             this.LSeleccionarProducto.TabIndex = 2;
-            this.LSeleccionarProducto.Text = "Seleccionar Producto";
+            this.LSeleccionarProducto.Text = "SELECCIONAR PRODUCTO";
             // 
             // LBuscarProducto
             // 

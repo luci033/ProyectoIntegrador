@@ -62,11 +62,6 @@ namespace ProyectoIntegrador.Formularios.Principal
 
         }
 
-        private void FormPrincipal_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void gestiónDeCategoríasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormCategorias frmCategorias = new FormCategorias();
@@ -155,6 +150,32 @@ namespace ProyectoIntegrador.Formularios.Principal
             FormClientes formClientes = new FormClientes();
             formClientes.MdiParent = this;
             formClientes.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PanelSubMenuUsuario_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+    
+
+        private void BGestionUsuarios_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void historialDeVentasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //creamos la instancia del formulario 
+            Formularios.Ventas.FHistorialVentas pantallaHistorial = new Formularios.Ventas.FHistorialVentas();
+
+            // 2. Lo mostramos en pantalla
+            pantallaHistorial.ShowDialog();
         }
     }
 }

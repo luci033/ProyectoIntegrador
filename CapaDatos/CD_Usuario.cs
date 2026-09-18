@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using CapaEntidades; // Asegúrate de importar la entidad
+using CapaEntidades; 
 
 namespace CapaDatos
 {

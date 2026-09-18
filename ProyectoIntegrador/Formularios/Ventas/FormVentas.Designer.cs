@@ -45,12 +45,14 @@
             this.LVentas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.LVentas.AutoSize = true;
-            this.LVentas.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LVentas.Location = new System.Drawing.Point(12, 66);
+            this.LVentas.Font = new System.Drawing.Font("Segoe UI", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LVentas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LVentas.Location = new System.Drawing.Point(14, 76);
+            this.LVentas.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LVentas.Name = "LVentas";
-            this.LVentas.Size = new System.Drawing.Size(343, 42);
+            this.LVentas.Size = new System.Drawing.Size(370, 47);
             this.LVentas.TabIndex = 12;
-            this.LVentas.Text = "Gestión de Ventas";
+            this.LVentas.Text = "GESTIÓN DE VENTAS";
             // 
             // BRegistrarVenta
             // 
@@ -58,9 +60,10 @@
             this.BRegistrarVenta.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.BRegistrarVenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BRegistrarVenta.Location = new System.Drawing.Point(525, 37);
+            this.BRegistrarVenta.Location = new System.Drawing.Point(669, 80);
+            this.BRegistrarVenta.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.BRegistrarVenta.Name = "BRegistrarVenta";
-            this.BRegistrarVenta.Size = new System.Drawing.Size(94, 91);
+            this.BRegistrarVenta.Size = new System.Drawing.Size(234, 56);
             this.BRegistrarVenta.TabIndex = 11;
             this.BRegistrarVenta.Text = "Registrar Venta";
             this.BRegistrarVenta.UseVisualStyleBackColor = true;
@@ -83,12 +86,13 @@
             this.cliente,
             this.Total,
             this.DetalleOrden});
-            this.dgVentas.Location = new System.Drawing.Point(12, 176);
+            this.dgVentas.Location = new System.Drawing.Point(14, 203);
+            this.dgVentas.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgVentas.Name = "dgVentas";
             this.dgVentas.ReadOnly = true;
             this.dgVentas.RowHeadersVisible = false;
             this.dgVentas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgVentas.Size = new System.Drawing.Size(655, 252);
+            this.dgVentas.Size = new System.Drawing.Size(889, 291);
             this.dgVentas.TabIndex = 10;
             // 
             // idCompra
@@ -130,12 +134,14 @@
             // 
             // FormVentas
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(679, 457);
+            this.ClientSize = new System.Drawing.Size(917, 527);
             this.Controls.Add(this.LVentas);
             this.Controls.Add(this.BRegistrarVenta);
             this.Controls.Add(this.dgVentas);
+            this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "FormVentas";
             this.Text = "FormVentas";
             ((System.ComponentModel.ISupportInitialize)(this.dgVentas)).EndInit();

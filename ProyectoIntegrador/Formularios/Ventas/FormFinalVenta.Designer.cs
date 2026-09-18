@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.RBOtro = new System.Windows.Forms.RadioButton();
             this.TBTotalCobro = new System.Windows.Forms.TextBox();
+            this.RBTarjeta = new System.Windows.Forms.RadioButton();
             this.LMetodoPago = new System.Windows.Forms.Label();
+            this.RBEfectivo = new System.Windows.Forms.RadioButton();
             this.LTotalCobro = new System.Windows.Forms.Label();
             this.TBClienteCobro = new System.Windows.Forms.TextBox();
             this.LCLienteCobro = new System.Windows.Forms.Label();
             this.BCancelar = new System.Windows.Forms.Button();
             this.BVolver = new System.Windows.Forms.Button();
             this.BFinalizarVenta = new System.Windows.Forms.Button();
-            this.RBEfectivo = new System.Windows.Forms.RadioButton();
-            this.RBTarjeta = new System.Windows.Forms.RadioButton();
-            this.RBOtro = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,12 +58,34 @@
             this.panel1.Size = new System.Drawing.Size(330, 187);
             this.panel1.TabIndex = 9;
             // 
+            // RBOtro
+            // 
+            this.RBOtro.AutoSize = true;
+            this.RBOtro.Location = new System.Drawing.Point(124, 137);
+            this.RBOtro.Name = "RBOtro";
+            this.RBOtro.Size = new System.Drawing.Size(45, 17);
+            this.RBOtro.TabIndex = 15;
+            this.RBOtro.TabStop = true;
+            this.RBOtro.Text = "Otro";
+            this.RBOtro.UseVisualStyleBackColor = true;
+            // 
             // TBTotalCobro
             // 
             this.TBTotalCobro.Location = new System.Drawing.Point(124, 55);
             this.TBTotalCobro.Name = "TBTotalCobro";
             this.TBTotalCobro.Size = new System.Drawing.Size(100, 20);
             this.TBTotalCobro.TabIndex = 4;
+            // 
+            // RBTarjeta
+            // 
+            this.RBTarjeta.AutoSize = true;
+            this.RBTarjeta.Location = new System.Drawing.Point(124, 114);
+            this.RBTarjeta.Name = "RBTarjeta";
+            this.RBTarjeta.Size = new System.Drawing.Size(58, 17);
+            this.RBTarjeta.TabIndex = 14;
+            this.RBTarjeta.TabStop = true;
+            this.RBTarjeta.Text = "Tarjeta";
+            this.RBTarjeta.UseVisualStyleBackColor = true;
             // 
             // LMetodoPago
             // 
@@ -73,6 +95,17 @@
             this.LMetodoPago.Size = new System.Drawing.Size(86, 13);
             this.LMetodoPago.TabIndex = 3;
             this.LMetodoPago.Text = "Método de Pago";
+            // 
+            // RBEfectivo
+            // 
+            this.RBEfectivo.AutoSize = true;
+            this.RBEfectivo.Location = new System.Drawing.Point(124, 91);
+            this.RBEfectivo.Name = "RBEfectivo";
+            this.RBEfectivo.Size = new System.Drawing.Size(64, 17);
+            this.RBEfectivo.TabIndex = 13;
+            this.RBEfectivo.TabStop = true;
+            this.RBEfectivo.Text = "Efectivo";
+            this.RBEfectivo.UseVisualStyleBackColor = true;
             // 
             // LTotalCobro
             // 
@@ -111,7 +144,7 @@
             // 
             // BVolver
             // 
-            this.BVolver.Location = new System.Drawing.Point(215, 249);
+            this.BVolver.Location = new System.Drawing.Point(174, 249);
             this.BVolver.Name = "BVolver";
             this.BVolver.Size = new System.Drawing.Size(60, 32);
             this.BVolver.TabIndex = 11;
@@ -121,7 +154,7 @@
             // 
             // BFinalizarVenta
             // 
-            this.BFinalizarVenta.Location = new System.Drawing.Point(281, 249);
+            this.BFinalizarVenta.Location = new System.Drawing.Point(249, 249);
             this.BFinalizarVenta.Name = "BFinalizarVenta";
             this.BFinalizarVenta.Size = new System.Drawing.Size(109, 32);
             this.BFinalizarVenta.TabIndex = 12;
@@ -129,44 +162,11 @@
             this.BFinalizarVenta.UseVisualStyleBackColor = true;
             this.BFinalizarVenta.Click += new System.EventHandler(this.button1_Click);
             // 
-            // RBEfectivo
-            // 
-            this.RBEfectivo.AutoSize = true;
-            this.RBEfectivo.Location = new System.Drawing.Point(124, 91);
-            this.RBEfectivo.Name = "RBEfectivo";
-            this.RBEfectivo.Size = new System.Drawing.Size(64, 17);
-            this.RBEfectivo.TabIndex = 13;
-            this.RBEfectivo.TabStop = true;
-            this.RBEfectivo.Text = "Efectivo";
-            this.RBEfectivo.UseVisualStyleBackColor = true;
-            // 
-            // RBTarjeta
-            // 
-            this.RBTarjeta.AutoSize = true;
-            this.RBTarjeta.Location = new System.Drawing.Point(124, 114);
-            this.RBTarjeta.Name = "RBTarjeta";
-            this.RBTarjeta.Size = new System.Drawing.Size(58, 17);
-            this.RBTarjeta.TabIndex = 14;
-            this.RBTarjeta.TabStop = true;
-            this.RBTarjeta.Text = "Tarjeta";
-            this.RBTarjeta.UseVisualStyleBackColor = true;
-            // 
-            // RBOtro
-            // 
-            this.RBOtro.AutoSize = true;
-            this.RBOtro.Location = new System.Drawing.Point(124, 137);
-            this.RBOtro.Name = "RBOtro";
-            this.RBOtro.Size = new System.Drawing.Size(45, 17);
-            this.RBOtro.TabIndex = 15;
-            this.RBOtro.TabStop = true;
-            this.RBOtro.Text = "Otro";
-            this.RBOtro.UseVisualStyleBackColor = true;
-            // 
             // FormCobro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(593, 328);
+            this.ClientSize = new System.Drawing.Size(448, 328);
             this.Controls.Add(this.BFinalizarVenta);
             this.Controls.Add(this.BVolver);
             this.Controls.Add(this.BCancelar);

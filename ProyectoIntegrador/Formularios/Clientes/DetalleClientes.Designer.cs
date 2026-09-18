@@ -37,24 +37,24 @@
             this.TBCorreo = new System.Windows.Forms.TextBox();
             this.LCorreo = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.LDesde = new System.Windows.Forms.Label();
-            this.LHasta = new System.Windows.Forms.Label();
-            this.LMedioPago = new System.Windows.Forms.Label();
-            this.BFiltrar = new System.Windows.Forms.Button();
-            this.TBDesde = new System.Windows.Forms.TextBox();
-            this.cmbDMedioPago = new System.Windows.Forms.ComboBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.BPDF = new System.Windows.Forms.Button();
-            this.BCerrar = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.cmbDMedioPago = new System.Windows.Forms.ComboBox();
+            this.TBDesde = new System.Windows.Forms.TextBox();
+            this.BFiltrar = new System.Windows.Forms.Button();
+            this.LMedioPago = new System.Windows.Forms.Label();
+            this.LHasta = new System.Windows.Forms.Label();
+            this.LDesde = new System.Windows.Forms.Label();
+            this.dataGridDetalleCliente = new System.Windows.Forms.DataGridView();
             this.colNroVenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMedioPago = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDetalle = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.BPDF = new System.Windows.Forms.Button();
+            this.BCerrar = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridDetalleCliente)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -141,32 +141,28 @@
             this.panel1.Size = new System.Drawing.Size(612, 38);
             this.panel1.TabIndex = 20;
             // 
-            // LDesde
+            // dateTimePicker1
             // 
-            this.LDesde.AutoSize = true;
-            this.LDesde.Location = new System.Drawing.Point(3, 11);
-            this.LDesde.Name = "LDesde";
-            this.LDesde.Size = new System.Drawing.Size(44, 13);
-            this.LDesde.TabIndex = 0;
-            this.LDesde.Text = "Desde: ";
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker1.Location = new System.Drawing.Point(176, 8);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(94, 20);
+            this.dateTimePicker1.TabIndex = 26;
             // 
-            // LHasta
+            // cmbDMedioPago
             // 
-            this.LHasta.AutoSize = true;
-            this.LHasta.Location = new System.Drawing.Point(140, 11);
-            this.LHasta.Name = "LHasta";
-            this.LHasta.Size = new System.Drawing.Size(41, 13);
-            this.LHasta.TabIndex = 1;
-            this.LHasta.Text = "Hasta: ";
+            this.cmbDMedioPago.FormattingEnabled = true;
+            this.cmbDMedioPago.Location = new System.Drawing.Point(370, 8);
+            this.cmbDMedioPago.Name = "cmbDMedioPago";
+            this.cmbDMedioPago.Size = new System.Drawing.Size(95, 21);
+            this.cmbDMedioPago.TabIndex = 25;
             // 
-            // LMedioPago
+            // TBDesde
             // 
-            this.LMedioPago.AutoSize = true;
-            this.LMedioPago.Location = new System.Drawing.Point(285, 11);
-            this.LMedioPago.Name = "LMedioPago";
-            this.LMedioPago.Size = new System.Drawing.Size(79, 13);
-            this.LMedioPago.TabIndex = 21;
-            this.LMedioPago.Text = "Medio de Pago";
+            this.TBDesde.Location = new System.Drawing.Point(42, 8);
+            this.TBDesde.Name = "TBDesde";
+            this.TBDesde.Size = new System.Drawing.Size(83, 20);
+            this.TBDesde.TabIndex = 23;
             // 
             // BFiltrar
             // 
@@ -177,82 +173,53 @@
             this.BFiltrar.Text = "Filtrar";
             this.BFiltrar.UseVisualStyleBackColor = true;
             // 
-            // TBDesde
+            // LMedioPago
             // 
-            this.TBDesde.Location = new System.Drawing.Point(42, 8);
-            this.TBDesde.Name = "TBDesde";
-            this.TBDesde.Size = new System.Drawing.Size(83, 20);
-            this.TBDesde.TabIndex = 23;
+            this.LMedioPago.AutoSize = true;
+            this.LMedioPago.Location = new System.Drawing.Point(285, 11);
+            this.LMedioPago.Name = "LMedioPago";
+            this.LMedioPago.Size = new System.Drawing.Size(79, 13);
+            this.LMedioPago.TabIndex = 21;
+            this.LMedioPago.Text = "Medio de Pago";
             // 
-            // cmbDMedioPago
+            // LHasta
             // 
-            this.cmbDMedioPago.FormattingEnabled = true;
-            this.cmbDMedioPago.Location = new System.Drawing.Point(370, 8);
-            this.cmbDMedioPago.Name = "cmbDMedioPago";
-            this.cmbDMedioPago.Size = new System.Drawing.Size(95, 21);
-            this.cmbDMedioPago.TabIndex = 25;
+            this.LHasta.AutoSize = true;
+            this.LHasta.Location = new System.Drawing.Point(140, 11);
+            this.LHasta.Name = "LHasta";
+            this.LHasta.Size = new System.Drawing.Size(41, 13);
+            this.LHasta.TabIndex = 1;
+            this.LHasta.Text = "Hasta: ";
             // 
-            // dateTimePicker1
+            // LDesde
             // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(176, 8);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(94, 20);
-            this.dateTimePicker1.TabIndex = 26;
+            this.LDesde.AutoSize = true;
+            this.LDesde.Location = new System.Drawing.Point(3, 11);
+            this.LDesde.Name = "LDesde";
+            this.LDesde.Size = new System.Drawing.Size(44, 13);
+            this.LDesde.TabIndex = 0;
+            this.LDesde.Text = "Desde: ";
             // 
-            // dataGridView1
+            // dataGridDetalleCliente
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToResizeColumns = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridDetalleCliente.AllowUserToAddRows = false;
+            this.dataGridDetalleCliente.AllowUserToDeleteRows = false;
+            this.dataGridDetalleCliente.AllowUserToResizeColumns = false;
+            this.dataGridDetalleCliente.AllowUserToResizeRows = false;
+            this.dataGridDetalleCliente.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridDetalleCliente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridDetalleCliente.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colNroVenta,
             this.colFecha,
             this.colMedioPago,
             this.colTotal,
             this.colDetalle});
-            this.dataGridView1.Location = new System.Drawing.Point(-1, 235);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(772, 67);
-            this.dataGridView1.TabIndex = 21;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // BPDF
-            // 
-            this.BPDF.Location = new System.Drawing.Point(407, 350);
-            this.BPDF.Name = "BPDF";
-            this.BPDF.Size = new System.Drawing.Size(142, 24);
-            this.BPDF.TabIndex = 22;
-            this.BPDF.Text = "Exportar PDF//";
-            this.BPDF.UseVisualStyleBackColor = true;
-            // 
-            // BCerrar
-            // 
-            this.BCerrar.Location = new System.Drawing.Point(580, 350);
-            this.BCerrar.Name = "BCerrar";
-            this.BCerrar.Size = new System.Drawing.Size(82, 24);
-            this.BCerrar.TabIndex = 23;
-            this.BCerrar.Text = "Cerrar";
-            this.BCerrar.UseVisualStyleBackColor = true;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.TBCorreo);
-            this.panel2.Controls.Add(this.LCorreo);
-            this.panel2.Controls.Add(this.cmbCondicionIVA);
-            this.panel2.Controls.Add(this.LCondicionIVA);
-            this.panel2.Controls.Add(this.TBDni);
-            this.panel2.Controls.Add(this.LDni);
-            this.panel2.Controls.Add(this.TBNombre);
-            this.panel2.Controls.Add(this.LNombre);
-            this.panel2.Location = new System.Drawing.Point(16, 42);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(497, 102);
-            this.panel2.TabIndex = 24;
+            this.dataGridDetalleCliente.Location = new System.Drawing.Point(-1, 235);
+            this.dataGridDetalleCliente.Name = "dataGridDetalleCliente";
+            this.dataGridDetalleCliente.RowHeadersVisible = false;
+            this.dataGridDetalleCliente.Size = new System.Drawing.Size(772, 67);
+            this.dataGridDetalleCliente.TabIndex = 21;
+            this.dataGridDetalleCliente.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // colNroVenta
             // 
@@ -288,6 +255,39 @@
             this.colDetalle.HeaderText = "Detalle";
             this.colDetalle.Name = "colDetalle";
             // 
+            // BPDF
+            // 
+            this.BPDF.Location = new System.Drawing.Point(407, 350);
+            this.BPDF.Name = "BPDF";
+            this.BPDF.Size = new System.Drawing.Size(142, 24);
+            this.BPDF.TabIndex = 22;
+            this.BPDF.Text = "Exportar PDF//";
+            this.BPDF.UseVisualStyleBackColor = true;
+            // 
+            // BCerrar
+            // 
+            this.BCerrar.Location = new System.Drawing.Point(580, 350);
+            this.BCerrar.Name = "BCerrar";
+            this.BCerrar.Size = new System.Drawing.Size(82, 24);
+            this.BCerrar.TabIndex = 23;
+            this.BCerrar.Text = "Cerrar";
+            this.BCerrar.UseVisualStyleBackColor = true;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.TBCorreo);
+            this.panel2.Controls.Add(this.LCorreo);
+            this.panel2.Controls.Add(this.cmbCondicionIVA);
+            this.panel2.Controls.Add(this.LCondicionIVA);
+            this.panel2.Controls.Add(this.TBDni);
+            this.panel2.Controls.Add(this.LDni);
+            this.panel2.Controls.Add(this.TBNombre);
+            this.panel2.Controls.Add(this.LNombre);
+            this.panel2.Location = new System.Drawing.Point(16, 42);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(497, 102);
+            this.panel2.TabIndex = 24;
+            // 
             // DetalleClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -296,13 +296,14 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.BCerrar);
             this.Controls.Add(this.BPDF);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridDetalleCliente);
             this.Controls.Add(this.panel1);
             this.Name = "DetalleClientes";
             this.Text = "Detalle Clientes";
+            this.Load += new System.EventHandler(this.DetalleClientes_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridDetalleCliente)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
@@ -327,7 +328,7 @@
         private System.Windows.Forms.Label LMedioPago;
         private System.Windows.Forms.Label LHasta;
         private System.Windows.Forms.Label LDesde;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridDetalleCliente;
         private System.Windows.Forms.Button BPDF;
         private System.Windows.Forms.Button BCerrar;
         private System.Windows.Forms.Panel panel2;

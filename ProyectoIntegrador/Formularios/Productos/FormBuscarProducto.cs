@@ -26,6 +26,7 @@ namespace ProyectoIntegrador.Formularios.Productos
 
         private void FormBuscarProducto_Load(object sender, EventArgs e)
         {
+            EstiloUI.AplicarEstiloGrilla(DGProductos);
 
             CBCategoria.Items.AddRange(new string[] { "Todos", "Collares", "Aros", "Anillos", "Pulseras", "Dijes", "Cadenas" });
             CBCategoria.SelectedIndex = 0;

@@ -16,6 +16,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
         public class VentaResumen
         {
             public int IdVenta { get; set; }
+            public string Vendedor { get; set; }
             public DateTime Fecha { get; set; }
             public decimal Total { get; set; }
         }
@@ -33,16 +34,19 @@ namespace ProyectoIntegrador.Formularios.Ventas
         {
             // e.RowIndex >= 0 evita clics accidentales sobre la fila de encabezados
             // Verificamos que el clic sea en la columna del botón (colDetalle)
-            if (e.RowIndex >= 0 && DataGridHistorialVenta.Columns[e.ColumnIndex].Name == "colDetalle")
+            //if (e.RowIndex >= 0 && DataGridHistorialVenta.Columns[e.ColumnIndex].Name == "colDetalle")
+                if (e.RowIndex >= 0 && e.ColumnIndex == 1)
             {
-                
+
                 //se obtiene el ID de la fila seleccionada y se lo convierte a numero
                 int IdVentaSeleccionada = Convert.ToInt32(DataGridHistorialVenta.Rows[e.RowIndex].Cells[0].Value);
 
+                // Cartel temporal para confirmar que el código agarró bien el ID
+                MessageBox.Show($"¡Atrapaste el ID {IdVentaSeleccionada}!\nYa estás listo para conectarlo al formulario de detalles.", "Excelente", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 //se abre el modla pasandole el id como argumento
                 FDetalleVenta modalDetalle = new FDetalleVenta(IdVentaSeleccionada);
                 modalDetalle.ShowDialog();
-                
+
 
                 /*
                 // Obtenemos el ID de la venta seleccionada leyendo la primera celda del renglón
@@ -55,7 +59,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
                     MessageBoxIcon.Information
                 );
                 */
-                
+
             }
         }
 
@@ -63,6 +67,9 @@ namespace ProyectoIntegrador.Formularios.Ventas
         // metodo auxiliar: recibe una lista de ventas y las dibuja en el DataGridView
         private void CargarGrilla(List<VentaResumen> ventas)
         {
+            // cremoas una variable en cero para ir guardando la suma
+            decimal totalSuma = 0;
+
             // Vaciamos filas anteriores para evitar duplicar datos al filtrar
             DataGridHistorialVenta.Rows.Clear();
 
@@ -71,14 +78,30 @@ namespace ProyectoIntegrador.Formularios.Ventas
                 // El DataGridViewButtonColumn genera el botón automáticamente en cada fila agregada
                 DataGridHistorialVenta.Rows.Add(
                     venta.IdVenta,
+                    "",
+                    venta.IdVenta,
+                    venta.Vendedor,
                     venta.Fecha.ToString("dd/MM/yyyy HH:mm"),
                     venta.Total.ToString("C2")
                 );
+
+                // a medida que dibuja la fila, le sumamos la plata a nuestra variable
+                totalSuma += venta.Total;
             }
+
+            // al terminar de dibujar todas las filas, mostramos el total en tu control
+            // OJO: Cambia "TBTotalFiltrado" por el nombre real que le pusiste a tu cajita o Label en el diseño
+            TBTotalFiltrado.Text = totalSuma.ToString("C2");
         }
 
         private void FHistorialVentas_Load(object sender, EventArgs e)
         {
+
+            // Llenamos el ComboBox con las opciones de búsqueda
+            cmbBuscar.Items.Add("Nro. Venta");
+            cmbBuscar.Items.Add("Vendedor");
+            cmbBuscar.SelectedIndex = 0; // Selecciona el primero por defecto
+
             // se cargan registros simulados para verificar el funcionamiento de la grilla
             listaVentas = new List<VentaResumen>
             {
@@ -110,5 +133,47 @@ namespace ProyectoIntegrador.Formularios.Ventas
 
             CargarGrilla(ventasFiltradas);
         }
+
+        private void BBuscar_Click(object sender, EventArgs e)
+        {
+            // Atrapamos las fechas (al "Hasta" le sumamos 1 día para incluir todo ese día hasta las 23:59)
+            DateTime fechaDesde = DTPFechaDesde.Value.Date;
+            DateTime fechaHasta = DTPFechaHasta.Value.Date.AddDays(1).AddSeconds(-1);
+
+            // filtramos por rango de fechas
+            var ventasFiltradas = listaVentas
+                .Where(v => v.Fecha >= fechaDesde && v.Fecha <= fechaHasta)
+                .ToList();
+
+            // filtramos por el ComboBox y el TextBox
+            string criterio = cmbBuscar.Text;
+            string texto = TBBuscar.Text.Trim().ToLower();
+
+            if (!string.IsNullOrEmpty(texto))
+            {
+                if (criterio == "Nro. Venta")
+                {
+                    ventasFiltradas = ventasFiltradas.Where(v => v.IdVenta.ToString().Contains(texto)).ToList();
+                }
+                else if (criterio == "Vendedor")
+                {
+                    ventasFiltradas = ventasFiltradas.Where(v => v.Vendedor.ToLower().Contains(texto)).ToList();
+                }
+            }
+            // mostramos el resultado final en la grilla
+            CargarGrilla(ventasFiltradas);
+        }
+
+        private void BLimpiar_Click(object sender, EventArgs e)
+        {
+            TBBuscar.Clear();
+            cmbBuscar.SelectedIndex = 0;
+            DTPFechaDesde.Value = DateTime.Now.AddMonths(-1);
+            DTPFechaHasta.Value = DateTime.Now;
+
+            CargarGrilla(listaVentas);
+        }
     }
 }
+
+

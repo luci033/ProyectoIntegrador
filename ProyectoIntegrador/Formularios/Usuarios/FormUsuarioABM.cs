@@ -24,9 +24,8 @@ namespace ProyectoIntegrador
         public string Apellido => TBApellido.Text.Trim();
         public string Dni => TBDni.Text.Trim();
         public string Correo => TBUsuario.Text.Trim();
-        //public string nombreUsuario => 
         public string Rol => CBRol.Text;
-        //public string Rol => CBRol.SelectedItem?.ToString() ?? "";
+      
 
         public FormUsuarioABM()
         {
@@ -265,5 +264,6 @@ namespace ProyectoIntegrador
             // Si pasó todas las validaciones, limpiamos el ícono de error
             errorProvider1.SetError(TBUsuario, "");
         }
+
     }
 }
