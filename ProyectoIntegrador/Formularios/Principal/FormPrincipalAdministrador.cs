@@ -1,6 +1,7 @@
 ﻿using ProyectoIntegrador.Formularios.Clientes;
 using ProyectoIntegrador.Formularios.Compras;
 using ProyectoIntegrador.Formularios.Devoluciones;
+using ProyectoIntegrador.Formularios.Inventario;
 using ProyectoIntegrador.Formularios.Productos;
 using ProyectoIntegrador.Formularios.Proveedores;
 using ProyectoIntegrador.Formularios.Usuarios;
@@ -176,6 +177,14 @@ namespace ProyectoIntegrador.Formularios.Principal
 
             // 2. Lo mostramos en pantalla
             pantallaHistorial.ShowDialog();
+        }
+
+        private void ajusteStockToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FormAjusteStock formAjuste = new FormAjusteStock())
+            {
+                formAjuste.ShowDialog();
+            }
         }
     }
 }
