@@ -108,12 +108,9 @@
     <Compile Include="Formularios\Inventario\FormAjusteStock.Designer.cs">
       <DependentUpon>FormAjusteStock.cs</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="Formularios\PanelGlass.cs">
       <SubType>Component</SubType>
     </Compile>
-=======
->>>>>>> 8d2eeaf5d8150049c601f773263937efa20e11b0
     <Compile Include="Formularios\Proveedores\FormBuscarProveedor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -412,13 +409,10 @@
       <Name>CapaNegocio</Name>
     </ProjectReference>
   </ItemGroup>
-<<<<<<< HEAD
   <ItemGroup />
-=======
   <ItemGroup>
     <Content Include="Formularios\Inventario\FormAjusteStock.cs.txt" />
     <Content Include="Formularios\Inventario\FormAjusteStock.Designer.cs.txt" />
   </ItemGroup>
->>>>>>> 8d2eeaf5d8150049c601f773263937efa20e11b0
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

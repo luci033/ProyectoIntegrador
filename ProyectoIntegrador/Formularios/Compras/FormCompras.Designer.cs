@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.LCompras = new System.Windows.Forms.Label();
-            this.BAgregarOrden = new System.Windows.Forms.Button();
             this.DGCompras = new System.Windows.Forms.DataGridView();
             this.idCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fechaCompa = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -38,6 +37,7 @@
             this.Observacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DetalleOrden = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.BAgregarOrden = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGCompras)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,26 +46,14 @@
             this.LCompras.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.LCompras.AutoSize = true;
-            this.LCompras.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LCompras.Location = new System.Drawing.Point(12, 59);
+            this.LCompras.Font = new System.Drawing.Font("Georgia", 16F);
+            this.LCompras.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LCompras.Location = new System.Drawing.Point(35, 50);
             this.LCompras.Name = "LCompras";
-            this.LCompras.Size = new System.Drawing.Size(378, 42);
+            this.LCompras.Size = new System.Drawing.Size(210, 27);
             this.LCompras.TabIndex = 9;
             this.LCompras.Text = "Gestión de Compras";
             this.LCompras.Click += new System.EventHandler(this.LProveedores_Click);
-            // 
-            // BAgregarOrden
-            // 
-            this.BAgregarOrden.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.BAgregarOrden.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BAgregarOrden.Location = new System.Drawing.Point(525, 30);
-            this.BAgregarOrden.Name = "BAgregarOrden";
-            this.BAgregarOrden.Size = new System.Drawing.Size(215, 91);
-            this.BAgregarOrden.TabIndex = 8;
-            this.BAgregarOrden.Text = "Agregar Orden";
-            this.BAgregarOrden.UseVisualStyleBackColor = true;
-            this.BAgregarOrden.Click += new System.EventHandler(this.BAgregarOrden_Click);
             // 
             // DGCompras
             // 
@@ -147,13 +135,30 @@
             this.DetalleOrden.ReadOnly = true;
             this.DetalleOrden.Text = "Ver...";
             // 
+            // BAgregarOrden
+            // 
+            this.BAgregarOrden.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(242)))), ((int)(((byte)(238)))));
+            this.BAgregarOrden.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(185)))), ((int)(((byte)(178)))));
+            this.BAgregarOrden.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BAgregarOrden.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.BAgregarOrden.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.BAgregarOrden.Location = new System.Drawing.Point(533, 33);
+            this.BAgregarOrden.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.BAgregarOrden.Name = "BAgregarOrden";
+            this.BAgregarOrden.Size = new System.Drawing.Size(174, 65);
+            this.BAgregarOrden.TabIndex = 10;
+            this.BAgregarOrden.Text = "Agregar Orden";
+            this.BAgregarOrden.UseVisualStyleBackColor = false;
+            this.BAgregarOrden.Click += new System.EventHandler(this.BAgregarOrden_Click);
+            // 
             // FormCompras
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(232)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.LCompras);
             this.Controls.Add(this.BAgregarOrden);
+            this.Controls.Add(this.LCompras);
             this.Controls.Add(this.DGCompras);
             this.Name = "FormCompras";
             this.Text = "Compras";
@@ -166,7 +171,6 @@
         #endregion
 
         private System.Windows.Forms.Label LCompras;
-        private System.Windows.Forms.Button BAgregarOrden;
         private System.Windows.Forms.DataGridView DGCompras;
         private System.Windows.Forms.DataGridViewTextBoxColumn idCompra;
         private System.Windows.Forms.DataGridViewTextBoxColumn fechaCompa;
@@ -175,5 +179,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Observacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total;
         private System.Windows.Forms.DataGridViewButtonColumn DetalleOrden;
+        private System.Windows.Forms.Button BAgregarOrden;
     }
 }

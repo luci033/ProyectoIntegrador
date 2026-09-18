@@ -29,23 +29,23 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.TBUsuarioActivo = new System.Windows.Forms.TextBox();
+            this.LUsuarioActivo = new System.Windows.Forms.Label();
             this.TBCodigoProducto = new System.Windows.Forms.TextBox();
             this.LCodigoProducto = new System.Windows.Forms.Label();
             this.BBuscarProducto = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.LNombreProducto = new System.Windows.Forms.Label();
-            this.BConfirmar = new System.Windows.Forms.Button();
-            this.LUsuarioActivo = new System.Windows.Forms.Label();
-            this.TBUsuarioActivo = new System.Windows.Forms.TextBox();
-            this.TBNombreProducto = new System.Windows.Forms.TextBox();
+            this.LObservaciones = new System.Windows.Forms.Label();
+            this.TBObservaciones = new System.Windows.Forms.TextBox();
+            this.TBCantidadAjustar = new System.Windows.Forms.TextBox();
+            this.LCantidadAjustar = new System.Windows.Forms.Label();
+            this.CBTipoAjuste = new System.Windows.Forms.ComboBox();
+            this.LTipoAjuste = new System.Windows.Forms.Label();
             this.TBStockActual = new System.Windows.Forms.TextBox();
             this.LStockProducto = new System.Windows.Forms.Label();
-            this.LTipoAjuste = new System.Windows.Forms.Label();
-            this.CBTipoAjuste = new System.Windows.Forms.ComboBox();
-            this.LCantidadAjustar = new System.Windows.Forms.Label();
-            this.TBCantidadAjustar = new System.Windows.Forms.TextBox();
-            this.TBObservaciones = new System.Windows.Forms.TextBox();
-            this.LObservaciones = new System.Windows.Forms.Label();
+            this.TBNombreProducto = new System.Windows.Forms.TextBox();
+            this.LNombreProducto = new System.Windows.Forms.Label();
+            this.BConfirmar = new System.Windows.Forms.Button();
             this.BCancelar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -62,6 +62,23 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(776, 130);
             this.panel1.TabIndex = 0;
+            // 
+            // TBUsuarioActivo
+            // 
+            this.TBUsuarioActivo.Location = new System.Drawing.Point(129, 32);
+            this.TBUsuarioActivo.Name = "TBUsuarioActivo";
+            this.TBUsuarioActivo.ReadOnly = true;
+            this.TBUsuarioActivo.Size = new System.Drawing.Size(136, 20);
+            this.TBUsuarioActivo.TabIndex = 9;
+            // 
+            // LUsuarioActivo
+            // 
+            this.LUsuarioActivo.AutoSize = true;
+            this.LUsuarioActivo.Location = new System.Drawing.Point(34, 35);
+            this.LUsuarioActivo.Name = "LUsuarioActivo";
+            this.LUsuarioActivo.Size = new System.Drawing.Size(79, 13);
+            this.LUsuarioActivo.TabIndex = 8;
+            this.LUsuarioActivo.Text = "Usuario Activo:";
             // 
             // TBCodigoProducto
             // 
@@ -109,6 +126,84 @@
             this.panel2.TabIndex = 3;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
+            // LObservaciones
+            // 
+            this.LObservaciones.AutoSize = true;
+            this.LObservaciones.Location = new System.Drawing.Point(481, 63);
+            this.LObservaciones.Name = "LObservaciones";
+            this.LObservaciones.Size = new System.Drawing.Size(81, 13);
+            this.LObservaciones.TabIndex = 19;
+            this.LObservaciones.Text = "Observaciones:";
+            // 
+            // TBObservaciones
+            // 
+            this.TBObservaciones.Location = new System.Drawing.Point(568, 60);
+            this.TBObservaciones.Multiline = true;
+            this.TBObservaciones.Name = "TBObservaciones";
+            this.TBObservaciones.Size = new System.Drawing.Size(136, 51);
+            this.TBObservaciones.TabIndex = 18;
+            // 
+            // TBCantidadAjustar
+            // 
+            this.TBCantidadAjustar.Location = new System.Drawing.Point(147, 102);
+            this.TBCantidadAjustar.Name = "TBCantidadAjustar";
+            this.TBCantidadAjustar.Size = new System.Drawing.Size(72, 20);
+            this.TBCantidadAjustar.TabIndex = 10;
+            // 
+            // LCantidadAjustar
+            // 
+            this.LCantidadAjustar.AutoSize = true;
+            this.LCantidadAjustar.Location = new System.Drawing.Point(34, 105);
+            this.LCantidadAjustar.Name = "LCantidadAjustar";
+            this.LCantidadAjustar.Size = new System.Drawing.Size(96, 13);
+            this.LCantidadAjustar.TabIndex = 17;
+            this.LCantidadAjustar.Text = "Cantidad a Ajustar:";
+            // 
+            // CBTipoAjuste
+            // 
+            this.CBTipoAjuste.FormattingEnabled = true;
+            this.CBTipoAjuste.Items.AddRange(new object[] {
+            "Egreso",
+            "Ingreso"});
+            this.CBTipoAjuste.Location = new System.Drawing.Point(147, 60);
+            this.CBTipoAjuste.Name = "CBTipoAjuste";
+            this.CBTipoAjuste.Size = new System.Drawing.Size(136, 21);
+            this.CBTipoAjuste.TabIndex = 15;
+            // 
+            // LTipoAjuste
+            // 
+            this.LTipoAjuste.AutoSize = true;
+            this.LTipoAjuste.Location = new System.Drawing.Point(34, 63);
+            this.LTipoAjuste.Name = "LTipoAjuste";
+            this.LTipoAjuste.Size = new System.Drawing.Size(78, 13);
+            this.LTipoAjuste.TabIndex = 13;
+            this.LTipoAjuste.Text = "Tipo de Ajuste:";
+            // 
+            // TBStockActual
+            // 
+            this.TBStockActual.Location = new System.Drawing.Point(568, 16);
+            this.TBStockActual.Name = "TBStockActual";
+            this.TBStockActual.ReadOnly = true;
+            this.TBStockActual.Size = new System.Drawing.Size(72, 20);
+            this.TBStockActual.TabIndex = 12;
+            // 
+            // LStockProducto
+            // 
+            this.LStockProducto.AutoSize = true;
+            this.LStockProducto.Location = new System.Drawing.Point(481, 19);
+            this.LStockProducto.Name = "LStockProducto";
+            this.LStockProducto.Size = new System.Drawing.Size(71, 13);
+            this.LStockProducto.TabIndex = 11;
+            this.LStockProducto.Text = "Stock Actual:";
+            // 
+            // TBNombreProducto
+            // 
+            this.TBNombreProducto.Location = new System.Drawing.Point(147, 16);
+            this.TBNombreProducto.Name = "TBNombreProducto";
+            this.TBNombreProducto.ReadOnly = true;
+            this.TBNombreProducto.Size = new System.Drawing.Size(136, 20);
+            this.TBNombreProducto.TabIndex = 10;
+            // 
             // LNombreProducto
             // 
             this.LNombreProducto.AutoSize = true;
@@ -128,101 +223,6 @@
             this.BConfirmar.Text = "Confirmar";
             this.BConfirmar.UseVisualStyleBackColor = true;
             this.BConfirmar.Click += new System.EventHandler(this.BConfirmar_Click);
-            // 
-            // LUsuarioActivo
-            // 
-            this.LUsuarioActivo.AutoSize = true;
-            this.LUsuarioActivo.Location = new System.Drawing.Point(34, 35);
-            this.LUsuarioActivo.Name = "LUsuarioActivo";
-            this.LUsuarioActivo.Size = new System.Drawing.Size(79, 13);
-            this.LUsuarioActivo.TabIndex = 8;
-            this.LUsuarioActivo.Text = "Usuario Activo:";
-            // 
-            // TBUsuarioActivo
-            // 
-            this.TBUsuarioActivo.Location = new System.Drawing.Point(129, 32);
-            this.TBUsuarioActivo.Name = "TBUsuarioActivo";
-            this.TBUsuarioActivo.ReadOnly = true;
-            this.TBUsuarioActivo.Size = new System.Drawing.Size(136, 20);
-            this.TBUsuarioActivo.TabIndex = 9;
-            // 
-            // TBNombreProducto
-            // 
-            this.TBNombreProducto.Location = new System.Drawing.Point(147, 16);
-            this.TBNombreProducto.Name = "TBNombreProducto";
-            this.TBNombreProducto.ReadOnly = true;
-            this.TBNombreProducto.Size = new System.Drawing.Size(136, 20);
-            this.TBNombreProducto.TabIndex = 10;
-            // 
-            // TBStockActual
-            // 
-            this.TBStockActual.Location = new System.Drawing.Point(568, 16);
-            this.TBStockActual.Name = "TBStockActual";
-            this.TBStockActual.ReadOnly = true;
-            this.TBStockActual.Size = new System.Drawing.Size(72, 20);
-            this.TBStockActual.TabIndex = 12;
-            // 
-            // LStockProducto
-            // 
-            this.LStockProducto.AutoSize = true;
-            this.LStockProducto.Location = new System.Drawing.Point(481, 19);
-            this.LStockProducto.Name = "LStockProducto";
-            this.LStockProducto.Size = new System.Drawing.Size(71, 13);
-            this.LStockProducto.TabIndex = 11;
-            this.LStockProducto.Text = "Stock Actual:";
-            // 
-            // LTipoAjuste
-            // 
-            this.LTipoAjuste.AutoSize = true;
-            this.LTipoAjuste.Location = new System.Drawing.Point(34, 63);
-            this.LTipoAjuste.Name = "LTipoAjuste";
-            this.LTipoAjuste.Size = new System.Drawing.Size(78, 13);
-            this.LTipoAjuste.TabIndex = 13;
-            this.LTipoAjuste.Text = "Tipo de Ajuste:";
-            // 
-            // CBTipoAjuste
-            // 
-            this.CBTipoAjuste.FormattingEnabled = true;
-            this.CBTipoAjuste.Items.AddRange(new object[] {
-            "Egreso",
-            "Ingreso"});
-            this.CBTipoAjuste.Location = new System.Drawing.Point(147, 60);
-            this.CBTipoAjuste.Name = "CBTipoAjuste";
-            this.CBTipoAjuste.Size = new System.Drawing.Size(136, 21);
-            this.CBTipoAjuste.TabIndex = 15;
-            // 
-            // LCantidadAjustar
-            // 
-            this.LCantidadAjustar.AutoSize = true;
-            this.LCantidadAjustar.Location = new System.Drawing.Point(34, 105);
-            this.LCantidadAjustar.Name = "LCantidadAjustar";
-            this.LCantidadAjustar.Size = new System.Drawing.Size(96, 13);
-            this.LCantidadAjustar.TabIndex = 17;
-            this.LCantidadAjustar.Text = "Cantidad a Ajustar:";
-            // 
-            // TBCantidadAjustar
-            // 
-            this.TBCantidadAjustar.Location = new System.Drawing.Point(147, 102);
-            this.TBCantidadAjustar.Name = "TBCantidadAjustar";
-            this.TBCantidadAjustar.Size = new System.Drawing.Size(72, 20);
-            this.TBCantidadAjustar.TabIndex = 10;
-            // 
-            // TBObservaciones
-            // 
-            this.TBObservaciones.Location = new System.Drawing.Point(568, 60);
-            this.TBObservaciones.Multiline = true;
-            this.TBObservaciones.Name = "TBObservaciones";
-            this.TBObservaciones.Size = new System.Drawing.Size(136, 51);
-            this.TBObservaciones.TabIndex = 18;
-            // 
-            // LObservaciones
-            // 
-            this.LObservaciones.AutoSize = true;
-            this.LObservaciones.Location = new System.Drawing.Point(481, 63);
-            this.LObservaciones.Name = "LObservaciones";
-            this.LObservaciones.Size = new System.Drawing.Size(81, 13);
-            this.LObservaciones.TabIndex = 19;
-            this.LObservaciones.Text = "Observaciones:";
             // 
             // BCancelar
             // 
@@ -244,8 +244,6 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.BConfirmar);
-            this.MaximumSize = new System.Drawing.Size(816, 489);
-            this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "FormAjusteStock";
             this.Text = "Ajuste de Stock";
             this.Load += new System.EventHandler(this.FormAjusteStock_Load);
