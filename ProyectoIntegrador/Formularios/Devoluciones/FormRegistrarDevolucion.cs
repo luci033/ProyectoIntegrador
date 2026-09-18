@@ -104,5 +104,10 @@ namespace ProyectoIntegrador.Formularios.Devoluciones
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
+
+        private void FormRegistrarDevolucion_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

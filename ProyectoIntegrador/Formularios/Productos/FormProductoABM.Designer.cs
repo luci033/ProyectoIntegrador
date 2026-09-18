@@ -57,7 +57,6 @@
             this.LNombre.Size = new System.Drawing.Size(44, 13);
             this.LNombre.TabIndex = 0;
             this.LNombre.Text = "Nombre";
-            this.LNombre.Click += new System.EventHandler(this.label1_Click);
             // 
             // LCategoria
             // 
@@ -67,12 +66,11 @@
             this.LCategoria.Size = new System.Drawing.Size(52, 13);
             this.LCategoria.TabIndex = 1;
             this.LCategoria.Text = "Categoria";
-            this.LCategoria.Click += new System.EventHandler(this.label2_Click);
             // 
             // LCodigo
             // 
             this.LCodigo.AutoSize = true;
-            this.LCodigo.Location = new System.Drawing.Point(62, 126);
+            this.LCodigo.Location = new System.Drawing.Point(66, 126);
             this.LCodigo.Name = "LCodigo";
             this.LCodigo.Size = new System.Drawing.Size(40, 13);
             this.LCodigo.TabIndex = 2;
@@ -104,7 +102,6 @@
             this.label1.Size = new System.Drawing.Size(76, 13);
             this.label1.TabIndex = 5;
             this.label1.Text = "Precio Unitario";
-            this.label1.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // LStockI
             // 
@@ -121,7 +118,6 @@
             this.textNombre.Name = "textNombre";
             this.textNombre.Size = new System.Drawing.Size(125, 20);
             this.textNombre.TabIndex = 7;
-            this.textNombre.TextChanged += new System.EventHandler(this.textNombre_TextChanged);
             // 
             // textBox2
             // 
@@ -153,7 +149,6 @@
             this.textStockInicial.Name = "textStockInicial";
             this.textStockInicial.Size = new System.Drawing.Size(125, 20);
             this.textStockInicial.TabIndex = 12;
-            this.textStockInicial.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             // 
             // textPrecio
             // 
@@ -209,7 +204,6 @@
             this.combGenero.Name = "combGenero";
             this.combGenero.Size = new System.Drawing.Size(125, 21);
             this.combGenero.TabIndex = 22;
-            this.combGenero.SelectedIndexChanged += new System.EventHandler(this.cobGenero_SelectedIndexChanged);
             // 
             // FormProductoABM
             // 

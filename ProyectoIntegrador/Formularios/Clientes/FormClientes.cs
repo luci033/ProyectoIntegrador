@@ -21,5 +21,14 @@ namespace ProyectoIntegrador.Formularios.Clientes
         {
 
         }
+
+        private void BNuevoCliente_Click(object sender, EventArgs e)
+        {
+            // instanciamos el formulario de ABM
+            FormClientesABM formNuevoCliente = new FormClientesABM();
+
+            // se de forma modal (bloquea el fondo hasta que se termine de registrar o cancelar)
+            formNuevoCliente.ShowDialog();
+        }
     }
 }

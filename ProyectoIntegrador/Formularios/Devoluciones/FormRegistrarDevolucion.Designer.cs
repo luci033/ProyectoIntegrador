@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.TBNroVenta = new System.Windows.Forms.TextBox();
-            this.LNroVenta = new System.Windows.Forms.Label();
-            this.DGDetalleVenta = new System.Windows.Forms.DataGridView();
-            this.TBCliente = new System.Windows.Forms.TextBox();
-            this.TBFecha = new System.Windows.Forms.TextBox();
-            this.LCliente = new System.Windows.Forms.Label();
-            this.LFecha = new System.Windows.Forms.Label();
             this.BBuscarVenta = new System.Windows.Forms.Button();
+            this.LFecha = new System.Windows.Forms.Label();
+            this.LCliente = new System.Windows.Forms.Label();
+            this.TBFecha = new System.Windows.Forms.TextBox();
+            this.TBCliente = new System.Windows.Forms.TextBox();
+            this.LNroVenta = new System.Windows.Forms.Label();
+            this.TBNroVenta = new System.Windows.Forms.TextBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.DGDetalleVenta = new System.Windows.Forms.DataGridView();
             this.idDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -66,20 +66,50 @@
             this.panel1.Size = new System.Drawing.Size(776, 165);
             this.panel1.TabIndex = 0;
             // 
-            // panel2
+            // BBuscarVenta
             // 
-            this.panel2.Controls.Add(this.DGDetalleVenta);
-            this.panel2.Location = new System.Drawing.Point(12, 183);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(776, 221);
-            this.panel2.TabIndex = 1;
+            this.BBuscarVenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BBuscarVenta.Location = new System.Drawing.Point(467, 62);
+            this.BBuscarVenta.Name = "BBuscarVenta";
+            this.BBuscarVenta.Size = new System.Drawing.Size(210, 36);
+            this.BBuscarVenta.TabIndex = 7;
+            this.BBuscarVenta.Text = "Buscar Venta";
+            this.BBuscarVenta.UseVisualStyleBackColor = true;
+            this.BBuscarVenta.Click += new System.EventHandler(this.BBuscarVenta_Click);
             // 
-            // TBNroVenta
+            // LFecha
             // 
-            this.TBNroVenta.Location = new System.Drawing.Point(102, 30);
-            this.TBNroVenta.Name = "TBNroVenta";
-            this.TBNroVenta.Size = new System.Drawing.Size(105, 20);
-            this.TBNroVenta.TabIndex = 0;
+            this.LFecha.AutoSize = true;
+            this.LFecha.Location = new System.Drawing.Point(40, 120);
+            this.LFecha.Name = "LFecha";
+            this.LFecha.Size = new System.Drawing.Size(40, 13);
+            this.LFecha.TabIndex = 6;
+            this.LFecha.Text = "Fecha:";
+            // 
+            // LCliente
+            // 
+            this.LCliente.AutoSize = true;
+            this.LCliente.Location = new System.Drawing.Point(38, 77);
+            this.LCliente.Name = "LCliente";
+            this.LCliente.Size = new System.Drawing.Size(42, 13);
+            this.LCliente.TabIndex = 5;
+            this.LCliente.Text = "Cliente:";
+            // 
+            // TBFecha
+            // 
+            this.TBFecha.Location = new System.Drawing.Point(102, 117);
+            this.TBFecha.Name = "TBFecha";
+            this.TBFecha.ReadOnly = true;
+            this.TBFecha.Size = new System.Drawing.Size(105, 20);
+            this.TBFecha.TabIndex = 4;
+            // 
+            // TBCliente
+            // 
+            this.TBCliente.Location = new System.Drawing.Point(102, 74);
+            this.TBCliente.Name = "TBCliente";
+            this.TBCliente.ReadOnly = true;
+            this.TBCliente.Size = new System.Drawing.Size(188, 20);
+            this.TBCliente.TabIndex = 3;
             // 
             // LNroVenta
             // 
@@ -89,6 +119,21 @@
             this.LNroVenta.Size = new System.Drawing.Size(61, 13);
             this.LNroVenta.TabIndex = 1;
             this.LNroVenta.Text = "Nro. Venta:";
+            // 
+            // TBNroVenta
+            // 
+            this.TBNroVenta.Location = new System.Drawing.Point(102, 30);
+            this.TBNroVenta.Name = "TBNroVenta";
+            this.TBNroVenta.Size = new System.Drawing.Size(105, 20);
+            this.TBNroVenta.TabIndex = 0;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.DGDetalleVenta);
+            this.panel2.Location = new System.Drawing.Point(12, 183);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(776, 221);
+            this.panel2.TabIndex = 1;
             // 
             // DGDetalleVenta
             // 
@@ -115,51 +160,6 @@
             this.DGDetalleVenta.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGDetalleVenta_CellContentClick);
             this.DGDetalleVenta.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGDetalleVenta_CellValueChanged);
             this.DGDetalleVenta.CurrentCellDirtyStateChanged += new System.EventHandler(this.DGDetalleVenta_CurrentCellDirtyStateChanged);
-            // 
-            // TBCliente
-            // 
-            this.TBCliente.Location = new System.Drawing.Point(102, 74);
-            this.TBCliente.Name = "TBCliente";
-            this.TBCliente.ReadOnly = true;
-            this.TBCliente.Size = new System.Drawing.Size(188, 20);
-            this.TBCliente.TabIndex = 3;
-            // 
-            // TBFecha
-            // 
-            this.TBFecha.Location = new System.Drawing.Point(102, 117);
-            this.TBFecha.Name = "TBFecha";
-            this.TBFecha.ReadOnly = true;
-            this.TBFecha.Size = new System.Drawing.Size(105, 20);
-            this.TBFecha.TabIndex = 4;
-            // 
-            // LCliente
-            // 
-            this.LCliente.AutoSize = true;
-            this.LCliente.Location = new System.Drawing.Point(38, 77);
-            this.LCliente.Name = "LCliente";
-            this.LCliente.Size = new System.Drawing.Size(42, 13);
-            this.LCliente.TabIndex = 5;
-            this.LCliente.Text = "Cliente:";
-            // 
-            // LFecha
-            // 
-            this.LFecha.AutoSize = true;
-            this.LFecha.Location = new System.Drawing.Point(40, 120);
-            this.LFecha.Name = "LFecha";
-            this.LFecha.Size = new System.Drawing.Size(40, 13);
-            this.LFecha.TabIndex = 6;
-            this.LFecha.Text = "Fecha:";
-            // 
-            // BBuscarVenta
-            // 
-            this.BBuscarVenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BBuscarVenta.Location = new System.Drawing.Point(467, 62);
-            this.BBuscarVenta.Name = "BBuscarVenta";
-            this.BBuscarVenta.Size = new System.Drawing.Size(210, 36);
-            this.BBuscarVenta.TabIndex = 7;
-            this.BBuscarVenta.Text = "Buscar Venta";
-            this.BBuscarVenta.UseVisualStyleBackColor = true;
-            this.BBuscarVenta.Click += new System.EventHandler(this.BBuscarVenta_Click);
             // 
             // idDetalle
             // 
@@ -244,6 +244,7 @@
             this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "FormRegistrarDevolucion";
             this.Text = "Registrar Devolución";
+            this.Load += new System.EventHandler(this.FormRegistrarDevolucion_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
