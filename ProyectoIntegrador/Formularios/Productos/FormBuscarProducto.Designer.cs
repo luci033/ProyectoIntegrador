@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DGProductos = new System.Windows.Forms.DataGridView();
             this.colIdProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,8 +91,8 @@
             // 
             // colCostoCompra
             // 
-            dataGridViewCellStyle6.Format = "C2";
-            this.colCostoCompra.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Format = "C2";
+            this.colCostoCompra.DefaultCellStyle = dataGridViewCellStyle3;
             this.colCostoCompra.FillWeight = 60F;
             this.colCostoCompra.HeaderText = "Costo de Compra";
             this.colCostoCompra.Name = "colCostoCompra";
@@ -205,8 +205,6 @@
             this.Controls.Add(this.LSeleccionarProducto);
             this.Controls.Add(this.BCancelar);
             this.Controls.Add(this.DGProductos);
-            this.MaximumSize = new System.Drawing.Size(816, 489);
-            this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "FormBuscarProducto";
             this.Text = "Buscar Productos";
             this.Load += new System.EventHandler(this.FormBuscarProducto_Load);

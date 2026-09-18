@@ -48,6 +48,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AForge, Version=2.2.5.0, Culture=neutral, PublicKeyToken=c1db6ff4eaa06aeb, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.2.2.5\lib\AForge.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Imaging, Version=2.2.5.0, Culture=neutral, PublicKeyToken=ba8ddea9676ca48b, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Imaging.2.2.5\lib\AForge.Imaging.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Math, Version=2.2.5.0, Culture=neutral, PublicKeyToken=abba2e25397ee8c9, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Math.2.2.5\lib\AForge.Math.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices" />
@@ -92,6 +101,15 @@
     </Compile>
     <Compile Include="Formularios\Compras\FormVerDetalle.Designer.cs">
       <DependentUpon>FormVerDetalle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Inventario\FormAjusteStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Inventario\FormAjusteStock.Designer.cs">
+      <DependentUpon>FormAjusteStock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\PanelGlass.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Formularios\Proveedores\FormBuscarProveedor.cs">
       <SubType>Form</SubType>
@@ -177,6 +195,9 @@
     <Compile Include="Formularios\Proveedores\FormProveedores.Designer.cs">
       <DependentUpon>FormProveedores.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\TransparentPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Formularios\Usuarios\FormUsuarioABM.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -219,6 +240,12 @@
     <Compile Include="Formularios\Ventas\FormHistorialVentas.Designer.cs">
       <DependentUpon>FormHistorialVentas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\Ventas\FormOpcionesVenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Ventas\FormOpcionesVenta.Designer.cs">
+      <DependentUpon>FormOpcionesVenta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\Ventas\FormRegistroVentas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -250,6 +277,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Devoluciones\FormRegistrarDevolucion.resx">
       <DependentUpon>FormRegistrarDevolucion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Inventario\FormAjusteStock.resx">
+      <DependentUpon>FormAjusteStock.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Proveedores\FormBuscarProveedor.resx">
       <DependentUpon>FormBuscarProveedor.cs</DependentUpon>
@@ -311,6 +341,9 @@
     <EmbeddedResource Include="Formularios\Ventas\FormHistorialVentas.resx">
       <DependentUpon>FormHistorialVentas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Ventas\FormOpcionesVenta.resx">
+      <DependentUpon>FormOpcionesVenta.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Ventas\FormRegistroVentas.resx">
       <DependentUpon>FormRegistroVentas.cs</DependentUpon>
     </EmbeddedResource>
@@ -327,6 +360,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -375,8 +409,6 @@
       <Name>CapaNegocio</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Formularios\Inventario\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

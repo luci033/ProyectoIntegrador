@@ -240,8 +240,6 @@
             this.Controls.Add(this.BRegistrarDevolucion);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.MaximumSize = new System.Drawing.Size(816, 489);
-            this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "FormRegistrarDevolucion";
             this.Text = "Registrar Devolución";
             this.Load += new System.EventHandler(this.FormRegistrarDevolucion_Load);

@@ -28,97 +28,81 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.productosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listarProductosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.registrarAjusteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.comprasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listarComprasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ajusteStockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1.SuspendLayout();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPrincipalLogistica));
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.BAjusteStock = new System.Windows.Forms.Button();
+            this.BCompras = new System.Windows.Forms.Button();
+            this.BProductos = new System.Windows.Forms.Button();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // panel1
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.productosToolStripMenuItem,
-            this.comprasToolStripMenuItem,
-            this.ajusteStockToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
+            this.panel1.Controls.Add(this.BAjusteStock);
+            this.panel1.Controls.Add(this.BCompras);
+            this.panel1.Controls.Add(this.BProductos);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(164, 664);
+            this.panel1.TabIndex = 3;
             // 
-            // productosToolStripMenuItem
+            // BAjusteStock
             // 
-            this.productosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.listarProductosToolStripMenuItem,
-            this.registrarAjusteToolStripMenuItem});
-            this.productosToolStripMenuItem.Name = "productosToolStripMenuItem";
-            this.productosToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
-            this.productosToolStripMenuItem.Text = "Productos";
+            this.BAjusteStock.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BAjusteStock.BackgroundImage")));
+            this.BAjusteStock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BAjusteStock.ForeColor = System.Drawing.Color.Transparent;
+            this.BAjusteStock.Location = new System.Drawing.Point(30, 288);
+            this.BAjusteStock.Name = "BAjusteStock";
+            this.BAjusteStock.Size = new System.Drawing.Size(100, 100);
+            this.BAjusteStock.TabIndex = 3;
+            this.BAjusteStock.UseVisualStyleBackColor = true;
+            this.BAjusteStock.Click += new System.EventHandler(this.BAjusteStock_Click);
             // 
-            // listarProductosToolStripMenuItem
+            // BCompras
             // 
-            this.listarProductosToolStripMenuItem.Name = "listarProductosToolStripMenuItem";
-            this.listarProductosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.listarProductosToolStripMenuItem.Text = "Listar Productos";
-            this.listarProductosToolStripMenuItem.Click += new System.EventHandler(this.listarProductosToolStripMenuItem_Click);
+            this.BCompras.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BCompras.BackgroundImage")));
+            this.BCompras.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BCompras.ForeColor = System.Drawing.Color.Transparent;
+            this.BCompras.Location = new System.Drawing.Point(30, 156);
+            this.BCompras.Name = "BCompras";
+            this.BCompras.Size = new System.Drawing.Size(100, 100);
+            this.BCompras.TabIndex = 2;
+            this.BCompras.UseVisualStyleBackColor = true;
+            this.BCompras.Click += new System.EventHandler(this.BCompras_Click);
             // 
-            // registrarAjusteToolStripMenuItem
+            // BProductos
             // 
-            this.registrarAjusteToolStripMenuItem.Name = "registrarAjusteToolStripMenuItem";
-            this.registrarAjusteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.registrarAjusteToolStripMenuItem.Text = "Registrar Ajuste ";
-            // 
-            // comprasToolStripMenuItem
-            // 
-            this.comprasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.listarComprasToolStripMenuItem});
-            this.comprasToolStripMenuItem.Name = "comprasToolStripMenuItem";
-            this.comprasToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
-            this.comprasToolStripMenuItem.Text = "Compras";
-            // 
-            // listarComprasToolStripMenuItem
-            // 
-            this.listarComprasToolStripMenuItem.Name = "listarComprasToolStripMenuItem";
-            this.listarComprasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.listarComprasToolStripMenuItem.Text = "Listar Compras";
-            // 
-            // ajusteStockToolStripMenuItem
-            // 
-            this.ajusteStockToolStripMenuItem.Name = "ajusteStockToolStripMenuItem";
-            this.ajusteStockToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
-            this.ajusteStockToolStripMenuItem.Text = "Ajuste Stock";
-            this.ajusteStockToolStripMenuItem.Click += new System.EventHandler(this.ajusteStockToolStripMenuItem_Click);
+            this.BProductos.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.BProductos.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BProductos.BackgroundImage")));
+            this.BProductos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BProductos.ForeColor = System.Drawing.Color.Transparent;
+            this.BProductos.Location = new System.Drawing.Point(30, 28);
+            this.BProductos.Name = "BProductos";
+            this.BProductos.Size = new System.Drawing.Size(100, 100);
+            this.BProductos.TabIndex = 1;
+            this.BProductos.UseVisualStyleBackColor = false;
+            this.BProductos.Click += new System.EventHandler(this.BProductos_Click);
             // 
             // FormPrincipalLogistica
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.menuStrip1);
+            this.ClientSize = new System.Drawing.Size(885, 664);
+            this.Controls.Add(this.panel1);
             this.IsMdiContainer = true;
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormPrincipalLogistica";
             this.Text = "Joyería ALBA - Logística";
             this.Load += new System.EventHandler(this.FormPrincipalLogistica_Load);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem productosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem listarProductosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem registrarAjusteToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem comprasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem listarComprasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ajusteStockToolStripMenuItem;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button BAjusteStock;
+        private System.Windows.Forms.Button BCompras;
+        private System.Windows.Forms.Button BProductos;
     }
 }

@@ -15,6 +15,7 @@ namespace ProyectoIntegrador.Formularios.Productos
         public FormBuscarProducto()
         {
             InitializeComponent();
+            this.WindowState = FormWindowState.Maximized;
         }
 
         public int IdProducto { get; private set; }

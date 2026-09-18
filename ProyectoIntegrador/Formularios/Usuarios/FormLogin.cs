@@ -21,8 +21,15 @@ namespace ProyectoIntegrador.Formularios.Usuarios
         public FormLogin()
         {
             InitializeComponent();
-            // Reemplaza 'panel1' por el nombre real de tu panel en el diseñador
-            panel1.BackColor = Color.FromArgb(120, 90, 30, 30);
+            this.WindowState = FormWindowState.Maximized;
+            panelGlass1.Left = (this.ClientSize.Width - panelGlass1.Width) / 2;
+            panelGlass1.Top = (this.ClientSize.Height - panelGlass1.Height) / 2;
+        }
+
+        private void FormLogin_Resize(object sender, EventArgs e)
+        {
+            panelGlass1.Left = (this.ClientSize.Width - panelGlass1.Width) / 2;
+            panelGlass1.Top = (this.ClientSize.Height - panelGlass1.Height) / 2;
         }
 
         private void Login_Load(object sender, EventArgs e)
