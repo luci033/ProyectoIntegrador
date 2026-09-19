@@ -51,5 +51,20 @@ namespace ProyectoIntegrador
                 }
             };
         }
+        // Nueva paleta de fondo
+        public static readonly Color ColorFondo = Color.FromArgb(239, 236, 232);
+        // Nota: Tu ColorBorgoña (42, 8, 12) ya está definido al principio de tu clase
+
+        public static void AplicarEstiloTitulo(Label titulo)
+        {
+            titulo.Font = new Font("Georgia", 24f, FontStyle.Bold);
+            titulo.ForeColor = ColorBorgoña;
+            titulo.BackColor = Color.Transparent; // Evita un recuadro sólido alrededor del texto
+        }
+
+        public static void AplicarEstiloFormulario(Form formulario)
+        {
+            formulario.BackColor = ColorFondo;
+        }
     }
 }

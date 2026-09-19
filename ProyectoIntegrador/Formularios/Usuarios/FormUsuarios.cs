@@ -57,6 +57,8 @@ namespace ProyectoIntegrador.Formularios.Usuarios
         private void FormUsuarios_Load(object sender, EventArgs e)
         {
             EstiloUI.AplicarEstiloGrilla(dataGridRegistroUsuario);
+            EstiloUI.AplicarEstiloFormulario(this);
+            EstiloUI.AplicarEstiloTitulo(LTitulo);
             // Reemplazá "tuDataGridView" por el nombre que le hayas puesto a tu grilla
             dataGridRegistroUsuario.Rows.Add(1, "12345678", "Juan", "Pérez", "jperez", "Administrador");
             dataGridRegistroUsuario.Rows.Add(2, "23456789", "Ana", "Gómez", "agomez", "Vendedor");

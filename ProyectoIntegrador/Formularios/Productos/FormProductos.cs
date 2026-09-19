@@ -21,12 +21,34 @@ namespace ProyectoIntegrador.Formularios.Productos
         private void FormProductos_Load(object sender, EventArgs e)
         {
             EstiloUI.AplicarEstiloGrilla(dataGridCatalogoProd);
+            EstiloUI.AplicarEstiloFormulario(this);
+            EstiloUI.AplicarEstiloTitulo(LTitulo);
 
-            /*
-            combCategoriaForm.Items.Clear();
-            combCategoriaForm.Items.AddRange(new string[] { "Anillos", "Collares", "Pulseras", "Aros", "Relojes" });
-            combCategoriaForm.SelectedIndex = -1;
-            */
+            CBCategoria.Items.AddRange(new string[] { "Todos", "Collares", "Aros", "Anillos", "Pulseras", "Dijes", "Cadenas" });
+            CBCategoria.SelectedIndex = 0;
+
+            CBGenero.Items.AddRange(new string[] { "Todos", "Femenino", "Masculino", "Unisex" });
+            CBGenero.SelectedIndex = 0;
+
+            // Se eliminó la línea dataGridCatalogoProd.ColumnCount = 6;
+
+            // Orden exacto: Código, Nombre, Categoría, Género, Precio, Stock, Modificar, Desactivar
+            dataGridCatalogoProd.Rows.Add("1123456", "Collar Rubí", "Collares", "Femenino", 155760, 10, "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("2234567", "Aros Luz de Luna", "Aros", "Femenino", 98065, 15, "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("3345678", "Anillo Solitario Diamante", "Anillos", "Femenino", 320500, 2, "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("4456789", "Pulsera Eslabón Oro 18k", "Pulseras", "Unisex", 215400, 5, "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("5567890", "Dije Corazón Zafiro", "Dijes", "Femenino", 85200, 8, "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("6678901", "Aros Perla Clásica", "Aros", "Femenino", 45600, 20, "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("7789012", "Cadena Plata 925", "Cadenas", "Unisex", 25300, 25, "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("8890123", "Anillo Esmeralda Imperial", "Anillos", "Femenino", 275800, 3, "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("9901234", "Gargantilla Oro Blanco", "Collares", "Femenino", 198000, 4, "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("1012345", "Pulsera Tenis Circones", "Pulseras", "Femenino", 112500, 7, "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("1123456", "Colgante Árbol de la Vida", "Dijes", "Unisex", 34900, 12, "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("1234567", "Aros Argolla Oro", "Aros", "Unisex", 76400, 9, "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("1345678", "Anillo Sello Oro 18k", "Anillos", "Masculino", 185000, 6, "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("1456789", "Cadena Espiga Plata", "Cadenas", "Masculino", 42000, 14, "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("1567890", "Pulsera Cuero y Acero", "Pulseras", "Masculino", 28500, 30, "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("1678901", "Dije Cruz Acero Quirúrgico", "Dijes", "Masculino", 15000, 40, "Modificar", "Desactivar");
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -141,6 +163,55 @@ namespace ProyectoIntegrador.Formularios.Productos
         {
             FormBuscarProducto modalBusqueda = new FormBuscarProducto();
             modalBusqueda.ShowDialog();
+        }
+
+        private void AplicarFiltros()
+        {
+            string categoriaSeleccionada = CBCategoria.SelectedItem?.ToString() ?? "Todos";
+            string generoSeleccionado = CBGenero.SelectedItem?.ToString() ?? "Todos";
+
+            // Obtenemos el texto del buscador y lo pasamos a minúsculas
+            string textoBusqueda = TBBuscarProducto.Text.Trim().ToLower();
+
+            foreach (DataGridViewRow fila in dataGridCatalogoProd.Rows)
+            {
+                if (fila.IsNewRow) continue;
+
+                // Índice 1 es Nombre, 2 es Categoría, 3 es Género
+                string nombreFila = fila.Cells[1].Value.ToString().ToLower();
+                string categoriaFila = fila.Cells[2].Value.ToString();
+                string generoFila = fila.Cells[3].Value.ToString();
+
+                // Verificamos si cumple cada filtro
+                bool coincideNombre = string.IsNullOrEmpty(textoBusqueda) || nombreFila.Contains(textoBusqueda);
+                bool coincideCategoria = (categoriaSeleccionada == "Todos" || categoriaFila == categoriaSeleccionada);
+                bool coincideGenero = (generoSeleccionado == "Todos" || generoFila == generoSeleccionado);
+
+                // La fila se muestra solo si cumple las TRES condiciones al mismo tiempo
+                fila.Visible = coincideNombre && coincideCategoria && coincideGenero;
+            }
+        }
+
+        // 2. Llamamos al método desde el evento de Categoría
+        private void CBCategoria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            AplicarFiltros();
+        }
+
+        // 3. Llamamos al mismo método desde el evento de Género
+        private void CBGenero_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            AplicarFiltros();
+        }
+
+        private void TBBuscarProducto_TextChanged(object sender, EventArgs e)
+        {
+            AplicarFiltros();
+        }
+
+        private void LCatalogoProductos_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
