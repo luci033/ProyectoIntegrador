@@ -66,5 +66,16 @@ namespace ProyectoIntegrador
         {
             formulario.BackColor = ColorFondo;
         }
+
+        public static void AplicarEstiloBoton(Button boton)
+        {
+            boton.Font = new Font("Georgia", boton.Font.Size, FontStyle.Bold);
+            boton.ForeColor = Color.White;
+            boton.BackColor = ColorBorgoña;
+
+            // Quita el diseño por defecto de Windows para aplicar tus colores
+            boton.FlatStyle = FlatStyle.Flat;
+            boton.FlatAppearance.BorderSize = 0;
+        }
     }
 }

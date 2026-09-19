@@ -201,7 +201,6 @@ namespace ProyectoIntegrador.Formularios.Usuarios
 
             string usuario = TBUsuario.Text.Trim();
             string clave = TBContrasena.Text.Trim();
-            string mensajeError;
 
             // se valida que no haya campos vacios
             if (string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(clave))
