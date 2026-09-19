@@ -36,6 +36,8 @@
             this.colApellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colModificar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.colDesactivar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.LGestionUsuario = new System.Windows.Forms.Label();
             this.TBBuscar = new System.Windows.Forms.TextBox();
             this.LBuscar = new System.Windows.Forms.Label();
@@ -57,6 +59,7 @@
             // 
             // dataGridRegistroUsuario
             // 
+            this.dataGridRegistroUsuario.AllowUserToAddRows = false;
             this.dataGridRegistroUsuario.AllowUserToDeleteRows = false;
             this.dataGridRegistroUsuario.AllowUserToResizeColumns = false;
             this.dataGridRegistroUsuario.AllowUserToResizeRows = false;
@@ -72,7 +75,9 @@
             this.colNombre,
             this.colApellido,
             this.colUsuario,
-            this.colRol});
+            this.colRol,
+            this.colModificar,
+            this.colDesactivar});
             this.dataGridRegistroUsuario.EnableHeadersVisualStyles = false;
             this.dataGridRegistroUsuario.Location = new System.Drawing.Point(0, 158);
             this.dataGridRegistroUsuario.Name = "dataGridRegistroUsuario";
@@ -124,6 +129,20 @@
             this.colRol.HeaderText = "Rol";
             this.colRol.Name = "colRol";
             this.colRol.ReadOnly = true;
+            // 
+            // colModificar
+            // 
+            this.colModificar.FillWeight = 30F;
+            this.colModificar.HeaderText = "Modificar";
+            this.colModificar.Name = "colModificar";
+            this.colModificar.ReadOnly = true;
+            // 
+            // colDesactivar
+            // 
+            this.colDesactivar.FillWeight = 30F;
+            this.colDesactivar.HeaderText = "Desactivar";
+            this.colDesactivar.Name = "colDesactivar";
+            this.colDesactivar.ReadOnly = true;
             // 
             // LGestionUsuario
             // 
@@ -182,13 +201,15 @@
         private System.Windows.Forms.Button BAgregarUsuario;
         private System.Windows.Forms.DataGridView dataGridRegistroUsuario;
         private System.Windows.Forms.Label LGestionUsuario;
+        private System.Windows.Forms.TextBox TBBuscar;
+        private System.Windows.Forms.Label LBuscar;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIdUsuario;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDni;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn colApellido;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUsuario;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRol;
-        private System.Windows.Forms.TextBox TBBuscar;
-        private System.Windows.Forms.Label LBuscar;
+        private System.Windows.Forms.DataGridViewButtonColumn colModificar;
+        private System.Windows.Forms.DataGridViewButtonColumn colDesactivar;
     }
 }

@@ -9,6 +9,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -159,6 +160,11 @@ namespace ProyectoIntegrador
             {
                 dialog.Title = "Seleccionar foto de perfil";
                 dialog.Filter = "Imágenes (*.jpg; *.jpeg; *.png)|*.jpg;*.jpeg;*.png";
+
+                /*if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    pictureBoxUsuario.Image = System.Drawing.Image.FromFile(dialog.FileName);
+                }*/
 
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
