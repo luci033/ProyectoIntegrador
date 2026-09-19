@@ -12,7 +12,7 @@ namespace ProyectoIntegrador
         public static void AplicarEstiloGrilla(DataGridView dgv)
         {
             // Opciones básicas de comportamiento
-            dgv.BackgroundColor = Color.White;
+            dgv.BackgroundColor = ColorSeleccion;
             dgv.BorderStyle = BorderStyle.None;
             dgv.RowHeadersVisible = false;
             dgv.AllowUserToAddRows = false;
@@ -28,12 +28,28 @@ namespace ProyectoIntegrador
             dgv.ColumnHeadersDefaultCellStyle.BackColor = ColorBorgoña;
             dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
+            dgv.ColumnHeadersDefaultCellStyle.SelectionBackColor = ColorBorgoña;
 
             // Filas uniformes
             dgv.RowTemplate.Height = 28;
+            dgv.DefaultCellStyle.BackColor = Color.White;
+            dgv.DefaultCellStyle.ForeColor = Color.Black;
             dgv.DefaultCellStyle.SelectionBackColor = ColorSeleccion;
             dgv.DefaultCellStyle.SelectionForeColor = ColorBorgoña;
             dgv.DefaultCellStyle.Font = new Font("Segoe UI", 9f, FontStyle.Regular);
+
+            // Fuerza el estilo de las columnas tipo botón justo antes de que se dibujen en pantalla
+            dgv.CellFormatting += (sender, e) =>
+            {
+                if (dgv.Columns[e.ColumnIndex] is DataGridViewButtonColumn colBoton)
+                {
+                    colBoton.FlatStyle = FlatStyle.Flat;
+                    e.CellStyle.BackColor = ColorBorgoña;
+                    e.CellStyle.SelectionBackColor = ColorBorgoña;
+                    e.CellStyle.ForeColor = Color.White;
+                    e.CellStyle.SelectionForeColor = Color.White;
+                }
+            };
         }
     }
 }

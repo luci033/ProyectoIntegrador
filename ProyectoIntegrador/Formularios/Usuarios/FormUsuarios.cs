@@ -57,6 +57,20 @@ namespace ProyectoIntegrador.Formularios.Usuarios
         private void FormUsuarios_Load(object sender, EventArgs e)
         {
             EstiloUI.AplicarEstiloGrilla(dataGridRegistroUsuario);
+            // Reemplazá "tuDataGridView" por el nombre que le hayas puesto a tu grilla
+            dataGridRegistroUsuario.Rows.Add(1, "12345678", "Juan", "Pérez", "jperez", "Administrador");
+            dataGridRegistroUsuario.Rows.Add(2, "23456789", "Ana", "Gómez", "agomez", "Vendedor");
+            dataGridRegistroUsuario.Rows.Add(3, "34567890", "Carlos", "Ruiz", "cruiz", "Logística");
+            dataGridRegistroUsuario.Rows.Add(4, "45678901", "María", "López", "mlopez", "Vendedor");
+            dataGridRegistroUsuario.Rows.Add(5, "56789012", "Luis", "Sosa", "lsosa", "Administrador");
+
+            // Opciones para Rol
+            CBRol.Items.AddRange(new string[] { "Todos", "Administrador", "Vendedor", "Logística" });
+            CBRol.SelectedIndex = 0; // Deja "Todos" seleccionado por defecto
+
+            // Opciones para Estado
+            CBEstado.Items.AddRange(new string[] { "Todos", "Activo", "Inactivo" });
+            CBEstado.SelectedIndex = 0;
 
         }
 
@@ -90,6 +104,46 @@ namespace ProyectoIntegrador.Formularios.Usuarios
 
                 // si encontro el texto, muestra la fila. si no, la oculta.
                 fila.Visible = contieneTexto;
+            }
+        }
+
+        private void CBRol_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string rolSeleccionado = CBRol.SelectedItem.ToString();
+
+            foreach (DataGridViewRow fila in dataGridRegistroUsuario.Rows)
+            {
+                if (fila.IsNewRow) continue; // Salta la fila vacía del final
+
+                if (rolSeleccionado == "Todos")
+                {
+                    fila.Visible = true;
+                }
+                else
+                {
+                    // Asumiendo que tu columna se llama "Rol" en el diseño
+                    fila.Visible = fila.Cells["colRol"].Value.ToString() == rolSeleccionado;
+                }
+            }
+        }
+
+        private void CBEstado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string estadoSeleccionado = CBEstado.SelectedItem.ToString();
+
+            foreach (DataGridViewRow fila in dataGridRegistroUsuario.Rows)
+            {
+                if (fila.IsNewRow) continue; // Salta la fila vacía del final
+
+                if (estadoSeleccionado == "Todos")
+                {
+                    fila.Visible = true;
+                }
+                else
+                {
+                    // Asumiendo que tu columna se llama "Estado" en el diseño
+                    fila.Visible = fila.Cells["colEstado"].Value.ToString() == estadoSeleccionado;
+                }
             }
         }
     }
