@@ -20,6 +20,16 @@ namespace ProyectoIntegrador
         public FormProductoABM()
         {
             InitializeComponent();
+
+            // 1. Cargamos las listas acá para que existan antes de recibir los datos
+            cmbCategoria.Items.Clear();
+            cmbCategoria.Items.AddRange(new string[] { "Anillos", "Collares", "Pulseras", "Aros", "Dijes", "Cadenas", "Relojes" });
+
+            cmbProveedor.Items.Clear();
+            cmbProveedor.Items.AddRange(new string[] { "Joyas del Norte", "Distribuidora Oro S.A.", "Gemas y Piedras", "Importadora Rubi", "Platería Central", "Proveedor A", "Proveedor B", "Proveedor C" });
+
+            combGenero.Items.Clear();
+            combGenero.Items.AddRange(new string[] { "Femenino", "Masculino", "Unisex" });
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -28,19 +38,17 @@ namespace ProyectoIntegrador
             EstiloUI.AplicarEstiloBoton(BCancelar);
             EstiloUI.AplicarEstiloBoton(BCrearProducto);
             EstiloUI.AplicarEstiloFormulario(this);
-            cmbCategoria.Items.Clear();
-            cmbCategoria.Items.AddRange(new string[] {"Anillos", "Collares", "Pulseras", "Aros", "Relojes"});
-            cmbProveedor.Items.AddRange(new string[] { "Joyas del Norte", "Distribuidora Oro S.A.", "Gemas y Piedras", "Importadora Rubi", "Platería Central" });
-            textPrecio.Text = "0.01";
-            textStockInicial.Text = "1";
 
+            // 2. Solo reseteamos los campos si estamos creando un producto NUEVO
+            if (!esModificacion && !esDetalle)
+            {
+                textPrecio.Text = "0.01";
+                textStockInicial.Text = "1";
 
-            combGenero.Items.Clear();
-            combGenero.Items.AddRange(new string[] { "Femenino", "Masculino"});
-
-            cmbProveedor.SelectedIndex = -1;
-            cmbCategoria.SelectedIndex = -1;
-            combGenero.SelectedIndex = -1;
+                cmbProveedor.SelectedIndex = -1;
+                cmbCategoria.SelectedIndex = -1;
+                combGenero.SelectedIndex = -1;
+            }
         }
 
         private bool ValidarCampos()
@@ -171,7 +179,7 @@ namespace ProyectoIntegrador
             textNombre.Text = nombre;
             textStockMinimo.Text = stockMinimo; // Asegurate de tener este TextBox creado
             textDescripcion.Text = descripcion; // Asegurate de tener este TextBox creado
-
+            cmbProveedor.Text = proveedor;
             // 2. Campos BLOQUEADOS (se ven pero no se editan)
             cmbCategoria.Text = categoria;
             cmbCategoria.Enabled = false;
@@ -184,8 +192,6 @@ namespace ProyectoIntegrador
 
             textStockInicial.Text = stock;
             textStockInicial.Enabled = false;
-
-            cmbProveedor.Text = proveedor;
         }
 
         public void ConfigurarModoDetalle(string codigo, string nombre, string categoria, string genero, string precio, string stock, string stockMinimo, string descripcion, string proveedor)
