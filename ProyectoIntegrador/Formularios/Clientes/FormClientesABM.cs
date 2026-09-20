@@ -14,14 +14,29 @@ namespace ProyectoIntegrador.Formularios.Clientes
     public partial class FormClientesABM : Form
     {
         public ClienteSimulado ClienteCreado { get; private set; }
+        public List<string> DnisExistentes = new List<string>();
+        private string dniOriginal = "";
         public FormClientesABM()
         {
             InitializeComponent();
         }
 
+        public class ClienteSimulado
+        {
+            public string Nombre { get; set; }
+            public string Apellido { get; set; }
+            public string DNI { get; set; }
+            public string Telefono { get; set; }
+            public string Correo { get; set; }
+            public string CondicionIVA { get; set; }
+        }
+
         private void FormClientesABM_Load(object sender, EventArgs e)
         {
-
+            EstiloUI.AplicarEstiloFormulario(this);
+            EstiloUI.AplicarEstiloTitulo(LTitulo);
+            EstiloUI.AplicarEstiloBoton(BCancelar);
+            EstiloUI.AplicarEstiloBoton(BRegistrarCliente);
         }
 
         private void label5_Click(object sender, EventArgs e)
@@ -31,39 +46,61 @@ namespace ProyectoIntegrador.Formularios.Clientes
 
         private void BRegistrarCliente_Click(object sender, EventArgs e)
         {
-          
-            if (this.ValidateChildren(ValidationConstraints.Enabled))
+            errorProvider1.Clear();
+            bool esValido = true;
+
+            if (string.IsNullOrWhiteSpace(TBNombre.Text) || !TBNombre.Text.All(c => char.IsLetter(c) || char.IsWhiteSpace(c)))
+            { errorProvider1.SetError(TBNombre, "Inválido"); esValido = false; }
+
+            if (string.IsNullOrWhiteSpace(TBApellido.Text) || !TBApellido.Text.All(c => char.IsLetter(c) || char.IsWhiteSpace(c)))
+            { errorProvider1.SetError(TBApellido, "Inválido"); esValido = false; }
+
+            if (string.IsNullOrWhiteSpace(TBDni.Text) || !TBDni.Text.All(char.IsDigit) || TBDni.Text.Length < 7)
+            { errorProvider1.SetError(TBDni, "Inválido"); esValido = false; }
+
+            // 2. Validación de Teléfono (solo números)
+            if (string.IsNullOrWhiteSpace(TBTelefono.Text) || !TBTelefono.Text.All(char.IsDigit))
+            { errorProvider1.SetError(TBTelefono, "Solo números"); esValido = false; }
+
+            if (!string.IsNullOrWhiteSpace(TBCorreo.Text))
             {
-                // Verifica el ComboBox manualmente porque no suele usar el evento Validating
+                try { new MailAddress(TBCorreo.Text); }
+                catch { errorProvider1.SetError(TBCorreo, "Inválido"); esValido = false; }
+
                 if (cmbCondicionIVA.SelectedIndex == -1)
+                { errorProvider1.SetError(cmbCondicionIVA, "Seleccione IVA"); esValido = false; }
+
+                if (!esValido)
                 {
-                    MessageBox.Show("Por favor, seleccione una Condición frente al IVA.", "Dato faltante", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Revise los campos en rojo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                // si todo estta bien muestra este mensaje
-                MessageBox.Show("¡Cliente validado y listo para guardar en la Base de Datos!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Validación de DNI duplicado
+                if (DnisExistentes.Contains(TBDni.Text) && TBDni.Text != dniOriginal)
+                {
+                    MessageBox.Show("Ese DNI ya se encuentra registrado en el sistema.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
                 ClienteCreado = new ClienteSimulado
                 {
                     Nombre = TBNombre.Text,
                     Apellido = TBApellido.Text,
                     DNI = TBDni.Text,
-                    Correo = TBCorreo.Text
+                    Telefono = TBTelefono.Text,
+                    Correo = TBCorreo.Text,
+                    CondicionIVA = cmbCondicionIVA.Text
                 };
 
-                // Aquí llamaremos a  CN_Cliente...  REVISAR
                 this.DialogResult = DialogResult.OK;
                 this.Close();
-            }
-            else
-            {
-                MessageBox.Show("Revise los campos marcados en rojo.", "Errores en el formulario", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void BCancelar_Click(object sender, EventArgs e)
         {
+            this.AutoValidate = AutoValidate.Disable; // Apaga la validación forzada
             this.Close();
         }
 
@@ -90,6 +127,22 @@ namespace ProyectoIntegrador.Formularios.Clientes
                 e.Cancel = false;
                 errorProvider1.SetError(TBNombre, "");
             }
+        }
+
+        public void ConfigurarModoEdicion(string nombre, string apellido, string dni, string telefono, string correo, string condicionIVA)
+        {
+            this.Text = "Modificar Cliente";
+            LTitulo.Text = "Modificar Cliente";
+            BRegistrarCliente.Text = "Modificar";
+
+            TBNombre.Text = nombre;
+            TBApellido.Text = apellido;
+            TBDni.Text = dni;
+            TBTelefono.Text = telefono;
+            TBCorreo.Text = correo;
+            cmbCondicionIVA.Text = condicionIVA;
+            // Guardamos el DNI original para compararlo luego
+            dniOriginal = dni;
         }
 
         private void TBApellido_Validating(object sender, CancelEventArgs e)
@@ -153,29 +206,6 @@ namespace ProyectoIntegrador.Formularios.Clientes
                 e.Cancel = true;
                 errorProvider1.SetError(TBCorreo, "El formato del correo no es válido (ej: nombre@dominio.com).");
             }
-        }
-
-        
-        public void ConfigurarModoEdicion(string nombre, string apellido, string dni, string correo)
-        {
-            this.Text = "Modificar Cliente"; // Cambiamos el título de la ventana
-
-            // Rellenamos las cajas de texto con los datos que nos mandan
-            TBNombre.Text = nombre;
-            TBApellido.Text = apellido;
-            TBDni.Text = dni;
-            TBCorreo.Text = correo;
-
-            // Bloqueamos el DNI para que no lo puedan cambiar 
-            TBDni.Enabled = false;
-        }
-
-        public class ClienteSimulado
-        {
-            public string Nombre { get; set; }
-            public string Apellido { get; set; }
-            public string DNI { get; set; }
-            public string Correo { get; set; }
         }
     }
 }

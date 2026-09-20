@@ -36,7 +36,7 @@
             this.colNro = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colApellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDni = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDniCUIT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTelefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCorreo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCondicionIVA = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,7 +60,6 @@
             // 
             this.DGClientes.AllowUserToAddRows = false;
             this.DGClientes.AllowUserToDeleteRows = false;
-            this.DGClientes.AllowUserToOrderColumns = true;
             this.DGClientes.AllowUserToResizeColumns = false;
             this.DGClientes.AllowUserToResizeRows = false;
             this.DGClientes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -72,7 +71,7 @@
             this.colNro,
             this.colNombre,
             this.colApellido,
-            this.colDni,
+            this.colDniCUIT,
             this.colTelefono,
             this.colCorreo,
             this.colCondicionIVA,
@@ -105,35 +104,48 @@
             // 
             // IdCliente
             // 
+            this.IdCliente.Frozen = true;
             this.IdCliente.HeaderText = "IDCliente";
             this.IdCliente.Name = "IdCliente";
             this.IdCliente.ReadOnly = true;
+            this.IdCliente.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.IdCliente.Visible = false;
             // 
             // colNro
             // 
+            this.colNro.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.colNro.FillWeight = 30F;
+            this.colNro.Frozen = true;
             this.colNro.HeaderText = "Nro";
             this.colNro.Name = "colNro";
             this.colNro.ReadOnly = true;
+            this.colNro.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.colNro.Width = 29;
             // 
             // colNombre
             // 
+            this.colNombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colNombre.Frozen = true;
             this.colNombre.HeaderText = "Nombre";
             this.colNombre.Name = "colNombre";
             this.colNombre.ReadOnly = true;
+            this.colNombre.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.colNombre.Width = 97;
             // 
             // colApellido
             // 
+            this.colApellido.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colApellido.Frozen = true;
             this.colApellido.HeaderText = "Apellido";
             this.colApellido.Name = "colApellido";
             this.colApellido.ReadOnly = true;
+            this.colApellido.Width = 98;
             // 
-            // colDni
+            // colDniCUIT
             // 
-            this.colDni.HeaderText = "DNI";
-            this.colDni.Name = "colDni";
-            this.colDni.ReadOnly = true;
+            this.colDniCUIT.HeaderText = "DNI/CUIT";
+            this.colDniCUIT.Name = "colDniCUIT";
+            this.colDniCUIT.ReadOnly = true;
             // 
             // colTelefono
             // 
@@ -151,16 +163,19 @@
             // 
             this.colCondicionIVA.HeaderText = "Condicion IVA";
             this.colCondicionIVA.Name = "colCondicionIVA";
+            this.colCondicionIVA.ReadOnly = true;
             // 
             // colHistorial
             // 
             this.colHistorial.HeaderText = "Historial";
             this.colHistorial.Name = "colHistorial";
+            this.colHistorial.ReadOnly = true;
             // 
             // colModificar
             // 
             this.colModificar.HeaderText = "Modificar";
             this.colModificar.Name = "colModificar";
+            this.colModificar.ReadOnly = true;
             // 
             // FormClientes
             // 
@@ -171,7 +186,7 @@
             this.Controls.Add(this.LTitulo);
             this.Controls.Add(this.BNuevoCliente);
             this.Name = "FormClientes";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Gestión de Clientes";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FormClientes_Load);
@@ -191,7 +206,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colNro;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn colApellido;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDni;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDniCUIT;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTelefono;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCorreo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCondicionIVA;

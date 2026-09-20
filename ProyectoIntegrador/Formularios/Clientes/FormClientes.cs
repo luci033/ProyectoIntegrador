@@ -26,6 +26,39 @@ namespace ProyectoIntegrador.Formularios.Clientes
             EstiloUI.AplicarEstiloFormulario(this);
             EstiloUI.AplicarEstiloTitulo(LTitulo);
             EstiloUI.AplicarEstiloBoton(BNuevoCliente);
+
+            // 1. Hardcodeo de 6 clientes
+            listaTemporalClientes.Add(new ClienteSimulado { Nombre = "Juan", Apellido = "Pérez", DNI = "11222333", Telefono = "3794111111", Correo = "juan@mail.com", CondicionIVA = "Consumidor Final" });
+            listaTemporalClientes.Add(new ClienteSimulado { Nombre = "María", Apellido = "Gómez", DNI = "22333444", Telefono = "3794222222", Correo = "maria@mail.com", CondicionIVA = "Monotributo" });
+            listaTemporalClientes.Add(new ClienteSimulado { Nombre = "Carlos", Apellido = "López", DNI = "33444555", Telefono = "3794333333", Correo = "carlos@mail.com", CondicionIVA = "Responsable Inscripto" });
+            listaTemporalClientes.Add(new ClienteSimulado { Nombre = "Ana", Apellido = "Díaz", DNI = "44555666", Telefono = "3794444444", Correo = "ana@mail.com", CondicionIVA = "Consumidor Final" });
+            listaTemporalClientes.Add(new ClienteSimulado { Nombre = "Luis", Apellido = "Martínez", DNI = "55666777", Telefono = "3794555555", Correo = "luis@mail.com", CondicionIVA = "Exento" });
+            listaTemporalClientes.Add(new ClienteSimulado { Nombre = "Laura", Apellido = "Romero", DNI = "66777888", Telefono = "3794666666", Correo = "laura@mail.com", CondicionIVA = "Monotributo" });
+
+            CargarGrillaClientes();
+        }
+
+        private void CargarGrillaClientes()
+        {
+            DGClientes.Rows.Clear(); // Limpiamos para no duplicar datos
+            int numeroFila = 1;
+
+            foreach (var cliente in listaTemporalClientes)
+            {
+                DGClientes.Rows.Add(
+                    "",                   // [0] ID Oculto 
+                    numeroFila,           // [1] Nro
+                    cliente.Nombre,       // [2] Nombre
+                    cliente.Apellido,     // [3] Apellido
+                    cliente.DNI,          // [4] DNI
+                    cliente.Telefono,       // [5] Telefono
+                    cliente.Correo,         // [6] Correo
+                    cliente.CondicionIVA,       // [7] Condición IVA
+                    "Ver..",                 // [8] Botón Historial
+                    "Modificar"             // [9] Botón Modificar
+                );
+                numeroFila++;
+            }
         }
 
         private void BNuevoCliente_Click(object sender, EventArgs e)
@@ -44,25 +77,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
             }
         }
 
-        private void CargarGrillaClientes()
-        {
-            DGClientes.Rows.Clear(); // Limpiamos para no duplicar datos
-            int numeroFila = 1;
 
-            foreach (var cliente in listaTemporalClientes)
-            {
-                DGClientes.Rows.Add(
-                    "",                   // [0] ID Oculto 
-                    numeroFila,           // [1] Nro
-                    cliente.Nombre,       // [2] Nombre
-                    cliente.Apellido,     // [3] Apellido
-                    cliente.DNI,          // [4] DNI
-                    cliente.Correo,       // [5] Correo
-                    "", "", ""            // [6, 7, 8] Los botones vacíos
-                );
-                numeroFila++;
-            }
-        }
 
         private void dataGridHistorialClientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -75,25 +90,31 @@ namespace ProyectoIntegrador.Formularios.Clientes
             // --- ACCIÓN: BOTÓN MODIFICAR ---
             if (nombreColumna == "colModificar")
             {
-                // LA SOLUCIÓN: Usamos Convert.ToString() para que no explote si la celda es nula
                 string nombre = Convert.ToString(DGClientes.Rows[e.RowIndex].Cells[2].Value);
                 string apellido = Convert.ToString(DGClientes.Rows[e.RowIndex].Cells[3].Value);
                 string dni = Convert.ToString(DGClientes.Rows[e.RowIndex].Cells[4].Value);
-                string correo = Convert.ToString(DGClientes.Rows[e.RowIndex].Cells[5].Value);
+                string telefono = Convert.ToString(DGClientes.Rows[e.RowIndex].Cells[5].Value);
+                string correo = Convert.ToString(DGClientes.Rows[e.RowIndex].Cells[6].Value);
+                string condicionIVA = Convert.ToString(DGClientes.Rows[e.RowIndex].Cells[7].Value);
 
-                // Escudo: Si el DNI está vacío, es porque hicieron clic en una fila en blanco
-                if (string.IsNullOrWhiteSpace(dni))
-                {
-                    MessageBox.Show("No puedes modificar una fila que está vacía.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return; // Cortamos acá, no abrimos el ABM
-                }
+                if (string.IsNullOrWhiteSpace(dni)) return;
 
-                // Si pasamos el escudo, abrimos la ventana normal
                 FormClientesABM modalABM = new FormClientesABM();
-                modalABM.ConfigurarModoEdicion(nombre, apellido, dni, correo);
 
-                if (modalABM.ShowDialog() == DialogResult.OK)
+                // Le enviamos la lista de DNIs actuales extraídos de la lista temporal
+                modalABM.DnisExistentes = listaTemporalClientes.Select(c => c.DNI).ToList();
+
+                modalABM.ConfigurarModoEdicion(nombre, apellido, dni, telefono, correo, condicionIVA);
+
+                    if (modalABM.ShowDialog() == DialogResult.OK)
                 {
+                    // Actualizamos la fila directamente
+                    DGClientes.Rows[e.RowIndex].Cells[2].Value = modalABM.ClienteCreado.Nombre;
+                    DGClientes.Rows[e.RowIndex].Cells[3].Value = modalABM.ClienteCreado.Apellido;
+                    DGClientes.Rows[e.RowIndex].Cells[5].Value = modalABM.ClienteCreado.Telefono;
+                    DGClientes.Rows[e.RowIndex].Cells[6].Value = modalABM.ClienteCreado.Correo;
+                    DGClientes.Rows[e.RowIndex].Cells[7].Value = modalABM.ClienteCreado.CondicionIVA;
+
                     MessageBox.Show("Cliente modificado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
