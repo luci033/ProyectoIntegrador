@@ -22,7 +22,10 @@ namespace ProyectoIntegrador.Formularios.Clientes
 
         private void FormClientes_Load(object sender, EventArgs e)
         {
-
+            EstiloUI.AplicarEstiloGrilla(DGClientes);
+            EstiloUI.AplicarEstiloFormulario(this);
+            EstiloUI.AplicarEstiloTitulo(LTitulo);
+            EstiloUI.AplicarEstiloBoton(BNuevoCliente);
         }
 
         private void BNuevoCliente_Click(object sender, EventArgs e)
@@ -43,12 +46,12 @@ namespace ProyectoIntegrador.Formularios.Clientes
 
         private void CargarGrillaClientes()
         {
-            dataGridHistorialClientes.Rows.Clear(); // Limpiamos para no duplicar datos
+            DGClientes.Rows.Clear(); // Limpiamos para no duplicar datos
             int numeroFila = 1;
 
             foreach (var cliente in listaTemporalClientes)
             {
-                dataGridHistorialClientes.Rows.Add(
+                DGClientes.Rows.Add(
                     "",                   // [0] ID Oculto 
                     numeroFila,           // [1] Nro
                     cliente.Nombre,       // [2] Nombre
@@ -67,16 +70,16 @@ namespace ProyectoIntegrador.Formularios.Clientes
             if (e.RowIndex < 0) return;
 
             // 2. Averiguamos qué columna tocó el usuario
-            string nombreColumna = dataGridHistorialClientes.Columns[e.ColumnIndex].Name;
+            string nombreColumna = DGClientes.Columns[e.ColumnIndex].Name;
 
             // --- ACCIÓN: BOTÓN MODIFICAR ---
             if (nombreColumna == "colModificar")
             {
                 // LA SOLUCIÓN: Usamos Convert.ToString() para que no explote si la celda es nula
-                string nombre = Convert.ToString(dataGridHistorialClientes.Rows[e.RowIndex].Cells[2].Value);
-                string apellido = Convert.ToString(dataGridHistorialClientes.Rows[e.RowIndex].Cells[3].Value);
-                string dni = Convert.ToString(dataGridHistorialClientes.Rows[e.RowIndex].Cells[4].Value);
-                string correo = Convert.ToString(dataGridHistorialClientes.Rows[e.RowIndex].Cells[5].Value);
+                string nombre = Convert.ToString(DGClientes.Rows[e.RowIndex].Cells[2].Value);
+                string apellido = Convert.ToString(DGClientes.Rows[e.RowIndex].Cells[3].Value);
+                string dni = Convert.ToString(DGClientes.Rows[e.RowIndex].Cells[4].Value);
+                string correo = Convert.ToString(DGClientes.Rows[e.RowIndex].Cells[5].Value);
 
                 // Escudo: Si el DNI está vacío, es porque hicieron clic en una fila en blanco
                 if (string.IsNullOrWhiteSpace(dni))
@@ -99,10 +102,10 @@ namespace ProyectoIntegrador.Formularios.Clientes
             else if (nombreColumna == "colHistorial")
             {
                 // 1. Atrapamos todos los datos de la fila seleccionada
-                string nombre = Convert.ToString(dataGridHistorialClientes.Rows[e.RowIndex].Cells[2].Value);
-                string apellido = Convert.ToString(dataGridHistorialClientes.Rows[e.RowIndex].Cells[3].Value);
-                string dni = Convert.ToString(dataGridHistorialClientes.Rows[e.RowIndex].Cells[4].Value);
-                string correo = Convert.ToString(dataGridHistorialClientes.Rows[e.RowIndex].Cells[5].Value);
+                string nombre = Convert.ToString(DGClientes.Rows[e.RowIndex].Cells[2].Value);
+                string apellido = Convert.ToString(DGClientes.Rows[e.RowIndex].Cells[3].Value);
+                string dni = Convert.ToString(DGClientes.Rows[e.RowIndex].Cells[4].Value);
+                string correo = Convert.ToString(DGClientes.Rows[e.RowIndex].Cells[5].Value);
 
                 // Escudo: Verificamos que no sea una fila vacía
                 if (!string.IsNullOrWhiteSpace(dni))
@@ -124,7 +127,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
                 // --- ACCIÓN: boton desactivar ---
                 else if (nombreColumna == "colDesactivar")
                 {
-                    string dniParaDesactivar = Convert.ToString(dataGridHistorialClientes.Rows[e.RowIndex].Cells[4].Value);
+                    string dniParaDesactivar = Convert.ToString(DGClientes.Rows[e.RowIndex].Cells[4].Value);
                     if (!string.IsNullOrWhiteSpace(dniParaDesactivar))
                     {
                         DialogResult respuesta = MessageBox.Show($"¿Seguro que deseas desactivar al cliente con DNI {dniParaDesactivar}?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);

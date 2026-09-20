@@ -147,10 +147,17 @@ namespace ProyectoIntegrador.Formularios.Principal
                 }
             }
 
-            // 2. Si el bucle termina sin encontrarlo, lo creamos
-            FormClientes formClientes = new FormClientes();
-            formClientes.MdiParent = this;
-            formClientes.Show();
+            // 1. Instancias el formulario hijo
+            FormClientes formularioHijo = new FormClientes();
+
+            // 2. Le indicas quién es su contenedor (this es el formulario padre)
+            formularioHijo.MdiParent = this;
+
+            // 3. Forzas a que se abra maximizado dentro del contenedor
+            formularioHijo.WindowState = FormWindowState.Maximized;
+
+            // 4. Lo muestras
+            formularioHijo.Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
