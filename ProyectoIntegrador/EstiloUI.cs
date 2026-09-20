@@ -8,11 +8,12 @@ namespace ProyectoIntegrador
         // Paleta base ALBA
         public static readonly Color ColorBorgoña = Color.FromArgb(42, 8, 12);
         public static readonly Color ColorSeleccion = Color.FromArgb(235, 228, 222);
+        public static readonly Color ColorInactivo = Color.Gray;
 
         public static void AplicarEstiloGrilla(DataGridView dgv)
         {
             // Opciones básicas de comportamiento
-            dgv.BackgroundColor = Color.White;
+            dgv.BackgroundColor = ColorSeleccion;
             dgv.BorderStyle = BorderStyle.None;
             dgv.RowHeadersVisible = false;
             dgv.AllowUserToAddRows = false;
@@ -28,12 +29,53 @@ namespace ProyectoIntegrador
             dgv.ColumnHeadersDefaultCellStyle.BackColor = ColorBorgoña;
             dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
+            dgv.ColumnHeadersDefaultCellStyle.SelectionBackColor = ColorBorgoña;
 
             // Filas uniformes
             dgv.RowTemplate.Height = 28;
+            dgv.DefaultCellStyle.BackColor = Color.White;
+            dgv.DefaultCellStyle.ForeColor = Color.Black;
             dgv.DefaultCellStyle.SelectionBackColor = ColorSeleccion;
             dgv.DefaultCellStyle.SelectionForeColor = ColorBorgoña;
             dgv.DefaultCellStyle.Font = new Font("Segoe UI", 9f, FontStyle.Regular);
+
+            // Fuerza el estilo de las columnas tipo botón justo antes de que se dibujen en pantalla
+            dgv.CellFormatting += (sender, e) =>
+            {
+                if (dgv.Columns[e.ColumnIndex] is DataGridViewButtonColumn colBoton)
+                {
+                    colBoton.FlatStyle = FlatStyle.Flat;
+                    e.CellStyle.BackColor = ColorBorgoña;
+                    e.CellStyle.SelectionBackColor = ColorBorgoña;
+                    e.CellStyle.ForeColor = Color.White;
+                    e.CellStyle.SelectionForeColor = Color.White;
+                }
+            };
+        }
+        // Nueva paleta de fondo
+        public static readonly Color ColorFondo = Color.FromArgb(239, 236, 232);
+
+        public static void AplicarEstiloTitulo(Label titulo)
+        {
+            titulo.Font = new Font("Georgia", 24f, FontStyle.Bold);
+            titulo.ForeColor = ColorBorgoña;
+            titulo.BackColor = Color.Transparent;
+        }
+
+        public static void AplicarEstiloFormulario(Form formulario)
+        {
+            formulario.BackColor = ColorFondo;
+        }
+
+        public static void AplicarEstiloBoton(Button boton)
+        {
+            boton.Font = new Font("Georgia", boton.Font.Size, FontStyle.Bold);
+            boton.ForeColor = Color.White;
+            boton.BackColor = ColorBorgoña;
+
+            // Quita el diseño por defecto de Windows para aplicar tus colores
+            boton.FlatStyle = FlatStyle.Flat;
+            boton.FlatAppearance.BorderSize = 0;
         }
     }
 }

@@ -29,15 +29,18 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormNuevaCategoria));
             this.TNuevaCategoria = new System.Windows.Forms.TextBox();
             this.BGuardar = new System.Windows.Forms.Button();
             this.BCancelar = new System.Windows.Forms.Button();
-            this.LCategorias = new System.Windows.Forms.Label();
+            this.LTitulo = new System.Windows.Forms.Label();
             this.LNuevaCaterogoria = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // TNuevaCategoria
@@ -71,15 +74,15 @@
             this.BCancelar.UseVisualStyleBackColor = true;
             this.BCancelar.Click += new System.EventHandler(this.BCancelar_Click);
             // 
-            // LCategorias
+            // LTitulo
             // 
-            this.LCategorias.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LCategorias.Location = new System.Drawing.Point(198, 127);
-            this.LCategorias.Name = "LCategorias";
-            this.LCategorias.Size = new System.Drawing.Size(376, 42);
-            this.LCategorias.TabIndex = 9;
-            this.LCategorias.Text = "Agregar nueva categoría";
-            this.LCategorias.Click += new System.EventHandler(this.LCategorias_Click);
+            this.LTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LTitulo.Location = new System.Drawing.Point(26, 82);
+            this.LTitulo.Name = "LTitulo";
+            this.LTitulo.Size = new System.Drawing.Size(376, 42);
+            this.LTitulo.TabIndex = 9;
+            this.LTitulo.Text = "Agregar nueva categoría";
+            this.LTitulo.Click += new System.EventHandler(this.LCategorias_Click);
             // 
             // LNuevaCaterogoria
             // 
@@ -97,22 +100,32 @@
             this.panel1.Controls.Add(this.LNuevaCaterogoria);
             this.panel1.Controls.Add(this.TNuevaCategoria);
             this.panel1.Controls.Add(this.BCancelar);
-            this.panel1.Location = new System.Drawing.Point(182, 172);
+            this.panel1.Location = new System.Drawing.Point(43, 236);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(392, 167);
+            this.panel1.Size = new System.Drawing.Size(385, 167);
             this.panel1.TabIndex = 10;
             // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(494, 126);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(200, 200);
+            this.pictureBox1.TabIndex = 11;
+            this.pictureBox1.TabStop = false;
+            // 
             // FormNuevaCategoria
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.LCategorias);
+            this.Controls.Add(this.LTitulo);
             this.Name = "FormNuevaCategoria";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Nueva Categoría";
@@ -120,6 +133,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -128,9 +142,10 @@
         private System.Windows.Forms.TextBox TNuevaCategoria;
         private System.Windows.Forms.Button BGuardar;
         private System.Windows.Forms.Button BCancelar;
-        private System.Windows.Forms.Label LCategorias;
+        private System.Windows.Forms.Label LTitulo;
         private System.Windows.Forms.Label LNuevaCaterogoria;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

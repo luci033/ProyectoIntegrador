@@ -17,6 +17,14 @@ namespace ProyectoIntegrador.Formularios.Ventas
             InitializeComponent();
         }
 
+        private void FormVentas_Load_1(object sender, EventArgs e)
+        {
+            EstiloUI.AplicarEstiloGrilla(dgVentas);
+            EstiloUI.AplicarEstiloFormulario(this);
+            EstiloUI.AplicarEstiloTitulo(LTitulo);
+            EstiloUI.AplicarEstiloBoton(BRegistrarVenta);
+        }
+
         private void BRegistrarVenta_Click(object sender, EventArgs e)
         {
             //Se abre el formulario de carga como dialogo
@@ -25,12 +33,16 @@ namespace ProyectoIntegrador.Formularios.Ventas
                 DialogResult resultado = formRegistroVenta.ShowDialog();
                 if(resultado == DialogResult.OK)
                 {
-                    /*
-                    CargarVenta();
-                    */
                 }
             }
             
         }
+
+        private void dgVentas_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+
     }
 }

@@ -22,12 +22,15 @@ namespace ProyectoIntegrador.Formularios.Productos
             InitializeComponent();
             TNuevaCategoria.Text = categoriaActual; // carga el string de la categoria actual 
             this.Text = "Modificar Categoría"; // cambia el título de la ventana
-            this.LCategorias.Text = "Modificar Categoria";
+            this.LTitulo.Text = "Modificar Categoria";
         }
 
         private void FormNuevaCategoria_Load(object sender, EventArgs e)
         {
-
+            EstiloUI.AplicarEstiloFormulario(this);
+            EstiloUI.AplicarEstiloTitulo(LTitulo);
+            EstiloUI.AplicarEstiloBoton(BCancelar);
+            EstiloUI.AplicarEstiloBoton(BGuardar);
         }
 
         private void LCategorias_Click(object sender, EventArgs e)

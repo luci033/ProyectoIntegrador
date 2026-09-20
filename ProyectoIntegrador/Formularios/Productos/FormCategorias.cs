@@ -19,7 +19,13 @@ namespace ProyectoIntegrador.Formularios.Productos
 
         private void FCategorias_Load(object sender, EventArgs e)
         {
-
+            EstiloUI.AplicarEstiloGrilla(DGCategoria);
+            EstiloUI.AplicarEstiloFormulario(this);
+            EstiloUI.AplicarEstiloTitulo(LTitulo);
+            EstiloUI.AplicarEstiloBoton(BAgregarCategoria);
+            DGCategoria.Rows.Add(1, "Anillos", "Modificar", "Desactivar");
+            DGCategoria.Rows.Add(2, "Collares", "Modificar", "Desactivar");
+            DGCategoria.Rows.Add(3, "Pulseras", "Modificar", "Desactivar");
         }
         private void BAgregarCategoria_Click(object sender, EventArgs e)
         {
@@ -36,7 +42,7 @@ namespace ProyectoIntegrador.Formularios.Productos
                 int nuevoId = DGCategoria.Rows.Count + 1;
 
                 // Agrega el id contador y el nombre de la categoría
-                DGCategoria.Rows.Add(nuevoId, frmNuevaCategoria.CategoriaNueva);
+                DGCategoria.Rows.Add(nuevoId, frmNuevaCategoria.CategoriaNueva, "Modificar", "Desactivar");
             }
         }
 
@@ -46,36 +52,39 @@ namespace ProyectoIntegrador.Formularios.Productos
 
             string NombreColumna = DGCategoria.Columns[e.ColumnIndex].Name;
 
-            if (NombreColumna == "CategoriaDesactivar") 
+            if (NombreColumna == "colDesactivar")
             {
-                DialogResult respuesta = MessageBox.Show(
-                "¿Está seguro que desea desactivar esta categoría?",
-                "Confirmación",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question
-                );
-                if (respuesta == DialogResult.Yes)
+                string accionActual = Convert.ToString(DGCategoria.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
+
+                if (accionActual == "Desactivar")
                 {
-                    DGCategoria.Rows.RemoveAt(e.RowIndex);
+                    DialogResult respuesta = MessageBox.Show("¿Está seguro que desea desactivar esta categoría?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (respuesta == DialogResult.Yes)
+                    {
+                        DGCategoria.Rows[e.RowIndex].DefaultCellStyle.BackColor = EstiloUI.ColorInactivo;
+                        DGCategoria.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "Activar";
+                    }
                 }
-                
+                else
+                {
+                    DGCategoria.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+                    DGCategoria.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "Desactivar";
+                }
             }
-
-            else if (NombreColumna == "CategoriaModificar")
+            else if (NombreColumna == "colModificar")
             {
-                // tomamos el dato del nombre de la categoría
-                string categoriaActual = DGCategoria.Rows[e.RowIndex].Cells[1].Value.ToString();
+                // Validación para bloquear el botón si la fila está desactivada
+                if (Convert.ToString(DGCategoria.Rows[e.RowIndex].Cells["colDesactivar"].Value) == "Activar") return;
 
-                // abre el formulario nueva categoria pasándole el texto
+                string categoriaActual = DGCategoria.Rows[e.RowIndex].Cells[1].Value.ToString();
                 FormNuevaCategoria frm = new FormNuevaCategoria(categoriaActual);
 
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
-                    // si recibe un OK reescribe el valor 
                     DGCategoria.Rows[e.RowIndex].Cells[1].Value = frm.CategoriaNueva;
                 }
             }
-
         }
 
         private void label1_Click(object sender, EventArgs e)

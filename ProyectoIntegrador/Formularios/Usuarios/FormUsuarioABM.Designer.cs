@@ -71,7 +71,7 @@
             this.LApellido.Location = new System.Drawing.Point(57, 104);
             this.LApellido.Name = "LApellido";
             this.LApellido.Size = new System.Drawing.Size(44, 13);
-            this.LApellido.TabIndex = 1;
+            this.LApellido.TabIndex = 2;
             this.LApellido.Text = "Apellido";
             // 
             // LUsuario
@@ -80,7 +80,7 @@
             this.LUsuario.Location = new System.Drawing.Point(57, 162);
             this.LUsuario.Name = "LUsuario";
             this.LUsuario.Size = new System.Drawing.Size(43, 13);
-            this.LUsuario.TabIndex = 2;
+            this.LUsuario.TabIndex = 6;
             this.LUsuario.Text = "Usuario";
             this.LUsuario.Click += new System.EventHandler(this.LCorreo_Click);
             // 
@@ -90,7 +90,7 @@
             this.LConstraseña.Location = new System.Drawing.Point(57, 191);
             this.LConstraseña.Name = "LConstraseña";
             this.LConstraseña.Size = new System.Drawing.Size(61, 13);
-            this.LConstraseña.TabIndex = 3;
+            this.LConstraseña.TabIndex = 8;
             this.LConstraseña.Text = "Contraseña";
             // 
             // LRepetirContraseña
@@ -99,7 +99,7 @@
             this.LRepetirContraseña.Location = new System.Drawing.Point(57, 219);
             this.LRepetirContraseña.Name = "LRepetirContraseña";
             this.LRepetirContraseña.Size = new System.Drawing.Size(98, 13);
-            this.LRepetirContraseña.TabIndex = 4;
+            this.LRepetirContraseña.TabIndex = 10;
             this.LRepetirContraseña.Text = "Repetir Contraseña";
             // 
             // LDNI
@@ -109,7 +109,7 @@
             this.LDNI.Location = new System.Drawing.Point(57, 135);
             this.LDNI.Name = "LDNI";
             this.LDNI.Size = new System.Drawing.Size(26, 13);
-            this.LDNI.TabIndex = 5;
+            this.LDNI.TabIndex = 4;
             this.LDNI.Text = "DNI";
             // 
             // label1
@@ -118,7 +118,7 @@
             this.label1.Location = new System.Drawing.Point(57, 250);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(124, 13);
-            this.label1.TabIndex = 6;
+            this.label1.TabIndex = 12;
             this.label1.Text = "Seleccionar foto de perfil";
             // 
             // TBNombre
@@ -126,7 +126,7 @@
             this.TBNombre.Location = new System.Drawing.Point(201, 72);
             this.TBNombre.Name = "TBNombre";
             this.TBNombre.Size = new System.Drawing.Size(121, 20);
-            this.TBNombre.TabIndex = 7;
+            this.TBNombre.TabIndex = 1;
             this.TBNombre.Validating += new System.ComponentModel.CancelEventHandler(this.TBNombre_Validating);
             // 
             // TBDni
@@ -134,7 +134,7 @@
             this.TBDni.Location = new System.Drawing.Point(201, 132);
             this.TBDni.Name = "TBDni";
             this.TBDni.Size = new System.Drawing.Size(121, 20);
-            this.TBDni.TabIndex = 8;
+            this.TBDni.TabIndex = 5;
             this.TBDni.Validating += new System.ComponentModel.CancelEventHandler(this.TBDni_Validating);
             // 
             // TBApellido
@@ -142,7 +142,7 @@
             this.TBApellido.Location = new System.Drawing.Point(201, 101);
             this.TBApellido.Name = "TBApellido";
             this.TBApellido.Size = new System.Drawing.Size(121, 20);
-            this.TBApellido.TabIndex = 9;
+            this.TBApellido.TabIndex = 3;
             this.TBApellido.Validating += new System.ComponentModel.CancelEventHandler(this.TBApellido_Validating);
             // 
             // TBUsuario
@@ -150,7 +150,7 @@
             this.TBUsuario.Location = new System.Drawing.Point(201, 159);
             this.TBUsuario.Name = "TBUsuario";
             this.TBUsuario.Size = new System.Drawing.Size(121, 20);
-            this.TBUsuario.TabIndex = 10;
+            this.TBUsuario.TabIndex = 7;
             this.TBUsuario.TextChanged += new System.EventHandler(this.TBUsuario_TextChanged);
             this.TBUsuario.Validating += new System.ComponentModel.CancelEventHandler(this.TBUsuario_Validating);
             // 
@@ -159,7 +159,7 @@
             this.TBContraseña.Location = new System.Drawing.Point(201, 188);
             this.TBContraseña.Name = "TBContraseña";
             this.TBContraseña.Size = new System.Drawing.Size(121, 20);
-            this.TBContraseña.TabIndex = 11;
+            this.TBContraseña.TabIndex = 9;
             this.TBContraseña.UseSystemPasswordChar = true;
             this.TBContraseña.Validating += new System.ComponentModel.CancelEventHandler(this.TBContraseña_Validating);
             // 
@@ -168,7 +168,8 @@
             this.TBContraseñaRepetir.Location = new System.Drawing.Point(201, 216);
             this.TBContraseñaRepetir.Name = "TBContraseñaRepetir";
             this.TBContraseñaRepetir.Size = new System.Drawing.Size(121, 20);
-            this.TBContraseñaRepetir.TabIndex = 12;
+            this.TBContraseñaRepetir.TabIndex = 11;
+            this.TBContraseñaRepetir.UseSystemPasswordChar = true;
             this.TBContraseñaRepetir.Validating += new System.ComponentModel.CancelEventHandler(this.TBContraseñaRepetir_Validating);
             // 
             // L
@@ -177,14 +178,13 @@
             this.L.Location = new System.Drawing.Point(57, 276);
             this.L.Name = "L";
             this.L.Size = new System.Drawing.Size(131, 13);
-            this.L.TabIndex = 13;
+            this.L.TabIndex = 14;
             this.L.Text = "Seleccionar rol del usuario";
             // 
             // pictureBoxUsuario
             // 
-            this.pictureBoxUsuario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.pictureBoxUsuario.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxUsuario.BackgroundImage")));
             this.pictureBoxUsuario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pictureBoxUsuario.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxUsuario.Image")));
             this.pictureBoxUsuario.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxUsuario.InitialImage")));
             this.pictureBoxUsuario.Location = new System.Drawing.Point(359, 63);
             this.pictureBoxUsuario.Name = "pictureBoxUsuario";
@@ -202,7 +202,7 @@
             this.BCrearUsuario.Location = new System.Drawing.Point(106, 343);
             this.BCrearUsuario.Name = "BCrearUsuario";
             this.BCrearUsuario.Size = new System.Drawing.Size(136, 34);
-            this.BCrearUsuario.TabIndex = 15;
+            this.BCrearUsuario.TabIndex = 16;
             this.BCrearUsuario.Text = "Crear Usuario";
             this.BCrearUsuario.UseVisualStyleBackColor = false;
             this.BCrearUsuario.Click += new System.EventHandler(this.BCrearUsuario_Click);
@@ -216,7 +216,7 @@
             this.BCancelar.Location = new System.Drawing.Point(359, 343);
             this.BCancelar.Name = "BCancelar";
             this.BCancelar.Size = new System.Drawing.Size(136, 34);
-            this.BCancelar.TabIndex = 16;
+            this.BCancelar.TabIndex = 17;
             this.BCancelar.Text = "Cancelar y Salir";
             this.BCancelar.UseVisualStyleBackColor = false;
             this.BCancelar.Click += new System.EventHandler(this.BCancelar_Click);
@@ -232,14 +232,14 @@
             this.CBRol.Location = new System.Drawing.Point(201, 273);
             this.CBRol.Name = "CBRol";
             this.CBRol.Size = new System.Drawing.Size(121, 21);
-            this.CBRol.TabIndex = 17;
+            this.CBRol.TabIndex = 15;
             // 
             // BBuscarArchivo
             // 
             this.BBuscarArchivo.Location = new System.Drawing.Point(201, 244);
             this.BBuscarArchivo.Name = "BBuscarArchivo";
             this.BBuscarArchivo.Size = new System.Drawing.Size(121, 23);
-            this.BBuscarArchivo.TabIndex = 18;
+            this.BBuscarArchivo.TabIndex = 13;
             this.BBuscarArchivo.Text = "Buscar Archivo";
             this.BBuscarArchivo.UseVisualStyleBackColor = true;
             this.BBuscarArchivo.Click += new System.EventHandler(this.BBuscarArchivo_Click);
@@ -278,7 +278,7 @@
             this.Controls.Add(this.LNombre);
             this.Name = "FormUsuarioABM";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Nuevo Usuario";
+            this.Text = "Registrar Usuarios";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUsuario)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
