@@ -38,7 +38,6 @@
             this.colCorreo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colHistorial = new System.Windows.Forms.DataGridViewButtonColumn();
             this.colModificar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.colDesactivar = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridHistorialClientes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -66,8 +65,7 @@
             this.colDni,
             this.colCorreo,
             this.colHistorial,
-            this.colModificar,
-            this.colDesactivar});
+            this.colModificar});
             this.dataGridHistorialClientes.Location = new System.Drawing.Point(2, 217);
             this.dataGridHistorialClientes.Name = "dataGridHistorialClientes";
             this.dataGridHistorialClientes.RowHeadersVisible = false;
@@ -123,11 +121,6 @@
             this.colModificar.HeaderText = "Modificar";
             this.colModificar.Name = "colModificar";
             // 
-            // colDesactivar
-            // 
-            this.colDesactivar.HeaderText = "Desactivar";
-            this.colDesactivar.Name = "colDesactivar";
-            // 
             // FormClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -154,6 +147,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCorreo;
         private System.Windows.Forms.DataGridViewButtonColumn colHistorial;
         private System.Windows.Forms.DataGridViewButtonColumn colModificar;
-        private System.Windows.Forms.DataGridViewButtonColumn colDesactivar;
     }
 }

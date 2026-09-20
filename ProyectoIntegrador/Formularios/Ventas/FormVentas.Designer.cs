@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.LVentas = new System.Windows.Forms.Label();
+            this.LTitulo = new System.Windows.Forms.Label();
             this.BRegistrarVenta = new System.Windows.Forms.Button();
             this.dgVentas = new System.Windows.Forms.DataGridView();
             this.idCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -39,20 +39,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgVentas)).BeginInit();
             this.SuspendLayout();
             // 
-            // LVentas
+            // LTitulo
             // 
-            this.LVentas.AccessibleRole = System.Windows.Forms.AccessibleRole.IpAddress;
-            this.LVentas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.LTitulo.AccessibleRole = System.Windows.Forms.AccessibleRole.IpAddress;
+            this.LTitulo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.LVentas.AutoSize = true;
-            this.LVentas.Font = new System.Drawing.Font("Segoe UI", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LVentas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.LVentas.Location = new System.Drawing.Point(14, 76);
-            this.LVentas.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.LVentas.Name = "LVentas";
-            this.LVentas.Size = new System.Drawing.Size(370, 47);
-            this.LVentas.TabIndex = 12;
-            this.LVentas.Text = "GESTIÓN DE VENTAS";
+            this.LTitulo.AutoSize = true;
+            this.LTitulo.Location = new System.Drawing.Point(14, 76);
+            this.LTitulo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.LTitulo.Name = "LTitulo";
+            this.LTitulo.Size = new System.Drawing.Size(100, 15);
+            this.LTitulo.TabIndex = 12;
+            this.LTitulo.Text = "Gestión de Ventas";
             // 
             // BRegistrarVenta
             // 
@@ -60,10 +58,10 @@
             this.BRegistrarVenta.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.BRegistrarVenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BRegistrarVenta.Location = new System.Drawing.Point(669, 80);
+            this.BRegistrarVenta.Location = new System.Drawing.Point(556, 95);
             this.BRegistrarVenta.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.BRegistrarVenta.Name = "BRegistrarVenta";
-            this.BRegistrarVenta.Size = new System.Drawing.Size(234, 56);
+            this.BRegistrarVenta.Size = new System.Drawing.Size(282, 56);
             this.BRegistrarVenta.TabIndex = 11;
             this.BRegistrarVenta.Text = "Registrar Venta";
             this.BRegistrarVenta.UseVisualStyleBackColor = true;
@@ -86,13 +84,13 @@
             this.cliente,
             this.Total,
             this.DetalleOrden});
-            this.dgVentas.Location = new System.Drawing.Point(14, 203);
+            this.dgVentas.Location = new System.Drawing.Point(14, 264);
             this.dgVentas.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgVentas.Name = "dgVentas";
             this.dgVentas.ReadOnly = true;
             this.dgVentas.RowHeadersVisible = false;
             this.dgVentas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgVentas.Size = new System.Drawing.Size(889, 291);
+            this.dgVentas.Size = new System.Drawing.Size(937, 230);
             this.dgVentas.TabIndex = 10;
             // 
             // idCompra
@@ -136,14 +134,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(917, 527);
-            this.Controls.Add(this.LVentas);
+            this.ClientSize = new System.Drawing.Size(965, 527);
+            this.Controls.Add(this.LTitulo);
             this.Controls.Add(this.BRegistrarVenta);
             this.Controls.Add(this.dgVentas);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "FormVentas";
-            this.Text = "FormVentas";
+            this.Text = "Ventas";
+            this.Load += new System.EventHandler(this.FormVentas_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.dgVentas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -152,7 +151,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label LVentas;
+        private System.Windows.Forms.Label LTitulo;
         private System.Windows.Forms.Button BRegistrarVenta;
         private System.Windows.Forms.DataGridView dgVentas;
         private System.Windows.Forms.DataGridViewTextBoxColumn idCompra;
