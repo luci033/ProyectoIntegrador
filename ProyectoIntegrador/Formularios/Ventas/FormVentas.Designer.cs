@@ -61,7 +61,7 @@
             this.BRegistrarVenta.Location = new System.Drawing.Point(556, 95);
             this.BRegistrarVenta.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.BRegistrarVenta.Name = "BRegistrarVenta";
-            this.BRegistrarVenta.Size = new System.Drawing.Size(282, 56);
+            this.BRegistrarVenta.Size = new System.Drawing.Size(123, 56);
             this.BRegistrarVenta.TabIndex = 11;
             this.BRegistrarVenta.Text = "Registrar Venta";
             this.BRegistrarVenta.UseVisualStyleBackColor = true;
@@ -90,7 +90,7 @@
             this.dgVentas.ReadOnly = true;
             this.dgVentas.RowHeadersVisible = false;
             this.dgVentas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgVentas.Size = new System.Drawing.Size(937, 230);
+            this.dgVentas.Size = new System.Drawing.Size(778, 230);
             this.dgVentas.TabIndex = 10;
             // 
             // idCompra
@@ -134,7 +134,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(965, 527);
+            this.ClientSize = new System.Drawing.Size(806, 527);
             this.Controls.Add(this.LTitulo);
             this.Controls.Add(this.BRegistrarVenta);
             this.Controls.Add(this.dgVentas);
