@@ -28,14 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DGProductos = new System.Windows.Forms.DataGridView();
-            this.colIdProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCostoCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colGenero = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BCancelar = new System.Windows.Forms.Button();
             this.LSeleccionarProducto = new System.Windows.Forms.Label();
             this.LBuscarProducto = new System.Windows.Forms.Label();
@@ -44,6 +37,11 @@
             this.CBGenero = new System.Windows.Forms.ComboBox();
             this.LCategoria = new System.Windows.Forms.Label();
             this.LGenero = new System.Windows.Forms.Label();
+            this.colIdProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colGenero = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DGProductos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,7 +57,6 @@
             this.colIdProducto,
             this.colCodigo,
             this.colNombre,
-            this.colCostoCompra,
             this.colCategoria,
             this.colGenero});
             this.DGProductos.Location = new System.Drawing.Point(12, 214);
@@ -69,48 +66,6 @@
             this.DGProductos.TabIndex = 0;
             this.DGProductos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGProductos_CellDoubleClick);
             this.DGProductos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DD);
-            // 
-            // colIdProducto
-            // 
-            this.colIdProducto.HeaderText = "Id Producto";
-            this.colIdProducto.Name = "colIdProducto";
-            this.colIdProducto.Visible = false;
-            // 
-            // colCodigo
-            // 
-            this.colCodigo.FillWeight = 40F;
-            this.colCodigo.HeaderText = "Código";
-            this.colCodigo.Name = "colCodigo";
-            this.colCodigo.ReadOnly = true;
-            // 
-            // colNombre
-            // 
-            this.colNombre.HeaderText = "Nombre";
-            this.colNombre.Name = "colNombre";
-            this.colNombre.ReadOnly = true;
-            // 
-            // colCostoCompra
-            // 
-            dataGridViewCellStyle3.Format = "C2";
-            this.colCostoCompra.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colCostoCompra.FillWeight = 60F;
-            this.colCostoCompra.HeaderText = "Costo de Compra";
-            this.colCostoCompra.Name = "colCostoCompra";
-            this.colCostoCompra.ReadOnly = true;
-            // 
-            // colCategoria
-            // 
-            this.colCategoria.FillWeight = 60F;
-            this.colCategoria.HeaderText = "Categoría";
-            this.colCategoria.Name = "colCategoria";
-            this.colCategoria.ReadOnly = true;
-            // 
-            // colGenero
-            // 
-            this.colGenero.FillWeight = 30F;
-            this.colGenero.HeaderText = "Género";
-            this.colGenero.Name = "colGenero";
-            this.colGenero.ReadOnly = true;
             // 
             // BCancelar
             // 
@@ -191,6 +146,39 @@
             this.LGenero.TabIndex = 8;
             this.LGenero.Text = "Genero:";
             // 
+            // colIdProducto
+            // 
+            this.colIdProducto.HeaderText = "Id Producto";
+            this.colIdProducto.Name = "colIdProducto";
+            this.colIdProducto.Visible = false;
+            // 
+            // colCodigo
+            // 
+            this.colCodigo.FillWeight = 40F;
+            this.colCodigo.HeaderText = "Código";
+            this.colCodigo.Name = "colCodigo";
+            this.colCodigo.ReadOnly = true;
+            // 
+            // colNombre
+            // 
+            this.colNombre.HeaderText = "Nombre";
+            this.colNombre.Name = "colNombre";
+            this.colNombre.ReadOnly = true;
+            // 
+            // colCategoria
+            // 
+            this.colCategoria.FillWeight = 60F;
+            this.colCategoria.HeaderText = "Categoría";
+            this.colCategoria.Name = "colCategoria";
+            this.colCategoria.ReadOnly = true;
+            // 
+            // colGenero
+            // 
+            this.colGenero.FillWeight = 30F;
+            this.colGenero.HeaderText = "Género";
+            this.colGenero.Name = "colGenero";
+            this.colGenero.ReadOnly = true;
+            // 
             // FormBuscarProducto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -221,15 +209,14 @@
         private System.Windows.Forms.Label LSeleccionarProducto;
         private System.Windows.Forms.Label LBuscarProducto;
         private System.Windows.Forms.TextBox TBBuscar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIdProducto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCodigo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCostoCompra;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCategoria;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colGenero;
         private System.Windows.Forms.ComboBox CBCategoria;
         private System.Windows.Forms.ComboBox CBGenero;
         private System.Windows.Forms.Label LCategoria;
         private System.Windows.Forms.Label LGenero;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIdProducto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCodigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCategoria;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colGenero;
     }
 }

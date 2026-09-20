@@ -24,23 +24,18 @@ namespace ProyectoIntegrador.Formularios.Compras
             TBFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
 
             DGDetalleOrden.ReadOnly = false;
-
-            /*foreach (DataGridViewColumn col in DGDetalleOrden.Columns)
+            // Bloqueamos todas las columnas por defecto para que no se puedan escribir datos fijos
+            foreach (DataGridViewColumn col in DGDetalleOrden.Columns)
             {
-                // solo se permite editar la columna de cantidad
-                if (col.Index != 5)
-                {
-                    col.ReadOnly = true;
-                }
-            } */
+                col.ReadOnly = true;
+            }
+
+            // Desbloqueamos únicamente la Cantidad (columna 5) y el Costo Unitario (columna 6) para que puedas editarlos libremente
+            DGDetalleOrden.Columns[5].ReadOnly = false;
+            DGDetalleOrden.Columns[6].ReadOnly = false;
         }
 
         private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
         {
 
         }
@@ -51,16 +46,6 @@ namespace ProyectoIntegrador.Formularios.Compras
         }
 
         private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BRegistrarCompra_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
@@ -92,10 +77,25 @@ namespace ProyectoIntegrador.Formularios.Compras
             {
                 if (formProducto.ShowDialog() == DialogResult.OK)
                 {
-                    int cantidad = 1; // Cantidad por defecto
-                    decimal subtotal = formProducto.CostoCompra * cantidad;
+                    // 1. Verificamos si el producto ya fue agregado a la grilla (buscando por su IdProducto en la columna 0)
+                    foreach (DataGridViewRow filaExistente in DGDetalleOrden.Rows)
+                    {
+                        if (filaExistente.Cells[0].Value != null && Convert.ToInt32(filaExistente.Cells[0].Value) == formProducto.IdProducto)
+                        {
+                            // Si ya existe, sumamos 1 a la cantidad actual (columna 5)
+                            decimal cantidadActual = Convert.ToDecimal(filaExistente.Cells[5].Value ?? 0);
+                            filaExistente.Cells[5].Value = cantidadActual + 1;
 
-                    // Orden de las columnas: IdProducto, Codigo, Nombre, Cantidad, CostoCompra, Subtotal
+                            // Al cambiar la celda, el sistema recalculará el subtotal y el total solo
+                            return; // Salimos para no agregar una fila nueva
+                        }
+                    }
+
+                    // 2. Si no existe, lo agregamos normalmente por primera vez
+                    int cantidad = 1;
+                    decimal CostoCompra = 0;
+                    decimal subtotal = CostoCompra * cantidad;
+
                     DGDetalleOrden.Rows.Add(
                         formProducto.IdProducto,
                         formProducto.Codigo,
@@ -103,11 +103,11 @@ namespace ProyectoIntegrador.Formularios.Compras
                         formProducto.Categoria,
                         formProducto.Genero,
                         cantidad,
-                        formProducto.CostoCompra,
+                        CostoCompra,
                         subtotal
                     );
 
-                    CalcularTotal(); // Llama a la función que suma todo
+                    CalcularTotal();
                 }
             }
         }
@@ -117,14 +117,13 @@ namespace ProyectoIntegrador.Formularios.Compras
             decimal total = 0;
             foreach (DataGridViewRow fila in DGDetalleOrden.Rows)
             {
-                // El índice 5 corresponde a la columna "Subtotal" en el Add de arriba
+                // El subtotal corresponde a la columna índice 7
                 if (fila.Cells[7].Value != null)
                 {
                     total += Convert.ToDecimal(fila.Cells[7].Value);
                 }
             }
 
-            // TBTotal es tu TextBox o Label del final. "C2" le da formato de moneda ($).
             TBTotal.Text = total.ToString("C2");
         }
 
@@ -148,14 +147,13 @@ namespace ProyectoIntegrador.Formularios.Compras
                 return;
             }
 
-            // verificamos q no sea 0 la cantidad
+            // verificamos q no sea 0 la cantidad 
             foreach (DataGridViewRow fila in DGDetalleOrden.Rows)
             {
-                // convierte a decimal y verifica
                 if (Convert.ToDecimal(fila.Cells[5].Value ?? 0) <= 0)
                 {
                     MessageBox.Show("No podés generar una orden con productos en cantidad 0.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return; // corta tood
+                    return;
                 }
             }
 
@@ -173,10 +171,6 @@ namespace ProyectoIntegrador.Formularios.Compras
 
         }
 
-        private void DGDetalleOrden_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
 
         private void DGDetalleOrden_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
@@ -194,7 +188,7 @@ namespace ProyectoIntegrador.Formularios.Compras
             int colSubtotal = 7;
 
             // Si se modificó una fila válida y la columna tocada es "Cantidad"
-            if (e.RowIndex >= 0 && e.ColumnIndex == colCantidad)
+            if (e.RowIndex >= 0 && (e.ColumnIndex == colCantidad || e.ColumnIndex == colCosto))
             {
                 DataGridViewRow fila = DGDetalleOrden.Rows[e.RowIndex];
 
@@ -205,7 +199,7 @@ namespace ProyectoIntegrador.Formularios.Compras
                 // Actualizamos el subtotal de esa fila
                 fila.Cells[colSubtotal].Value = cantidad * costo;
 
-                // Llamamos a la función que ya habías creado antes para sumar la columna de subtotales
+                // Llamamos a la función para sumar la columna de subtotales
                 CalcularTotal();
             }
         }

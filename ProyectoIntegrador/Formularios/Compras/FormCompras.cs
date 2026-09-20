@@ -78,5 +78,10 @@ namespace ProyectoIntegrador.Formularios.Compras
         {
 
         }
+
+        private void FormCompras_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -162,6 +162,7 @@
             this.Controls.Add(this.DGCompras);
             this.Name = "FormCompras";
             this.Text = "Compras";
+            this.Load += new System.EventHandler(this.FormCompras_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DGCompras)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

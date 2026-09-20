@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.BSeleccionarProveedor = new System.Windows.Forms.Button();
             this.LCUIT = new System.Windows.Forms.Label();
             this.LRazonSocial = new System.Windows.Forms.Label();
@@ -49,8 +49,6 @@
             this.LTotal = new System.Windows.Forms.Label();
             this.BAgregarProducto = new System.Windows.Forms.Button();
             this.DGDetalleOrden = new System.Windows.Forms.DataGridView();
-            this.BGenerarOrden = new System.Windows.Forms.Button();
-            this.BCancelar = new System.Windows.Forms.Button();
             this.colIdProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,6 +57,8 @@
             this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CostoUnitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BGenerarOrden = new System.Windows.Forms.Button();
+            this.BCancelar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGDetalleOrden)).BeginInit();
@@ -101,7 +101,7 @@
             this.TBRazonSocial.ReadOnly = true;
             this.TBRazonSocial.Size = new System.Drawing.Size(145, 20);
             this.TBRazonSocial.TabIndex = 3;
-            this.TBRazonSocial.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.TBRazonSocial.TextChanged += new System.EventHandler(this.label3_Click);
             // 
             // TBCUIT
             // 
@@ -271,29 +271,8 @@
             this.DGDetalleOrden.RowHeadersVisible = false;
             this.DGDetalleOrden.Size = new System.Drawing.Size(770, 191);
             this.DGDetalleOrden.TabIndex = 8;
-            this.DGDetalleOrden.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGDetalleOrden_CellContentClick);
             this.DGDetalleOrden.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGDetalleOrden_CellValueChanged);
             this.DGDetalleOrden.CurrentCellDirtyStateChanged += new System.EventHandler(this.DGDetalleOrden_CurrentCellDirtyStateChanged);
-            // 
-            // BGenerarOrden
-            // 
-            this.BGenerarOrden.Location = new System.Drawing.Point(650, 431);
-            this.BGenerarOrden.Name = "BGenerarOrden";
-            this.BGenerarOrden.Size = new System.Drawing.Size(135, 32);
-            this.BGenerarOrden.TabIndex = 9;
-            this.BGenerarOrden.Text = "Generar Orden";
-            this.BGenerarOrden.UseVisualStyleBackColor = true;
-            this.BGenerarOrden.Click += new System.EventHandler(this.BGenerarOrden_Click);
-            // 
-            // BCancelar
-            // 
-            this.BCancelar.Location = new System.Drawing.Point(509, 431);
-            this.BCancelar.Name = "BCancelar";
-            this.BCancelar.Size = new System.Drawing.Size(135, 32);
-            this.BCancelar.TabIndex = 10;
-            this.BCancelar.Text = "Cancelar";
-            this.BCancelar.UseVisualStyleBackColor = true;
-            this.BCancelar.Click += new System.EventHandler(this.BCancelar_Click);
             // 
             // colIdProducto
             // 
@@ -336,8 +315,8 @@
             // 
             // CostoUnitario
             // 
-            dataGridViewCellStyle1.Format = "C2";
-            this.CostoUnitario.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle15.Format = "C2";
+            this.CostoUnitario.DefaultCellStyle = dataGridViewCellStyle15;
             this.CostoUnitario.FillWeight = 55F;
             this.CostoUnitario.HeaderText = "Costo Unitario";
             this.CostoUnitario.Name = "CostoUnitario";
@@ -345,12 +324,32 @@
             // 
             // Subtotal
             // 
-            dataGridViewCellStyle2.Format = "C2";
-            this.Subtotal.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle16.Format = "C2";
+            this.Subtotal.DefaultCellStyle = dataGridViewCellStyle16;
             this.Subtotal.FillWeight = 58.08423F;
             this.Subtotal.HeaderText = "Subtotal ";
             this.Subtotal.Name = "Subtotal";
             this.Subtotal.ReadOnly = true;
+            // 
+            // BGenerarOrden
+            // 
+            this.BGenerarOrden.Location = new System.Drawing.Point(650, 431);
+            this.BGenerarOrden.Name = "BGenerarOrden";
+            this.BGenerarOrden.Size = new System.Drawing.Size(135, 32);
+            this.BGenerarOrden.TabIndex = 9;
+            this.BGenerarOrden.Text = "Generar Orden";
+            this.BGenerarOrden.UseVisualStyleBackColor = true;
+            this.BGenerarOrden.Click += new System.EventHandler(this.BGenerarOrden_Click);
+            // 
+            // BCancelar
+            // 
+            this.BCancelar.Location = new System.Drawing.Point(509, 431);
+            this.BCancelar.Name = "BCancelar";
+            this.BCancelar.Size = new System.Drawing.Size(135, 32);
+            this.BCancelar.TabIndex = 10;
+            this.BCancelar.Text = "Cancelar";
+            this.BCancelar.UseVisualStyleBackColor = true;
+            this.BCancelar.Click += new System.EventHandler(this.BCancelar_Click);
             // 
             // FormOrdenCompra
             // 

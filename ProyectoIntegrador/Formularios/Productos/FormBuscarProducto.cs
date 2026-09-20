@@ -24,6 +24,7 @@ namespace ProyectoIntegrador.Formularios.Productos
         public decimal CostoCompra { get; private set; }
         public string Categoria { get; private set; }
         public string Genero { get; private set; }
+        public int Stock { get; private set;  }
 
         private void FormBuscarProducto_Load(object sender, EventArgs e)
         {
@@ -38,22 +39,22 @@ namespace ProyectoIntegrador.Formularios.Productos
             DGProductos.ColumnCount = 6;
 
             // Datos de prueba
-            DGProductos.Rows.Add(1, "1123456", "Collar Rubí", 155760, "Collares", "Femenino");
-            DGProductos.Rows.Add(2, "2234567", "Aros Luz de Luna", 98065, "Aros", "Femenino");
-            DGProductos.Rows.Add(3, "3345678", "Anillo Solitario Diamante", 320500, "Anillos", "Femenino");
-            DGProductos.Rows.Add(4, "4456789", "Pulsera Eslabón Oro 18k", 215400, "Pulseras", "Unisex");
-            DGProductos.Rows.Add(5, "5567890", "Dije Corazón Zafiro", 85200, "Dijes", "Femenino");
-            DGProductos.Rows.Add(6, "6678901", "Aros Perla Clásica", 45600, "Aros", "Femenino");
-            DGProductos.Rows.Add(7, "7789012", "Cadena Plata 925", 25300, "Cadenas", "Unisex");
-            DGProductos.Rows.Add(8, "8890123", "Anillo Esmeralda Imperial", 275800, "Anillos", "Femenino");
-            DGProductos.Rows.Add(9, "9901234", "Gargantilla Oro Blanco", 198000, "Collares", "Femenino");
-            DGProductos.Rows.Add(10, "1012345", "Pulsera Tenis Circones", 112500, "Pulseras", "Femenino");
-            DGProductos.Rows.Add(11, "1123456", "Colgante Árbol de la Vida", 34900, "Dijes", "Unisex");
-            DGProductos.Rows.Add(12, "1234567", "Aros Argolla Oro", 76400, "Aros", "Unisex");
-            DGProductos.Rows.Add(13, "1345678", "Anillo Sello Oro 18k", 185000, "Anillos", "Masculino");
-            DGProductos.Rows.Add(14, "1456789", "Cadena Espiga Plata", 42000, "Cadenas", "Masculino");
-            DGProductos.Rows.Add(15, "1567890", "Pulsera Cuero y Acero", 28500, "Pulseras", "Masculino");
-            DGProductos.Rows.Add(16, "1678901", "Dije Cruz Acero Quirúrgico", 15000, "Dijes", "Masculino");
+            DGProductos.Rows.Add(1, "1123456", "Collar Rubí", "Collares", "Femenino");
+            DGProductos.Rows.Add(2, "2234567", "Aros Luz de Luna", "Aros", "Femenino");
+            DGProductos.Rows.Add(3, "3345678", "Anillo Solitario Diamante",  "Anillos", "Femenino");
+            DGProductos.Rows.Add(4, "4456789", "Pulsera Eslabón Oro 18k",  "Pulseras", "Unisex");
+            DGProductos.Rows.Add(5, "5567890", "Dije Corazón Zafiro", "Dijes", "Femenino");
+            DGProductos.Rows.Add(6, "6678901", "Aros Perla Clásica",  "Aros", "Femenino");
+            DGProductos.Rows.Add(7, "7789012", "Cadena Plata 925",  "Cadenas", "Unisex");
+            DGProductos.Rows.Add(8, "8890123", "Anillo Esmeralda Imperial",  "Anillos", "Femenino");
+            DGProductos.Rows.Add(9, "9901234", "Gargantilla Oro Blanco",  "Collares", "Femenino");
+            DGProductos.Rows.Add(10, "1012345", "Pulsera Tenis Circones",  "Pulseras", "Femenino");
+            DGProductos.Rows.Add(11, "1123456", "Colgante Árbol de la Vida",  "Dijes", "Unisex");
+            DGProductos.Rows.Add(12, "1234567", "Aros Argolla Oro",  "Aros", "Unisex");
+            DGProductos.Rows.Add(13, "1345678", "Anillo Sello Oro 18k","Anillos", "Masculino");
+            DGProductos.Rows.Add(14, "1456789", "Cadena Espiga Plata",  "Cadenas", "Masculino");
+            DGProductos.Rows.Add(15, "1567890", "Pulsera Cuero y Acero",  "Pulseras", "Masculino");
+            DGProductos.Rows.Add(16, "1678901", "Dije Cruz Acero Quirúrgico",  "Dijes", "Masculino");
 
             DGProductos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DGProductos.AllowUserToAddRows = false;
@@ -75,18 +76,20 @@ namespace ProyectoIntegrador.Formularios.Productos
         {
             if (e.RowIndex >= 0)
             {
+
                 DataGridViewRow fila = DGProductos.Rows[e.RowIndex];
 
                 IdProducto = Convert.ToInt32(fila.Cells[0].Value);
                 Codigo = fila.Cells[1].Value?.ToString();
                 Nombre = fila.Cells[2].Value?.ToString();
-                CostoCompra = Convert.ToDecimal(fila.Cells[3].Value);
-                Categoria = fila.Cells[4].Value?.ToString();
-                Genero = fila.Cells[5].Value?.ToString();
+                Categoria = fila.Cells[3].Value?.ToString();
+                Genero = fila.Cells[4].Value?.ToString();
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
+
+            
         }
 
         private void TBBuscar_TextChanged(object sender, EventArgs e) => FiltrarGrilla();
@@ -109,8 +112,8 @@ namespace ProyectoIntegrador.Formularios.Productos
                 if (fila.Cells[2].Value != null)
                 {
                     string nombre = fila.Cells[2].Value.ToString().ToLower();
-                    string categoria = fila.Cells[4].Value?.ToString() ?? "";
-                    string genero = fila.Cells[5].Value?.ToString() ?? "";
+                    string categoria = fila.Cells[3].Value?.ToString() ?? "";
+                    string genero = fila.Cells[4].Value?.ToString() ?? "";
 
                     bool pasaNombre = nombre.Contains(filtroNombre);
                     bool pasaCat = filtroCat == "Todos" || categoria == filtroCat;
