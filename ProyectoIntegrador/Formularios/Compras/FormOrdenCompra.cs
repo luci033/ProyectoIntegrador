@@ -33,6 +33,8 @@ namespace ProyectoIntegrador.Formularios.Compras
             // Desbloqueamos únicamente la Cantidad (columna 5) y el Costo Unitario (columna 6) para que puedas editarlos libremente
             DGDetalleOrden.Columns[5].ReadOnly = false;
             DGDetalleOrden.Columns[6].ReadOnly = false;
+
+            DGDetalleOrden.DataError += new DataGridViewDataErrorEventHandler(DGDetalleOrden_DataError);
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -192,15 +194,51 @@ namespace ProyectoIntegrador.Formularios.Compras
             {
                 DataGridViewRow fila = DGDetalleOrden.Rows[e.RowIndex];
 
-                // Convertimos a decimal para poder multiplicar
-                decimal cantidad = Convert.ToDecimal(fila.Cells[colCantidad].Value ?? 0);
-                decimal costo = Convert.ToDecimal(fila.Cells[colCosto].Value ?? 0);
+                // Usamos TryParse para evaluar de forma segura sin que explote si hay letras
+                bool esCantidadValida = decimal.TryParse(fila.Cells[colCantidad].Value?.ToString(), out decimal cantidad);
+                bool esCostoValido = decimal.TryParse(fila.Cells[colCosto].Value?.ToString(), out decimal costo);
 
-                // Actualizamos el subtotal de esa fila
-                fila.Cells[colSubtotal].Value = cantidad * costo;
+                // Si ambos valores son números válidos, calculamos; si no, dejamos en 0 
+                if (esCantidadValida && esCostoValido)
+                {
+                    fila.Cells[colSubtotal].Value = cantidad * costo;
+                    CalcularTotal();
+                }
+                else
+                {
+                    fila.Cells[colSubtotal].Value = 0;
+                    CalcularTotal();
+                }
+            }
 
-                // Llamamos a la función para sumar la columna de subtotales
-                CalcularTotal();
+
+        }
+
+        private void DGDetalleOrden_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            // Verificamos si el error ocurrió en la columna de Cantidad (5) o Costo Unitario (6)
+            if (e.ColumnIndex == 5 || e.ColumnIndex == 6)
+            {
+                MessageBox.Show("Por favor, ingresá solo números válidos.", "Formato incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                // Evitamos que el sistema lance la excepción por defecto y cierre la app
+                e.ThrowException = false;
+            }
+        }
+
+        private void DGDetalleOrden_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            // Verificamos si estamos editando la Cantidad (5) o el Costo Unitario (6)
+            if (e.ColumnIndex == 5 || e.ColumnIndex == 6)
+            {
+                // Si hay texto escrito y NO se puede convertir a número decimal...
+                if (!decimal.TryParse(e.FormattedValue.ToString(), out decimal n) && !string.IsNullOrEmpty(e.FormattedValue.ToString()))
+                {
+                    MessageBox.Show("Por favor, ingresá solo números válidos.", "Formato incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    // Cancela el cambio y no deja salir de la celda hasta que se corrige
+                    e.Cancel = true;
+                }
             }
         }
     }

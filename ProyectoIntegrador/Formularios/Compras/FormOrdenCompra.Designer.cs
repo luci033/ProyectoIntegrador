@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
             this.BSeleccionarProveedor = new System.Windows.Forms.Button();
             this.LCUIT = new System.Windows.Forms.Label();
             this.LRazonSocial = new System.Windows.Forms.Label();
@@ -271,8 +271,10 @@
             this.DGDetalleOrden.RowHeadersVisible = false;
             this.DGDetalleOrden.Size = new System.Drawing.Size(770, 191);
             this.DGDetalleOrden.TabIndex = 8;
+            this.DGDetalleOrden.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.DGDetalleOrden_CellValidating);
             this.DGDetalleOrden.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGDetalleOrden_CellValueChanged);
             this.DGDetalleOrden.CurrentCellDirtyStateChanged += new System.EventHandler(this.DGDetalleOrden_CurrentCellDirtyStateChanged);
+            this.DGDetalleOrden.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DGDetalleOrden_DataError);
             // 
             // colIdProducto
             // 
@@ -315,8 +317,8 @@
             // 
             // CostoUnitario
             // 
-            dataGridViewCellStyle15.Format = "C2";
-            this.CostoUnitario.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle19.Format = "C2";
+            this.CostoUnitario.DefaultCellStyle = dataGridViewCellStyle19;
             this.CostoUnitario.FillWeight = 55F;
             this.CostoUnitario.HeaderText = "Costo Unitario";
             this.CostoUnitario.Name = "CostoUnitario";
@@ -324,8 +326,8 @@
             // 
             // Subtotal
             // 
-            dataGridViewCellStyle16.Format = "C2";
-            this.Subtotal.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle20.Format = "C2";
+            this.Subtotal.DefaultCellStyle = dataGridViewCellStyle20;
             this.Subtotal.FillWeight = 58.08423F;
             this.Subtotal.HeaderText = "Subtotal ";
             this.Subtotal.Name = "Subtotal";
