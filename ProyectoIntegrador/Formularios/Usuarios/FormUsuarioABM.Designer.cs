@@ -151,7 +151,6 @@
             this.TBUsuario.Name = "TBUsuario";
             this.TBUsuario.Size = new System.Drawing.Size(121, 20);
             this.TBUsuario.TabIndex = 7;
-            this.TBUsuario.TextChanged += new System.EventHandler(this.TBUsuario_TextChanged);
             this.TBUsuario.Validating += new System.ComponentModel.CancelEventHandler(this.TBUsuario_Validating);
             // 
             // TBContraseña

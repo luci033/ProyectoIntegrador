@@ -103,7 +103,7 @@
             this.dataGridRegistroUsuario.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridRegistroUsuario.Size = new System.Drawing.Size(767, 180);
             this.dataGridRegistroUsuario.TabIndex = 1;
-            this.dataGridRegistroUsuario.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridRegistroUsuario_CellContentClick);
+            this.dataGridRegistroUsuario.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridRegistroUsuario_CellContentClick_1);
             // 
             // colIdUsuario
             // 

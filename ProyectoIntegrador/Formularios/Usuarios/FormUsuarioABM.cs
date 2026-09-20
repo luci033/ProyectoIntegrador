@@ -24,7 +24,7 @@ namespace ProyectoIntegrador
         public string Nombre => TBNombre.Text.Trim();
         public string Apellido => TBApellido.Text.Trim();
         public string Dni => TBDni.Text.Trim();
-        public string Correo => TBUsuario.Text.Trim();
+        public string Usuario => TBUsuario.Text.Trim();
         public string Rol => CBRol.Text;
       
 
@@ -71,6 +71,113 @@ namespace ProyectoIntegrador
             }
 
             errorProvider1.SetError(TBNombre, "");
+        }
+
+        private void BBuscarArchivo_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog dialog = new OpenFileDialog())
+            {
+                dialog.Title = "Seleccionar foto de perfil";
+                dialog.Filter = "Imágenes (*.jpg; *.jpeg; *.png)|*.jpg;*.jpeg;*.png";
+
+                /*if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    pictureBoxUsuario.Image = System.Drawing.Image.FromFile(dialog.FileName);
+                }*/
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    pictureBoxUsuario.Image = System.Drawing.Image.FromFile(dialog.FileName);
+                }
+            }
+        }
+
+        private void TBDni_Validating(object sender, CancelEventArgs e)
+        {
+            string dni = TBDni.Text.Trim();
+            if (string.IsNullOrEmpty(dni))
+            {
+                errorProvider1.SetError(TBDni, "El DNI es obligatorio.");
+                return;
+            }
+
+            if (dni.Length < 7 || dni.Length > 8 || !long.TryParse(dni, out _))
+            {
+                errorProvider1.SetError(TBDni, "El DNI debe tener 7 u 8 números.");
+                return;
+            }
+
+            errorProvider1.SetError(TBDni, "");
+        }
+
+        private void TBContraseña_Validating(object sender, CancelEventArgs e)
+        {
+            if (TBContraseña.Text.Length < 4)
+            {
+                errorProvider1.SetError(TBContraseña, "La contraseña debe tener al menos 4 caracteres.");
+                return;
+            }
+
+            errorProvider1.SetError(TBContraseña, "");
+        }
+
+        private void TBContraseñaRepetir_Validating(object sender, CancelEventArgs e)
+        {
+            if (TBContraseñaRepetir.Text != TBContraseña.Text)
+            {
+                errorProvider1.SetError(TBContraseñaRepetir, "Las contraseñas no coinciden.");
+                return;
+            }
+
+            errorProvider1.SetError(TBContraseñaRepetir, "");
+        }
+
+
+        private void TBApellido_Validating(object sender, CancelEventArgs e)
+        {
+            string apellido = TBApellido.Text.Trim();
+
+            if (string.IsNullOrEmpty(apellido))
+            {
+                errorProvider1.SetError(TBApellido, "El apellido es obligatorio.");
+                return;
+            }
+
+            if (!Regex.IsMatch(apellido, @"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$"))
+            {
+                errorProvider1.SetError(TBApellido, "El apellido solo puede contener letras.");
+                return;
+            }
+
+            errorProvider1.SetError(TBApellido, "");
+        }
+
+        private void LCorreo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TBUsuario_Validating(object sender, CancelEventArgs e)
+        {
+            // Obtenemos el texto ingresado sin espacios al inicio ni al final
+            string usuario = TBUsuario.Text.Trim();
+
+            // 1. Validación de campo obligatorio
+            if (string.IsNullOrEmpty(usuario))
+            {
+                errorProvider1.SetError(TBUsuario, "El nombre de usuario es obligatorio.");
+                return;
+            }
+
+            // 2. Validación de longitud mínima (mínimo 5 caracteres)
+            if (usuario.Length < 5)
+            {
+                errorProvider1.SetError(TBUsuario, "El usuario debe tener al menos 5 caracteres.");
+                return;
+            }
+
+            // Si pasó todas las validaciones, limpiamos el ícono de error
+            errorProvider1.SetError(TBUsuario, "");
         }
 
         private void BCrearUsuario_Click(object sender, EventArgs e)
@@ -136,10 +243,10 @@ namespace ProyectoIntegrador
                 IdRol = idRolSeleccionado
             };
 
-            // 8. Llamar directo a Capa de Datos (Cero puentes, como querías)
-            CD_Usuario datosUsuario = new CD_Usuario();
+            // 8. Llamar directo a Capa de Negocio
+            CN_Usuario negocioUsuario = new CN_Usuario();
             string mensaje;
-            bool resultado = datosUsuario.RegistrarUsuario(nuevoUsuario, out mensaje);
+            bool resultado = negocioUsuario.Registrar(nuevoUsuario, out mensaje);
 
             // 9. Evaluar respuesta de la base de datos
             if (resultado)
@@ -154,122 +261,21 @@ namespace ProyectoIntegrador
             }
         }
 
-        private void BBuscarArchivo_Click(object sender, EventArgs e)
-        {
-            using (OpenFileDialog dialog = new OpenFileDialog())
-            {
-                dialog.Title = "Seleccionar foto de perfil";
-                dialog.Filter = "Imágenes (*.jpg; *.jpeg; *.png)|*.jpg;*.jpeg;*.png";
-
-                /*if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    pictureBoxUsuario.Image = System.Drawing.Image.FromFile(dialog.FileName);
-                }*/
-
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    pictureBoxUsuario.Image = System.Drawing.Image.FromFile(dialog.FileName);
-                }
-            }
-        }
-
-        private void TBDni_Validating(object sender, CancelEventArgs e)
-        {
-            string dni = TBDni.Text.Trim();
-            if (string.IsNullOrEmpty(dni))
-            {
-                errorProvider1.SetError(TBDni, "El DNI es obligatorio.");
-                return;
-            }
-
-            if (dni.Length < 7 || dni.Length > 8 || !long.TryParse(dni, out _))
-            {
-                errorProvider1.SetError(TBDni, "El DNI debe tener 7 u 8 números.");
-                return;
-            }
-
-            errorProvider1.SetError(TBDni, "");
-        }
-
-        private void TBContraseña_Validating(object sender, CancelEventArgs e)
-        {
-            if (TBContraseña.Text.Length < 4)
-            {
-                errorProvider1.SetError(TBContraseña, "La contraseña debe tener al menos 4 caracteres.");
-                return;
-            }
-
-            errorProvider1.SetError(TBContraseña, "");
-        }
-
-        private void TBContraseñaRepetir_Validating(object sender, CancelEventArgs e)
-        {
-            if (TBContraseñaRepetir.Text != TBContraseña.Text)
-            {
-                errorProvider1.SetError(TBContraseñaRepetir, "Las contraseñas no coinciden.");
-                return;
-            }
-
-            errorProvider1.SetError(TBContraseñaRepetir, "");
-        }
-
         private void BCancelar_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
-        private void TBApellido_Validating(object sender, CancelEventArgs e)
+        public void ConfigurarModoEdicion(string dni, string nombre, string apellido, string nombreUsuario, string rol)
         {
-            string apellido = TBApellido.Text.Trim();
+            TBDni.Text = dni;
+            TBDni.Enabled = false; // bloquemos el dni para que no se pueda cmabiar 
 
-            if (string.IsNullOrEmpty(apellido))
-            {
-                errorProvider1.SetError(TBApellido, "El apellido es obligatorio.");
-                return;
-            }
-
-            if (!Regex.IsMatch(apellido, @"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$"))
-            {
-                errorProvider1.SetError(TBApellido, "El apellido solo puede contener letras.");
-                return;
-            }
-
-            errorProvider1.SetError(TBApellido, "");
+            TBNombre.Text = nombre;
+            TBApellido.Text = apellido;
+            TBUsuario.Text = nombreUsuario; 
+            CBRol.Text = rol;
         }
-
-        private void LCorreo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TBUsuario_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TBUsuario_Validating(object sender, CancelEventArgs e)
-        {
-            // Obtenemos el texto ingresado sin espacios al inicio ni al final
-            string usuario = TBUsuario.Text.Trim();
-
-            // 1. Validación de campo obligatorio
-            if (string.IsNullOrEmpty(usuario))
-            {
-                errorProvider1.SetError(TBUsuario, "El nombre de usuario es obligatorio.");
-                return;
-            }
-
-            // 2. Validación de longitud mínima (mínimo 5 caracteres)
-            if (usuario.Length < 5)
-            {
-                errorProvider1.SetError(TBUsuario, "El usuario debe tener al menos 5 caracteres.");
-                return;
-            }
-
-            // Si pasó todas las validaciones, limpiamos el ícono de error
-            errorProvider1.SetError(TBUsuario, "");
-        }
-
     }
 }

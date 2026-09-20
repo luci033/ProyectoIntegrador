@@ -39,7 +39,22 @@ namespace CapaDatos
             catch (Exception ex)
             {
                 respuesta = false;
-                mensaje = ex.Message;
+
+                // 1. Primero buscamos el dni
+                if (ex.Message.Contains("UQ_Usuario_DNI"))
+                {
+                    mensaje = "Ya existe una persona registrada con este DNI en el sistema.";
+                }
+                // 2. Si no saltó el DNI, buscamos el usuario
+                else if (ex.Message.Contains("UQ_Usuario"))
+                {
+                    mensaje = "El nombre de usuario ya está en uso. Por favor, elija otro.";
+                }
+                // 3. Cualquier otra cosa rara de SQL, se muestra
+                else
+                {
+                    mensaje = "Error al guardar: " + ex.Message;
+                }
             }
 
             return respuesta;
