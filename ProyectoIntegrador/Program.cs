@@ -22,6 +22,7 @@ namespace ProyectoIntegrador
             //FormLogin login = new FormLogin();
             //Application.Run(new FormLogin());
 
+
             //Application.Run(new FormPrincipalAdministrador());
             //Application.Run(new FormPrincipalVendedor());
             Application.Run(new FormPrincipalLogistica());
