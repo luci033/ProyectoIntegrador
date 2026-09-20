@@ -63,16 +63,14 @@ namespace ProyectoIntegrador.Formularios.Clientes
 
         private void BNuevoCliente_Click(object sender, EventArgs e)
         {
-            // Instanciamos el formulario y le ponemos de nombre modalCliente
             FormClientesABM modalCliente = new FormClientesABM();
 
-            // Si el ABM se cerró correctamente con el botón Registrar...
+            // AGREGAR ESTA LÍNEA: Le pasamos la lista de DNIs registrados al formulario nuevo
+            modalCliente.DnisExistentes = listaTemporalClientes.Select(c => c.DNI).ToList();
+
             if (modalCliente.ShowDialog() == DialogResult.OK)
             {
-                // Atrapamos el paquete y lo guardamos en la lista
                 listaTemporalClientes.Add(modalCliente.ClienteCreado);
-
-                // Mandamos a dibujar la tabla
                 CargarGrillaClientes();
             }
         }
