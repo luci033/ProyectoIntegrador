@@ -145,6 +145,31 @@ namespace ProyectoIntegrador.Formularios.Clientes
             dniOriginal = dni;
         }
 
+        public void ConfigurarModoDetalle(string nombre, string apellido, string dni, string telefono, string correo, string condicionIVA)
+        {
+            this.Text = "Detalle Cliente";
+            LTitulo.Text = "Detalle Cliente";
+
+            TBNombre.Text = nombre;
+            TBApellido.Text = apellido;
+            TBDni.Text = dni;
+            TBTelefono.Text = telefono;
+            TBCorreo.Text = correo;
+            cmbCondicionIVA.Text = condicionIVA;
+
+            // Bloquear controles
+            TBNombre.ReadOnly = true;
+            TBApellido.ReadOnly = true;
+            TBDni.ReadOnly = true;
+            TBTelefono.ReadOnly = true;
+            TBCorreo.ReadOnly = true;
+            cmbCondicionIVA.Enabled = false;
+
+            // Ajustar botones
+            BRegistrarCliente.Visible = false;
+            BCancelar.Text = "Cerrar";
+        }
+
         private void TBApellido_Validating(object sender, CancelEventArgs e)
         {
             string apellido = TBApellido.Text.Trim();

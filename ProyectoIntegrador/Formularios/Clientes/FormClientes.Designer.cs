@@ -30,8 +30,6 @@
         {
             this.BNuevoCliente = new System.Windows.Forms.Button();
             this.DGClientes = new System.Windows.Forms.DataGridView();
-            this.LTitulo = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.IdCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNro = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,6 +40,8 @@
             this.colCondicionIVA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colHistorial = new System.Windows.Forms.DataGridViewButtonColumn();
             this.colModificar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.LTitulo = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.DGClientes)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -83,24 +83,7 @@
             this.DGClientes.Size = new System.Drawing.Size(810, 211);
             this.DGClientes.TabIndex = 2;
             this.DGClientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridHistorialClientes_CellContentClick);
-            // 
-            // LTitulo
-            // 
-            this.LTitulo.AutoSize = true;
-            this.LTitulo.Location = new System.Drawing.Point(46, 68);
-            this.LTitulo.Name = "LTitulo";
-            this.LTitulo.Size = new System.Drawing.Size(98, 13);
-            this.LTitulo.TabIndex = 3;
-            this.LTitulo.Text = "Gestión de Clientes";
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.DGClientes);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 347);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(816, 217);
-            this.panel1.TabIndex = 4;
+            this.DGClientes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGClientes_CellDoubleClick);
             // 
             // IdCliente
             // 
@@ -176,6 +159,24 @@
             this.colModificar.HeaderText = "Modificar";
             this.colModificar.Name = "colModificar";
             this.colModificar.ReadOnly = true;
+            // 
+            // LTitulo
+            // 
+            this.LTitulo.AutoSize = true;
+            this.LTitulo.Location = new System.Drawing.Point(46, 68);
+            this.LTitulo.Name = "LTitulo";
+            this.LTitulo.Size = new System.Drawing.Size(98, 13);
+            this.LTitulo.TabIndex = 3;
+            this.LTitulo.Text = "Gestión de Clientes";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.DGClientes);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 347);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(816, 217);
+            this.panel1.TabIndex = 4;
             // 
             // FormClientes
             // 

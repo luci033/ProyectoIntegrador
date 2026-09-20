@@ -154,5 +154,30 @@ namespace ProyectoIntegrador.Formularios.Clientes
                 }
             }
         }
+
+        private void DGClientes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Evitamos errores si hacen doble clic en los títulos
+            if (e.RowIndex < 0) return;
+
+            // Evitamos que se abra el detalle si hacen doble clic justo sobre un botón
+            string nombreColumna = DGClientes.Columns[e.ColumnIndex].Name;
+            if (nombreColumna == "colModificar" || nombreColumna == "colHistorial" || nombreColumna == "colDesactivar") return;
+
+            string dni = Convert.ToString(DGClientes.Rows[e.RowIndex].Cells[4].Value);
+
+            // Si la fila está vacía, no hacemos nada
+            if (string.IsNullOrWhiteSpace(dni)) return;
+
+            string nombre = Convert.ToString(DGClientes.Rows[e.RowIndex].Cells[2].Value);
+            string apellido = Convert.ToString(DGClientes.Rows[e.RowIndex].Cells[3].Value);
+            string telefono = Convert.ToString(DGClientes.Rows[e.RowIndex].Cells[5].Value);
+            string correo = Convert.ToString(DGClientes.Rows[e.RowIndex].Cells[6].Value);
+            string condicionIVA = Convert.ToString(DGClientes.Rows[e.RowIndex].Cells[7].Value);
+
+            FormClientesABM modalDetalle = new FormClientesABM();
+            modalDetalle.ConfigurarModoDetalle(nombre, apellido, dni, telefono, correo, condicionIVA);
+            modalDetalle.ShowDialog();
+        }
     }
 }
