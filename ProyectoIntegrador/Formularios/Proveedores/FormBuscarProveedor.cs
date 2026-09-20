@@ -38,6 +38,11 @@ namespace ProyectoIntegrador.Formularios.Compras
 
         private void FormBuscarProveedor_Load(object sender, EventArgs e)
         {
+            EstiloUI.AplicarEstiloGrilla(DGProveedores);
+            EstiloUI.AplicarEstiloFormulario(this);
+            EstiloUI.AplicarEstiloTitulo(LTitulo);
+            EstiloUI.AplicarEstiloBoton(BCancelar);
+
             //datos de prueba
             DGProveedores.Rows.Add("Joyas del Sur S.A.", "30556667778", "3794223344", "ventas@joyasdelsur.com");
             DGProveedores.Rows.Add("Insumos Metálicos", "33445558889", "3794556677", "contacto@insumosmetalicos.com");

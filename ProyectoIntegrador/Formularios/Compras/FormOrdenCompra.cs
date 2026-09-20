@@ -20,6 +20,15 @@ namespace ProyectoIntegrador.Formularios.Compras
 
         private void FormOrdenCompra_Load(object sender, EventArgs e)
         {
+            EstiloUI.AplicarEstiloGrilla(DGDetalleOrden);
+            EstiloUI.AplicarEstiloFormulario(this);
+            EstiloUI.AplicarEstiloTitulo(LTitulo);
+            EstiloUI.AplicarEstiloBoton(BCancelar);
+            EstiloUI.AplicarEstiloBoton(BGenerarOrden);
+            EstiloUI.AplicarEstiloBoton(BAgregarProducto);
+            EstiloUI.AplicarEstiloBoton(BSeleccionarProveedor);
+
+
             // cargo fecha del sistema
             TBFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
 

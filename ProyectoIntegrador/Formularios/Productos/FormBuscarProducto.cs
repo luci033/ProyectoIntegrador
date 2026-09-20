@@ -29,6 +29,9 @@ namespace ProyectoIntegrador.Formularios.Productos
         private void FormBuscarProducto_Load(object sender, EventArgs e)
         {
             EstiloUI.AplicarEstiloGrilla(DGProductos);
+            EstiloUI.AplicarEstiloFormulario(this);
+            EstiloUI.AplicarEstiloTitulo(LTitulo);
+            EstiloUI.AplicarEstiloBoton(BCancelar);
 
             CBCategoria.Items.AddRange(new string[] { "Todos", "Collares", "Aros", "Anillos", "Pulseras", "Dijes", "Cadenas" });
             CBCategoria.SelectedIndex = 0;
@@ -36,7 +39,7 @@ namespace ProyectoIntegrador.Formularios.Productos
             CBGenero.Items.AddRange(new string[] { "Todos", "Femenino", "Masculino", "Unisex" });
             CBGenero.SelectedIndex = 0;
 
-            DGProductos.ColumnCount = 6;
+            
 
             // Datos de prueba
             DGProductos.Rows.Add(1, "1123456", "Collar Rubí", "Collares", "Femenino");

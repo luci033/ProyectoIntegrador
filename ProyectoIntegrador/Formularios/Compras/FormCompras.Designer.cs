@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.LCompras = new System.Windows.Forms.Label();
+            this.LTitulo = new System.Windows.Forms.Label();
             this.DGCompras = new System.Windows.Forms.DataGridView();
             this.idCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fechaCompa = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -41,19 +41,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.DGCompras)).BeginInit();
             this.SuspendLayout();
             // 
-            // LCompras
+            // LTitulo
             // 
-            this.LCompras.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.LTitulo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.LCompras.AutoSize = true;
-            this.LCompras.Font = new System.Drawing.Font("Georgia", 16F);
-            this.LCompras.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.LCompras.Location = new System.Drawing.Point(35, 50);
-            this.LCompras.Name = "LCompras";
-            this.LCompras.Size = new System.Drawing.Size(210, 27);
-            this.LCompras.TabIndex = 9;
-            this.LCompras.Text = "Gestión de Compras";
-            this.LCompras.Click += new System.EventHandler(this.LProveedores_Click);
+            this.LTitulo.AutoSize = true;
+            this.LTitulo.Location = new System.Drawing.Point(35, 50);
+            this.LTitulo.Name = "LTitulo";
+            this.LTitulo.Size = new System.Drawing.Size(102, 13);
+            this.LTitulo.TabIndex = 9;
+            this.LTitulo.Text = "Gestión de Compras";
+            this.LTitulo.Click += new System.EventHandler(this.LProveedores_Click);
             // 
             // DGCompras
             // 
@@ -158,7 +156,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(232)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.BAgregarOrden);
-            this.Controls.Add(this.LCompras);
+            this.Controls.Add(this.LTitulo);
             this.Controls.Add(this.DGCompras);
             this.Name = "FormCompras";
             this.Text = "Compras";
@@ -171,7 +169,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label LCompras;
+        private System.Windows.Forms.Label LTitulo;
         private System.Windows.Forms.DataGridView DGCompras;
         private System.Windows.Forms.DataGridViewTextBoxColumn idCompra;
         private System.Windows.Forms.DataGridViewTextBoxColumn fechaCompa;

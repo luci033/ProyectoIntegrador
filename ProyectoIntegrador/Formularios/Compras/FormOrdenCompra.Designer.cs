@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.BSeleccionarProveedor = new System.Windows.Forms.Button();
             this.LCUIT = new System.Windows.Forms.Label();
             this.LRazonSocial = new System.Windows.Forms.Label();
@@ -40,12 +40,11 @@
             this.LCorreo = new System.Windows.Forms.Label();
             this.TBContacto = new System.Windows.Forms.TextBox();
             this.LTelefono = new System.Windows.Forms.Label();
+            this.LTitulo = new System.Windows.Forms.Label();
             this.TBFecha = new System.Windows.Forms.TextBox();
             this.LFecha = new System.Windows.Forms.Label();
-            this.LDatosProveedor = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.TBTotal = new System.Windows.Forms.TextBox();
-            this.LDetalleOrden = new System.Windows.Forms.Label();
             this.LTotal = new System.Windows.Forms.Label();
             this.BAgregarProducto = new System.Windows.Forms.Button();
             this.DGDetalleOrden = new System.Windows.Forms.DataGridView();
@@ -59,6 +58,8 @@
             this.Subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BGenerarOrden = new System.Windows.Forms.Button();
             this.BCancelar = new System.Windows.Forms.Button();
+            this.LUsuario = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGDetalleOrden)).BeginInit();
@@ -66,11 +67,9 @@
             // 
             // BSeleccionarProveedor
             // 
-            this.BSeleccionarProveedor.Location = new System.Drawing.Point(37, 43);
-            this.BSeleccionarProveedor.MaximumSize = new System.Drawing.Size(135, 43);
-            this.BSeleccionarProveedor.MinimumSize = new System.Drawing.Size(135, 43);
+            this.BSeleccionarProveedor.Location = new System.Drawing.Point(37, 69);
             this.BSeleccionarProveedor.Name = "BSeleccionarProveedor";
-            this.BSeleccionarProveedor.Size = new System.Drawing.Size(135, 43);
+            this.BSeleccionarProveedor.Size = new System.Drawing.Size(152, 43);
             this.BSeleccionarProveedor.TabIndex = 0;
             this.BSeleccionarProveedor.Text = "Seleccionar Proveedor";
             this.BSeleccionarProveedor.UseVisualStyleBackColor = true;
@@ -79,7 +78,7 @@
             // LCUIT
             // 
             this.LCUIT.AutoSize = true;
-            this.LCUIT.Location = new System.Drawing.Point(243, 80);
+            this.LCUIT.Location = new System.Drawing.Point(243, 106);
             this.LCUIT.Name = "LCUIT";
             this.LCUIT.Size = new System.Drawing.Size(35, 13);
             this.LCUIT.TabIndex = 1;
@@ -88,7 +87,7 @@
             // LRazonSocial
             // 
             this.LRazonSocial.AutoSize = true;
-            this.LRazonSocial.Location = new System.Drawing.Point(243, 43);
+            this.LRazonSocial.Location = new System.Drawing.Point(243, 80);
             this.LRazonSocial.Name = "LRazonSocial";
             this.LRazonSocial.Size = new System.Drawing.Size(73, 13);
             this.LRazonSocial.TabIndex = 2;
@@ -96,7 +95,7 @@
             // 
             // TBRazonSocial
             // 
-            this.TBRazonSocial.Location = new System.Drawing.Point(319, 40);
+            this.TBRazonSocial.Location = new System.Drawing.Point(319, 77);
             this.TBRazonSocial.Name = "TBRazonSocial";
             this.TBRazonSocial.ReadOnly = true;
             this.TBRazonSocial.Size = new System.Drawing.Size(145, 20);
@@ -105,7 +104,7 @@
             // 
             // TBCUIT
             // 
-            this.TBCUIT.Location = new System.Drawing.Point(319, 77);
+            this.TBCUIT.Location = new System.Drawing.Point(319, 103);
             this.TBCUIT.Name = "TBCUIT";
             this.TBCUIT.ReadOnly = true;
             this.TBCUIT.Size = new System.Drawing.Size(145, 20);
@@ -113,13 +112,15 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.LUsuario);
             this.panel1.Controls.Add(this.TBCorreo);
             this.panel1.Controls.Add(this.LCorreo);
             this.panel1.Controls.Add(this.TBContacto);
             this.panel1.Controls.Add(this.LTelefono);
+            this.panel1.Controls.Add(this.LTitulo);
             this.panel1.Controls.Add(this.TBFecha);
             this.panel1.Controls.Add(this.LFecha);
-            this.panel1.Controls.Add(this.LDatosProveedor);
             this.panel1.Controls.Add(this.TBCUIT);
             this.panel1.Controls.Add(this.LRazonSocial);
             this.panel1.Controls.Add(this.BSeleccionarProveedor);
@@ -127,12 +128,12 @@
             this.panel1.Controls.Add(this.LCUIT);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(776, 106);
+            this.panel1.Size = new System.Drawing.Size(776, 130);
             this.panel1.TabIndex = 6;
             // 
             // TBCorreo
             // 
-            this.TBCorreo.Location = new System.Drawing.Point(572, 77);
+            this.TBCorreo.Location = new System.Drawing.Point(572, 103);
             this.TBCorreo.Name = "TBCorreo";
             this.TBCorreo.ReadOnly = true;
             this.TBCorreo.Size = new System.Drawing.Size(145, 20);
@@ -141,7 +142,7 @@
             // LCorreo
             // 
             this.LCorreo.AutoSize = true;
-            this.LCorreo.Location = new System.Drawing.Point(513, 80);
+            this.LCorreo.Location = new System.Drawing.Point(513, 106);
             this.LCorreo.Name = "LCorreo";
             this.LCorreo.Size = new System.Drawing.Size(41, 13);
             this.LCorreo.TabIndex = 11;
@@ -149,7 +150,7 @@
             // 
             // TBContacto
             // 
-            this.TBContacto.Location = new System.Drawing.Point(572, 40);
+            this.TBContacto.Location = new System.Drawing.Point(572, 77);
             this.TBContacto.Name = "TBContacto";
             this.TBContacto.ReadOnly = true;
             this.TBContacto.Size = new System.Drawing.Size(145, 20);
@@ -159,16 +160,26 @@
             // LTelefono
             // 
             this.LTelefono.AutoSize = true;
-            this.LTelefono.Location = new System.Drawing.Point(513, 43);
+            this.LTelefono.Location = new System.Drawing.Point(513, 80);
             this.LTelefono.Name = "LTelefono";
             this.LTelefono.Size = new System.Drawing.Size(52, 13);
             this.LTelefono.TabIndex = 9;
             this.LTelefono.Text = "Telefono:";
             this.LTelefono.Click += new System.EventHandler(this.label1_Click_2);
             // 
+            // LTitulo
+            // 
+            this.LTitulo.AutoSize = true;
+            this.LTitulo.Location = new System.Drawing.Point(21, 0);
+            this.LTitulo.Name = "LTitulo";
+            this.LTitulo.Size = new System.Drawing.Size(125, 13);
+            this.LTitulo.TabIndex = 6;
+            this.LTitulo.Text = "Nueva Orden de Compra";
+            this.LTitulo.Click += new System.EventHandler(this.label4_Click);
+            // 
             // TBFecha
             // 
-            this.TBFecha.Location = new System.Drawing.Point(628, 6);
+            this.TBFecha.Location = new System.Drawing.Point(628, 39);
             this.TBFecha.Name = "TBFecha";
             this.TBFecha.ReadOnly = true;
             this.TBFecha.Size = new System.Drawing.Size(145, 20);
@@ -177,38 +188,27 @@
             // LFecha
             // 
             this.LFecha.AutoSize = true;
-            this.LFecha.Location = new System.Drawing.Point(569, 9);
+            this.LFecha.Location = new System.Drawing.Point(585, 42);
             this.LFecha.Name = "LFecha";
             this.LFecha.Size = new System.Drawing.Size(40, 13);
             this.LFecha.TabIndex = 7;
             this.LFecha.Text = "Fecha:";
             // 
-            // LDatosProveedor
-            // 
-            this.LDatosProveedor.AutoSize = true;
-            this.LDatosProveedor.Location = new System.Drawing.Point(3, 9);
-            this.LDatosProveedor.Name = "LDatosProveedor";
-            this.LDatosProveedor.Size = new System.Drawing.Size(87, 13);
-            this.LDatosProveedor.TabIndex = 6;
-            this.LDatosProveedor.Text = "Datos Proveedor";
-            this.LDatosProveedor.Click += new System.EventHandler(this.label4_Click);
-            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.TBTotal);
-            this.panel2.Controls.Add(this.LDetalleOrden);
             this.panel2.Controls.Add(this.LTotal);
             this.panel2.Controls.Add(this.BAgregarProducto);
             this.panel2.Controls.Add(this.DGDetalleOrden);
-            this.panel2.Location = new System.Drawing.Point(12, 124);
+            this.panel2.Location = new System.Drawing.Point(12, 143);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(776, 301);
+            this.panel2.Size = new System.Drawing.Size(776, 282);
             this.panel2.TabIndex = 7;
             // 
             // TBTotal
             // 
             this.TBTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TBTotal.Location = new System.Drawing.Point(588, 267);
+            this.TBTotal.Location = new System.Drawing.Point(588, 244);
             this.TBTotal.Multiline = true;
             this.TBTotal.Name = "TBTotal";
             this.TBTotal.ReadOnly = true;
@@ -216,21 +216,11 @@
             this.TBTotal.TabIndex = 13;
             this.TBTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // LDetalleOrden
-            // 
-            this.LDetalleOrden.AutoSize = true;
-            this.LDetalleOrden.Location = new System.Drawing.Point(3, 10);
-            this.LDetalleOrden.Name = "LDetalleOrden";
-            this.LDetalleOrden.Size = new System.Drawing.Size(72, 13);
-            this.LDetalleOrden.TabIndex = 7;
-            this.LDetalleOrden.Text = "Detalle Orden";
-            this.LDetalleOrden.Click += new System.EventHandler(this.label1_Click_1);
-            // 
             // LTotal
             // 
             this.LTotal.AutoSize = true;
             this.LTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LTotal.Location = new System.Drawing.Point(537, 274);
+            this.LTotal.Location = new System.Drawing.Point(537, 251);
             this.LTotal.Name = "LTotal";
             this.LTotal.Size = new System.Drawing.Size(45, 18);
             this.LTotal.TabIndex = 7;
@@ -239,9 +229,9 @@
             // 
             // BAgregarProducto
             // 
-            this.BAgregarProducto.Location = new System.Drawing.Point(37, 26);
+            this.BAgregarProducto.Location = new System.Drawing.Point(37, 5);
             this.BAgregarProducto.Name = "BAgregarProducto";
-            this.BAgregarProducto.Size = new System.Drawing.Size(135, 43);
+            this.BAgregarProducto.Size = new System.Drawing.Size(152, 41);
             this.BAgregarProducto.TabIndex = 7;
             this.BAgregarProducto.Text = "Agregar Producto";
             this.BAgregarProducto.UseVisualStyleBackColor = true;
@@ -266,7 +256,7 @@
             this.CostoUnitario,
             this.Subtotal});
             this.DGDetalleOrden.GridColor = System.Drawing.Color.Silver;
-            this.DGDetalleOrden.Location = new System.Drawing.Point(3, 75);
+            this.DGDetalleOrden.Location = new System.Drawing.Point(3, 52);
             this.DGDetalleOrden.Name = "DGDetalleOrden";
             this.DGDetalleOrden.RowHeadersVisible = false;
             this.DGDetalleOrden.Size = new System.Drawing.Size(770, 191);
@@ -317,8 +307,8 @@
             // 
             // CostoUnitario
             // 
-            dataGridViewCellStyle19.Format = "C2";
-            this.CostoUnitario.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle9.Format = "C2";
+            this.CostoUnitario.DefaultCellStyle = dataGridViewCellStyle9;
             this.CostoUnitario.FillWeight = 55F;
             this.CostoUnitario.HeaderText = "Costo Unitario";
             this.CostoUnitario.Name = "CostoUnitario";
@@ -326,8 +316,8 @@
             // 
             // Subtotal
             // 
-            dataGridViewCellStyle20.Format = "C2";
-            this.Subtotal.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle10.Format = "C2";
+            this.Subtotal.DefaultCellStyle = dataGridViewCellStyle10;
             this.Subtotal.FillWeight = 58.08423F;
             this.Subtotal.HeaderText = "Subtotal ";
             this.Subtotal.Name = "Subtotal";
@@ -352,6 +342,23 @@
             this.BCancelar.Text = "Cancelar";
             this.BCancelar.UseVisualStyleBackColor = true;
             this.BCancelar.Click += new System.EventHandler(this.BCancelar_Click);
+            // 
+            // LUsuario
+            // 
+            this.LUsuario.AutoSize = true;
+            this.LUsuario.Location = new System.Drawing.Point(576, 16);
+            this.LUsuario.Name = "LUsuario";
+            this.LUsuario.Size = new System.Drawing.Size(46, 13);
+            this.LUsuario.TabIndex = 13;
+            this.LUsuario.Text = "Usuario:";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(628, 13);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(145, 20);
+            this.textBox1.TabIndex = 14;
             // 
             // FormOrdenCompra
             // 
@@ -385,12 +392,11 @@
         private System.Windows.Forms.TextBox TBRazonSocial;
         private System.Windows.Forms.TextBox TBCUIT;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label LDatosProveedor;
+        private System.Windows.Forms.Label LTitulo;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView DGDetalleOrden;
         private System.Windows.Forms.Button BAgregarProducto;
         private System.Windows.Forms.Label LTotal;
-        private System.Windows.Forms.Label LDetalleOrden;
         private System.Windows.Forms.TextBox TBFecha;
         private System.Windows.Forms.Label LFecha;
         private System.Windows.Forms.Button BGenerarOrden;
@@ -408,5 +414,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn CostoUnitario;
         private System.Windows.Forms.DataGridViewTextBoxColumn Subtotal;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label LUsuario;
     }
 }

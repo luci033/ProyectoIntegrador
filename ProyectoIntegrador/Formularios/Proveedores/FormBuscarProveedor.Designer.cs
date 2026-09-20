@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.LSeleccionarProveedor = new System.Windows.Forms.Label();
+            this.LTitulo = new System.Windows.Forms.Label();
             this.DGProveedores = new System.Windows.Forms.DataGridView();
             this.colRazonSocial = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCUIT = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -38,16 +38,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.DGProveedores)).BeginInit();
             this.SuspendLayout();
             // 
-            // LSeleccionarProveedor
+            // LTitulo
             // 
-            this.LSeleccionarProveedor.AutoSize = true;
-            this.LSeleccionarProveedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LSeleccionarProveedor.Location = new System.Drawing.Point(123, 72);
-            this.LSeleccionarProveedor.Name = "LSeleccionarProveedor";
-            this.LSeleccionarProveedor.Size = new System.Drawing.Size(532, 55);
-            this.LSeleccionarProveedor.TabIndex = 0;
-            this.LSeleccionarProveedor.Text = "Seleccionar Proveedor";
-            this.LSeleccionarProveedor.Click += new System.EventHandler(this.label1_Click);
+            this.LTitulo.AutoSize = true;
+            this.LTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LTitulo.Location = new System.Drawing.Point(183, 70);
+            this.LTitulo.Name = "LTitulo";
+            this.LTitulo.Size = new System.Drawing.Size(532, 55);
+            this.LTitulo.TabIndex = 0;
+            this.LTitulo.Text = "Seleccionar Proveedor";
+            this.LTitulo.Click += new System.EventHandler(this.label1_Click);
             // 
             // DGProveedores
             // 
@@ -115,7 +115,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.BCancelar);
             this.Controls.Add(this.DGProveedores);
-            this.Controls.Add(this.LSeleccionarProveedor);
+            this.Controls.Add(this.LTitulo);
             this.MaximumSize = new System.Drawing.Size(816, 489);
             this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "FormBuscarProveedor";
@@ -129,7 +129,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label LSeleccionarProveedor;
+        private System.Windows.Forms.Label LTitulo;
         private System.Windows.Forms.DataGridView DGProveedores;
         private System.Windows.Forms.Button BCancelar;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRazonSocial;

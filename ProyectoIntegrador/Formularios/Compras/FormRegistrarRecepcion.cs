@@ -25,6 +25,11 @@ namespace ProyectoIntegrador.Formularios.Compras
 
         private void FormRegistrarRecepcion_Load(object sender, EventArgs e)
         {
+            EstiloUI.AplicarEstiloGrilla(DGDetalleRecepcion);
+            EstiloUI.AplicarEstiloFormulario(this);
+            EstiloUI.AplicarEstiloTitulo(LTitulo);
+            EstiloUI.AplicarEstiloBoton(BAceptar);
+            EstiloUI.AplicarEstiloBoton(BCancelar);
             // fecha del sistema
             TBFechaRecepcion.Text = DateTime.Now.ToString("dd/MM/yyyy");
         }
@@ -85,6 +90,11 @@ namespace ProyectoIntegrador.Formularios.Compras
         }
 
         private void TBObservacion_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }

@@ -42,9 +42,9 @@ namespace ProyectoIntegrador.Formularios.Compras
             // fecha recepción es columna 3
             if (e.ColumnIndex == 3 && DGCompras.Rows[e.RowIndex].Cells[3].Value.ToString() == "Registrar Recepción")
             {
-                string nro = DGCompras.Rows[e.RowIndex].Cells[1].Value.ToString();
-                string fecha = DGCompras.Rows[e.RowIndex].Cells[2].Value.ToString();
-                string prov = DGCompras.Rows[e.RowIndex].Cells[3].Value.ToString();
+                string nro = DGCompras.Rows[e.RowIndex].Cells[0].Value.ToString();
+                string fecha = DGCompras.Rows[e.RowIndex].Cells[1].Value.ToString();
+                string prov = DGCompras.Rows[e.RowIndex].Cells[2].Value.ToString();
                 using (FormRegistrarRecepcion formRecepcion = new FormRegistrarRecepcion(nro, prov, fecha))
                 {
                     if (formRecepcion.ShowDialog() == DialogResult.OK)
@@ -81,7 +81,10 @@ namespace ProyectoIntegrador.Formularios.Compras
 
         private void FormCompras_Load(object sender, EventArgs e)
         {
-
+            EstiloUI.AplicarEstiloGrilla(DGCompras);
+            EstiloUI.AplicarEstiloFormulario(this);
+            EstiloUI.AplicarEstiloTitulo(LTitulo);
+            EstiloUI.AplicarEstiloBoton(BAgregarOrden);
         }
     }
 }

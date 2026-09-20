@@ -28,20 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.LRegistrarRecepcion = new System.Windows.Forms.Label();
+            this.LTitulo = new System.Windows.Forms.Label();
             this.LFechaRecepcion = new System.Windows.Forms.Label();
             this.TBFechaRecepcion = new System.Windows.Forms.TextBox();
             this.TBObservacion = new System.Windows.Forms.TextBox();
             this.LObservacion = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.BAceptar = new System.Windows.Forms.Button();
-            this.BCancelar = new System.Windows.Forms.Button();
-            this.TBProveedor = new System.Windows.Forms.TextBox();
-            this.LProveedor = new System.Windows.Forms.Label();
-            this.TBNroOrden = new System.Windows.Forms.TextBox();
-            this.LNroOrden = new System.Windows.Forms.Label();
             this.TBFechaOrden = new System.Windows.Forms.TextBox();
             this.LFechaOrden = new System.Windows.Forms.Label();
+            this.TBNroOrden = new System.Windows.Forms.TextBox();
+            this.LNroOrden = new System.Windows.Forms.Label();
+            this.TBProveedor = new System.Windows.Forms.TextBox();
+            this.LProveedor = new System.Windows.Forms.Label();
+            this.BAceptar = new System.Windows.Forms.Button();
+            this.BCancelar = new System.Windows.Forms.Button();
             this.DGDetalleRecepcion = new System.Windows.Forms.DataGridView();
             this.colIdProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,15 +52,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.DGDetalleRecepcion)).BeginInit();
             this.SuspendLayout();
             // 
-            // LRegistrarRecepcion
+            // LTitulo
             // 
-            this.LRegistrarRecepcion.AutoSize = true;
-            this.LRegistrarRecepcion.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LRegistrarRecepcion.Location = new System.Drawing.Point(179, 9);
-            this.LRegistrarRecepcion.Name = "LRegistrarRecepcion";
-            this.LRegistrarRecepcion.Size = new System.Drawing.Size(479, 55);
-            this.LRegistrarRecepcion.TabIndex = 0;
-            this.LRegistrarRecepcion.Text = "Registrar Recepción";
+            this.LTitulo.AutoSize = true;
+            this.LTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LTitulo.Location = new System.Drawing.Point(179, 9);
+            this.LTitulo.Name = "LTitulo";
+            this.LTitulo.Size = new System.Drawing.Size(479, 55);
+            this.LTitulo.TabIndex = 0;
+            this.LTitulo.Text = "Registrar Recepción";
             // 
             // LFechaRecepcion
             // 
@@ -115,6 +115,61 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(776, 118);
             this.panel1.TabIndex = 5;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // TBFechaOrden
+            // 
+            this.TBFechaOrden.Location = new System.Drawing.Point(97, 86);
+            this.TBFechaOrden.Name = "TBFechaOrden";
+            this.TBFechaOrden.ReadOnly = true;
+            this.TBFechaOrden.Size = new System.Drawing.Size(102, 20);
+            this.TBFechaOrden.TabIndex = 10;
+            this.TBFechaOrden.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            // 
+            // LFechaOrden
+            // 
+            this.LFechaOrden.AutoSize = true;
+            this.LFechaOrden.Location = new System.Drawing.Point(20, 89);
+            this.LFechaOrden.Name = "LFechaOrden";
+            this.LFechaOrden.Size = new System.Drawing.Size(72, 13);
+            this.LFechaOrden.TabIndex = 9;
+            this.LFechaOrden.Text = "Fecha Orden:";
+            // 
+            // TBNroOrden
+            // 
+            this.TBNroOrden.Location = new System.Drawing.Point(97, 13);
+            this.TBNroOrden.Name = "TBNroOrden";
+            this.TBNroOrden.ReadOnly = true;
+            this.TBNroOrden.Size = new System.Drawing.Size(102, 20);
+            this.TBNroOrden.TabIndex = 8;
+            this.TBNroOrden.TextChanged += new System.EventHandler(this.TBNroOrden_TextChanged);
+            // 
+            // LNroOrden
+            // 
+            this.LNroOrden.AutoSize = true;
+            this.LNroOrden.Location = new System.Drawing.Point(20, 16);
+            this.LNroOrden.Name = "LNroOrden";
+            this.LNroOrden.Size = new System.Drawing.Size(62, 13);
+            this.LNroOrden.TabIndex = 7;
+            this.LNroOrden.Text = "Nro. Orden:";
+            // 
+            // TBProveedor
+            // 
+            this.TBProveedor.Location = new System.Drawing.Point(97, 51);
+            this.TBProveedor.Name = "TBProveedor";
+            this.TBProveedor.ReadOnly = true;
+            this.TBProveedor.Size = new System.Drawing.Size(102, 20);
+            this.TBProveedor.TabIndex = 6;
+            this.TBProveedor.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // LProveedor
+            // 
+            this.LProveedor.AutoSize = true;
+            this.LProveedor.Location = new System.Drawing.Point(20, 54);
+            this.LProveedor.Name = "LProveedor";
+            this.LProveedor.Size = new System.Drawing.Size(59, 13);
+            this.LProveedor.TabIndex = 5;
+            this.LProveedor.Text = "Proveedor:";
             // 
             // BAceptar
             // 
@@ -135,60 +190,6 @@
             this.BCancelar.Text = "Cancelar";
             this.BCancelar.UseVisualStyleBackColor = true;
             this.BCancelar.Click += new System.EventHandler(this.BCancelar_Click);
-            // 
-            // TBProveedor
-            // 
-            this.TBProveedor.Location = new System.Drawing.Point(97, 51);
-            this.TBProveedor.Name = "TBProveedor";
-            this.TBProveedor.ReadOnly = true;
-            this.TBProveedor.Size = new System.Drawing.Size(102, 20);
-            this.TBProveedor.TabIndex = 6;
-            this.TBProveedor.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // LProveedor
-            // 
-            this.LProveedor.AutoSize = true;
-            this.LProveedor.Location = new System.Drawing.Point(20, 54);
-            this.LProveedor.Name = "LProveedor";
-            this.LProveedor.Size = new System.Drawing.Size(59, 13);
-            this.LProveedor.TabIndex = 5;
-            this.LProveedor.Text = "Proveedor:";
-            // 
-            // TBNroOrden
-            // 
-            this.TBNroOrden.Location = new System.Drawing.Point(97, 13);
-            this.TBNroOrden.Name = "TBNroOrden";
-            this.TBNroOrden.ReadOnly = true;
-            this.TBNroOrden.Size = new System.Drawing.Size(102, 20);
-            this.TBNroOrden.TabIndex = 8;
-            this.TBNroOrden.TextChanged += new System.EventHandler(this.TBNroOrden_TextChanged);
-            // 
-            // LNroOrden
-            // 
-            this.LNroOrden.AutoSize = true;
-            this.LNroOrden.Location = new System.Drawing.Point(20, 16);
-            this.LNroOrden.Name = "LNroOrden";
-            this.LNroOrden.Size = new System.Drawing.Size(62, 13);
-            this.LNroOrden.TabIndex = 7;
-            this.LNroOrden.Text = "Nro. Orden:";
-            // 
-            // TBFechaOrden
-            // 
-            this.TBFechaOrden.Location = new System.Drawing.Point(97, 86);
-            this.TBFechaOrden.Name = "TBFechaOrden";
-            this.TBFechaOrden.ReadOnly = true;
-            this.TBFechaOrden.Size = new System.Drawing.Size(102, 20);
-            this.TBFechaOrden.TabIndex = 10;
-            this.TBFechaOrden.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
-            // 
-            // LFechaOrden
-            // 
-            this.LFechaOrden.AutoSize = true;
-            this.LFechaOrden.Location = new System.Drawing.Point(20, 89);
-            this.LFechaOrden.Name = "LFechaOrden";
-            this.LFechaOrden.Size = new System.Drawing.Size(72, 13);
-            this.LFechaOrden.TabIndex = 9;
-            this.LFechaOrden.Text = "Fecha Orden:";
             // 
             // DGDetalleRecepcion
             // 
@@ -252,7 +253,7 @@
             this.Controls.Add(this.BCancelar);
             this.Controls.Add(this.BAceptar);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.LRegistrarRecepcion);
+            this.Controls.Add(this.LTitulo);
             this.MaximumSize = new System.Drawing.Size(816, 489);
             this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "FormRegistrarRecepcion";
@@ -268,7 +269,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label LRegistrarRecepcion;
+        private System.Windows.Forms.Label LTitulo;
         private System.Windows.Forms.Label LFechaRecepcion;
         private System.Windows.Forms.TextBox TBFechaRecepcion;
         private System.Windows.Forms.TextBox TBObservacion;
