@@ -31,22 +31,22 @@ namespace ProyectoIntegrador.Formularios.Productos
             CBGenero.Items.AddRange(new string[] { "Todos", "Femenino", "Masculino", "Unisex" });
             CBGenero.SelectedIndex = 0;
 
-            dataGridCatalogoProd.Rows.Add("1123456", "Collar Rubí", "Collares", "Femenino", 155760, 10, 5, "Collar de oro blanco con rubí central.", "Modificar", "Desactivar");
-            dataGridCatalogoProd.Rows.Add("2234567", "Aros Luz de Luna", "Aros", "Femenino", 98065, 15, 5, "Aros colgantes de plata con diseño de media luna.", "Modificar", "Desactivar");
-            dataGridCatalogoProd.Rows.Add("3345678", "Anillo Solitario Diamante", "Anillos", "Femenino", 320500, 2, 1, "Anillo de compromiso en oro blanco.", "Modificar", "Desactivar");
-            dataGridCatalogoProd.Rows.Add("4456789", "Pulsera Eslabón Oro 18k", "Pulseras", "Unisex", 215400, 5, 2, "Pulsera de eslabones gruesos.", "Modificar", "Desactivar");
-            dataGridCatalogoProd.Rows.Add("5567890", "Dije Corazón Zafiro", "Dijes", "Femenino", 85200, 8, 3, "Dije pequeño en forma de corazón con zafiro.", "Modificar", "Desactivar");
-            dataGridCatalogoProd.Rows.Add("6678901", "Aros Perla Clásica", "Aros", "Femenino", 45600, 20, 8, "Aros pasantes con perlas de 8mm.", "Modificar", "Desactivar");
-            dataGridCatalogoProd.Rows.Add("7789012", "Cadena Plata 925", "Cadenas", "Unisex", 25300, 25, 10, "Cadena tradicional de 45 cm.", "Modificar", "Desactivar");
-            dataGridCatalogoProd.Rows.Add("8890123", "Anillo Esmeralda Imperial", "Anillos", "Femenino", 275800, 3, 1, "Anillo con esmeralda colombiana.", "Modificar", "Desactivar");
-            dataGridCatalogoProd.Rows.Add("9901234", "Gargantilla Oro Blanco", "Collares", "Femenino", 198000, 4, 2, "Gargantilla elegante y minimalista.", "Modificar", "Desactivar");
-            dataGridCatalogoProd.Rows.Add("1012345", "Pulsera Tenis Circones", "Pulseras", "Femenino", 112500, 7, 3, "Pulsera estilo tenis con brillos.", "Modificar", "Desactivar");
-            dataGridCatalogoProd.Rows.Add("1123456", "Colgante Árbol de la Vida", "Dijes", "Unisex", 34900, 12, 5, "Colgante circular en acero quirúrgico.", "Modificar", "Desactivar");
-            dataGridCatalogoProd.Rows.Add("1234567", "Aros Argolla Oro", "Aros", "Unisex", 76400, 9, 4, "Aros clásicos tipo argolla mediana.", "Modificar", "Desactivar");
-            dataGridCatalogoProd.Rows.Add("1345678", "Anillo Sello Oro 18k", "Anillos", "Masculino", 185000, 6, 2, "Anillo tipo sello liso para caballero.", "Modificar", "Desactivar");
-            dataGridCatalogoProd.Rows.Add("1456789", "Cadena Espiga Plata", "Cadenas", "Masculino", 42000, 14, 5, "Cadena plana de eslabón trenzado.", "Modificar", "Desactivar");
-            dataGridCatalogoProd.Rows.Add("1567890", "Pulsera Cuero y Acero", "Pulseras", "Masculino", 28500, 30, 10, "Pulsera de cuero negro con cierre magnético.", "Modificar", "Desactivar");
-            dataGridCatalogoProd.Rows.Add("1678901", "Dije Cruz Acero Quirúrgico", "Dijes", "Masculino", 15000, 40, 15, "Dije liso antialérgico.", "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("1123456", "Collar Rubí", "Collares", "Femenino", 155760, 10, 5, "Collar de oro blanco con rubí central.", "Proveedor A", "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("2234567", "Aros Luz de Luna", "Aros", "Femenino", 98065, 15, 5, "Aros colgantes de plata con diseño de media luna.", "Proveedor B", "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("3345678", "Anillo Solitario Diamante", "Anillos", "Femenino", 320500, 2, 1, "Anillo de compromiso en oro blanco.", "Proveedor C", "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("4456789", "Pulsera Eslabón Oro 18k", "Pulseras", "Unisex", 215400, 5, 2, "Pulsera de eslabones gruesos.", "Proveedor A", "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("5567890", "Dije Corazón Zafiro", "Dijes", "Femenino", 85200, 8, 3, "Dije pequeño en forma de corazón con zafiro.", "Proveedor B", "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("6678901", "Aros Perla Clásica", "Aros", "Femenino", 45600, 20, 8, "Aros pasantes con perlas de 8mm.", "Proveedor C", "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("7789012", "Cadena Plata 925", "Cadenas", "Unisex", 25300, 25, 10, "Cadena tradicional de 45 cm.", "Proveedor A", "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("8890123", "Anillo Esmeralda Imperial", "Anillos", "Femenino", 275800, 3, 1, "Anillo con esmeralda colombiana.", "Proveedor B", "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("9901234", "Gargantilla Oro Blanco", "Collares", "Femenino", 198000, 4, 2, "Gargantilla elegante y minimalista.", "Proveedor C", "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("1012345", "Pulsera Tenis Circones", "Pulseras", "Femenino", 112500, 7, 3, "Pulsera estilo tenis con brillos.", "Proveedor A", "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("1123456", "Colgante Árbol de la Vida", "Dijes", "Unisex", 34900, 12, 5, "Colgante circular en acero quirúrgico.", "Proveedor B", "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("1234567", "Aros Argolla Oro", "Aros", "Unisex", 76400, 9, 4, "Aros clásicos tipo argolla mediana.", "Proveedor C", "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("1345678", "Anillo Sello Oro 18k", "Anillos", "Masculino", 185000, 6, 2, "Anillo tipo sello liso para caballero.", "Proveedor A", "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("1456789", "Cadena Espiga Plata", "Cadenas", "Masculino", 42000, 14, 5, "Cadena plana de eslabón trenzado.", "Proveedor B", "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("1567890", "Pulsera Cuero y Acero", "Pulseras", "Masculino", 28500, 30, 10, "Pulsera de cuero negro con cierre magnético.", "Proveedor C", "Modificar", "Desactivar");
+            dataGridCatalogoProd.Rows.Add("1678901", "Dije Cruz Acero Quirúrgico", "Dijes", "Masculino", 15000, 40, 15, "Dije liso antialérgico.", "Proveedor A", "Modificar", "Desactivar");
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -64,18 +64,19 @@ namespace ProyectoIntegrador.Formularios.Productos
             // --- ACCIÓN: BOTÓN MODIFICAR ---
             if (nombreColumna == "colModificar")
             {
+                // Si el botón de la columna eliminar dice "Activar", la fila está inactiva y cortamos el evento
+                if (Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells["colEliminar"].Value) == "Activar") return;
                 string nombre = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[1].Value);
                 string categoria = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[2].Value);
                 string genero = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[3].Value);
                 string precio = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[4].Value);
                 string stock = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[5].Value);
-
-                // Capturás los datos desde las nuevas columnas
                 string stockMinimo = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[6].Value);
                 string descripcion = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[7].Value);
+                string proveedor = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[8].Value);
 
                 FormProductoABM modalABM = new FormProductoABM();
-                modalABM.ConfigurarModoEdicion(codigo, nombre, categoria, genero, precio, stock, stockMinimo, descripcion);
+                modalABM.ConfigurarModoEdicion(codigo, nombre, categoria, genero, precio, stock, stockMinimo, descripcion, proveedor);
 
                 if (modalABM.ShowDialog() == DialogResult.OK)
                 {
@@ -92,12 +93,23 @@ namespace ProyectoIntegrador.Formularios.Productos
             else if (nombreColumna == "colEliminar")
             {
                 string nombre = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[1].Value);
-                DialogResult respuesta = MessageBox.Show($"¿Seguro que deseas eliminar el producto {nombre}?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                string accionActual = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
 
-                if (respuesta == DialogResult.Yes)
+                if (accionActual == "Desactivar")
                 {
-                    MessageBox.Show("Producto eliminado de la vista.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    // dataGridProductos.Rows.RemoveAt(e.RowIndex); // Esta línea borraría la fila visualmente
+                    DialogResult respuesta = MessageBox.Show($"¿Seguro que deseas desactivar el producto {nombre}?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (respuesta == DialogResult.Yes)
+                    {
+                        dataGridCatalogoProd.Rows[e.RowIndex].DefaultCellStyle.BackColor = EstiloUI.ColorInactivo;
+                        dataGridCatalogoProd.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "Activar";
+                        MessageBox.Show("Desactivado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else // Si el botón dice "Activar"
+                {
+                    // Vuelve la fila a su color normal y el texto a "Desactivar"
+                    dataGridCatalogoProd.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+                    dataGridCatalogoProd.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "Desactivar";
                 }
             }
         }
@@ -120,8 +132,9 @@ namespace ProyectoIntegrador.Formularios.Productos
                     modalProducto.Stock,           // [5] Stock
                     modalProducto.StockMinimo,     // [6] Stock Mínimo
                     modalProducto.Descripcion,     // [7] Descripción (Te faltaba esta propiedad)
-                    "Modificar",                   // [8] Botón Modificar (Te faltaba este)
-                    "Desactivar"                   // [9] Botón Desactivar (Te faltaba este)
+                    modalProducto.Proveedor,       // [8] Proveedor
+                    "Modificar",                   // [9] Botón Modificar (Te faltaba este)
+                    "Desactivar"                   // [10] Botón Desactivar (Te faltaba este)
                 );
             }
         }
@@ -221,6 +234,33 @@ namespace ProyectoIntegrador.Formularios.Productos
         private void LCatalogoProductos_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void dataGridCatalogoProd_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            string nombreColumna = dataGridCatalogoProd.Columns[e.ColumnIndex].Name;
+
+            // Evitamos que se abra el detalle si hizo doble clic justo sobre los botones
+            if (nombreColumna == "colModificar" || nombreColumna == "colEliminar") return;
+
+            string codigo = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[0].Value);
+            if (string.IsNullOrWhiteSpace(codigo)) return;
+
+            // Extraemos los datos
+            string nombre = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[1].Value);
+            string categoria = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[2].Value);
+            string genero = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[3].Value);
+            string precio = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[4].Value);
+            string stock = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[5].Value);
+            string stockMinimo = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[6].Value);
+            string descripcion = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[7].Value);
+            string proveedor = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[8].Value);
+
+            FormProductoABM modalABM = new FormProductoABM();
+            modalABM.ConfigurarModoDetalle(codigo, nombre, categoria, genero, precio, stock, stockMinimo, descripcion, proveedor);
+            modalABM.ShowDialog();
         }
     }
 }

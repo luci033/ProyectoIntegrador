@@ -48,6 +48,8 @@
             this.combGenero = new System.Windows.Forms.ComboBox();
             this.LTitulo = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.LProveedor = new System.Windows.Forms.Label();
+            this.cmbProveedor = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,7 +74,7 @@
             // LDescripcion
             // 
             this.LDescripcion.AutoSize = true;
-            this.LDescripcion.Location = new System.Drawing.Point(72, 332);
+            this.LDescripcion.Location = new System.Drawing.Point(72, 358);
             this.LDescripcion.Name = "LDescripcion";
             this.LDescripcion.Size = new System.Drawing.Size(66, 13);
             this.LDescripcion.TabIndex = 3;
@@ -90,7 +92,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(72, 220);
+            this.label1.Location = new System.Drawing.Point(72, 246);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(79, 13);
             this.label1.TabIndex = 5;
@@ -99,7 +101,7 @@
             // LStockI
             // 
             this.LStockI.AutoSize = true;
-            this.LStockI.Location = new System.Drawing.Point(72, 256);
+            this.LStockI.Location = new System.Drawing.Point(72, 282);
             this.LStockI.Name = "LStockI";
             this.LStockI.Size = new System.Drawing.Size(71, 13);
             this.LStockI.TabIndex = 6;
@@ -110,20 +112,20 @@
             this.textNombre.Location = new System.Drawing.Point(180, 100);
             this.textNombre.Name = "textNombre";
             this.textNombre.Size = new System.Drawing.Size(125, 20);
-            this.textNombre.TabIndex = 7;
+            this.textNombre.TabIndex = 0;
             // 
             // textDescripcion
             // 
-            this.textDescripcion.Location = new System.Drawing.Point(180, 329);
+            this.textDescripcion.Location = new System.Drawing.Point(180, 355);
             this.textDescripcion.Multiline = true;
             this.textDescripcion.Name = "textDescripcion";
             this.textDescripcion.Size = new System.Drawing.Size(123, 55);
-            this.textDescripcion.TabIndex = 8;
+            this.textDescripcion.TabIndex = 7;
             // 
             // LStockM
             // 
             this.LStockM.AutoSize = true;
-            this.LStockM.Location = new System.Drawing.Point(72, 294);
+            this.LStockM.Location = new System.Drawing.Point(72, 320);
             this.LStockM.Name = "LStockM";
             this.LStockM.Size = new System.Drawing.Size(76, 13);
             this.LStockM.TabIndex = 11;
@@ -131,27 +133,27 @@
             // 
             // textStockInicial
             // 
-            this.textStockInicial.Location = new System.Drawing.Point(180, 253);
+            this.textStockInicial.Location = new System.Drawing.Point(180, 279);
             this.textStockInicial.Name = "textStockInicial";
             this.textStockInicial.ReadOnly = true;
             this.textStockInicial.Size = new System.Drawing.Size(125, 20);
-            this.textStockInicial.TabIndex = 12;
+            this.textStockInicial.TabIndex = 5;
             // 
             // textPrecio
             // 
-            this.textPrecio.Location = new System.Drawing.Point(180, 217);
+            this.textPrecio.Location = new System.Drawing.Point(180, 243);
             this.textPrecio.Name = "textPrecio";
             this.textPrecio.ReadOnly = true;
             this.textPrecio.Size = new System.Drawing.Size(125, 20);
-            this.textPrecio.TabIndex = 14;
+            this.textPrecio.TabIndex = 4;
             this.textPrecio.TextChanged += new System.EventHandler(this.textPrecio_TextChanged);
             // 
             // textStockMinimo
             // 
-            this.textStockMinimo.Location = new System.Drawing.Point(180, 291);
+            this.textStockMinimo.Location = new System.Drawing.Point(180, 317);
             this.textStockMinimo.Name = "textStockMinimo";
             this.textStockMinimo.Size = new System.Drawing.Size(125, 20);
-            this.textStockMinimo.TabIndex = 15;
+            this.textStockMinimo.TabIndex = 6;
             // 
             // openFileDialog1
             // 
@@ -159,18 +161,19 @@
             // 
             // cmbCategoria
             // 
+            this.cmbCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCategoria.FormattingEnabled = true;
             this.cmbCategoria.Location = new System.Drawing.Point(180, 139);
             this.cmbCategoria.Name = "cmbCategoria";
             this.cmbCategoria.Size = new System.Drawing.Size(125, 21);
-            this.cmbCategoria.TabIndex = 18;
+            this.cmbCategoria.TabIndex = 1;
             // 
             // BCrearProducto
             // 
-            this.BCrearProducto.Location = new System.Drawing.Point(173, 415);
+            this.BCrearProducto.Location = new System.Drawing.Point(173, 441);
             this.BCrearProducto.Name = "BCrearProducto";
             this.BCrearProducto.Size = new System.Drawing.Size(130, 23);
-            this.BCrearProducto.TabIndex = 20;
+            this.BCrearProducto.TabIndex = 8;
             this.BCrearProducto.Text = "Crear Producto";
             this.BCrearProducto.UseVisualStyleBackColor = true;
             this.BCrearProducto.Click += new System.EventHandler(this.BCrearProducto_Click);
@@ -178,21 +181,22 @@
             // BCancelar
             // 
             this.BCancelar.CausesValidation = false;
-            this.BCancelar.Location = new System.Drawing.Point(492, 415);
+            this.BCancelar.Location = new System.Drawing.Point(492, 441);
             this.BCancelar.Name = "BCancelar";
             this.BCancelar.Size = new System.Drawing.Size(130, 23);
-            this.BCancelar.TabIndex = 21;
+            this.BCancelar.TabIndex = 9;
             this.BCancelar.Text = "Cancelar y Salir";
             this.BCancelar.UseVisualStyleBackColor = true;
             this.BCancelar.Click += new System.EventHandler(this.BCancelar_Click);
             // 
             // combGenero
             // 
+            this.combGenero.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.combGenero.FormattingEnabled = true;
             this.combGenero.Location = new System.Drawing.Point(180, 179);
             this.combGenero.Name = "combGenero";
             this.combGenero.Size = new System.Drawing.Size(125, 21);
-            this.combGenero.TabIndex = 22;
+            this.combGenero.TabIndex = 2;
             // 
             // LTitulo
             // 
@@ -212,11 +216,31 @@
             this.pictureBox1.TabIndex = 24;
             this.pictureBox1.TabStop = false;
             // 
+            // LProveedor
+            // 
+            this.LProveedor.AutoSize = true;
+            this.LProveedor.Location = new System.Drawing.Point(72, 216);
+            this.LProveedor.Name = "LProveedor";
+            this.LProveedor.Size = new System.Drawing.Size(59, 13);
+            this.LProveedor.TabIndex = 25;
+            this.LProveedor.Text = "Proveedor:";
+            // 
+            // cmbProveedor
+            // 
+            this.cmbProveedor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbProveedor.FormattingEnabled = true;
+            this.cmbProveedor.Location = new System.Drawing.Point(180, 213);
+            this.cmbProveedor.Name = "cmbProveedor";
+            this.cmbProveedor.Size = new System.Drawing.Size(125, 21);
+            this.cmbProveedor.TabIndex = 3;
+            // 
             // FormProductoABM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(807, 459);
+            this.ClientSize = new System.Drawing.Size(807, 508);
+            this.Controls.Add(this.cmbProveedor);
+            this.Controls.Add(this.LProveedor);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.LTitulo);
             this.Controls.Add(this.combGenero);
@@ -265,5 +289,7 @@
         private System.Windows.Forms.ComboBox combGenero;
         private System.Windows.Forms.Label LTitulo;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label LProveedor;
+        private System.Windows.Forms.ComboBox cmbProveedor;
     }
 }

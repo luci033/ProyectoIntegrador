@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.BNuevo = new System.Windows.Forms.Button();
             this.LTitulo = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -51,6 +51,7 @@
             this.CStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStockMinimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colProveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colModificar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.colEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel1.SuspendLayout();
@@ -102,6 +103,7 @@
             // 
             // CBGenero
             // 
+            this.CBGenero.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CBGenero.FormattingEnabled = true;
             this.CBGenero.Location = new System.Drawing.Point(667, 17);
             this.CBGenero.Name = "CBGenero";
@@ -111,6 +113,7 @@
             // 
             // CBCategoria
             // 
+            this.CBCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CBCategoria.FormattingEnabled = true;
             this.CBCategoria.Location = new System.Drawing.Point(480, 17);
             this.CBCategoria.Name = "CBCategoria";
@@ -165,14 +168,14 @@
             this.dataGridCatalogoProd.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridCatalogoProd.BackgroundColor = System.Drawing.Color.White;
             this.dataGridCatalogoProd.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridCatalogoProd.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridCatalogoProd.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridCatalogoProd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridCatalogoProd.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CCodigo,
@@ -183,16 +186,17 @@
             this.CStock,
             this.colStockMinimo,
             this.colDescripcion,
+            this.colProveedor,
             this.colModificar,
             this.colEliminar});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(228)))), ((int)(((byte)(22)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridCatalogoProd.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(228)))), ((int)(((byte)(22)))));
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridCatalogoProd.DefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridCatalogoProd.EnableHeadersVisualStyles = false;
             this.dataGridCatalogoProd.Location = new System.Drawing.Point(4, 3);
             this.dataGridCatalogoProd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -203,6 +207,7 @@
             this.dataGridCatalogoProd.Size = new System.Drawing.Size(878, 259);
             this.dataGridCatalogoProd.TabIndex = 8;
             this.dataGridCatalogoProd.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridCatalogoProd.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridCatalogoProd_CellDoubleClick);
             // 
             // panel2
             // 
@@ -242,8 +247,8 @@
             // 
             // Column5
             // 
-            dataGridViewCellStyle2.Format = "C2";
-            this.Column5.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Format = "C2";
+            this.Column5.DefaultCellStyle = dataGridViewCellStyle6;
             this.Column5.FillWeight = 60F;
             this.Column5.HeaderText = "Precio";
             this.Column5.Name = "Column5";
@@ -251,8 +256,8 @@
             // 
             // CStock
             // 
-            dataGridViewCellStyle3.NullValue = null;
-            this.CStock.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.NullValue = null;
+            this.CStock.DefaultCellStyle = dataGridViewCellStyle7;
             this.CStock.FillWeight = 30F;
             this.CStock.HeaderText = "Stock";
             this.CStock.Name = "CStock";
@@ -271,6 +276,13 @@
             this.colDescripcion.Name = "colDescripcion";
             this.colDescripcion.ReadOnly = true;
             // 
+            // colProveedor
+            // 
+            this.colProveedor.HeaderText = "Proveedor";
+            this.colProveedor.Name = "colProveedor";
+            this.colProveedor.ReadOnly = true;
+            this.colProveedor.Visible = false;
+            // 
             // colModificar
             // 
             this.colModificar.FillWeight = 50F;
@@ -288,8 +300,7 @@
             this.colEliminar.Name = "colEliminar";
             this.colEliminar.ReadOnly = true;
             this.colEliminar.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.colEliminar.Text = "Desactivar";
-            this.colEliminar.UseColumnTextForButtonValue = true;
+            this.colEliminar.Text = "";
             // 
             // FormProductos
             // 
@@ -335,6 +346,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CStock;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStockMinimo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescripcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colProveedor;
         private System.Windows.Forms.DataGridViewButtonColumn colModificar;
         private System.Windows.Forms.DataGridViewButtonColumn colEliminar;
     }

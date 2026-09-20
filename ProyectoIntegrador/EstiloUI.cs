@@ -8,6 +8,7 @@ namespace ProyectoIntegrador
         // Paleta base ALBA
         public static readonly Color ColorBorgoña = Color.FromArgb(42, 8, 12);
         public static readonly Color ColorSeleccion = Color.FromArgb(235, 228, 222);
+        public static readonly Color ColorInactivo = Color.Gray;
 
         public static void AplicarEstiloGrilla(DataGridView dgv)
         {
@@ -53,13 +54,12 @@ namespace ProyectoIntegrador
         }
         // Nueva paleta de fondo
         public static readonly Color ColorFondo = Color.FromArgb(239, 236, 232);
-        // Nota: Tu ColorBorgoña (42, 8, 12) ya está definido al principio de tu clase
 
         public static void AplicarEstiloTitulo(Label titulo)
         {
             titulo.Font = new Font("Georgia", 24f, FontStyle.Bold);
             titulo.ForeColor = ColorBorgoña;
-            titulo.BackColor = Color.Transparent; // Evita un recuadro sólido alrededor del texto
+            titulo.BackColor = Color.Transparent;
         }
 
         public static void AplicarEstiloFormulario(Form formulario)

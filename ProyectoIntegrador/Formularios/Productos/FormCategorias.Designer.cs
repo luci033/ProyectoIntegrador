@@ -30,12 +30,11 @@
         {
             this.DGCategoria = new System.Windows.Forms.DataGridView();
             this.BAgregarCategoria = new System.Windows.Forms.Button();
-            this.LCategorias = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.LTitulo = new System.Windows.Forms.Label();
             this.Número = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CategoriaNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CategoriaModificar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.CategoriaDesactivar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.colModificar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.colDesactivar = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DGCategoria)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,8 +50,8 @@
             this.DGCategoria.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Número,
             this.CategoriaNombre,
-            this.CategoriaModificar,
-            this.CategoriaDesactivar});
+            this.colModificar,
+            this.colDesactivar});
             this.DGCategoria.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.DGCategoria.EnableHeadersVisualStyles = false;
             this.DGCategoria.Location = new System.Drawing.Point(0, 212);
@@ -69,7 +68,7 @@
             // 
             this.BAgregarCategoria.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.BAgregarCategoria.Location = new System.Drawing.Point(550, 120);
+            this.BAgregarCategoria.Location = new System.Drawing.Point(528, 77);
             this.BAgregarCategoria.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.BAgregarCategoria.Name = "BAgregarCategoria";
             this.BAgregarCategoria.Size = new System.Drawing.Size(204, 51);
@@ -78,32 +77,19 @@
             this.BAgregarCategoria.UseVisualStyleBackColor = true;
             this.BAgregarCategoria.Click += new System.EventHandler(this.BAgregarCategoria_Click);
             // 
-            // LCategorias
+            // LTitulo
             // 
-            this.LCategorias.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.LTitulo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.LCategorias.AutoSize = true;
-            this.LCategorias.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LCategorias.Location = new System.Drawing.Point(14, 55);
-            this.LCategorias.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.LCategorias.Name = "LCategorias";
-            this.LCategorias.Size = new System.Drawing.Size(411, 42);
-            this.LCategorias.TabIndex = 2;
-            this.LCategorias.Text = "Gestión de Categorías";
-            this.LCategorias.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(17, 120);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(164, 20);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Clasificación de Joyas";
+            this.LTitulo.AutoSize = true;
+            this.LTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LTitulo.Location = new System.Drawing.Point(14, 55);
+            this.LTitulo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.LTitulo.Name = "LTitulo";
+            this.LTitulo.Size = new System.Drawing.Size(411, 42);
+            this.LTitulo.TabIndex = 2;
+            this.LTitulo.Text = "Gestión de Categorías";
+            this.LTitulo.Click += new System.EventHandler(this.label1_Click);
             // 
             // Número
             // 
@@ -119,23 +105,21 @@
             this.CategoriaNombre.Name = "CategoriaNombre";
             this.CategoriaNombre.ReadOnly = true;
             // 
-            // CategoriaModificar
+            // colModificar
             // 
-            this.CategoriaModificar.FillWeight = 20F;
-            this.CategoriaModificar.HeaderText = "";
-            this.CategoriaModificar.Name = "CategoriaModificar";
-            this.CategoriaModificar.ReadOnly = true;
-            this.CategoriaModificar.Text = "Editar";
-            this.CategoriaModificar.UseColumnTextForButtonValue = true;
+            this.colModificar.FillWeight = 20F;
+            this.colModificar.HeaderText = "Modificar";
+            this.colModificar.Name = "colModificar";
+            this.colModificar.ReadOnly = true;
+            this.colModificar.Text = "";
             // 
-            // CategoriaDesactivar
+            // colDesactivar
             // 
-            this.CategoriaDesactivar.FillWeight = 15F;
-            this.CategoriaDesactivar.HeaderText = "";
-            this.CategoriaDesactivar.Name = "CategoriaDesactivar";
-            this.CategoriaDesactivar.ReadOnly = true;
-            this.CategoriaDesactivar.Text = "Eliminar";
-            this.CategoriaDesactivar.UseColumnTextForButtonValue = true;
+            this.colDesactivar.FillWeight = 15F;
+            this.colDesactivar.HeaderText = "Desactivar";
+            this.colDesactivar.Name = "colDesactivar";
+            this.colDesactivar.ReadOnly = true;
+            this.colDesactivar.Text = "";
             // 
             // FormCategorias
             // 
@@ -144,8 +128,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(807, 503);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.LCategorias);
+            this.Controls.Add(this.LTitulo);
             this.Controls.Add(this.BAgregarCategoria);
             this.Controls.Add(this.DGCategoria);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -163,11 +146,10 @@
 
         private System.Windows.Forms.DataGridView DGCategoria;
         private System.Windows.Forms.Button BAgregarCategoria;
-        private System.Windows.Forms.Label LCategorias;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label LTitulo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Número;
         private System.Windows.Forms.DataGridViewTextBoxColumn CategoriaNombre;
-        private System.Windows.Forms.DataGridViewButtonColumn CategoriaModificar;
-        private System.Windows.Forms.DataGridViewButtonColumn CategoriaDesactivar;
+        private System.Windows.Forms.DataGridViewButtonColumn colModificar;
+        private System.Windows.Forms.DataGridViewButtonColumn colDesactivar;
     }
 }

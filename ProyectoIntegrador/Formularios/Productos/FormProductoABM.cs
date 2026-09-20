@@ -15,7 +15,8 @@ namespace ProyectoIntegrador
         public string StockMinimo => textStockMinimo.Text.Trim(); // <- Agregá esta línea
         public string Descripcion => textDescripcion.Text.Trim();
         private bool esModificacion = false;
-
+        private bool esDetalle = false;
+        public string Proveedor => cmbProveedor.Text.Trim();
         public FormProductoABM()
         {
             InitializeComponent();
@@ -29,6 +30,7 @@ namespace ProyectoIntegrador
             EstiloUI.AplicarEstiloFormulario(this);
             cmbCategoria.Items.Clear();
             cmbCategoria.Items.AddRange(new string[] {"Anillos", "Collares", "Pulseras", "Aros", "Relojes"});
+            cmbProveedor.Items.AddRange(new string[] { "Joyas del Norte", "Distribuidora Oro S.A.", "Gemas y Piedras", "Importadora Rubi", "Platería Central" });
             textPrecio.Text = "0.01";
             textStockInicial.Text = "1";
 
@@ -36,6 +38,7 @@ namespace ProyectoIntegrador
             combGenero.Items.Clear();
             combGenero.Items.AddRange(new string[] { "Femenino", "Masculino"});
 
+            cmbProveedor.SelectedIndex = -1;
             cmbCategoria.SelectedIndex = -1;
             combGenero.SelectedIndex = -1;
         }
@@ -66,8 +69,15 @@ namespace ProyectoIntegrador
                 return false;
             }
 
-            // 5. valida precio uni
-            if (esModificacion == false)
+            if (string.IsNullOrWhiteSpace(cmbProveedor.Text))
+            {
+                MessageBox.Show("Seleccione un proveedor para el producto.", "Dato Requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cmbProveedor.Focus();
+                return false;
+            }
+
+                // 5. valida precio uni
+                if (esModificacion == false)
             {
                 if (!decimal.TryParse(textPrecio.Text, out decimal precio) || precio <= 0)
                 {
@@ -134,6 +144,12 @@ namespace ProyectoIntegrador
 
         private void BCancelar_Click(object sender, EventArgs e)
         {
+            if (esDetalle)
+            {
+                this.Close();
+                return; // Corta la ejecución para que no salga el MessageBox
+            }
+
             DialogResult Respuesta = MessageBox.Show(
                 "¿Está seguro de que desea cancelar?, Se perderan los datos no guardados.",
                 "Cancelar Registro", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
@@ -144,7 +160,7 @@ namespace ProyectoIntegrador
             }
         }
 
-        public void ConfigurarModoEdicion(string codigo, string nombre, string categoria, string genero, string precio, string stock, string stockMinimo, string descripcion)
+        public void ConfigurarModoEdicion(string codigo, string nombre, string categoria, string genero, string precio, string stock, string stockMinimo, string descripcion, string proveedor)
         {
             this.esModificacion = true;
             this.Text = "Modificar Producto";
@@ -168,6 +184,37 @@ namespace ProyectoIntegrador
 
             textStockInicial.Text = stock;
             textStockInicial.Enabled = false;
+
+            cmbProveedor.Text = proveedor;
+        }
+
+        public void ConfigurarModoDetalle(string codigo, string nombre, string categoria, string genero, string precio, string stock, string stockMinimo, string descripcion, string proveedor)
+        {
+            esDetalle = true;
+            this.Text = "Detalle Producto";
+            LTitulo.Text = "Detalle Producto";
+            BCrearProducto.Visible = false; // Ocultamos el botón de guardar
+            BCancelar.Text = "Cerrar"; // Cambiamos el texto del botón
+
+            // Cargamos los datos
+            textNombre.Text = nombre;
+            cmbCategoria.Text = categoria;
+            combGenero.Text = genero;
+            textPrecio.Text = precio;
+            textStockInicial.Text = stock;
+            textStockMinimo.Text = stockMinimo;
+            textDescripcion.Text = descripcion;
+            cmbProveedor.Text = proveedor;
+
+            // Bloqueamos todos los controles
+            textNombre.Enabled = false;
+            cmbCategoria.Enabled = false;
+            combGenero.Enabled = false;
+            textPrecio.Enabled = false;
+            textStockInicial.Enabled = false;
+            textStockMinimo.Enabled = false;
+            textDescripcion.Enabled = false;
+            cmbProveedor.Enabled = false;
         }
 
         private void textPrecio_TextChanged(object sender, EventArgs e)
