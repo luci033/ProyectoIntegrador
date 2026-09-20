@@ -26,28 +26,12 @@ namespace ProyectoIntegrador.Formularios.Usuarios
                 // Abre el formulario como modal
                 if (formCrear.ShowDialog() == DialogResult.OK)
                 {
-                    // 1. Revisamos si el DNI ya existe en la grilla
-                    foreach (DataGridViewRow fila in dataGridRegistroUsuario.Rows)
-                    {
-                        if (fila.Cells[0].Value != null && fila.Cells[0].Value.ToString() == formCrear.Dni)
-                        {
-                            MessageBox.Show("Ya existe un usuario registrado con el DNI: " + formCrear.Dni,
-                                            "Usuario duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return; // Frena la ejecución y NO agrega la fila
-                        }
-                    }
+                    MessageBox.Show("Usuario registrado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    //int nuevoId = 1; //temporal hasta hacer la conexion con la BD
-                    // Agregamos la nueva fila directamente a la grilla con los datos cargados
-                    dataGridRegistroUsuario.Rows.Add(
-                        0,
-                        formCrear.Dni,
-                        formCrear.Nombre,
-                        formCrear.Apellido,
-                        formCrear.Usuario,
-                        formCrear.Rol
-                    );
+                    // aca le decimos a la grilla que se recargue directo desde la base de datos
+                    CargarDatosGrilla();
                 }
+                
             }
         }
 
@@ -84,7 +68,20 @@ namespace ProyectoIntegrador.Formularios.Usuarios
                     item.User,
                     nombreRol
                 );
-                dataGridRegistroUsuario.Rows[indiceFila].Cells["colDesactivar"].Value = "Desactivar";
+
+                //evaluamos la memoria que trajo la BD
+                if(item.Activo == true)
+                {
+                    dataGridRegistroUsuario.Rows[indiceFila].Cells["colDesactivar"].Value = "Desactivar";
+
+                }
+                else
+                {
+                    // Si está inactivo: texto cambiar a Activar y pintamos de gris
+                    dataGridRegistroUsuario.Rows[indiceFila].Cells["colDesactivar"].Value = "Activar";
+                    dataGridRegistroUsuario.Rows[indiceFila].DefaultCellStyle.BackColor = Color.LightGray;
+                    dataGridRegistroUsuario.Rows[indiceFila].DefaultCellStyle.ForeColor = Color.DimGray;
+                }
             }
 
             /*
@@ -208,7 +205,8 @@ namespace ProyectoIntegrador.Formularios.Usuarios
                 if (modalABM.ShowDialog() == DialogResult.OK)
                 {
                     MessageBox.Show("Usuario modificado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    // TODO: Acá irá la actualización (UPDATE) a la base de datos
+
+                    CargarDatosGrilla();
                 }
             }
 
@@ -257,6 +255,45 @@ namespace ProyectoIntegrador.Formularios.Usuarios
                     {
                         MessageBox.Show("Hubo un problema: " + mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+                }
+            }
+            
+        }
+
+        private void CargarDatosGrilla()
+        {
+            // Limpiamos la grilla para que no se dupliquen los datos
+            dataGridRegistroUsuario.Rows.Clear();
+
+            // Traemos la lista actualizada de la base de datos
+            CN_Usuario negocioUsuario = new CN_Usuario();
+            List<Usuario> listaUsuarios = negocioUsuario.Listar();
+
+            foreach (Usuario item in listaUsuarios)
+            {
+                string nombreRol = "Desconocido";
+                if (item.IdRol == 1) nombreRol = "Administrador";
+                else if (item.IdRol == 2) nombreRol = "Vendedor";
+                else if (item.IdRol == 3) nombreRol = "Logística";
+
+                int indiceFila = dataGridRegistroUsuario.Rows.Add(
+                    item.IdUsuario,
+                    item.Dni,
+                    item.NombreUsuario,
+                    item.ApellidoUsuario,
+                    item.User,
+                    nombreRol
+                );
+
+                if (item.Activo == true)
+                {
+                    dataGridRegistroUsuario.Rows[indiceFila].Cells["colDesactivar"].Value = "Desactivar";
+                }
+                else
+                {
+                    dataGridRegistroUsuario.Rows[indiceFila].Cells["colDesactivar"].Value = "Activar";
+                    dataGridRegistroUsuario.Rows[indiceFila].DefaultCellStyle.BackColor = Color.LightGray;
+                    dataGridRegistroUsuario.Rows[indiceFila].DefaultCellStyle.ForeColor = Color.DimGray;
                 }
             }
         }

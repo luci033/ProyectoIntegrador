@@ -9,6 +9,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -248,16 +249,26 @@ namespace ProyectoIntegrador
             string mensaje;
             bool resultado = negocioUsuario.Registrar(nuevoUsuario, out mensaje);
 
-            // 9. Evaluar respuesta de la base de datos
-            if (resultado)
+            // Si el DNI está bloqueado, usamos el método EDITAR. Si no, REGISTRAR.
+            if (TBDni.Enabled == false)
             {
-                MessageBox.Show("Usuario registrado con éxito en la base de datos.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                resultado = negocioUsuario.Editar(nuevoUsuario, out mensaje);
+            }
+            else
+            {
+                resultado = negocioUsuario.Registrar(nuevoUsuario, out mensaje);
+            }
+
+            // 9. Evaluar respuesta
+            if (resultado == true)
+            {
+                MessageBox.Show("Operación realizada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             else
             {
-                MessageBox.Show("No se pudo registrar el usuario: " + mensaje, "Error al guardar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("No se pudo completar: " + mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -277,5 +288,6 @@ namespace ProyectoIntegrador
             TBUsuario.Text = nombreUsuario; 
             CBRol.Text = rol;
         }
+
     }
 }

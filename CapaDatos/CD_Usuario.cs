@@ -113,7 +113,7 @@ namespace CapaDatos
                 using (SqlConnection conexion = Conexion.ObtenerConexion())
                 {
                     // Escribimos la consulta SQL. Traemos los campos que necesitas para la grilla.
-                    string query = "SELECT IdUsuario, DNI, NombreUsuario, ApellidoUsuario, Usuario, IdRol FROM Usuarios";
+                    string query = "SELECT IdUsuario, DNI, NombreUsuario, ApellidoUsuario, Usuario, IdRol, Activo FROM Usuarios";
 
                     using (SqlCommand cmd = new SqlCommand(query, conexion))
                     {
@@ -132,7 +132,8 @@ namespace CapaDatos
                                     ApellidoUsuario = reader["ApellidoUsuario"].ToString(),
                                     User = reader["Usuario"].ToString(),
                                     IdRol = Convert.ToInt32(reader["IdRol"]),
-                                    Contrasena = ""
+                                    Contrasena = "",
+                                    Activo = Convert.ToBoolean(reader["Activo"])
                                 });
                             }
                         }
@@ -174,6 +175,50 @@ namespace CapaDatos
             {
                 respuesta = false;
                 mensaje = ex.Message;
+            }
+
+            return respuesta;
+        }
+
+        public bool EditarUsuario(Usuario obj, out string mensaje)
+        {
+            mensaje = string.Empty;
+            bool respuesta = false;
+
+            try
+            {
+                using (SqlConnection conexion = Conexion.ObtenerConexion())
+                {
+                    // Hacemos el UPDATE buscando específicamente por DNI
+                    string query = @"UPDATE Usuarios 
+                             SET Usuario = @Usuario, NombreUsuario = @Nombre, ApellidoUsuario = @Apellido, IdRol = @IdRol 
+                             WHERE DNI = @DNI";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conexion))
+                    {
+                        cmd.Parameters.AddWithValue("@Usuario", obj.User);
+                        cmd.Parameters.AddWithValue("@Nombre", string.IsNullOrWhiteSpace(obj.NombreUsuario) ? (object)DBNull.Value : obj.NombreUsuario);
+                        cmd.Parameters.AddWithValue("@Apellido", string.IsNullOrWhiteSpace(obj.ApellidoUsuario) ? (object)DBNull.Value : obj.ApellidoUsuario);
+                        cmd.Parameters.AddWithValue("@IdRol", obj.IdRol);
+                        cmd.Parameters.AddWithValue("@DNI", obj.Dni);
+
+                        int filasAfectadas = cmd.ExecuteNonQuery();
+                        respuesta = filasAfectadas > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                respuesta = false;
+                // Si intenta ponerse un nombre de usuario que ya tiene otra persona, lo atajamos:
+                if (ex.Message.Contains("UQ_Usuario"))
+                {
+                    mensaje = "El nombre de usuario ya está en uso. Por favor, elija otro.";
+                }
+                else
+                {
+                    mensaje = "Error al actualizar: " + ex.Message;
+                }
             }
 
             return respuesta;

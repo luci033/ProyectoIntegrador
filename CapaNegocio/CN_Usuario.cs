@@ -58,5 +58,19 @@ namespace CapaNegocio
         {
             return objCapaDato.CambiarEstadoUsuario(idUsuario, nuevoEstado, out mensaje);
         }
+
+        public bool Editar(Usuario obj, out string mensaje)
+        {
+            mensaje = string.Empty;
+
+            // Validamos que no nos mande el usuario vacío
+            if (string.IsNullOrWhiteSpace(obj.User))
+            {
+                mensaje = "El nombre de usuario no puede estar vacío.";
+                return false;
+            }
+
+            return objCapaDato.EditarUsuario(obj, out mensaje);
+        }
     }
 }
