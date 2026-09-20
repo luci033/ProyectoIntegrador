@@ -1,7 +1,8 @@
-﻿using System;
+﻿using CapaEntidades; 
+using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using CapaEntidades; 
 
 namespace CapaDatos
 {
@@ -100,6 +101,82 @@ namespace CapaDatos
             }
 
             return objUsuario; // Devuelve los datos del usuario o null si falló
+        }
+
+        // Método para listar (SELECT) todos los usuarios de la base de datos
+        public List<Usuario> Listar()
+        {
+            List<Usuario> lista = new List<Usuario>();
+
+            try
+            {
+                using (SqlConnection conexion = Conexion.ObtenerConexion())
+                {
+                    // Escribimos la consulta SQL. Traemos los campos que necesitas para la grilla.
+                    string query = "SELECT IdUsuario, DNI, NombreUsuario, ApellidoUsuario, Usuario, IdRol FROM Usuarios";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conexion))
+                    {
+                        cmd.CommandType = CommandType.Text;
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                // Por cada fila que encuentra SQL, armamos un "paquete" Usuario
+                                lista.Add(new Usuario()
+                                {
+                                    IdUsuario = Convert.ToInt32(reader["IdUsuario"]),
+                                    Dni = reader["DNI"].ToString(),
+                                    NombreUsuario = reader["NombreUsuario"].ToString(),
+                                    ApellidoUsuario = reader["ApellidoUsuario"].ToString(),
+                                    User = reader["Usuario"].ToString(),
+                                    IdRol = Convert.ToInt32(reader["IdRol"]),
+                                    Contrasena = ""
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Si explota algo, devolvemos la lista vacía para que no se rompa el programa
+                lista = new List<Usuario>();
+            }
+
+            return lista;
+        }
+
+        public bool CambiarEstadoUsuario(int idUsuario, int nuevoEstado, out string mensaje)
+        {
+            mensaje = string.Empty;
+            bool respuesta = false;
+
+            try
+            {
+                using (SqlConnection conexion = Conexion.ObtenerConexion())
+                {
+                    // Ahora actualizamos la columna Activo con el número exacto que le pasemos (0 o 1)
+                    string query = "UPDATE Usuarios SET Activo = @Estado WHERE IdUsuario = @IdUsuario";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conexion))
+                    {
+                        cmd.Parameters.AddWithValue("@Estado", nuevoEstado);
+                        cmd.Parameters.AddWithValue("@IdUsuario", idUsuario);
+
+                        int filasAfectadas = cmd.ExecuteNonQuery();
+                        respuesta = filasAfectadas > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                respuesta = false;
+                mensaje = ex.Message;
+            }
+
+            return respuesta;
         }
     }
 }

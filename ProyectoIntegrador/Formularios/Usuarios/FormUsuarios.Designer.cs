@@ -28,17 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.BAgregarUsuario = new System.Windows.Forms.Button();
             this.dataGridRegistroUsuario = new System.Windows.Forms.DataGridView();
-            this.colIdUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDni = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colApellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colModificar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.colDesactivar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.LTitulo = new System.Windows.Forms.Label();
             this.TBBuscar = new System.Windows.Forms.TextBox();
             this.LBuscar = new System.Windows.Forms.Label();
@@ -48,6 +40,14 @@
             this.LRol = new System.Windows.Forms.Label();
             this.CBEstado = new System.Windows.Forms.ComboBox();
             this.CBRol = new System.Windows.Forms.ComboBox();
+            this.colIdUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDni = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colApellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colModificar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.colDesactivar = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridRegistroUsuario)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -87,14 +87,14 @@
             this.colRol,
             this.colModificar,
             this.colDesactivar});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridRegistroUsuario.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridRegistroUsuario.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridRegistroUsuario.EnableHeadersVisualStyles = false;
             this.dataGridRegistroUsuario.Location = new System.Drawing.Point(0, 3);
             this.dataGridRegistroUsuario.Name = "dataGridRegistroUsuario";
@@ -104,68 +104,6 @@
             this.dataGridRegistroUsuario.Size = new System.Drawing.Size(767, 180);
             this.dataGridRegistroUsuario.TabIndex = 1;
             this.dataGridRegistroUsuario.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridRegistroUsuario_CellContentClick_1);
-            // 
-            // colIdUsuario
-            // 
-            this.colIdUsuario.HeaderText = "IdUsuario";
-            this.colIdUsuario.Name = "colIdUsuario";
-            this.colIdUsuario.ReadOnly = true;
-            this.colIdUsuario.Visible = false;
-            // 
-            // colDni
-            // 
-            this.colDni.FillWeight = 15F;
-            this.colDni.HeaderText = "DNI";
-            this.colDni.Name = "colDni";
-            this.colDni.ReadOnly = true;
-            // 
-            // colNombre
-            // 
-            this.colNombre.FillWeight = 20F;
-            this.colNombre.HeaderText = "Nombre";
-            this.colNombre.Name = "colNombre";
-            this.colNombre.ReadOnly = true;
-            // 
-            // colApellido
-            // 
-            this.colApellido.FillWeight = 20F;
-            this.colApellido.HeaderText = "Apellido";
-            this.colApellido.Name = "colApellido";
-            this.colApellido.ReadOnly = true;
-            // 
-            // colUsuario
-            // 
-            this.colUsuario.FillWeight = 30F;
-            this.colUsuario.HeaderText = "Usuario";
-            this.colUsuario.Name = "colUsuario";
-            this.colUsuario.ReadOnly = true;
-            // 
-            // colRol
-            // 
-            this.colRol.FillWeight = 15F;
-            this.colRol.HeaderText = "Rol";
-            this.colRol.Name = "colRol";
-            this.colRol.ReadOnly = true;
-            // 
-            // colModificar
-            // 
-            this.colModificar.FillWeight = 30F;
-            this.colModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.colModificar.HeaderText = "Modificar";
-            this.colModificar.Name = "colModificar";
-            this.colModificar.ReadOnly = true;
-            this.colModificar.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.colModificar.Text = "Modificar";
-            this.colModificar.UseColumnTextForButtonValue = true;
-            // 
-            // colDesactivar
-            // 
-            this.colDesactivar.FillWeight = 30F;
-            this.colDesactivar.HeaderText = "Desactivar";
-            this.colDesactivar.Name = "colDesactivar";
-            this.colDesactivar.ReadOnly = true;
-            this.colDesactivar.Text = "Desactivar";
-            this.colDesactivar.UseColumnTextForButtonValue = true;
             // 
             // LTitulo
             // 
@@ -258,6 +196,67 @@
             this.CBRol.Size = new System.Drawing.Size(121, 21);
             this.CBRol.TabIndex = 5;
             this.CBRol.SelectedIndexChanged += new System.EventHandler(this.CBRol_SelectedIndexChanged);
+            // 
+            // colIdUsuario
+            // 
+            this.colIdUsuario.HeaderText = "IdUsuario";
+            this.colIdUsuario.Name = "colIdUsuario";
+            this.colIdUsuario.ReadOnly = true;
+            this.colIdUsuario.Visible = false;
+            // 
+            // colDni
+            // 
+            this.colDni.FillWeight = 15F;
+            this.colDni.HeaderText = "DNI";
+            this.colDni.Name = "colDni";
+            this.colDni.ReadOnly = true;
+            // 
+            // colNombre
+            // 
+            this.colNombre.FillWeight = 20F;
+            this.colNombre.HeaderText = "Nombre";
+            this.colNombre.Name = "colNombre";
+            this.colNombre.ReadOnly = true;
+            // 
+            // colApellido
+            // 
+            this.colApellido.FillWeight = 20F;
+            this.colApellido.HeaderText = "Apellido";
+            this.colApellido.Name = "colApellido";
+            this.colApellido.ReadOnly = true;
+            // 
+            // colUsuario
+            // 
+            this.colUsuario.FillWeight = 30F;
+            this.colUsuario.HeaderText = "Usuario";
+            this.colUsuario.Name = "colUsuario";
+            this.colUsuario.ReadOnly = true;
+            // 
+            // colRol
+            // 
+            this.colRol.FillWeight = 15F;
+            this.colRol.HeaderText = "Rol";
+            this.colRol.Name = "colRol";
+            this.colRol.ReadOnly = true;
+            // 
+            // colModificar
+            // 
+            this.colModificar.FillWeight = 30F;
+            this.colModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.colModificar.HeaderText = "Modificar";
+            this.colModificar.Name = "colModificar";
+            this.colModificar.ReadOnly = true;
+            this.colModificar.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.colModificar.Text = "Modificar";
+            this.colModificar.UseColumnTextForButtonValue = true;
+            // 
+            // colDesactivar
+            // 
+            this.colDesactivar.FillWeight = 30F;
+            this.colDesactivar.HeaderText = "Desactivar";
+            this.colDesactivar.Name = "colDesactivar";
+            this.colDesactivar.ReadOnly = true;
+            this.colDesactivar.Text = "Desactivar";
             // 
             // FormUsuarios
             // 

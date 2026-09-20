@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CapaNegocio;                // Para que reconozca a CN_Usuario
+using CapaEntidades;              // Para que reconozca el objeto Usuario
 
 namespace ProyectoIntegrador.Formularios.Usuarios
 {
@@ -51,7 +53,7 @@ namespace ProyectoIntegrador.Formularios.Usuarios
 
         private void label1_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void FormUsuarios_Load(object sender, EventArgs e)
@@ -60,6 +62,30 @@ namespace ProyectoIntegrador.Formularios.Usuarios
             EstiloUI.AplicarEstiloFormulario(this);
             EstiloUI.AplicarEstiloTitulo(LTitulo);
             EstiloUI.AplicarEstiloBoton(BAgregarUsuario);
+            // 1. Llamamos a la Capa de Negocio para que nos traiga la lista real de SQL
+            CN_Usuario negocioUsuario = new CN_Usuario();
+            List<Usuario> listaUsuarios = negocioUsuario.Listar();
+
+            // 2. Recorremos la lista y la dibujamos en la grilla
+            foreach (Usuario item in listaUsuarios)
+            {
+                // Como SQL nos devuelve el Rol en números (1, 2), lo traducimos a palabras para que se vea lindo
+                string nombreRol = "Desconocido";
+                if (item.IdRol == 1) nombreRol = "Administrador";
+                else if (item.IdRol == 2) nombreRol = "Vendedor";
+                else if (item.IdRol == 3) nombreRol = "Logística";
+
+                // Agregamo la fila a tu DataGridView
+                int indiceFila = dataGridRegistroUsuario.Rows.Add(
+                    item.IdUsuario,
+                    item.Dni,
+                    item.NombreUsuario,
+                    item.ApellidoUsuario,
+                    item.User,
+                    nombreRol
+                );
+                dataGridRegistroUsuario.Rows[indiceFila].Cells["colDesactivar"].Value = "Desactivar";
+            }
 
             /*
             dataGridRegistroUsuario.Rows.Add(1, "12345678", "Juan", "Pérez", "jperez", "Administrador");
@@ -154,7 +180,7 @@ namespace ProyectoIntegrador.Formularios.Usuarios
 
         private void dataGridRegistroUsuario_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
-      
+
             // 1. Escudo para evitar errores si tocan los títulos de las columnas
             if (e.RowIndex < 0) return;
 
@@ -189,23 +215,52 @@ namespace ProyectoIntegrador.Formularios.Usuarios
             // --- ACCIÓN: BOTÓN DESACTIVAR (BAJA LÓGICA) ---
             else if (nombreColumna == "colDesactivar")
             {
-                // Atrapamos el nombre de usuario (Columna 4) para hacerlo más personalizado
+                int idUsuario = Convert.ToInt32(dataGridRegistroUsuario.Rows[e.RowIndex].Cells[0].Value);
                 string nombreUsuario = Convert.ToString(dataGridRegistroUsuario.Rows[e.RowIndex].Cells[4].Value);
+                DataGridViewRow fila = dataGridRegistroUsuario.Rows[e.RowIndex];
 
-                DialogResult respuesta = MessageBox.Show($"¿Seguro que deseas desactivar al usuario '{nombreUsuario}' con DNI {dni}?", "Confirmar Baja Lógica", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                // Detectamos el estado actual mirando el color de la fila
+                bool estaInactivo = fila.DefaultCellStyle.BackColor == Color.LightGray;
+
+                // Preparamos las variables según lo que vayamos a hacer
+                string accion = estaInactivo ? "activar" : "desactivar";
+                int nuevoEstadoBD = estaInactivo ? 1 : 0; // 1 = Prender, 0 = Apagar
+
+                DialogResult respuesta = MessageBox.Show($"¿Seguro que deseas {accion} al usuario '{nombreUsuario}'?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (respuesta == DialogResult.Yes)
                 {
-                    // Aplicamos la baja lógica visual: pintamos la fila de gris
-                    DataGridViewRow fila = dataGridRegistroUsuario.Rows[e.RowIndex];
-                    fila.DefaultCellStyle.BackColor = Color.LightGray;
-                    fila.DefaultCellStyle.ForeColor = Color.DimGray;
+                    CN_Usuario negocioUsuario = new CN_Usuario();
+                    string mensaje = "";
+                    bool resultado = negocioUsuario.CambiarEstado(idUsuario, nuevoEstadoBD, out mensaje);
 
-                    MessageBox.Show("Usuario desactivado. (Baja lógica aplicada con éxito)", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    // TODO: Acá irá el UPDATE a la base de datos para cambiar el estado a Inactivo
+                    if (resultado == true)
+                    {
+                        if (estaInactivo)
+                        {
+                            // Lo prendemos: Vuelve a ser blanco y el botón dice "Desactivar"
+                            fila.DefaultCellStyle.BackColor = Color.White;
+                            fila.DefaultCellStyle.ForeColor = Color.Black;
+                            fila.Cells["colDesactivar"].Value = "Desactivar";
+                        }
+                        else
+                        {
+                            // Lo apagamos: Se pone gris y el botón dice "Activar"
+                            fila.DefaultCellStyle.BackColor = Color.LightGray;
+                            fila.DefaultCellStyle.ForeColor = Color.DimGray;
+                            fila.Cells["colDesactivar"].Value = "Activar";
+                        }
+
+                        MessageBox.Show($"Usuario {accion}do con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Hubo un problema: " + mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
     }
-    
 }
+    
+

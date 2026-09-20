@@ -1,6 +1,7 @@
-﻿using System;
-using CapaDatos;
+﻿using CapaDatos;
 using CapaEntidades;
+using System;
+using System.Collections.Generic;
 
 namespace CapaNegocio
 {
@@ -33,18 +34,29 @@ namespace CapaNegocio
 
         //puente a la capa de negocio, se validan primero que los campos no esten vacios antes de ir a la BD
         public Usuario Login(string usuario, string contrasena, out string mensaje)
+        {
+            mensaje = string.Empty;
+
+            // Validación básica de seguridad
+            if (string.IsNullOrWhiteSpace(usuario) || string.IsNullOrWhiteSpace(contrasena))
             {
-                mensaje = string.Empty;
-
-                // Validación básica de seguridad
-                if (string.IsNullOrWhiteSpace(usuario) || string.IsNullOrWhiteSpace(contrasena))
-                {
-                    mensaje = "Debe ingresar el usuario y la contraseña.";
-                    return null;
-                }
-
-                // Si todo está ok, se pasa a la Capa de Datos
-                return objCapaDato.Login(usuario, contrasena);
+                mensaje = "Debe ingresar el usuario y la contraseña.";
+                return null;
             }
+
+            // Si todo está ok, se pasa a la Capa de Datos
+            return objCapaDato.Login(usuario, contrasena);
+        }
+
+        // Puente para pedirle la lista a la capa de datos
+        public List<Usuario> Listar()
+        {
+            return objCapaDato.Listar();
+        }
+
+        public bool CambiarEstado(int idUsuario, int nuevoEstado, out string mensaje)
+        {
+            return objCapaDato.CambiarEstadoUsuario(idUsuario, nuevoEstado, out mensaje);
         }
     }
+}
