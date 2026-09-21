@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -107,7 +107,16 @@ namespace ProyectoIntegrador.Formularios.Devoluciones
 
         private void FormRegistrarDevolucion_Load(object sender, EventArgs e)
         {
-
+            EstiloUI.AplicarEstiloFormulario(this);
+            EstiloUI.AplicarEstiloPanelSeccion(panel1, 12);
+            EstiloUI.AplicarEstiloPanelSeccion(panel2, 14);
+            EstiloUI.AplicarEstiloBoton(BBuscarVenta);
+            EstiloUI.AplicarEstiloBoton(BRegistrarDevolucion);
+            EstiloUI.AplicarEstiloBotonSecundario(BCancelar);
+            EstiloUI.AplicarEstiloTextBox(TBNroVenta);
+            EstiloUI.AplicarEstiloTextBox(TBCliente);
+            EstiloUI.AplicarEstiloTextBox(TBFecha);
+            EstiloUI.AplicarEstiloGrilla(DGDetalleVenta);
         }
     }
 }

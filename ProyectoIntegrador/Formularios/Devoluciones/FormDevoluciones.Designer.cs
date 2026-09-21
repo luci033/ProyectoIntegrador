@@ -1,4 +1,4 @@
-﻿namespace ProyectoIntegrador.Formularios.Devoluciones
+namespace ProyectoIntegrador.Formularios.Devoluciones
 {
     partial class FormDevoluciones
     {
@@ -45,6 +45,87 @@
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.LDevoluciones);
+            this.panel2.Controls.Add(this.BRegistrarDevolucion);
+            this.panel2.Location = new System.Drawing.Point(20, 20);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(960, 75);
+            this.panel2.TabIndex = 0;
+            // 
+            // LDevoluciones
+            // 
+            this.LDevoluciones.AutoSize = true;
+            this.LDevoluciones.BackColor = System.Drawing.Color.Transparent;
+            this.LDevoluciones.Font = new System.Drawing.Font("Georgia", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LDevoluciones.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LDevoluciones.Location = new System.Drawing.Point(25, 20);
+            this.LDevoluciones.Name = "LDevoluciones";
+            this.LDevoluciones.Size = new System.Drawing.Size(350, 31);
+            this.LDevoluciones.TabIndex = 0;
+            this.LDevoluciones.Text = "Gestión de Devoluciones";
+            this.LDevoluciones.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // BRegistrarDevolucion
+            // 
+            this.BRegistrarDevolucion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BRegistrarDevolucion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.BRegistrarDevolucion.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BRegistrarDevolucion.FlatAppearance.BorderSize = 0;
+            this.BRegistrarDevolucion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BRegistrarDevolucion.Font = new System.Drawing.Font("Georgia", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BRegistrarDevolucion.ForeColor = System.Drawing.Color.White;
+            this.BRegistrarDevolucion.Location = new System.Drawing.Point(735, 17);
+            this.BRegistrarDevolucion.Name = "BRegistrarDevolucion";
+            this.BRegistrarDevolucion.Size = new System.Drawing.Size(200, 40);
+            this.BRegistrarDevolucion.TabIndex = 1;
+            this.BRegistrarDevolucion.Text = "+ Registrar Devolución";
+            this.BRegistrarDevolucion.UseVisualStyleBackColor = false;
+            this.BRegistrarDevolucion.Click += new System.EventHandler(this.BRegistrarDevolucion_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.LBuscar);
+            this.panel1.Controls.Add(this.TBBuscar);
+            this.panel1.Controls.Add(this.DGDevoluciones);
+            this.panel1.Location = new System.Drawing.Point(20, 110);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(960, 480);
+            this.panel1.TabIndex = 1;
+            // 
+            // LBuscar
+            // 
+            this.LBuscar.AutoSize = true;
+            this.LBuscar.BackColor = System.Drawing.Color.Transparent;
+            this.LBuscar.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBuscar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LBuscar.Location = new System.Drawing.Point(25, 22);
+            this.LBuscar.Name = "LBuscar";
+            this.LBuscar.Size = new System.Drawing.Size(206, 17);
+            this.LBuscar.TabIndex = 0;
+            this.LBuscar.Text = "Buscar por Nro. Venta o Cliente:";
+            // 
+            // TBBuscar
+            // 
+            this.TBBuscar.BackColor = System.Drawing.Color.White;
+            this.TBBuscar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TBBuscar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TBBuscar.ForeColor = System.Drawing.Color.Black;
+            this.TBBuscar.Location = new System.Drawing.Point(240, 19);
+            this.TBBuscar.Name = "TBBuscar";
+            this.TBBuscar.Size = new System.Drawing.Size(300, 25);
+            this.TBBuscar.TabIndex = 1;
+            this.TBBuscar.TextChanged += new System.EventHandler(this.TBBuscar_TextChanged);
+            // 
             // DGDevoluciones
             // 
             this.DGDevoluciones.AllowUserToAddRows = false;
@@ -52,7 +133,12 @@
             this.DGDevoluciones.AllowUserToOrderColumns = true;
             this.DGDevoluciones.AllowUserToResizeColumns = false;
             this.DGDevoluciones.AllowUserToResizeRows = false;
+            this.DGDevoluciones.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DGDevoluciones.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DGDevoluciones.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(228)))), ((int)(((byte)(222)))));
+            this.DGDevoluciones.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.DGDevoluciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGDevoluciones.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colId,
@@ -60,53 +146,12 @@
             this.colCliente,
             this.colReintegro,
             this.colDetalle});
-            this.DGDevoluciones.Location = new System.Drawing.Point(3, 56);
+            this.DGDevoluciones.Location = new System.Drawing.Point(25, 60);
             this.DGDevoluciones.Name = "DGDevoluciones";
             this.DGDevoluciones.RowHeadersVisible = false;
-            this.DGDevoluciones.Size = new System.Drawing.Size(770, 172);
-            this.DGDevoluciones.TabIndex = 0;
+            this.DGDevoluciones.Size = new System.Drawing.Size(910, 395);
+            this.DGDevoluciones.TabIndex = 2;
             this.DGDevoluciones.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGDevoluciones_CellContentClick);
-            // 
-            // BRegistrarDevolucion
-            // 
-            this.BRegistrarDevolucion.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BRegistrarDevolucion.Location = new System.Drawing.Point(559, 46);
-            this.BRegistrarDevolucion.Name = "BRegistrarDevolucion";
-            this.BRegistrarDevolucion.Size = new System.Drawing.Size(156, 67);
-            this.BRegistrarDevolucion.TabIndex = 1;
-            this.BRegistrarDevolucion.Text = "Registrar Devolución";
-            this.BRegistrarDevolucion.UseVisualStyleBackColor = true;
-            this.BRegistrarDevolucion.Click += new System.EventHandler(this.BRegistrarDevolucion_Click);
-            // 
-            // LDevoluciones
-            // 
-            this.LDevoluciones.AutoSize = true;
-            this.LDevoluciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LDevoluciones.Location = new System.Drawing.Point(61, 60);
-            this.LDevoluciones.Name = "LDevoluciones";
-            this.LDevoluciones.Size = new System.Drawing.Size(203, 33);
-            this.LDevoluciones.TabIndex = 2;
-            this.LDevoluciones.Text = "Devoluciones";
-            this.LDevoluciones.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.TBBuscar);
-            this.panel1.Controls.Add(this.LBuscar);
-            this.panel1.Controls.Add(this.DGDevoluciones);
-            this.panel1.Location = new System.Drawing.Point(12, 207);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(776, 231);
-            this.panel1.TabIndex = 3;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.LDevoluciones);
-            this.panel2.Controls.Add(this.BRegistrarDevolucion);
-            this.panel2.Location = new System.Drawing.Point(12, 21);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(776, 162);
-            this.panel2.TabIndex = 4;
             // 
             // colId
             // 
@@ -137,32 +182,16 @@
             this.colDetalle.HeaderText = "Detalle";
             this.colDetalle.Name = "colDetalle";
             // 
-            // LBuscar
-            // 
-            this.LBuscar.AutoSize = true;
-            this.LBuscar.Location = new System.Drawing.Point(37, 24);
-            this.LBuscar.Name = "LBuscar";
-            this.LBuscar.Size = new System.Drawing.Size(159, 13);
-            this.LBuscar.TabIndex = 1;
-            this.LBuscar.Text = "Buscar por Nro. Venta o Cliente:";
-            // 
-            // TBBuscar
-            // 
-            this.TBBuscar.Location = new System.Drawing.Point(202, 21);
-            this.TBBuscar.Name = "TBBuscar";
-            this.TBBuscar.Size = new System.Drawing.Size(167, 20);
-            this.TBBuscar.TabIndex = 2;
-            this.TBBuscar.TextChanged += new System.EventHandler(this.TBBuscar_TextChanged);
-            // 
             // FormDevoluciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(232)))));
+            this.ClientSize = new System.Drawing.Size(1000, 610);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "FormDevoluciones";
-            this.Text = "Devoluciones";
+            this.Text = "Gestión de Devoluciones - Joyería ALBA";
             this.Load += new System.EventHandler(this.FormDevoluciones_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DGDevoluciones)).EndInit();
             this.panel1.ResumeLayout(false);
