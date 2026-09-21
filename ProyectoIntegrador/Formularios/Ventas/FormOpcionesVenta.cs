@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -9,6 +9,27 @@ namespace ProyectoIntegrador.Formularios.Ventas
         public FormOpcionesVenta()
         {
             InitializeComponent();
+        }
+
+        private void FormOpcionesVenta_Load(object sender, EventArgs e)
+        {
+            EstiloUI.AplicarEstiloFormulario(this);
+            EstiloUI.AplicarEstiloCard(panelCard, 16);
+            EstiloUI.AplicarBordesRedondeados(BRegistrarVenta, 14);
+            EstiloUI.AplicarBordesRedondeados(BHistorialVenta, 14);
+            BRegistrarVenta.Cursor = Cursors.Hand;
+            BHistorialVenta.Cursor = Cursors.Hand;
+            CentrarTarjeta();
+        }
+
+        private void CentrarTarjeta()
+        {
+            EstiloUI.CentrarControl(panelCard, this);
+        }
+
+        private void FormOpcionesVenta_Resize(object sender, EventArgs e)
+        {
+            CentrarTarjeta();
         }
 
         // Método genérico para abrir el nuevo form en el contenedor principal

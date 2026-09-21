@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -59,7 +59,13 @@ namespace ProyectoIntegrador.Formularios.Ventas
 
         private void FromCobro_Load(object sender, EventArgs e)
         {
-
+            EstiloUI.AplicarEstiloFormulario(this);
+            EstiloUI.AplicarEstiloCard(panelCard, 14);
+            EstiloUI.AplicarEstiloBoton(BFinalizarVenta);
+            EstiloUI.AplicarEstiloBotonSecundario(BVolver);
+            EstiloUI.AplicarEstiloBotonSecundario(BCancelar);
+            EstiloUI.AplicarEstiloTextBox(TBClienteCobro);
+            EstiloUI.AplicarEstiloTextBox(TBTotalCobro);
         }
 
         //cierra el modal sin cancelar la venta

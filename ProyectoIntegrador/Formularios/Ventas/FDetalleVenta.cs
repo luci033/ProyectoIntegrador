@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -65,7 +65,10 @@ namespace ProyectoIntegrador.Formularios.Ventas
 
         private void FDetalleVenta_Load(object sender, EventArgs e)
         {
-
+            EstiloUI.AplicarEstiloFormulario(this);
+            EstiloUI.AplicarEstiloCard(panelCard, 14);
+            EstiloUI.AplicarEstiloBoton(BCerrar);
+            EstiloUI.AplicarEstiloGrilla(dataGridDetalle);
         }
 
         private void BCerrar_Click(object sender, EventArgs e)

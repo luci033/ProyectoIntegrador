@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -96,6 +96,15 @@ namespace ProyectoIntegrador.Formularios.Ventas
 
         private void FHistorialVentas_Load(object sender, EventArgs e)
         {
+            EstiloUI.AplicarEstiloFormulario(this);
+            EstiloUI.AplicarEstiloTitulo(LHistorialVenta);
+            EstiloUI.AplicarEstiloPanelSeccion(panel1, 12);
+            EstiloUI.AplicarEstiloPanelSeccion(panelGrid, 14);
+            EstiloUI.AplicarEstiloBoton(BBuscar);
+            EstiloUI.AplicarEstiloBotonSecundario(BLimpiar);
+            EstiloUI.AplicarEstiloTextBox(TBBuscar);
+            EstiloUI.AplicarEstiloTextBox(TBTotalFiltrado);
+            EstiloUI.AplicarEstiloGrilla(DataGridHistorialVenta);
 
             // Llenamos el ComboBox con las opciones de búsqueda
             cmbBuscar.Items.Add("Nro. Venta");
