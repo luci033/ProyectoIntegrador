@@ -28,10 +28,10 @@ namespace ProyectoIntegrador.Formularios.Productos
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.BNuevo = new System.Windows.Forms.Button();
             this.LTitulo = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -59,7 +59,6 @@ namespace ProyectoIntegrador.Formularios.Productos
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // 
             // BNuevo
             // 
             this.BNuevo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -67,7 +66,7 @@ namespace ProyectoIntegrador.Formularios.Productos
             this.BNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BNuevo.Font = new System.Drawing.Font("Georgia", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BNuevo.ForeColor = System.Drawing.Color.White;
-            this.BNuevo.Location = new System.Drawing.Point(680, 22);
+            this.BNuevo.Location = new System.Drawing.Point(810, 22);
             this.BNuevo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.BNuevo.Name = "BNuevo";
             this.BNuevo.Size = new System.Drawing.Size(182, 44);
@@ -78,14 +77,13 @@ namespace ProyectoIntegrador.Formularios.Productos
             // 
             // LTitulo
             // 
-            this.LTitulo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
             this.LTitulo.AutoSize = true;
             this.LTitulo.Font = new System.Drawing.Font("Georgia", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
             this.LTitulo.Location = new System.Drawing.Point(24, 25);
             this.LTitulo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LTitulo.Name = "LTitulo";
-            this.LTitulo.Size = new System.Drawing.Size(400, 38);
+            this.LTitulo.Size = new System.Drawing.Size(383, 38);
             this.LTitulo.TabIndex = 15;
             this.LTitulo.Text = "Catálogo de Productos";
             this.LTitulo.Click += new System.EventHandler(this.LCatalogoProductos_Click);
@@ -103,7 +101,7 @@ namespace ProyectoIntegrador.Formularios.Productos
             this.panel1.Location = new System.Drawing.Point(24, 80);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(838, 48);
+            this.panel1.Size = new System.Drawing.Size(968, 48);
             this.panel1.TabIndex = 16;
             // 
             // CBGenero
@@ -177,14 +175,14 @@ namespace ProyectoIntegrador.Formularios.Productos
             this.dataGridCatalogoProd.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridCatalogoProd.BackgroundColor = System.Drawing.Color.White;
             this.dataGridCatalogoProd.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridCatalogoProd.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridCatalogoProd.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridCatalogoProd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridCatalogoProd.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CCodigo,
@@ -198,14 +196,14 @@ namespace ProyectoIntegrador.Formularios.Productos
             this.colProveedor,
             this.colModificar,
             this.colEliminar});
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(228)))), ((int)(((byte)(22)))));
-            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridCatalogoProd.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(228)))), ((int)(((byte)(22)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridCatalogoProd.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridCatalogoProd.EnableHeadersVisualStyles = false;
             this.dataGridCatalogoProd.Location = new System.Drawing.Point(4, 3);
             this.dataGridCatalogoProd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -213,7 +211,7 @@ namespace ProyectoIntegrador.Formularios.Productos
             this.dataGridCatalogoProd.ReadOnly = true;
             this.dataGridCatalogoProd.RowHeadersVisible = false;
             this.dataGridCatalogoProd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridCatalogoProd.Size = new System.Drawing.Size(878, 259);
+            this.dataGridCatalogoProd.Size = new System.Drawing.Size(960, 259);
             this.dataGridCatalogoProd.TabIndex = 8;
             this.dataGridCatalogoProd.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridCatalogoProd.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridCatalogoProd_CellDoubleClick);
@@ -247,8 +245,8 @@ namespace ProyectoIntegrador.Formularios.Productos
             // 
             // Column5
             // 
-            dataGridViewCellStyle18.Format = "C2";
-            this.Column5.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle2.Format = "C2";
+            this.Column5.DefaultCellStyle = dataGridViewCellStyle2;
             this.Column5.FillWeight = 60F;
             this.Column5.HeaderText = "Precio";
             this.Column5.Name = "Column5";
@@ -256,8 +254,8 @@ namespace ProyectoIntegrador.Formularios.Productos
             // 
             // CStock
             // 
-            dataGridViewCellStyle19.NullValue = null;
-            this.CStock.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle3.NullValue = null;
+            this.CStock.DefaultCellStyle = dataGridViewCellStyle3;
             this.CStock.FillWeight = 30F;
             this.CStock.HeaderText = "Stock";
             this.CStock.Name = "CStock";
@@ -310,7 +308,7 @@ namespace ProyectoIntegrador.Formularios.Productos
             this.panel2.Controls.Add(this.dataGridCatalogoProd);
             this.panel2.Location = new System.Drawing.Point(24, 138);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(838, 560);
+            this.panel2.Size = new System.Drawing.Size(968, 560);
             this.panel2.TabIndex = 17;
             // 
             // FormProductos
@@ -318,7 +316,7 @@ namespace ProyectoIntegrador.Formularios.Productos
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(232)))));
-            this.ClientSize = new System.Drawing.Size(886, 732);
+            this.ClientSize = new System.Drawing.Size(1016, 732);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.BNuevo);
             this.Controls.Add(this.panel2);
