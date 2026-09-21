@@ -37,6 +37,8 @@ namespace ProyectoIntegrador
             this.WindowState = FormWindowState.Maximized;
             EstiloUI.AplicarEstiloFormulario(this);
             EstiloUI.AplicarEstiloTitulo(LTitulo);
+            EstiloUI.AplicarEstiloCard(panelCard, 16);
+            EstiloUI.AplicarBordesRedondeados(pictureBox1, 8);
             EstiloUI.AplicarEstiloBoton(BCrearProducto);
             EstiloUI.AplicarEstiloBotonSecundario(BCancelar);
             EstiloUI.AplicarEstiloTextBox(textNombre);

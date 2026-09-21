@@ -30,6 +30,7 @@ namespace ProyectoIntegrador.Formularios.Productos
             this.WindowState = FormWindowState.Maximized;
             EstiloUI.AplicarEstiloFormulario(this);
             EstiloUI.AplicarEstiloTitulo(LTitulo);
+            EstiloUI.AplicarEstiloCard(panelCard, 16);
             EstiloUI.AplicarEstiloBoton(BGuardar);
             EstiloUI.AplicarEstiloBotonSecundario(BCancelar);
             EstiloUI.AplicarEstiloTextBox(TNuevaCategoria);

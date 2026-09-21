@@ -32,6 +32,7 @@ namespace ProyectoIntegrador.Formularios.Productos
             EstiloUI.AplicarEstiloFormulario(this);
             EstiloUI.AplicarEstiloTitulo(LTitulo);
             EstiloUI.AplicarEstiloBotonSecundario(BCancelar);
+            EstiloUI.AplicarEstiloPanelSeccion(panel2, 10);
             EstiloUI.AplicarEstiloGrilla(DGProductos);
             EstiloUI.AplicarEstiloTextBox(TBBuscar);
 

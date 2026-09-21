@@ -24,6 +24,7 @@ namespace ProyectoIntegrador.Formularios.Productos
             EstiloUI.AplicarEstiloFormulario(this);
             EstiloUI.AplicarEstiloTitulo(LTitulo);
             EstiloUI.AplicarEstiloBoton(BNuevo);
+            EstiloUI.AplicarEstiloPanelSeccion(panel1, 10);
             EstiloUI.AplicarEstiloGrilla(dataGridCatalogoProd);
             EstiloUI.AplicarEstiloTextBox(TBBuscarProducto);
 
