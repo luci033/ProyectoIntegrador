@@ -70,11 +70,6 @@ namespace ProyectoIntegrador.Formularios.Productos
             this.Close();
         }
 
-        private void DD(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void DGProductos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)

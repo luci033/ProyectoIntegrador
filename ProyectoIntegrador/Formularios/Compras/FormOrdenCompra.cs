@@ -177,6 +177,13 @@ namespace ProyectoIntegrador.Formularios.Compras
                     return;
                 }
 
+                // NUEVA VALIDACIÓN: Verifica que el subtotal (índice 7) sea mayor a cero
+                if (Convert.ToDecimal(fila.Cells[7].Value ?? 0) <= 0)
+                {
+                    MessageBox.Show("Todos los productos deben tener un costo unitario y subtotal mayor a cero.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 // Agregamos un noveno elemento al final ("") para la cantidad recibida
                 DetallesProductos.Add(new object[] {
             fila.Cells[0].Value, // [0] ID
@@ -248,14 +255,9 @@ namespace ProyectoIntegrador.Formularios.Compras
 
         private void DGDetalleOrden_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            // Verificamos si el error ocurrió en la columna de Cantidad (5) o Costo Unitario (6)
-            if (e.ColumnIndex == 5 || e.ColumnIndex == 6)
-            {
-                MessageBox.Show("Por favor, ingresá solo números válidos.", "Formato incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                // Evitamos que el sistema lance la excepción por defecto y cierre la app
-                e.ThrowException = false;
-            }
+            // Solo evitamos que la aplicación se rompa por errores internos de formato.
+            // Ya eliminamos el MessageBox de acá para que no se superponga con el de CellValidating y trabe la pantalla.
+            e.ThrowException = false;
         }
 
         private void DGDetalleOrden_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
@@ -263,13 +265,18 @@ namespace ProyectoIntegrador.Formularios.Compras
             // Verificamos si estamos editando la Cantidad (5) o el Costo Unitario (6)
             if (e.ColumnIndex == 5 || e.ColumnIndex == 6)
             {
-                // Si hay texto escrito y NO se puede convertir a número decimal...
-                if (!decimal.TryParse(e.FormattedValue.ToString(), out decimal n) && !string.IsNullOrEmpty(e.FormattedValue.ToString()))
-                {
-                    MessageBox.Show("Por favor, ingresá solo números válidos.", "Formato incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                string valorIngresado = e.FormattedValue.ToString();
 
-                    // Cancela el cambio y no deja salir de la celda hasta que se corrige
-                    e.Cancel = true;
+                // Si borran todo y dejan vacío, lo dejamos pasar temporalmente
+                if (string.IsNullOrWhiteSpace(valorIngresado)) return;
+
+                // Cambiamos a <= 0 para obligar a que sea estrictamente mayor a cero
+                if (!decimal.TryParse(valorIngresado, out decimal numero) || numero <= 0)
+                {
+                    MessageBox.Show("Por favor, ingresá un número válido que sea mayor a cero.", "Valor incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    // Deshace el cambio y libera la celda
+                    DGDetalleOrden.CancelEdit();
                 }
             }
         }

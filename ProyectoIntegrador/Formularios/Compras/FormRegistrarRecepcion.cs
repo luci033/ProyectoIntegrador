@@ -35,6 +35,9 @@ namespace ProyectoIntegrador.Formularios.Compras
             EstiloUI.AplicarEstiloBoton(BAceptar);
             EstiloUI.AplicarEstiloBoton(BCancelar);
             TBFechaRecepcion.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            DGDetalleRecepcion.CellValidating += new DataGridViewCellValidatingEventHandler(DGDetalleRecepcion_CellValidating);
+            DGDetalleRecepcion.DataError += new DataGridViewDataErrorEventHandler(DGDetalleRecepcion_DataError);
+
 
             // Llenar grilla dinámicamente
             if (listaProductos != null)
@@ -89,6 +92,32 @@ namespace ProyectoIntegrador.Formularios.Compras
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        private void DGDetalleRecepcion_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            // Columna 4 es "Cantidad Recibida"
+            if (e.ColumnIndex == 4)
+            {
+                string valorIngresado = e.FormattedValue.ToString();
+                if (string.IsNullOrWhiteSpace(valorIngresado)) return;
+
+                // Capturamos la cantidad pedida de la columna 3
+                int cantPedida = Convert.ToInt32(DGDetalleRecepcion.Rows[e.RowIndex].Cells[3].Value ?? 0);
+
+                // Validamos que sea número, que no sea negativo y que no supere la pedida
+                if (!int.TryParse(valorIngresado, out int cantRecibida) || cantRecibida < 0 || cantRecibida > cantPedida)
+                {
+                    MessageBox.Show($"Por favor, ingresá un número entre 0 y {cantPedida}.", "Valor incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    DGDetalleRecepcion.CancelEdit(); // Deshace el cambio
+                }
+            }
+        }
+
+        private void DGDetalleRecepcion_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            // Evita que el programa se cierre si ingresan letras
+            e.ThrowException = false;
         }
 
         private void TBNroOrden_TextChanged(object sender, EventArgs e)

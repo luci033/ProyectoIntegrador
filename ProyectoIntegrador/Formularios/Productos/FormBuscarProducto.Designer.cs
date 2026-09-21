@@ -68,8 +68,7 @@
             this.DGProductos.RowHeadersVisible = false;
             this.DGProductos.Size = new System.Drawing.Size(797, 193);
             this.DGProductos.TabIndex = 0;
-            this.DGProductos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGProductos_CellDoubleClick);
-            this.DGProductos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DD);
+            this.DGProductos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGProductos_CellDoubleClick);
             // 
             // colIdProducto
             // 
@@ -149,6 +148,7 @@
             // 
             // CBCategoria
             // 
+            this.CBCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CBCategoria.FormattingEnabled = true;
             this.CBCategoria.Location = new System.Drawing.Point(403, 17);
             this.CBCategoria.Name = "CBCategoria";
@@ -158,6 +158,7 @@
             // 
             // CBGenero
             // 
+            this.CBGenero.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CBGenero.FormattingEnabled = true;
             this.CBGenero.Location = new System.Drawing.Point(616, 17);
             this.CBGenero.Name = "CBGenero";
