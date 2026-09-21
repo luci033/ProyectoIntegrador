@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -29,8 +29,36 @@ namespace ProyectoIntegrador.Formularios.Inventario
 
         private void FormAjusteStock_Load(object sender, EventArgs e)
         {
+            this.WindowState = FormWindowState.Maximized;
+            EstiloUI.AplicarEstiloFormulario(this);
+            EstiloUI.AplicarEstiloTitulo(LTitulo);
+            EstiloUI.AplicarEstiloCard(panelCard, 16);
+            EstiloUI.AplicarEstiloPanelSeccion(panel1, 12);
+            EstiloUI.AplicarEstiloPanelSeccion(panel2, 12);
+            EstiloUI.AplicarEstiloBoton(BBuscarProducto);
+            EstiloUI.AplicarEstiloBoton(BConfirmar);
+            EstiloUI.AplicarEstiloBotonSecundario(BCancelar);
+
+            EstiloUI.AplicarEstiloTextBox(TBUsuarioActivo);
+            EstiloUI.AplicarEstiloTextBox(TBCodigoProducto);
+            EstiloUI.AplicarEstiloTextBox(TBNombreProducto);
+            EstiloUI.AplicarEstiloTextBox(TBStockActual);
+            EstiloUI.AplicarEstiloTextBox(TBCantidadAjustar);
+            EstiloUI.AplicarEstiloTextBox(TBObservaciones);
+
+            TBStockActual.Font = new Font("Segoe UI", 14f, FontStyle.Bold);
+            TBStockActual.ForeColor = EstiloUI.ColorBorgoña;
+
+            EstiloUI.CentrarControl(panelCard, this);
+
             //TBUsuarioActivo.Text = SesionActual.NombreUsuario; // O tu clase estática de sesión
+            CBTipoAjuste.Items.Clear();
             CBTipoAjuste.Items.AddRange(new string[] { "Ingreso", "Egreso" });
+        }
+
+        private void FormAjusteStock_Resize(object sender, EventArgs e)
+        {
+            EstiloUI.CentrarControl(panelCard, this);
         }
 
         private void BBuscarProducto_Click(object sender, EventArgs e)
