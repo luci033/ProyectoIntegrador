@@ -84,14 +84,17 @@ namespace ProyectoIntegrador.Formularios.Proveedores
 
         private void FormProveedorABM_Load(object sender, EventArgs e)
         {
-
+            EstiloUI.AplicarEstiloFormulario(this);
+            EstiloUI.AplicarEstiloTitulo(LTitulo);
+            EstiloUI.AplicarEstiloBoton(BCancelar);
+            EstiloUI.AplicarEstiloBoton(BGuardar);
         }
 
         public void ConfigurarModoEdicion(string razon, string cuit, string tel, string correo)
         {
             this.Text = "Modificar Proveedor"; // Título de la ventana
 
-            LNuevoProveedor.Text = "Modificar Proveedor"; 
+            LTitulo.Text = "Modificar Proveedor"; 
 
             TBRazonSocial.Text = razon;
             TBRazonSocial.Enabled = false; // Impide modificar

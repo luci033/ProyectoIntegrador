@@ -236,7 +236,6 @@
             this.colCantidadPedida.FillWeight = 50F;
             this.colCantidadPedida.HeaderText = "Cantidad Pedida";
             this.colCantidadPedida.Name = "colCantidadPedida";
-            this.colCantidadPedida.ReadOnly = true;
             // 
             // colCantidadRecibida
             // 

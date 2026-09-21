@@ -12,16 +12,19 @@ namespace ProyectoIntegrador.Formularios.Compras
 {
     public partial class FormVerDetalle : Form
     {
-        public FormVerDetalle(string nro, string prov, string fecha, string recep, string obs, string total)
+        private List<object[]> listaProductos; // Variable global
+
+        // Actualizar constructor
+        public FormVerDetalle(string nro, string prov, string fecha, string recep, string obs, string total, List<object[]> detalles)
         {
             InitializeComponent();
-
             TBNroOrden.Text = nro;
             TBProveedor.Text = prov;
             TBFechaEmision.Text = fecha;
             TBFechaRecepcion.Text = recep;
             TBObservacion.Text = obs;
             TBTotalGeneral.Text = total;
+            listaProductos = detalles; // Asignar
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -35,8 +38,30 @@ namespace ProyectoIntegrador.Formularios.Compras
         }
 
         private void FormVerDetalle_Load(object sender, EventArgs e)
-        { 
-            DGDetalleOrden.Rows.Add(1 ,"1123456", "Collar Rubí", "Collares", "Femenino", 2, "$ 155.760,00", "$ 311.520,00");
+        {
+            EstiloUI.AplicarEstiloGrilla(DGDetalleOrden);
+            EstiloUI.AplicarEstiloFormulario(this);
+            EstiloUI.AplicarEstiloTitulo(LTitulo);
+            EstiloUI.AplicarEstiloBoton(BCerrar);
+
+            // Llenar grilla dinámicamente
+            if (listaProductos != null)
+            {
+                foreach (var item in listaProductos)
+                {
+                    DGDetalleOrden.Rows.Add(
+                        item[0], // ID
+                        item[1], // Código
+                        item[2], // Nombre
+                        item[3], // Categoría
+                        item[4], // Género
+                        item[5], // Cantidad Pedida
+                        item[8], // Cantidad Recibida (Índice 8 que acabamos de crear)
+                        item[6], // Costo
+                        item[7]  // Subtotal
+                    );
+                }
+            }
         }
 
         private void label5_Click(object sender, EventArgs e)

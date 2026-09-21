@@ -29,37 +29,40 @@ namespace ProyectoIntegrador.Formularios.Compras
                 if (formNueva.ShowDialog() == DialogResult.OK)
                 {
                     int nro = DGCompras.Rows.Count + 1;
-                    // agregar fila 
-                    DGCompras.Rows.Add(nro, formNueva.Fecha, formNueva.Proveedor, "Registrar Recepción", "", formNueva.Total, "Ver...");
+                    int indice = DGCompras.Rows.Add(nro, formNueva.Fecha, formNueva.Proveedor, "Registrar Recepción", "", formNueva.Total, "Ver...");
+
+                    // 1. Guardamos la lista de productos ocultos en la propiedad Tag de la fila
+                    DGCompras.Rows[indice].Tag = formNueva.DetallesProductos;
                 }
             }
         }
 
         private void DGProveedores_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0) return; // para no clickear los titulos
+            if (e.RowIndex < 0) return;
 
-            // fecha recepción es columna 3
             if (e.ColumnIndex == 3 && DGCompras.Rows[e.RowIndex].Cells[3].Value.ToString() == "Registrar Recepción")
             {
                 string nro = DGCompras.Rows[e.RowIndex].Cells[0].Value.ToString();
                 string fecha = DGCompras.Rows[e.RowIndex].Cells[1].Value.ToString();
                 string prov = DGCompras.Rows[e.RowIndex].Cells[2].Value.ToString();
-                using (FormRegistrarRecepcion formRecepcion = new FormRegistrarRecepcion(nro, prov, fecha))
+
+                // 2. Recuperamos los productos
+                List<object[]> detalles = DGCompras.Rows[e.RowIndex].Tag as List<object[]>;
+
+                // 3. Los mandamos por parámetro
+                using (FormRegistrarRecepcion formRecepcion = new FormRegistrarRecepcion(nro, prov, fecha, detalles))
                 {
                     if (formRecepcion.ShowDialog() == DialogResult.OK)
                     {
-                        // reemplazo el boton por la fecha seleccionada y la observacion
                         DGCompras.Rows[e.RowIndex].Cells[3].Value = formRecepcion.FechaSeleccionada;
                         DGCompras.Rows[e.RowIndex].Cells[4].Value = formRecepcion.Observacion;
                     }
                 }
             }
-            // detalle es la col index 6
             else if (e.ColumnIndex == 6)
             {
                 DataGridViewRow fila = DGCompras.Rows[e.RowIndex];
-
                 string nro = fila.Cells[0].Value?.ToString();
                 string fecha = fila.Cells[1].Value?.ToString();
                 string prov = fila.Cells[2].Value?.ToString();
@@ -67,7 +70,9 @@ namespace ProyectoIntegrador.Formularios.Compras
                 string obs = fila.Cells[4].Value?.ToString();
                 string total = fila.Cells[5].Value?.ToString();
 
-                using (FormVerDetalle formDetalle = new FormVerDetalle(nro, prov, fecha, recep, obs, total))
+                // 4. Recuperamos los productos y los mandamos
+                List<object[]> detalles = fila.Tag as List<object[]>;
+                using (FormVerDetalle formDetalle = new FormVerDetalle(nro, prov, fecha, recep, obs, total, detalles))
                 {
                     formDetalle.ShowDialog();
                 }

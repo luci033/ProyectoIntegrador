@@ -149,16 +149,26 @@ namespace ProyectoIntegrador.Formularios.Compras
         public string Fecha => TBFecha.Text;
         public string Total => TBTotal.Text;
 
+        public List<object[]> DetallesProductos { get; private set; } = new List<object[]>();
+
         private void BGenerarOrden_Click(object sender, EventArgs e)
         {
-            // verifica que haya proveedor y al menos un producto
+            // Validación de Total > 0
+            decimal totalOrden = 0;
+            decimal.TryParse(TBTotal.Text.Replace("$", "").Trim(), out totalOrden);
+
+            if (totalOrden <= 0)
+            {
+                MessageBox.Show("El total de la orden debe ser mayor a cero.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (string.IsNullOrWhiteSpace(Proveedor) || DGDetalleOrden.Rows.Count == 0)
             {
                 MessageBox.Show("Faltan datos o productos.");
                 return;
             }
 
-            // verificamos q no sea 0 la cantidad 
             foreach (DataGridViewRow fila in DGDetalleOrden.Rows)
             {
                 if (Convert.ToDecimal(fila.Cells[5].Value ?? 0) <= 0)
@@ -166,6 +176,19 @@ namespace ProyectoIntegrador.Formularios.Compras
                     MessageBox.Show("No podés generar una orden con productos en cantidad 0.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+
+                // Agregamos un noveno elemento al final ("") para la cantidad recibida
+                DetallesProductos.Add(new object[] {
+            fila.Cells[0].Value, // [0] ID
+            fila.Cells[1].Value, // [1] Código
+            fila.Cells[2].Value, // [2] Nombre
+            fila.Cells[3].Value, // [3] Categoría
+            fila.Cells[4].Value, // [4] Género
+            fila.Cells[5].Value, // [5] Cantidad Pedida
+            fila.Cells[6].Value, // [6] Costo
+            fila.Cells[7].Value, // [7] Subtotal
+            ""                   // [8] Cantidad Recibida (Inicia vacía)
+        });
             }
 
             this.DialogResult = DialogResult.OK;

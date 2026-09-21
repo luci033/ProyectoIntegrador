@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.TBProveedor = new System.Windows.Forms.TextBox();
             this.LProveedor = new System.Windows.Forms.Label();
@@ -40,7 +40,7 @@
             this.LObservacion = new System.Windows.Forms.Label();
             this.LFechaRecepcion = new System.Windows.Forms.Label();
             this.LFechaEmision = new System.Windows.Forms.Label();
-            this.LDetalleOrden = new System.Windows.Forms.Label();
+            this.LTitulo = new System.Windows.Forms.Label();
             this.LNroOrden = new System.Windows.Forms.Label();
             this.BCerrar = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -54,6 +54,7 @@
             this.colCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colGenero = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCantidadRecibida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CostoUnitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
@@ -157,16 +158,16 @@
             this.LFechaEmision.TabIndex = 1;
             this.LFechaEmision.Text = "Fecha Emisión:";
             // 
-            // LDetalleOrden
+            // LTitulo
             // 
-            this.LDetalleOrden.AutoSize = true;
-            this.LDetalleOrden.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LDetalleOrden.Location = new System.Drawing.Point(12, 9);
-            this.LDetalleOrden.Name = "LDetalleOrden";
-            this.LDetalleOrden.Size = new System.Drawing.Size(157, 25);
-            this.LDetalleOrden.TabIndex = 1;
-            this.LDetalleOrden.Text = "Detalle Orden";
-            this.LDetalleOrden.Click += new System.EventHandler(this.label2_Click);
+            this.LTitulo.AutoSize = true;
+            this.LTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LTitulo.Location = new System.Drawing.Point(12, 9);
+            this.LTitulo.Name = "LTitulo";
+            this.LTitulo.Size = new System.Drawing.Size(157, 25);
+            this.LTitulo.TabIndex = 1;
+            this.LTitulo.Text = "Detalle Orden";
+            this.LTitulo.Click += new System.EventHandler(this.label2_Click);
             // 
             // LNroOrden
             // 
@@ -228,6 +229,7 @@
             this.colCategoria,
             this.colGenero,
             this.cantidad,
+            this.colCantidadRecibida,
             this.CostoUnitario,
             this.Subtotal});
             this.DGDetalleOrden.GridColor = System.Drawing.Color.Silver;
@@ -299,10 +301,16 @@
             this.cantidad.Name = "cantidad";
             this.cantidad.ReadOnly = true;
             // 
+            // colCantidadRecibida
+            // 
+            this.colCantidadRecibida.FillWeight = 34.85054F;
+            this.colCantidadRecibida.HeaderText = "Cantidad Recibida";
+            this.colCantidadRecibida.Name = "colCantidadRecibida";
+            // 
             // CostoUnitario
             // 
-            dataGridViewCellStyle3.Format = "C2";
-            this.CostoUnitario.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Format = "C2";
+            this.CostoUnitario.DefaultCellStyle = dataGridViewCellStyle1;
             this.CostoUnitario.FillWeight = 55F;
             this.CostoUnitario.HeaderText = "Costo Unitario";
             this.CostoUnitario.Name = "CostoUnitario";
@@ -310,8 +318,8 @@
             // 
             // Subtotal
             // 
-            dataGridViewCellStyle4.Format = "C2";
-            this.Subtotal.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Format = "C2";
+            this.Subtotal.DefaultCellStyle = dataGridViewCellStyle2;
             this.Subtotal.FillWeight = 58.08423F;
             this.Subtotal.HeaderText = "Subtotal ";
             this.Subtotal.Name = "Subtotal";
@@ -326,7 +334,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.BCerrar);
             this.Controls.Add(this.LNroOrden);
-            this.Controls.Add(this.LDetalleOrden);
+            this.Controls.Add(this.LTitulo);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.MaximumSize = new System.Drawing.Size(816, 588);
@@ -354,7 +362,7 @@
         private System.Windows.Forms.Label LObservacion;
         private System.Windows.Forms.Label LFechaRecepcion;
         private System.Windows.Forms.Label LFechaEmision;
-        private System.Windows.Forms.Label LDetalleOrden;
+        private System.Windows.Forms.Label LTitulo;
         private System.Windows.Forms.Label LNroOrden;
         private System.Windows.Forms.Button BCerrar;
         private System.Windows.Forms.TextBox TBProveedor;
@@ -372,6 +380,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategoria;
         private System.Windows.Forms.DataGridViewTextBoxColumn colGenero;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCantidadRecibida;
         private System.Windows.Forms.DataGridViewTextBoxColumn CostoUnitario;
         private System.Windows.Forms.DataGridViewTextBoxColumn Subtotal;
     }

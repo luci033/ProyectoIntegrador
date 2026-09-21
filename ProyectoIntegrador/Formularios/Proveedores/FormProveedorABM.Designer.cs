@@ -37,7 +37,7 @@
             this.TBCorreo = new System.Windows.Forms.TextBox();
             this.BGuardar = new System.Windows.Forms.Button();
             this.BCancelar = new System.Windows.Forms.Button();
-            this.LNuevoProveedor = new System.Windows.Forms.Label();
+            this.LTitulo = new System.Windows.Forms.Label();
             this.TBTelefono = new System.Windows.Forms.TextBox();
             this.LTelefono = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
@@ -115,15 +115,15 @@
             this.BCancelar.UseVisualStyleBackColor = true;
             this.BCancelar.Click += new System.EventHandler(this.BCancelar_Click);
             // 
-            // LNuevoProveedor
+            // LTitulo
             // 
-            this.LNuevoProveedor.AutoSize = true;
-            this.LNuevoProveedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LNuevoProveedor.Location = new System.Drawing.Point(412, 118);
-            this.LNuevoProveedor.Name = "LNuevoProveedor";
-            this.LNuevoProveedor.Size = new System.Drawing.Size(301, 39);
-            this.LNuevoProveedor.TabIndex = 10;
-            this.LNuevoProveedor.Text = "Nuevo Proveedor";
+            this.LTitulo.AutoSize = true;
+            this.LTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LTitulo.Location = new System.Drawing.Point(412, 118);
+            this.LTitulo.Name = "LTitulo";
+            this.LTitulo.Size = new System.Drawing.Size(301, 39);
+            this.LTitulo.TabIndex = 10;
+            this.LTitulo.Text = "Nuevo Proveedor";
             // 
             // TBTelefono
             // 
@@ -152,7 +152,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.LTelefono);
             this.Controls.Add(this.TBTelefono);
-            this.Controls.Add(this.LNuevoProveedor);
+            this.Controls.Add(this.LTitulo);
             this.Controls.Add(this.BCancelar);
             this.Controls.Add(this.BGuardar);
             this.Controls.Add(this.TBCorreo);
@@ -182,7 +182,7 @@
         private System.Windows.Forms.TextBox TBCorreo;
         private System.Windows.Forms.Button BGuardar;
         private System.Windows.Forms.Button BCancelar;
-        private System.Windows.Forms.Label LNuevoProveedor;
+        private System.Windows.Forms.Label LTitulo;
         private System.Windows.Forms.TextBox TBTelefono;
         private System.Windows.Forms.Label LTelefono;
         private System.Windows.Forms.ErrorProvider errorProvider1;
