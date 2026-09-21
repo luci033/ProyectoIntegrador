@@ -48,9 +48,9 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.LTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
             this.LTitulo.Location = new System.Drawing.Point(25, 20);
             this.LTitulo.Name = "LTitulo";
-            this.LTitulo.Size = new System.Drawing.Size(332, 31);
+            this.LTitulo.Size = new System.Drawing.Size(265, 31);
             this.LTitulo.TabIndex = 0;
-            this.LTitulo.Text = "GESTIÓN DE VENTAS";
+            this.LTitulo.Text = "Gestión de Ventas";
             // 
             // BRegistrarVenta
             // 

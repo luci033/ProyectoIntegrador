@@ -1,3 +1,5 @@
+using ProyectoIntegrador.Formularios.Clientes;
+using ProyectoIntegrador.Formularios.Productos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,13 +30,67 @@ namespace ProyectoIntegrador.Formularios.Ventas
             EstiloUI.AplicarEstiloBoton(BBuscarCliente);
             EstiloUI.AplicarEstiloBoton(BCobrar);
             EstiloUI.AplicarEstiloBotonSecundario(BCancelar);
-            EstiloUI.AplicarEstiloTextBox(textBox1);
+            EstiloUI.AplicarEstiloTextBox(TBNroVenta);
             EstiloUI.AplicarEstiloTextBox(TBVendedor);
             EstiloUI.AplicarEstiloTextBox(TBFecha);
             EstiloUI.AplicarEstiloTextBox(TBCliente);
             EstiloUI.AplicarEstiloTextBox(TBCondicionIVA);
             EstiloUI.AplicarEstiloTextBox(TBTotal);
             EstiloUI.AplicarEstiloGrilla(dataGridProducto);
+
+            TBNroVenta.Text = "00001"; // Número simulado
+            TBVendedor.Text = "Vendedor Prueba"; // TODO: Reemplazar por variable de sesión
+            TBFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
+
+            // Configuración de edición
+            dataGridProducto.ReadOnly = false;
+            foreach (DataGridViewColumn col in dataGridProducto.Columns)
+            {
+                col.ReadOnly = true;
+            }
+            dataGridProducto.Columns[5].ReadOnly = false; // Desbloquea columna Cantidad
+
+            // Vincular eventos de validación
+            dataGridProducto.CellValidating += new DataGridViewCellValidatingEventHandler(dataGridProducto_CellValidating);
+            dataGridProducto.CellValueChanged += new DataGridViewCellEventHandler(dataGridProducto_CellValueChanged);
+            dataGridProducto.DataError += new DataGridViewDataErrorEventHandler(dataGridProducto_DataError);
+        }
+
+        private void dataGridProducto_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            if (e.ColumnIndex == 5) // Columna Cantidad
+            {
+                string valor = e.FormattedValue.ToString();
+                if (string.IsNullOrWhiteSpace(valor)) return;
+
+                // Recuperamos el stock que escondimos en el Tag
+                int stockDisponible = Convert.ToInt32(dataGridProducto.Rows[e.RowIndex].Tag ?? 0);
+
+                if (!int.TryParse(valor, out int cantidad) || cantidad <= 0 || cantidad > stockDisponible)
+                {
+                    MessageBox.Show($"La cantidad debe ser mayor a cero y no superar el stock disponible ({stockDisponible}).", "Cantidad Inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    dataGridProducto.CancelEdit(); // Deshace el cambio sin trabar la pantalla
+                }
+            }
+        }
+
+        private void dataGridProducto_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            // Si cambia la cantidad, actualizamos el subtotal automáticamente
+            if (e.RowIndex >= 0 && e.ColumnIndex == 5)
+            {
+                DataGridViewRow fila = dataGridProducto.Rows[e.RowIndex];
+                decimal precioUnitario = Convert.ToDecimal(fila.Cells[4].Value ?? 0);
+                int cantidad = Convert.ToInt32(fila.Cells[5].Value ?? 0);
+
+                fila.Cells[7].Value = precioUnitario * cantidad; // Actualiza el Sub Total
+                ActualizarTotalGeneral();
+            }
+        }
+
+        private void dataGridProducto_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.ThrowException = false; // Evita cierres abruptos por formato
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -63,7 +119,13 @@ namespace ProyectoIntegrador.Formularios.Ventas
 
         private void BCancelar_Click(object sender, EventArgs e)
         {
+            DialogResult respuesta = MessageBox.Show("¿Estás seguro de que querés cancelar la venta actual?", "Confirmar cancelación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
+            if (respuesta == DialogResult.Yes)
+            {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+            }
         }
 
         private void label1_Click_1(object sender, EventArgs e)
@@ -76,6 +138,46 @@ namespace ProyectoIntegrador.Formularios.Ventas
 
         }
 
+        private void BBuscarCliente_Click(object sender, EventArgs e)
+        {
+            using (FormBuscarCliente formBuscar = new FormBuscarCliente())
+            {
+                if (formBuscar.ShowDialog() == DialogResult.OK)
+                {
+                    // int idClienteBD = formBuscar.IdCliente; // Reservado para la BD
+                    TBCliente.Text = formBuscar.NombreCompleto;
+                    TBCondicionIVA.Text = formBuscar.CondicionIVA;
+                }
+            }
+        }
+
+        private void BAgregarProducto_Click_1(object sender, EventArgs e)
+        {
+            using (FormBuscarProducto formProducto = new FormBuscarProducto())
+            {
+                formProducto.ConfigurarParaVentas(); // Llama al método que creamos
+
+                if (formProducto.ShowDialog() == DialogResult.OK)
+                {
+                    // Insertar fila en el orden: Cod, Producto, Categoría, Género, Precio Unit, Cantidad, Eliminar, SubTotal
+                    int indiceFila = dataGridProducto.Rows.Add(
+                        formProducto.Codigo,
+                        formProducto.Nombre,
+                        formProducto.Categoria,
+                        formProducto.Genero,
+                        formProducto.PrecioVenta,
+                        1, // Cantidad por defecto
+                        "Eliminar",
+                        formProducto.PrecioVenta // Subtotal inicial (Precio * 1)
+                    );
+
+                    // Guardamos el Stock Actual de forma oculta en la fila para validarlo
+                    dataGridProducto.Rows[indiceFila].Tag = formProducto.Stock;
+
+                    ActualizarTotalGeneral();
+                }
+            }
+        }
     }
  }
 

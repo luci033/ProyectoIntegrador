@@ -78,6 +78,12 @@
     <Compile Include="Formularios\Clientes\DetalleClientes.Designer.cs">
       <DependentUpon>DetalleClientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\Clientes\FormBuscarCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Clientes\FormBuscarCliente.Designer.cs">
+      <DependentUpon>FormBuscarCliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\Clientes\FormClientes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -262,6 +268,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Formularios\Clientes\DetalleClientes.resx">
       <DependentUpon>DetalleClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Clientes\FormBuscarCliente.resx">
+      <DependentUpon>FormBuscarCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Clientes\FormClientes.resx">
       <DependentUpon>FormClientes.cs</DependentUpon>

@@ -37,12 +37,6 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorProvider3 = new System.Windows.Forms.ErrorProvider(this.components);
             this.dataGridProducto = new System.Windows.Forms.DataGridView();
-            this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPrecioUnitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.colSubTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LTitulo = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -56,9 +50,17 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.TBVendedor = new System.Windows.Forms.TextBox();
             this.TBFecha = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.TBNroVenta = new System.Windows.Forms.TextBox();
             this.LNroComprobante = new System.Windows.Forms.Label();
             this.BAgregarProducto = new System.Windows.Forms.Button();
+            this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colGenero = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPrecioUnitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.colSubTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider3)).BeginInit();
@@ -108,7 +110,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.LTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
             this.LTotal.Location = new System.Drawing.Point(740, 340);
             this.LTotal.Name = "LTotal";
-            this.LTotal.Size = new System.Drawing.Size(56, 19);
+            this.LTotal.Size = new System.Drawing.Size(54, 19);
             this.LTotal.TabIndex = 4;
             this.LTotal.Text = "TOTAL:";
             // 
@@ -152,6 +154,8 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.dataGridProducto.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCodigo,
             this.colProducto,
+            this.colCategoria,
+            this.colGenero,
             this.colPrecioUnitario,
             this.colCantidad,
             this.colEliminar,
@@ -164,43 +168,6 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.dataGridProducto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridProducto.Size = new System.Drawing.Size(871, 305);
             this.dataGridProducto.TabIndex = 1;
-            // 
-            // colCodigo
-            // 
-            this.colCodigo.FillWeight = 20F;
-            this.colCodigo.HeaderText = "Cod.";
-            this.colCodigo.Name = "colCodigo";
-            // 
-            // colProducto
-            // 
-            this.colProducto.FillWeight = 50F;
-            this.colProducto.HeaderText = "Producto";
-            this.colProducto.Name = "colProducto";
-            // 
-            // colPrecioUnitario
-            // 
-            this.colPrecioUnitario.FillWeight = 30F;
-            this.colPrecioUnitario.HeaderText = "Precio Unit.";
-            this.colPrecioUnitario.Name = "colPrecioUnitario";
-            // 
-            // colCantidad
-            // 
-            this.colCantidad.FillWeight = 25F;
-            this.colCantidad.HeaderText = "Cantidad";
-            this.colCantidad.Name = "colCantidad";
-            // 
-            // colEliminar
-            // 
-            this.colEliminar.FillWeight = 25F;
-            this.colEliminar.HeaderText = "Eliminar";
-            this.colEliminar.Name = "colEliminar";
-            this.colEliminar.Text = "Eliminar";
-            // 
-            // colSubTotal
-            // 
-            this.colSubTotal.FillWeight = 35F;
-            this.colSubTotal.HeaderText = "Sub Total";
-            this.colSubTotal.Name = "colSubTotal";
             // 
             // panel1
             // 
@@ -225,9 +192,9 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.LTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
             this.LTitulo.Location = new System.Drawing.Point(25, 20);
             this.LTitulo.Name = "LTitulo";
-            this.LTitulo.Size = new System.Drawing.Size(306, 31);
+            this.LTitulo.Size = new System.Drawing.Size(221, 31);
             this.LTitulo.TabIndex = 0;
-            this.LTitulo.Text = "REGISTRAR VENTA";
+            this.LTitulo.Text = "Registar Venta";
             // 
             // panel3
             // 
@@ -257,6 +224,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.BBuscarCliente.TabIndex = 4;
             this.BBuscarCliente.Text = "Buscar Cliente";
             this.BBuscarCliente.UseVisualStyleBackColor = false;
+            this.BBuscarCliente.Click += new System.EventHandler(this.BBuscarCliente_Click);
             // 
             // TBCondicionIVA
             // 
@@ -294,7 +262,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.LCondicionIVA.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
             this.LCondicionIVA.Location = new System.Drawing.Point(295, 18);
             this.LCondicionIVA.Name = "LCondicionIVA";
-            this.LCondicionIVA.Size = new System.Drawing.Size(89, 15);
+            this.LCondicionIVA.Size = new System.Drawing.Size(86, 15);
             this.LCondicionIVA.TabIndex = 2;
             this.LCondicionIVA.Text = "Condición IVA:";
             // 
@@ -305,7 +273,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.LVendedor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
             this.LVendedor.Location = new System.Drawing.Point(295, 20);
             this.LVendedor.Name = "LVendedor";
-            this.LVendedor.Size = new System.Drawing.Size(65, 15);
+            this.LVendedor.Size = new System.Drawing.Size(64, 15);
             this.LVendedor.TabIndex = 2;
             this.LVendedor.Text = "Vendedor:";
             // 
@@ -343,7 +311,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Controls.Add(this.textBox1);
+            this.panel2.Controls.Add(this.TBNroVenta);
             this.panel2.Controls.Add(this.LNroComprobante);
             this.panel2.Controls.Add(this.TBFecha);
             this.panel2.Controls.Add(this.TBVendedor);
@@ -354,15 +322,15 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.panel2.Size = new System.Drawing.Size(895, 60);
             this.panel2.TabIndex = 1;
             // 
-            // textBox1
+            // TBNroVenta
             // 
-            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.textBox1.Location = new System.Drawing.Point(145, 17);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(130, 24);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.TBNroVenta.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.TBNroVenta.Location = new System.Drawing.Point(145, 17);
+            this.TBNroVenta.Name = "TBNroVenta";
+            this.TBNroVenta.ReadOnly = true;
+            this.TBNroVenta.Size = new System.Drawing.Size(130, 24);
+            this.TBNroVenta.TabIndex = 1;
+            this.TBNroVenta.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // LNroComprobante
             // 
@@ -371,7 +339,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.LNroComprobante.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
             this.LNroComprobante.Location = new System.Drawing.Point(18, 20);
             this.LNroComprobante.Name = "LNroComprobante";
-            this.LNroComprobante.Size = new System.Drawing.Size(117, 15);
+            this.LNroComprobante.Size = new System.Drawing.Size(113, 15);
             this.LNroComprobante.TabIndex = 0;
             this.LNroComprobante.Text = "Nro. Comprobante:";
             this.LNroComprobante.Click += new System.EventHandler(this.label1_Click_1);
@@ -389,6 +357,56 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.BAgregarProducto.TabIndex = 3;
             this.BAgregarProducto.Text = "+ Agregar Joya";
             this.BAgregarProducto.UseVisualStyleBackColor = false;
+            this.BAgregarProducto.Click += new System.EventHandler(this.BAgregarProducto_Click_1);
+            // 
+            // colCodigo
+            // 
+            this.colCodigo.FillWeight = 20F;
+            this.colCodigo.HeaderText = "Cod.";
+            this.colCodigo.Name = "colCodigo";
+            // 
+            // colProducto
+            // 
+            this.colProducto.FillWeight = 50F;
+            this.colProducto.HeaderText = "Producto";
+            this.colProducto.Name = "colProducto";
+            // 
+            // colCategoria
+            // 
+            this.colCategoria.FillWeight = 40F;
+            this.colCategoria.HeaderText = "Categoría";
+            this.colCategoria.Name = "colCategoria";
+            // 
+            // colGenero
+            // 
+            this.colGenero.FillWeight = 40F;
+            this.colGenero.HeaderText = "Género";
+            this.colGenero.Name = "colGenero";
+            // 
+            // colPrecioUnitario
+            // 
+            this.colPrecioUnitario.FillWeight = 30F;
+            this.colPrecioUnitario.HeaderText = "Precio Unit.";
+            this.colPrecioUnitario.Name = "colPrecioUnitario";
+            // 
+            // colCantidad
+            // 
+            this.colCantidad.FillWeight = 25F;
+            this.colCantidad.HeaderText = "Cantidad";
+            this.colCantidad.Name = "colCantidad";
+            // 
+            // colEliminar
+            // 
+            this.colEliminar.FillWeight = 25F;
+            this.colEliminar.HeaderText = "Eliminar";
+            this.colEliminar.Name = "colEliminar";
+            this.colEliminar.Text = "Eliminar";
+            // 
+            // colSubTotal
+            // 
+            this.colSubTotal.FillWeight = 35F;
+            this.colSubTotal.HeaderText = "Sub Total";
+            this.colSubTotal.Name = "colSubTotal";
             // 
             // FormRegistroVentas
             // 
@@ -444,10 +462,12 @@ namespace ProyectoIntegrador.Formularios.Ventas
         private System.Windows.Forms.TextBox TBVendedor;
         private System.Windows.Forms.Label LFecha;
         private System.Windows.Forms.Label LVendedor;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox TBNroVenta;
         private System.Windows.Forms.Label LNroComprobante;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCodigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProducto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCategoria;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colGenero;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPrecioUnitario;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCantidad;
         private System.Windows.Forms.DataGridViewButtonColumn colEliminar;

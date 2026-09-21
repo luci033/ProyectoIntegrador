@@ -37,6 +37,10 @@ namespace ProyectoIntegrador.Formularios.Clientes
             listaTemporalClientes.Add(new ClienteSimulado { Nombre = "Laura", Apellido = "Romero", DNI = "66777888", Telefono = "3794666666", Correo = "laura@mail.com", CondicionIVA = "Monotributo" });
 
             CargarGrillaClientes();
+
+            CBCondiciónIVA.Items.Clear();
+            CBCondiciónIVA.Items.AddRange(new string[] { "Todos", "Consumidor Final", "Monotributo", "Responsable Inscripto", "Exento" });
+            CBCondiciónIVA.SelectedIndex = 0;
         }
 
         private void CargarGrillaClientes()
@@ -59,6 +63,34 @@ namespace ProyectoIntegrador.Formularios.Clientes
                     "Modificar"             // [9] Botón Modificar
                 );
                 numeroFila++;
+            }
+        }
+
+        private void FiltrarGrilla()
+        {
+            string busqueda = TBBuscar.Text.Trim().ToLower();
+            string condicion = CBCondiciónIVA.SelectedItem?.ToString() ?? "Todos";
+
+            // Quitamos el foco de la celda actual para evitar errores al ocultar filas
+            DGClientes.CurrentCell = null;
+
+            foreach (DataGridViewRow fila in DGClientes.Rows)
+            {
+                if (fila.IsNewRow) continue;
+
+                string nombre = fila.Cells[2].Value?.ToString().ToLower() ?? "";
+                string apellido = fila.Cells[3].Value?.ToString().ToLower() ?? "";
+                string dni = fila.Cells[4].Value?.ToString().ToLower() ?? "";
+                string iva = fila.Cells[7].Value?.ToString() ?? "";
+
+                bool coincideBusqueda = string.IsNullOrEmpty(busqueda) ||
+                                        nombre.Contains(busqueda) ||
+                                        apellido.Contains(busqueda) ||
+                                        dni.Contains(busqueda);
+
+                bool coincideIva = (condicion == "Todos" || iva == condicion);
+
+                fila.Visible = coincideBusqueda && coincideIva;
             }
         }
 
@@ -179,6 +211,16 @@ namespace ProyectoIntegrador.Formularios.Clientes
             FormClientesABM modalDetalle = new FormClientesABM();
             modalDetalle.ConfigurarModoDetalle(nombre, apellido, dni, telefono, correo, condicionIVA);
             modalDetalle.ShowDialog();
+        }
+
+        private void TBuscar_TextChanged(object sender, EventArgs e)
+        {
+            FiltrarGrilla();
+        }
+
+        private void CBCondiciónIVA_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FiltrarGrilla();
         }
     }
 }

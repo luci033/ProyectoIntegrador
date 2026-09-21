@@ -1,6 +1,6 @@
-namespace ProyectoIntegrador.Formularios.Clientes
+﻿namespace ProyectoIntegrador.Formularios.Clientes
 {
-    partial class FormClientes
+    partial class FormBuscarCliente
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,8 @@ namespace ProyectoIntegrador.Formularios.Clientes
         /// </summary>
         private void InitializeComponent()
         {
-            this.BNuevoCliente = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.DGClientes = new System.Windows.Forms.DataGridView();
             this.IdCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNro = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -40,29 +41,32 @@ namespace ProyectoIntegrador.Formularios.Clientes
             this.colCondicionIVA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colHistorial = new System.Windows.Forms.DataGridViewButtonColumn();
             this.colModificar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.LTitulo = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.CBCondiciónIVA = new System.Windows.Forms.ComboBox();
+            this.TBBuscar = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.LCondiciónIVA = new System.Windows.Forms.Label();
             this.LBucar = new System.Windows.Forms.Label();
-            this.TBBuscar = new System.Windows.Forms.TextBox();
-            this.CBCondiciónIVA = new System.Windows.Forms.ComboBox();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGClientes)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // BNuevoCliente
+            // label1
             // 
-            this.BNuevoCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BNuevoCliente.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BNuevoCliente.Font = new System.Drawing.Font("Georgia", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BNuevoCliente.Location = new System.Drawing.Point(592, 24);
-            this.BNuevoCliente.Name = "BNuevoCliente";
-            this.BNuevoCliente.Size = new System.Drawing.Size(200, 44);
-            this.BNuevoCliente.TabIndex = 1;
-            this.BNuevoCliente.Text = "+ Nuevo Cliente";
-            this.BNuevoCliente.UseVisualStyleBackColor = true;
-            this.BNuevoCliente.Click += new System.EventHandler(this.BNuevoCliente_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(44, 56);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(75, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Buscar Cliente";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.DGClientes);
+            this.panel1.Location = new System.Drawing.Point(5, 259);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(783, 154);
+            this.panel1.TabIndex = 1;
             // 
             // DGClientes
             // 
@@ -86,14 +90,13 @@ namespace ProyectoIntegrador.Formularios.Clientes
             this.colCondicionIVA,
             this.colHistorial,
             this.colModificar});
-            this.DGClientes.Location = new System.Drawing.Point(24, 154);
+            this.DGClientes.Location = new System.Drawing.Point(28, 25);
             this.DGClientes.Name = "DGClientes";
             this.DGClientes.ReadOnly = true;
             this.DGClientes.RowHeadersVisible = false;
             this.DGClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGClientes.Size = new System.Drawing.Size(768, 386);
-            this.DGClientes.TabIndex = 2;
-            this.DGClientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridHistorialClientes_CellContentClick);
+            this.DGClientes.Size = new System.Drawing.Size(696, 113);
+            this.DGClientes.TabIndex = 3;
             this.DGClientes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGClientes_CellDoubleClick);
             // 
             // IdCliente
@@ -160,6 +163,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
             this.colHistorial.Name = "colHistorial";
             this.colHistorial.ReadOnly = true;
             this.colHistorial.Text = "Ver...";
+            this.colHistorial.Visible = false;
             // 
             // colModificar
             // 
@@ -169,25 +173,25 @@ namespace ProyectoIntegrador.Formularios.Clientes
             this.colModificar.Name = "colModificar";
             this.colModificar.ReadOnly = true;
             this.colModificar.Text = "Modificar";
+            this.colModificar.Visible = false;
             // 
-            // LTitulo
+            // CBCondiciónIVA
             // 
-            this.LTitulo.AutoSize = true;
-            this.LTitulo.Font = new System.Drawing.Font("Georgia", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.LTitulo.Location = new System.Drawing.Point(24, 25);
-            this.LTitulo.Name = "LTitulo";
-            this.LTitulo.Size = new System.Drawing.Size(330, 38);
-            this.LTitulo.TabIndex = 0;
-            this.LTitulo.Text = "Gestión de Clientes";
+            this.CBCondiciónIVA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CBCondiciónIVA.FormattingEnabled = true;
+            this.CBCondiciónIVA.Location = new System.Drawing.Point(554, 10);
+            this.CBCondiciónIVA.Name = "CBCondiciónIVA";
+            this.CBCondiciónIVA.Size = new System.Drawing.Size(121, 21);
+            this.CBCondiciónIVA.TabIndex = 1;
+            this.CBCondiciónIVA.SelectedIndexChanged += new System.EventHandler(this.CBCondiciónIVA_SelectedIndexChanged);
             // 
-            // panel1
+            // TBBuscar
             // 
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(0, 0);
-            this.panel1.TabIndex = 3;
-            this.panel1.Visible = false;
+            this.TBBuscar.Location = new System.Drawing.Point(71, 7);
+            this.TBBuscar.Name = "TBBuscar";
+            this.TBBuscar.Size = new System.Drawing.Size(100, 20);
+            this.TBBuscar.TabIndex = 2;
+            this.TBBuscar.TextChanged += new System.EventHandler(this.TBuscar_TextChanged);
             // 
             // panel2
             // 
@@ -195,10 +199,10 @@ namespace ProyectoIntegrador.Formularios.Clientes
             this.panel2.Controls.Add(this.LBucar);
             this.panel2.Controls.Add(this.TBBuscar);
             this.panel2.Controls.Add(this.CBCondiciónIVA);
-            this.panel2.Location = new System.Drawing.Point(24, 104);
+            this.panel2.Location = new System.Drawing.Point(33, 192);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(768, 44);
-            this.panel2.TabIndex = 4;
+            this.panel2.Size = new System.Drawing.Size(696, 44);
+            this.panel2.TabIndex = 2;
             // 
             // LCondiciónIVA
             // 
@@ -212,47 +216,24 @@ namespace ProyectoIntegrador.Formularios.Clientes
             // LBucar
             // 
             this.LBucar.AutoSize = true;
-            this.LBucar.Location = new System.Drawing.Point(40, 13);
+            this.LBucar.Location = new System.Drawing.Point(18, 10);
             this.LBucar.Name = "LBucar";
             this.LBucar.Size = new System.Drawing.Size(43, 13);
             this.LBucar.TabIndex = 4;
             this.LBucar.Text = "Buscar:";
             // 
-            // TBBuscar
-            // 
-            this.TBBuscar.Location = new System.Drawing.Point(100, 11);
-            this.TBBuscar.Name = "TBBuscar";
-            this.TBBuscar.Size = new System.Drawing.Size(100, 20);
-            this.TBBuscar.TabIndex = 2;
-            this.TBBuscar.TextChanged += new System.EventHandler(this.TBuscar_TextChanged);
-            // 
-            // CBCondiciónIVA
-            // 
-            this.CBCondiciónIVA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CBCondiciónIVA.FormattingEnabled = true;
-            this.CBCondiciónIVA.Location = new System.Drawing.Point(554, 10);
-            this.CBCondiciónIVA.Name = "CBCondiciónIVA";
-            this.CBCondiciónIVA.Size = new System.Drawing.Size(121, 21);
-            this.CBCondiciónIVA.TabIndex = 1;
-            this.CBCondiciónIVA.SelectedIndexChanged += new System.EventHandler(this.CBCondiciónIVA_SelectedIndexChanged);
-            // 
-            // FormClientes
+            // FormBuscarCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(232)))));
-            this.ClientSize = new System.Drawing.Size(816, 564);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.DGClientes);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.LTitulo);
-            this.Controls.Add(this.BNuevoCliente);
-            this.MinimumSize = new System.Drawing.Size(800, 500);
-            this.Name = "FormClientes";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Gestión de Clientes";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.FormClientes_Load);
+            this.Controls.Add(this.label1);
+            this.Name = "FormBuscarCliente";
+            this.Text = "FormBuscarCliente";
+            this.Load += new System.EventHandler(this.FormBuscarCliente_Load);
+            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DGClientes)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -262,10 +243,15 @@ namespace ProyectoIntegrador.Formularios.Clientes
         }
 
         #endregion
-        private System.Windows.Forms.Button BNuevoCliente;
-        private System.Windows.Forms.DataGridView DGClientes;
-        private System.Windows.Forms.Label LTitulo;
+
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ComboBox CBCondiciónIVA;
+        private System.Windows.Forms.TextBox TBBuscar;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label LBucar;
+        private System.Windows.Forms.Label LCondiciónIVA;
+        private System.Windows.Forms.DataGridView DGClientes;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdCliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNro;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNombre;
@@ -276,10 +262,5 @@ namespace ProyectoIntegrador.Formularios.Clientes
         private System.Windows.Forms.DataGridViewTextBoxColumn colCondicionIVA;
         private System.Windows.Forms.DataGridViewButtonColumn colHistorial;
         private System.Windows.Forms.DataGridViewButtonColumn colModificar;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label LCondiciónIVA;
-        private System.Windows.Forms.Label LBucar;
-        private System.Windows.Forms.TextBox TBBuscar;
-        private System.Windows.Forms.ComboBox CBCondiciónIVA;
     }
 }

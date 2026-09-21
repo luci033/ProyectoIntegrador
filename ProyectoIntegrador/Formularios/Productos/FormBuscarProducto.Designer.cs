@@ -29,11 +29,6 @@ namespace ProyectoIntegrador.Formularios.Productos
         private void InitializeComponent()
         {
             this.DGProductos = new System.Windows.Forms.DataGridView();
-            this.colIdProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colGenero = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BCancelar = new System.Windows.Forms.Button();
             this.LTitulo = new System.Windows.Forms.Label();
             this.LBuscarProducto = new System.Windows.Forms.Label();
@@ -44,6 +39,14 @@ namespace ProyectoIntegrador.Formularios.Productos
             this.LGenero = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.colIdProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colGenero = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStockActual = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPrecioVenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPrecioCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DGProductos)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -55,6 +58,9 @@ namespace ProyectoIntegrador.Formularios.Productos
             this.DGProductos.AllowUserToDeleteRows = false;
             this.DGProductos.AllowUserToResizeColumns = false;
             this.DGProductos.AllowUserToResizeRows = false;
+            this.DGProductos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DGProductos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DGProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGProductos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -62,47 +68,16 @@ namespace ProyectoIntegrador.Formularios.Productos
             this.colCodigo,
             this.colNombre,
             this.colCategoria,
-            this.colGenero});
-            this.DGProductos.Location = new System.Drawing.Point(3, 3);
+            this.colGenero,
+            this.colStockActual,
+            this.colPrecioVenta,
+            this.colPrecioCompra});
+            this.DGProductos.Location = new System.Drawing.Point(0, 0);
             this.DGProductos.Name = "DGProductos";
             this.DGProductos.RowHeadersVisible = false;
-            this.DGProductos.Size = new System.Drawing.Size(797, 193);
+            this.DGProductos.Size = new System.Drawing.Size(752, 236);
             this.DGProductos.TabIndex = 0;
             this.DGProductos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGProductos_CellDoubleClick);
-            // 
-            // colIdProducto
-            // 
-            this.colIdProducto.HeaderText = "Id Producto";
-            this.colIdProducto.Name = "colIdProducto";
-            this.colIdProducto.Visible = false;
-            // 
-            // colCodigo
-            // 
-            this.colCodigo.FillWeight = 40F;
-            this.colCodigo.HeaderText = "Código";
-            this.colCodigo.Name = "colCodigo";
-            this.colCodigo.ReadOnly = true;
-            // 
-            // colNombre
-            // 
-            this.colNombre.HeaderText = "Nombre";
-            this.colNombre.Name = "colNombre";
-            this.colNombre.ReadOnly = true;
-            // 
-            // colCategoria
-            // 
-            this.colCategoria.FillWeight = 60F;
-            this.colCategoria.HeaderText = "Categoría";
-            this.colCategoria.Name = "colCategoria";
-            this.colCategoria.ReadOnly = true;
-            // 
-            // colGenero
-            // 
-            this.colGenero.FillWeight = 30F;
-            this.colGenero.HeaderText = "Género";
-            this.colGenero.Name = "colGenero";
-            this.colGenero.ReadOnly = true;
-            // 
             // 
             // BCancelar
             // 
@@ -118,12 +93,11 @@ namespace ProyectoIntegrador.Formularios.Productos
             // 
             // LTitulo
             // 
-            this.LTitulo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
             this.LTitulo.AutoSize = true;
             this.LTitulo.Font = new System.Drawing.Font("Georgia", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LTitulo.Location = new System.Drawing.Point(24, 25);
             this.LTitulo.Name = "LTitulo";
-            this.LTitulo.Size = new System.Drawing.Size(378, 38);
+            this.LTitulo.Size = new System.Drawing.Size(368, 38);
             this.LTitulo.TabIndex = 2;
             this.LTitulo.Text = "Seleccionar Producto";
             // 
@@ -198,14 +172,6 @@ namespace ProyectoIntegrador.Formularios.Productos
             this.panel1.Size = new System.Drawing.Size(752, 290);
             this.panel1.TabIndex = 9;
             // 
-            // DGProductos
-            // 
-            this.DGProductos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.DGProductos.Location = new System.Drawing.Point(0, 0);
-            this.DGProductos.Size = new System.Drawing.Size(752, 236);
-            // 
             // panel2
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -220,6 +186,57 @@ namespace ProyectoIntegrador.Formularios.Productos
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(752, 48);
             this.panel2.TabIndex = 10;
+            // 
+            // colIdProducto
+            // 
+            this.colIdProducto.HeaderText = "Id Producto";
+            this.colIdProducto.Name = "colIdProducto";
+            this.colIdProducto.Visible = false;
+            // 
+            // colCodigo
+            // 
+            this.colCodigo.FillWeight = 40F;
+            this.colCodigo.HeaderText = "Código";
+            this.colCodigo.Name = "colCodigo";
+            this.colCodigo.ReadOnly = true;
+            // 
+            // colNombre
+            // 
+            this.colNombre.HeaderText = "Nombre";
+            this.colNombre.Name = "colNombre";
+            this.colNombre.ReadOnly = true;
+            // 
+            // colCategoria
+            // 
+            this.colCategoria.FillWeight = 60F;
+            this.colCategoria.HeaderText = "Categoría";
+            this.colCategoria.Name = "colCategoria";
+            this.colCategoria.ReadOnly = true;
+            // 
+            // colGenero
+            // 
+            this.colGenero.FillWeight = 30F;
+            this.colGenero.HeaderText = "Género";
+            this.colGenero.Name = "colGenero";
+            this.colGenero.ReadOnly = true;
+            // 
+            // colStockActual
+            // 
+            this.colStockActual.HeaderText = "Stock Actual";
+            this.colStockActual.Name = "colStockActual";
+            // 
+            // colPrecioVenta
+            // 
+            this.colPrecioVenta.FillWeight = 40F;
+            this.colPrecioVenta.HeaderText = "Precio Venta";
+            this.colPrecioVenta.Name = "colPrecioVenta";
+            this.colPrecioVenta.Visible = false;
+            // 
+            // colPrecioCompra
+            // 
+            this.colPrecioCompra.HeaderText = "Precio Compra";
+            this.colPrecioCompra.Name = "colPrecioCompra";
+            this.colPrecioCompra.Visible = false;
             // 
             // FormBuscarProducto
             // 
@@ -255,12 +272,15 @@ namespace ProyectoIntegrador.Formularios.Productos
         private System.Windows.Forms.ComboBox CBGenero;
         private System.Windows.Forms.Label LCategoria;
         private System.Windows.Forms.Label LGenero;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIdProducto;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCodigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategoria;
         private System.Windows.Forms.DataGridViewTextBoxColumn colGenero;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colStockActual;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPrecioVenta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPrecioCompra;
     }
 }
