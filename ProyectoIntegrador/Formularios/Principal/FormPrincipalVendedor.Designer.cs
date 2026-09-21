@@ -1,4 +1,4 @@
-﻿namespace ProyectoIntegrador.Formularios.Principal
+namespace ProyectoIntegrador.Formularios.Principal
 {
     partial class FormPrincipalVendedor
     {
@@ -129,9 +129,9 @@
             this.BProductos.FlatAppearance.BorderSize = 0;
             this.BProductos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BProductos.ForeColor = System.Drawing.Color.Transparent;
-            this.BProductos.Location = new System.Drawing.Point(70, 150);
+            this.BProductos.Location = new System.Drawing.Point(62, 134);
             this.BProductos.Name = "BProductos";
-            this.BProductos.Size = new System.Drawing.Size(100, 100);
+            this.BProductos.Size = new System.Drawing.Size(116, 116);
             this.BProductos.TabIndex = 1;
             this.BProductos.UseVisualStyleBackColor = false;
             this.BProductos.Click += new System.EventHandler(this.BProductos_Click);
@@ -145,9 +145,9 @@
             this.BVentas.FlatAppearance.BorderSize = 0;
             this.BVentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BVentas.ForeColor = System.Drawing.Color.Transparent;
-            this.BVentas.Location = new System.Drawing.Point(70, 270);
+            this.BVentas.Location = new System.Drawing.Point(62, 260);
             this.BVentas.Name = "BVentas";
-            this.BVentas.Size = new System.Drawing.Size(100, 100);
+            this.BVentas.Size = new System.Drawing.Size(116, 116);
             this.BVentas.TabIndex = 2;
             this.BVentas.UseVisualStyleBackColor = false;
             this.BVentas.Click += new System.EventHandler(this.BVentas_Click);
@@ -161,9 +161,9 @@
             this.BDevoluciones.FlatAppearance.BorderSize = 0;
             this.BDevoluciones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BDevoluciones.ForeColor = System.Drawing.Color.Transparent;
-            this.BDevoluciones.Location = new System.Drawing.Point(70, 390);
+            this.BDevoluciones.Location = new System.Drawing.Point(62, 386);
             this.BDevoluciones.Name = "BDevoluciones";
-            this.BDevoluciones.Size = new System.Drawing.Size(100, 100);
+            this.BDevoluciones.Size = new System.Drawing.Size(116, 116);
             this.BDevoluciones.TabIndex = 3;
             this.BDevoluciones.UseVisualStyleBackColor = false;
             this.BDevoluciones.Click += new System.EventHandler(this.BDevoluciones_Click);
@@ -177,9 +177,9 @@
             this.BClientes.FlatAppearance.BorderSize = 0;
             this.BClientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BClientes.ForeColor = System.Drawing.Color.Transparent;
-            this.BClientes.Location = new System.Drawing.Point(70, 510);
+            this.BClientes.Location = new System.Drawing.Point(62, 512);
             this.BClientes.Name = "BClientes";
-            this.BClientes.Size = new System.Drawing.Size(100, 100);
+            this.BClientes.Size = new System.Drawing.Size(116, 116);
             this.BClientes.TabIndex = 4;
             this.BClientes.UseVisualStyleBackColor = false;
             this.BClientes.Click += new System.EventHandler(this.BClientes_Click);
@@ -217,7 +217,7 @@
             this.Name = "FormPrincipalVendedor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Joyería ALBA - Vendedor";
-            this.Load += new System.EventHandler(this.s);
+            this.Load += new System.EventHandler(this.FormPrincipalVendedor_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PBLogo)).EndInit();
             this.panelFooter.ResumeLayout(false);

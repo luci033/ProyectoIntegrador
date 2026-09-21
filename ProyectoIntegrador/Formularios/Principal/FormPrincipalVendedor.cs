@@ -1,4 +1,4 @@
-﻿using ProyectoIntegrador.Formularios.Clientes;
+using ProyectoIntegrador.Formularios.Clientes;
 using ProyectoIntegrador.Formularios.Devoluciones;
 using ProyectoIntegrador.Formularios.Productos;
 using ProyectoIntegrador.Formularios.Ventas;
@@ -22,6 +22,11 @@ namespace ProyectoIntegrador.Formularios.Principal
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
             this.IsMdiContainer = true;
+
+            EstiloUI.AplicarBordesRedondeados(BProductos, 14);
+            EstiloUI.AplicarBordesRedondeados(BVentas, 14);
+            EstiloUI.AplicarBordesRedondeados(BDevoluciones, 14);
+            EstiloUI.AplicarBordesRedondeados(BClientes, 14);
         }
 
         private void CerrarFormulariosHijos()
@@ -71,10 +76,24 @@ namespace ProyectoIntegrador.Formularios.Principal
             AbrirFormulario<FormOpcionesVenta>();
         }
 
-        // Eventos viejos (podés borrarlos si ya los eliminaste del diseño)
+        private void FormPrincipalVendedor_Load(object sender, EventArgs e)
+        {
+            // Personaliza el fondo del espacio MDI al color institucional
+            foreach (Control c in this.Controls)
+            {
+                if (c is MdiClient mdi)
+                {
+                    mdi.BackColor = EstiloUI.ColorFondo;
+                }
+            }
+
+            // Inicia abriendo el módulo de ventas por defecto
+            BVentas_Click(this, EventArgs.Empty);
+        }
+
         private void s(object sender, EventArgs e)
         {
-
+            FormPrincipalVendedor_Load(sender, e);
         }
 
         private void listarVentasToolStripMenuItem_Click(object sender, EventArgs e)
