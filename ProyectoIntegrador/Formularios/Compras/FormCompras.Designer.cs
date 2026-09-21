@@ -1,4 +1,4 @@
-﻿namespace ProyectoIntegrador.Formularios.Compras
+namespace ProyectoIntegrador.Formularios.Compras
 {
     partial class FormCompras
     {
@@ -43,12 +43,13 @@
             // 
             // LTitulo
             // 
-            this.LTitulo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.LTitulo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
             this.LTitulo.AutoSize = true;
-            this.LTitulo.Location = new System.Drawing.Point(35, 50);
+            this.LTitulo.Font = new System.Drawing.Font("Georgia", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LTitulo.Location = new System.Drawing.Point(24, 25);
             this.LTitulo.Name = "LTitulo";
-            this.LTitulo.Size = new System.Drawing.Size(102, 13);
+            this.LTitulo.Size = new System.Drawing.Size(360, 38);
             this.LTitulo.TabIndex = 9;
             this.LTitulo.Text = "Gestión de Compras";
             this.LTitulo.Click += new System.EventHandler(this.LProveedores_Click);
@@ -59,7 +60,8 @@
             this.DGCompras.AllowUserToDeleteRows = false;
             this.DGCompras.AllowUserToResizeColumns = false;
             this.DGCompras.AllowUserToResizeRows = false;
-            this.DGCompras.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.DGCompras.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DGCompras.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DGCompras.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -71,12 +73,12 @@
             this.Observacion,
             this.Total,
             this.DetalleOrden});
-            this.DGCompras.Location = new System.Drawing.Point(12, 169);
+            this.DGCompras.Location = new System.Drawing.Point(24, 85);
             this.DGCompras.Name = "DGCompras";
             this.DGCompras.ReadOnly = true;
             this.DGCompras.RowHeadersVisible = false;
             this.DGCompras.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGCompras.Size = new System.Drawing.Size(776, 252);
+            this.DGCompras.Size = new System.Drawing.Size(752, 335);
             this.DGCompras.TabIndex = 7;
             this.DGCompras.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGProveedores_CellContentClick);
             // 
@@ -135,18 +137,15 @@
             // 
             // BAgregarOrden
             // 
-            this.BAgregarOrden.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(242)))), ((int)(((byte)(238)))));
-            this.BAgregarOrden.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(185)))), ((int)(((byte)(178)))));
-            this.BAgregarOrden.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BAgregarOrden.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.BAgregarOrden.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.BAgregarOrden.Location = new System.Drawing.Point(533, 33);
-            this.BAgregarOrden.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.BAgregarOrden.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BAgregarOrden.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BAgregarOrden.Font = new System.Drawing.Font("Georgia", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BAgregarOrden.Location = new System.Drawing.Point(576, 24);
             this.BAgregarOrden.Name = "BAgregarOrden";
-            this.BAgregarOrden.Size = new System.Drawing.Size(174, 65);
+            this.BAgregarOrden.Size = new System.Drawing.Size(200, 44);
             this.BAgregarOrden.TabIndex = 10;
-            this.BAgregarOrden.Text = "Agregar Orden";
-            this.BAgregarOrden.UseVisualStyleBackColor = false;
+            this.BAgregarOrden.Text = "+ Nueva Orden";
+            this.BAgregarOrden.UseVisualStyleBackColor = true;
             this.BAgregarOrden.Click += new System.EventHandler(this.BAgregarOrden_Click);
             // 
             // FormCompras
@@ -158,8 +157,11 @@
             this.Controls.Add(this.BAgregarOrden);
             this.Controls.Add(this.LTitulo);
             this.Controls.Add(this.DGCompras);
+            this.MinimumSize = new System.Drawing.Size(800, 450);
             this.Name = "FormCompras";
-            this.Text = "Compras";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Gestión de Compras";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FormCompras_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DGCompras)).EndInit();
             this.ResumeLayout(false);

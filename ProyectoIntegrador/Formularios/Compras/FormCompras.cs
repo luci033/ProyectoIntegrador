@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -86,6 +86,7 @@ namespace ProyectoIntegrador.Formularios.Compras
 
         private void FormCompras_Load(object sender, EventArgs e)
         {
+            this.WindowState = FormWindowState.Maximized;
             EstiloUI.AplicarEstiloGrilla(DGCompras);
             EstiloUI.AplicarEstiloFormulario(this);
             EstiloUI.AplicarEstiloTitulo(LTitulo);

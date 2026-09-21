@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -39,10 +39,15 @@ namespace ProyectoIntegrador.Formularios.Compras
 
         private void FormVerDetalle_Load(object sender, EventArgs e)
         {
-            EstiloUI.AplicarEstiloGrilla(DGDetalleOrden);
+            this.WindowState = FormWindowState.Maximized;
             EstiloUI.AplicarEstiloFormulario(this);
             EstiloUI.AplicarEstiloTitulo(LTitulo);
+            EstiloUI.AplicarEstiloCard(panelCard, 16);
+            EstiloUI.AplicarEstiloPanelSeccion(panel1, 10);
+            EstiloUI.AplicarEstiloPanelSeccion(panel2, 10);
+            EstiloUI.AplicarEstiloGrilla(DGDetalleOrden);
             EstiloUI.AplicarEstiloBoton(BCerrar);
+            EstiloUI.CentrarControl(panelCard, this);
 
             // Llenar grilla dinámicamente
             if (listaProductos != null)
@@ -62,6 +67,11 @@ namespace ProyectoIntegrador.Formularios.Compras
                     );
                 }
             }
+        }
+
+        private void FormVerDetalle_Resize(object sender, EventArgs e)
+        {
+            EstiloUI.CentrarControl(panelCard, this);
         }
 
         private void label5_Click(object sender, EventArgs e)

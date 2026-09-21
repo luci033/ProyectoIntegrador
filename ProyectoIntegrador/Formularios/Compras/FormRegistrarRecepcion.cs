@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -29,15 +29,19 @@ namespace ProyectoIntegrador.Formularios.Compras
 
         private void FormRegistrarRecepcion_Load(object sender, EventArgs e)
         {
-            EstiloUI.AplicarEstiloGrilla(DGDetalleRecepcion);
+            this.WindowState = FormWindowState.Maximized;
             EstiloUI.AplicarEstiloFormulario(this);
             EstiloUI.AplicarEstiloTitulo(LTitulo);
+            EstiloUI.AplicarEstiloCard(panelCard, 16);
+            EstiloUI.AplicarEstiloPanelSeccion(panel1, 10);
+            EstiloUI.AplicarEstiloGrilla(DGDetalleRecepcion);
             EstiloUI.AplicarEstiloBoton(BAceptar);
-            EstiloUI.AplicarEstiloBoton(BCancelar);
+            EstiloUI.AplicarEstiloBotonSecundario(BCancelar);
+            EstiloUI.CentrarControl(panelCard, this);
+
             TBFechaRecepcion.Text = DateTime.Now.ToString("dd/MM/yyyy");
             DGDetalleRecepcion.CellValidating += new DataGridViewCellValidatingEventHandler(DGDetalleRecepcion_CellValidating);
             DGDetalleRecepcion.DataError += new DataGridViewDataErrorEventHandler(DGDetalleRecepcion_DataError);
-
 
             // Llenar grilla dinámicamente
             if (listaProductos != null)
@@ -60,6 +64,11 @@ namespace ProyectoIntegrador.Formularios.Compras
 
             // Desbloqueamos SOLO la columna de "Cantidad Recibida" (asumiendo que es el índice 4)
             DGDetalleRecepcion.Columns[4].ReadOnly = false;
+        }
+
+        private void FormRegistrarRecepcion_Resize(object sender, EventArgs e)
+        {
+            EstiloUI.CentrarControl(panelCard, this);
         }
 
         private void BAceptar_Click(object sender, EventArgs e)

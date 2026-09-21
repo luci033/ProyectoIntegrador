@@ -1,4 +1,4 @@
-﻿using ProyectoIntegrador.Formularios.Productos;
+using ProyectoIntegrador.Formularios.Productos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,13 +20,18 @@ namespace ProyectoIntegrador.Formularios.Compras
 
         private void FormOrdenCompra_Load(object sender, EventArgs e)
         {
-            EstiloUI.AplicarEstiloGrilla(DGDetalleOrden);
+            this.WindowState = FormWindowState.Maximized;
             EstiloUI.AplicarEstiloFormulario(this);
             EstiloUI.AplicarEstiloTitulo(LTitulo);
-            EstiloUI.AplicarEstiloBoton(BCancelar);
-            EstiloUI.AplicarEstiloBoton(BGenerarOrden);
-            EstiloUI.AplicarEstiloBoton(BAgregarProducto);
+            EstiloUI.AplicarEstiloCard(panelCard, 16);
+            EstiloUI.AplicarEstiloPanelSeccion(panel1, 10);
+            EstiloUI.AplicarEstiloPanelSeccion(panel2, 10);
             EstiloUI.AplicarEstiloBoton(BSeleccionarProveedor);
+            EstiloUI.AplicarEstiloBoton(BAgregarProducto);
+            EstiloUI.AplicarEstiloBoton(BGenerarOrden);
+            EstiloUI.AplicarEstiloBotonSecundario(BCancelar);
+            EstiloUI.AplicarEstiloGrilla(DGDetalleOrden);
+            EstiloUI.CentrarControl(panelCard, this);
 
 
             // cargo fecha del sistema
@@ -44,6 +49,11 @@ namespace ProyectoIntegrador.Formularios.Compras
             DGDetalleOrden.Columns[6].ReadOnly = false;
 
             DGDetalleOrden.DataError += new DataGridViewDataErrorEventHandler(DGDetalleOrden_DataError);
+        }
+
+        private void FormOrdenCompra_Resize(object sender, EventArgs e)
+        {
+            EstiloUI.CentrarControl(panelCard, this);
         }
 
         private void label3_Click(object sender, EventArgs e)
