@@ -1,4 +1,4 @@
-﻿using ProyectoIntegrador.Formularios.Compras;
+using ProyectoIntegrador.Formularios.Compras;
 using ProyectoIntegrador.Formularios.Inventario;
 using ProyectoIntegrador.Formularios.Productos;
 using ProyectoIntegrador.Formularios.Proveedores;
@@ -21,6 +21,10 @@ namespace ProyectoIntegrador.Formularios.Principal
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
             this.IsMdiContainer = true; // Permite que este formulario contenga a los otros
+
+            EstiloUI.AplicarBordesRedondeados(BProductos, 14);
+            EstiloUI.AplicarBordesRedondeados(BCompras, 14);
+            EstiloUI.AplicarBordesRedondeados(BAjusteStock, 14);
         }
 
         private void CerrarFormulariosHijos()
@@ -33,7 +37,17 @@ namespace ProyectoIntegrador.Formularios.Principal
 
         private void FormPrincipalLogistica_Load(object sender, EventArgs e)
         {
+            // Personaliza el color de fondo del espacio contenedor MDI
+            foreach (Control c in this.Controls)
+            {
+                if (c is MdiClient mdi)
+                {
+                    mdi.BackColor = EstiloUI.ColorFondo;
+                }
+            }
 
+            // Inicia mostrando el catálogo de productos por defecto
+            BProductos_Click(this, EventArgs.Empty);
         }
 
         // Dejo vacíos los eventos del menú superior viejo por si los borraste del diseño
