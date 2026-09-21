@@ -1,4 +1,4 @@
-﻿namespace ProyectoIntegrador.Formularios.Clientes
+namespace ProyectoIntegrador.Formularios.Clientes
 {
     partial class DetalleClientes
     {
@@ -28,21 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.TBNombre = new System.Windows.Forms.TextBox();
+            this.panelCard = new System.Windows.Forms.Panel();
+            this.LTitulo = new System.Windows.Forms.Label();
+            this.LSubtitulo = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.LNombre = new System.Windows.Forms.Label();
-            this.TBDni = new System.Windows.Forms.TextBox();
+            this.TBNombre = new System.Windows.Forms.TextBox();
             this.LDni = new System.Windows.Forms.Label();
-            this.cmbCondicionIVA = new System.Windows.Forms.ComboBox();
+            this.TBDni = new System.Windows.Forms.TextBox();
             this.LCondicionIVA = new System.Windows.Forms.Label();
-            this.TBCorreo = new System.Windows.Forms.TextBox();
+            this.cmbCondicionIVA = new System.Windows.Forms.ComboBox();
             this.LCorreo = new System.Windows.Forms.Label();
+            this.TBCorreo = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.LDesde = new System.Windows.Forms.Label();
+            this.DTPDesde = new System.Windows.Forms.DateTimePicker();
+            this.LHasta = new System.Windows.Forms.Label();
             this.DTPHasta = new System.Windows.Forms.DateTimePicker();
+            this.LMedioPago = new System.Windows.Forms.Label();
             this.cmbDMedioPago = new System.Windows.Forms.ComboBox();
             this.BFiltrar = new System.Windows.Forms.Button();
-            this.LMedioPago = new System.Windows.Forms.Label();
-            this.LHasta = new System.Windows.Forms.Label();
-            this.LDesde = new System.Windows.Forms.Label();
             this.dataGridDetalleCliente = new System.Windows.Forms.DataGridView();
             this.colNroVenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,151 +56,236 @@
             this.colDetalle = new System.Windows.Forms.DataGridViewButtonColumn();
             this.BPDF = new System.Windows.Forms.Button();
             this.BCerrar = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.DTPDesde = new System.Windows.Forms.DateTimePicker();
+            this.panelCard.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridDetalleCliente)).BeginInit();
-            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // TBNombre
+            // panelCard
             // 
-            this.TBNombre.Location = new System.Drawing.Point(134, 18);
-            this.TBNombre.Name = "TBNombre";
-            this.TBNombre.ReadOnly = true;
-            this.TBNombre.Size = new System.Drawing.Size(100, 20);
-            this.TBNombre.TabIndex = 8;
+            this.panelCard.BackColor = System.Drawing.Color.White;
+            this.panelCard.Controls.Add(this.LTitulo);
+            this.panelCard.Controls.Add(this.LSubtitulo);
+            this.panelCard.Controls.Add(this.panel2);
+            this.panelCard.Controls.Add(this.panel1);
+            this.panelCard.Controls.Add(this.dataGridDetalleCliente);
+            this.panelCard.Controls.Add(this.BPDF);
+            this.panelCard.Controls.Add(this.BCerrar);
+            this.panelCard.Location = new System.Drawing.Point(30, 20);
+            this.panelCard.Name = "panelCard";
+            this.panelCard.Size = new System.Drawing.Size(980, 670);
+            this.panelCard.TabIndex = 0;
+            // 
+            // LTitulo
+            // 
+            this.LTitulo.AutoSize = true;
+            this.LTitulo.Font = new System.Drawing.Font("Georgia", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LTitulo.Location = new System.Drawing.Point(25, 20);
+            this.LTitulo.Name = "LTitulo";
+            this.LTitulo.Size = new System.Drawing.Size(462, 31);
+            this.LTitulo.TabIndex = 0;
+            this.LTitulo.Text = "Historial de Compras del Cliente";
+            // 
+            // LSubtitulo
+            // 
+            this.LSubtitulo.AutoSize = true;
+            this.LSubtitulo.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LSubtitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(85)))), ((int)(((byte)(78)))));
+            this.LSubtitulo.Location = new System.Drawing.Point(25, 55);
+            this.LSubtitulo.Name = "LSubtitulo";
+            this.LSubtitulo.Size = new System.Drawing.Size(466, 17);
+            this.LSubtitulo.TabIndex = 1;
+            this.LSubtitulo.Text = "Consulte las ventas efectuadas, medios de pago y montos totales facturados.";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(245)))), ((int)(((byte)(242)))));
+            this.panel2.Controls.Add(this.LNombre);
+            this.panel2.Controls.Add(this.TBNombre);
+            this.panel2.Controls.Add(this.LDni);
+            this.panel2.Controls.Add(this.TBDni);
+            this.panel2.Controls.Add(this.LCondicionIVA);
+            this.panel2.Controls.Add(this.cmbCondicionIVA);
+            this.panel2.Controls.Add(this.LCorreo);
+            this.panel2.Controls.Add(this.TBCorreo);
+            this.panel2.Location = new System.Drawing.Point(25, 85);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(930, 75);
+            this.panel2.TabIndex = 2;
             // 
             // LNombre
             // 
             this.LNombre.AutoSize = true;
-            this.LNombre.Location = new System.Drawing.Point(26, 25);
+            this.LNombre.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LNombre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LNombre.Location = new System.Drawing.Point(20, 14);
             this.LNombre.Name = "LNombre";
-            this.LNombre.Size = new System.Drawing.Size(44, 13);
-            this.LNombre.TabIndex = 7;
-            this.LNombre.Text = "Nombre";
-            this.LNombre.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.LNombre.Size = new System.Drawing.Size(113, 15);
+            this.LNombre.TabIndex = 0;
+            this.LNombre.Text = "Nombre y Apellido:";
             // 
-            // TBDni
+            // TBNombre
             // 
-            this.TBDni.Location = new System.Drawing.Point(359, 62);
-            this.TBDni.Name = "TBDni";
-            this.TBDni.ReadOnly = true;
-            this.TBDni.Size = new System.Drawing.Size(100, 20);
-            this.TBDni.TabIndex = 10;
+            this.TBNombre.BackColor = System.Drawing.Color.White;
+            this.TBNombre.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.TBNombre.Location = new System.Drawing.Point(20, 35);
+            this.TBNombre.Name = "TBNombre";
+            this.TBNombre.ReadOnly = true;
+            this.TBNombre.Size = new System.Drawing.Size(240, 24);
+            this.TBNombre.TabIndex = 1;
             // 
             // LDni
             // 
             this.LDni.AutoSize = true;
-            this.LDni.Location = new System.Drawing.Point(285, 65);
+            this.LDni.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LDni.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LDni.Location = new System.Drawing.Point(280, 14);
             this.LDni.Name = "LDni";
-            this.LDni.Size = new System.Drawing.Size(26, 13);
-            this.LDni.TabIndex = 9;
-            this.LDni.Text = "DNI";
-            this.LDni.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.LDni.Size = new System.Drawing.Size(65, 15);
+            this.LDni.TabIndex = 2;
+            this.LDni.Text = "DNI / CUIT:";
             // 
-            // cmbCondicionIVA
+            // TBDni
             // 
-            this.cmbCondicionIVA.FormattingEnabled = true;
-            this.cmbCondicionIVA.Location = new System.Drawing.Point(359, 21);
-            this.cmbCondicionIVA.Name = "cmbCondicionIVA";
-            this.cmbCondicionIVA.Size = new System.Drawing.Size(100, 21);
-            this.cmbCondicionIVA.TabIndex = 17;
+            this.TBDni.BackColor = System.Drawing.Color.White;
+            this.TBDni.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.TBDni.Location = new System.Drawing.Point(280, 35);
+            this.TBDni.Name = "TBDni";
+            this.TBDni.ReadOnly = true;
+            this.TBDni.Size = new System.Drawing.Size(140, 24);
+            this.TBDni.TabIndex = 3;
             // 
             // LCondicionIVA
             // 
             this.LCondicionIVA.AutoSize = true;
-            this.LCondicionIVA.Location = new System.Drawing.Point(266, 29);
+            this.LCondicionIVA.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LCondicionIVA.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LCondicionIVA.Location = new System.Drawing.Point(440, 14);
             this.LCondicionIVA.Name = "LCondicionIVA";
-            this.LCondicionIVA.Size = new System.Drawing.Size(74, 13);
-            this.LCondicionIVA.TabIndex = 16;
-            this.LCondicionIVA.Text = "Condición IVA";
-            this.LCondicionIVA.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.LCondicionIVA.Size = new System.Drawing.Size(89, 15);
+            this.LCondicionIVA.TabIndex = 4;
+            this.LCondicionIVA.Text = "Condición IVA:";
             // 
-            // TBCorreo
+            // cmbCondicionIVA
             // 
-            this.TBCorreo.Location = new System.Drawing.Point(134, 58);
-            this.TBCorreo.Name = "TBCorreo";
-            this.TBCorreo.ReadOnly = true;
-            this.TBCorreo.Size = new System.Drawing.Size(100, 20);
-            this.TBCorreo.TabIndex = 19;
+            this.cmbCondicionIVA.BackColor = System.Drawing.Color.White;
+            this.cmbCondicionIVA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCondicionIVA.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.cmbCondicionIVA.FormattingEnabled = true;
+            this.cmbCondicionIVA.Location = new System.Drawing.Point(440, 35);
+            this.cmbCondicionIVA.Name = "cmbCondicionIVA";
+            this.cmbCondicionIVA.Size = new System.Drawing.Size(180, 24);
+            this.cmbCondicionIVA.TabIndex = 5;
             // 
             // LCorreo
             // 
             this.LCorreo.AutoSize = true;
-            this.LCorreo.Location = new System.Drawing.Point(23, 65);
+            this.LCorreo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LCorreo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LCorreo.Location = new System.Drawing.Point(640, 14);
             this.LCorreo.Name = "LCorreo";
-            this.LCorreo.Size = new System.Drawing.Size(94, 13);
-            this.LCorreo.TabIndex = 18;
-            this.LCorreo.Text = "Correo Electrónico";
-            this.LCorreo.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.LCorreo.Size = new System.Drawing.Size(113, 15);
+            this.LCorreo.TabIndex = 6;
+            this.LCorreo.Text = "Correo Electrónico:";
+            // 
+            // TBCorreo
+            // 
+            this.TBCorreo.BackColor = System.Drawing.Color.White;
+            this.TBCorreo.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.TBCorreo.Location = new System.Drawing.Point(640, 35);
+            this.TBCorreo.Name = "TBCorreo";
+            this.TBCorreo.ReadOnly = true;
+            this.TBCorreo.Size = new System.Drawing.Size(270, 24);
+            this.TBCorreo.TabIndex = 7;
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(245)))), ((int)(((byte)(242)))));
+            this.panel1.Controls.Add(this.LDesde);
             this.panel1.Controls.Add(this.DTPDesde);
+            this.panel1.Controls.Add(this.LHasta);
             this.panel1.Controls.Add(this.DTPHasta);
+            this.panel1.Controls.Add(this.LMedioPago);
             this.panel1.Controls.Add(this.cmbDMedioPago);
             this.panel1.Controls.Add(this.BFiltrar);
-            this.panel1.Controls.Add(this.LMedioPago);
-            this.panel1.Controls.Add(this.LHasta);
-            this.panel1.Controls.Add(this.LDesde);
-            this.panel1.Location = new System.Drawing.Point(25, 175);
+            this.panel1.Location = new System.Drawing.Point(25, 170);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(612, 38);
-            this.panel1.TabIndex = 20;
-            // 
-            // DTPHasta
-            // 
-            this.DTPHasta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.DTPHasta.Location = new System.Drawing.Point(176, 8);
-            this.DTPHasta.Name = "DTPHasta";
-            this.DTPHasta.Size = new System.Drawing.Size(94, 20);
-            this.DTPHasta.TabIndex = 26;
-            // 
-            // cmbDMedioPago
-            // 
-            this.cmbDMedioPago.FormattingEnabled = true;
-            this.cmbDMedioPago.Location = new System.Drawing.Point(370, 8);
-            this.cmbDMedioPago.Name = "cmbDMedioPago";
-            this.cmbDMedioPago.Size = new System.Drawing.Size(95, 21);
-            this.cmbDMedioPago.TabIndex = 25;
-            // 
-            // BFiltrar
-            // 
-            this.BFiltrar.Location = new System.Drawing.Point(520, 4);
-            this.BFiltrar.Name = "BFiltrar";
-            this.BFiltrar.Size = new System.Drawing.Size(89, 27);
-            this.BFiltrar.TabIndex = 22;
-            this.BFiltrar.Text = "Filtrar";
-            this.BFiltrar.UseVisualStyleBackColor = true;
-            this.BFiltrar.Click += new System.EventHandler(this.BFiltrar_Click);
-            // 
-            // LMedioPago
-            // 
-            this.LMedioPago.AutoSize = true;
-            this.LMedioPago.Location = new System.Drawing.Point(285, 11);
-            this.LMedioPago.Name = "LMedioPago";
-            this.LMedioPago.Size = new System.Drawing.Size(79, 13);
-            this.LMedioPago.TabIndex = 21;
-            this.LMedioPago.Text = "Medio de Pago";
-            // 
-            // LHasta
-            // 
-            this.LHasta.AutoSize = true;
-            this.LHasta.Location = new System.Drawing.Point(140, 11);
-            this.LHasta.Name = "LHasta";
-            this.LHasta.Size = new System.Drawing.Size(41, 13);
-            this.LHasta.TabIndex = 1;
-            this.LHasta.Text = "Hasta: ";
+            this.panel1.Size = new System.Drawing.Size(930, 60);
+            this.panel1.TabIndex = 3;
             // 
             // LDesde
             // 
             this.LDesde.AutoSize = true;
-            this.LDesde.Location = new System.Drawing.Point(3, 11);
+            this.LDesde.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LDesde.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LDesde.Location = new System.Drawing.Point(20, 22);
             this.LDesde.Name = "LDesde";
-            this.LDesde.Size = new System.Drawing.Size(44, 13);
+            this.LDesde.Size = new System.Drawing.Size(45, 15);
             this.LDesde.TabIndex = 0;
-            this.LDesde.Text = "Desde: ";
+            this.LDesde.Text = "Desde:";
+            // 
+            // DTPDesde
+            // 
+            this.DTPDesde.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.DTPDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.DTPDesde.Location = new System.Drawing.Point(75, 18);
+            this.DTPDesde.Name = "DTPDesde";
+            this.DTPDesde.Size = new System.Drawing.Size(130, 24);
+            this.DTPDesde.TabIndex = 1;
+            // 
+            // LHasta
+            // 
+            this.LHasta.AutoSize = true;
+            this.LHasta.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LHasta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LHasta.Location = new System.Drawing.Point(225, 22);
+            this.LHasta.Name = "LHasta";
+            this.LHasta.Size = new System.Drawing.Size(42, 15);
+            this.LHasta.TabIndex = 2;
+            this.LHasta.Text = "Hasta:";
+            // 
+            // DTPHasta
+            // 
+            this.DTPHasta.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.DTPHasta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.DTPHasta.Location = new System.Drawing.Point(275, 18);
+            this.DTPHasta.Name = "DTPHasta";
+            this.DTPHasta.Size = new System.Drawing.Size(130, 24);
+            this.DTPHasta.TabIndex = 3;
+            // 
+            // LMedioPago
+            // 
+            this.LMedioPago.AutoSize = true;
+            this.LMedioPago.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LMedioPago.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LMedioPago.Location = new System.Drawing.Point(435, 22);
+            this.LMedioPago.Name = "LMedioPago";
+            this.LMedioPago.Size = new System.Drawing.Size(95, 15);
+            this.LMedioPago.TabIndex = 4;
+            this.LMedioPago.Text = "Medio de Pago:";
+            // 
+            // cmbDMedioPago
+            // 
+            this.cmbDMedioPago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDMedioPago.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.cmbDMedioPago.FormattingEnabled = true;
+            this.cmbDMedioPago.Location = new System.Drawing.Point(540, 18);
+            this.cmbDMedioPago.Name = "cmbDMedioPago";
+            this.cmbDMedioPago.Size = new System.Drawing.Size(180, 24);
+            this.cmbDMedioPago.TabIndex = 5;
+            // 
+            // BFiltrar
+            // 
+            this.BFiltrar.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
+            this.BFiltrar.Location = new System.Drawing.Point(745, 13);
+            this.BFiltrar.Name = "BFiltrar";
+            this.BFiltrar.Size = new System.Drawing.Size(165, 34);
+            this.BFiltrar.TabIndex = 6;
+            this.BFiltrar.Text = "Filtrar";
+            this.BFiltrar.UseVisualStyleBackColor = true;
+            this.BFiltrar.Click += new System.EventHandler(this.BFiltrar_Click);
             // 
             // dataGridDetalleCliente
             // 
@@ -211,112 +301,99 @@
             this.colMedioPago,
             this.colTotal,
             this.colDetalle});
-            this.dataGridDetalleCliente.Location = new System.Drawing.Point(-1, 235);
+            this.dataGridDetalleCliente.Location = new System.Drawing.Point(25, 240);
             this.dataGridDetalleCliente.Name = "dataGridDetalleCliente";
             this.dataGridDetalleCliente.RowHeadersVisible = false;
-            this.dataGridDetalleCliente.Size = new System.Drawing.Size(772, 67);
-            this.dataGridDetalleCliente.TabIndex = 21;
+            this.dataGridDetalleCliente.Size = new System.Drawing.Size(930, 350);
+            this.dataGridDetalleCliente.TabIndex = 4;
             this.dataGridDetalleCliente.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // colNroVenta
             // 
-            this.colNroVenta.FillWeight = 15F;
+            this.colNroVenta.FillWeight = 20F;
             this.colNroVenta.HeaderText = "Nro. Venta";
             this.colNroVenta.Name = "colNroVenta";
             this.colNroVenta.ReadOnly = true;
             // 
             // colFecha
             // 
-            this.colFecha.FillWeight = 15F;
+            this.colFecha.FillWeight = 25F;
             this.colFecha.HeaderText = "Fecha";
             this.colFecha.Name = "colFecha";
             this.colFecha.ReadOnly = true;
             // 
             // colMedioPago
             // 
-            this.colMedioPago.FillWeight = 15F;
+            this.colMedioPago.FillWeight = 30F;
             this.colMedioPago.HeaderText = "Medio de Pago";
             this.colMedioPago.Name = "colMedioPago";
             this.colMedioPago.ReadOnly = true;
             // 
             // colTotal
             // 
-            this.colTotal.FillWeight = 15F;
+            this.colTotal.FillWeight = 25F;
             this.colTotal.HeaderText = "Total";
             this.colTotal.Name = "colTotal";
             this.colTotal.ReadOnly = true;
             // 
             // colDetalle
             // 
-            this.colDetalle.FillWeight = 15F;
+            this.colDetalle.FillWeight = 20F;
+            this.colDetalle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.colDetalle.HeaderText = "Detalle";
             this.colDetalle.Name = "colDetalle";
+            this.colDetalle.Text = "Ver...";
             // 
             // BPDF
             // 
-            this.BPDF.Location = new System.Drawing.Point(407, 350);
+            this.BPDF.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.BPDF.Location = new System.Drawing.Point(545, 605);
             this.BPDF.Name = "BPDF";
-            this.BPDF.Size = new System.Drawing.Size(142, 24);
-            this.BPDF.TabIndex = 22;
-            this.BPDF.Text = "Exportar PDF//";
+            this.BPDF.Size = new System.Drawing.Size(180, 44);
+            this.BPDF.TabIndex = 5;
+            this.BPDF.Text = "Exportar PDF";
             this.BPDF.UseVisualStyleBackColor = true;
             // 
             // BCerrar
             // 
-            this.BCerrar.Location = new System.Drawing.Point(580, 350);
+            this.BCerrar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.BCerrar.Location = new System.Drawing.Point(745, 605);
             this.BCerrar.Name = "BCerrar";
-            this.BCerrar.Size = new System.Drawing.Size(82, 24);
-            this.BCerrar.TabIndex = 23;
+            this.BCerrar.Size = new System.Drawing.Size(210, 44);
+            this.BCerrar.TabIndex = 6;
             this.BCerrar.Text = "Cerrar";
             this.BCerrar.UseVisualStyleBackColor = true;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.TBCorreo);
-            this.panel2.Controls.Add(this.LCorreo);
-            this.panel2.Controls.Add(this.cmbCondicionIVA);
-            this.panel2.Controls.Add(this.LCondicionIVA);
-            this.panel2.Controls.Add(this.TBDni);
-            this.panel2.Controls.Add(this.LDni);
-            this.panel2.Controls.Add(this.TBNombre);
-            this.panel2.Controls.Add(this.LNombre);
-            this.panel2.Location = new System.Drawing.Point(16, 42);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(497, 102);
-            this.panel2.TabIndex = 24;
-            // 
-            // DTPDesde
-            // 
-            this.DTPDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.DTPDesde.Location = new System.Drawing.Point(40, 9);
-            this.DTPDesde.Name = "DTPDesde";
-            this.DTPDesde.Size = new System.Drawing.Size(94, 20);
-            this.DTPDesde.TabIndex = 27;
+            this.BCerrar.Click += new System.EventHandler(this.BCerrar_Click);
             // 
             // DetalleClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(773, 386);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.BCerrar);
-            this.Controls.Add(this.BPDF);
-            this.Controls.Add(this.dataGridDetalleCliente);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(1040, 720);
+            this.Controls.Add(this.panelCard);
+            this.MinimumSize = new System.Drawing.Size(850, 600);
             this.Name = "DetalleClientes";
-            this.Text = "Detalle Clientes";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Historial de Compras del Cliente";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.DetalleClientes_Load);
+            this.Resize += new System.EventHandler(this.DetalleClientes_Resize);
+            this.panelCard.ResumeLayout(false);
+            this.panelCard.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridDetalleCliente)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
+        private System.Windows.Forms.Panel panelCard;
+        private System.Windows.Forms.Label LTitulo;
+        private System.Windows.Forms.Label LSubtitulo;
         private System.Windows.Forms.TextBox TBNombre;
         private System.Windows.Forms.Label LNombre;
         private System.Windows.Forms.TextBox TBDni;

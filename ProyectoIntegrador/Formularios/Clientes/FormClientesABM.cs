@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -33,10 +33,19 @@ namespace ProyectoIntegrador.Formularios.Clientes
 
         private void FormClientesABM_Load(object sender, EventArgs e)
         {
+            this.WindowState = FormWindowState.Maximized;
             EstiloUI.AplicarEstiloFormulario(this);
             EstiloUI.AplicarEstiloTitulo(LTitulo);
-            EstiloUI.AplicarEstiloBoton(BCancelar);
+            EstiloUI.AplicarEstiloCard(panelCard, 16);
+            if (panelAvatar != null) EstiloUI.AplicarEstiloPanelSeccion(panelAvatar, 12);
             EstiloUI.AplicarEstiloBoton(BRegistrarCliente);
+            EstiloUI.AplicarEstiloBotonSecundario(BCancelar);
+            EstiloUI.CentrarControl(panelCard, this);
+        }
+
+        private void FormClientesABM_Resize(object sender, EventArgs e)
+        {
+            EstiloUI.CentrarControl(panelCard, this);
         }
 
         private void label5_Click(object sender, EventArgs e)

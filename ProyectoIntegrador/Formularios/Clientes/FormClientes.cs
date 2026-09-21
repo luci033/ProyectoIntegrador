@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,6 +22,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
 
         private void FormClientes_Load(object sender, EventArgs e)
         {
+            this.WindowState = FormWindowState.Maximized;
             EstiloUI.AplicarEstiloGrilla(DGClientes);
             EstiloUI.AplicarEstiloFormulario(this);
             EstiloUI.AplicarEstiloTitulo(LTitulo);

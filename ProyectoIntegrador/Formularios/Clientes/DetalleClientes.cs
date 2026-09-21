@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,8 +24,27 @@ namespace ProyectoIntegrador.Formularios.Clientes
 
         private void DetalleClientes_Load(object sender, EventArgs e)
         {
+            this.WindowState = FormWindowState.Maximized;
+            EstiloUI.AplicarEstiloFormulario(this);
+            EstiloUI.AplicarEstiloTitulo(LTitulo);
+            EstiloUI.AplicarEstiloCard(panelCard, 16);
+            EstiloUI.AplicarEstiloPanelSeccion(panel2, 10);
+            EstiloUI.AplicarEstiloPanelSeccion(panel1, 10);
             EstiloUI.AplicarEstiloGrilla(dataGridDetalleCliente);
+            EstiloUI.AplicarEstiloBoton(BFiltrar);
+            EstiloUI.AplicarEstiloBotonSecundario(BPDF);
+            EstiloUI.AplicarEstiloBoton(BCerrar);
+            EstiloUI.CentrarControl(panelCard, this);
+        }
 
+        private void DetalleClientes_Resize(object sender, EventArgs e)
+        {
+            EstiloUI.CentrarControl(panelCard, this);
+        }
+
+        private void BCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         public void CargarDatosCliente(string nombre, string correo, string condicionIva, string dni)
