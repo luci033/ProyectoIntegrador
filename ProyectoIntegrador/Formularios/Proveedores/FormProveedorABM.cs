@@ -87,6 +87,7 @@ namespace ProyectoIntegrador.Formularios.Proveedores
             this.WindowState = FormWindowState.Maximized;
             EstiloUI.AplicarEstiloFormulario(this);
             EstiloUI.AplicarEstiloTitulo(LTitulo);
+            EstiloUI.AplicarEstiloCard(panelCard, 16);
             EstiloUI.AplicarEstiloBoton(BGuardar);
             EstiloUI.AplicarEstiloBotonSecundario(BCancelar);
             EstiloUI.AplicarEstiloTextBox(TBRazonSocial);

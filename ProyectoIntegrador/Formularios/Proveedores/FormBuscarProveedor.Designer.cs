@@ -108,9 +108,9 @@ namespace ProyectoIntegrador.Formularios.Compras
             // 
             this.BCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.BCancelar.Font = new System.Drawing.Font("Georgia", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BCancelar.Location = new System.Drawing.Point(626, 400);
+            this.BCancelar.Location = new System.Drawing.Point(616, 396);
             this.BCancelar.Name = "BCancelar";
-            this.BCancelar.Size = new System.Drawing.Size(150, 38);
+            this.BCancelar.Size = new System.Drawing.Size(160, 42);
             this.BCancelar.TabIndex = 2;
             this.BCancelar.Text = "Cancelar";
             this.BCancelar.UseVisualStyleBackColor = true;
