@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,10 +19,11 @@ namespace ProyectoIntegrador.Formularios.Productos
 
         private void FCategorias_Load(object sender, EventArgs e)
         {
-            EstiloUI.AplicarEstiloGrilla(DGCategoria);
+            this.WindowState = FormWindowState.Maximized;
             EstiloUI.AplicarEstiloFormulario(this);
             EstiloUI.AplicarEstiloTitulo(LTitulo);
             EstiloUI.AplicarEstiloBoton(BAgregarCategoria);
+            EstiloUI.AplicarEstiloGrilla(DGCategoria);
             DGCategoria.Rows.Add(1, "Anillos", "Modificar", "Desactivar");
             DGCategoria.Rows.Add(2, "Collares", "Modificar", "Desactivar");
             DGCategoria.Rows.Add(3, "Pulseras", "Modificar", "Desactivar");

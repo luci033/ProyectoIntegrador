@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace ProyectoIntegrador
@@ -69,13 +70,44 @@ namespace ProyectoIntegrador
 
         public static void AplicarEstiloBoton(Button boton)
         {
-            boton.Font = new Font("Georgia", boton.Font.Size, FontStyle.Bold);
+            boton.Font = new Font("Georgia", boton.Font.Size > 0 ? boton.Font.Size : 11f, FontStyle.Bold);
             boton.ForeColor = Color.White;
             boton.BackColor = ColorBorgoña;
 
             // Quita el diseño por defecto de Windows para aplicar tus colores
             boton.FlatStyle = FlatStyle.Flat;
             boton.FlatAppearance.BorderSize = 0;
+            boton.Cursor = Cursors.Hand;
+        }
+
+        public static readonly Color ColorBotonSecundario = Color.FromArgb(215, 208, 201);
+        public static readonly Color ColorBotonSecundarioTexto = Color.FromArgb(42, 8, 12);
+        public static readonly Color ColorCard = Color.White;
+        public static readonly Color ColorBorde = Color.FromArgb(200, 195, 189);
+
+        public static void AplicarEstiloBotonSecundario(Button boton)
+        {
+            boton.Font = new Font("Georgia", boton.Font.Size > 0 ? boton.Font.Size : 10f, FontStyle.Bold);
+            boton.ForeColor = ColorBotonSecundarioTexto;
+            boton.BackColor = ColorBotonSecundario;
+            boton.FlatStyle = FlatStyle.Flat;
+            boton.FlatAppearance.BorderSize = 0;
+            boton.Cursor = Cursors.Hand;
+        }
+
+        public static void AplicarEstiloTextBox(TextBox textBox)
+        {
+            textBox.Font = new Font("Segoe UI", 10f, FontStyle.Regular);
+            textBox.BorderStyle = BorderStyle.FixedSingle;
+            textBox.BackColor = Color.White;
+            textBox.ForeColor = Color.Black;
+        }
+
+        public static void CentrarControl(Control hijo, Control contenedor)
+        {
+            if (hijo == null || contenedor == null) return;
+            hijo.Left = Math.Max(10, (contenedor.ClientSize.Width - hijo.Width) / 2);
+            hijo.Top = Math.Max(10, (contenedor.ClientSize.Height - hijo.Height) / 2);
         }
     }
 }

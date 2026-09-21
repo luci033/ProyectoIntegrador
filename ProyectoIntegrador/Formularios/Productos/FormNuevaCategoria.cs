@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,10 +27,18 @@ namespace ProyectoIntegrador.Formularios.Productos
 
         private void FormNuevaCategoria_Load(object sender, EventArgs e)
         {
+            this.WindowState = FormWindowState.Maximized;
             EstiloUI.AplicarEstiloFormulario(this);
             EstiloUI.AplicarEstiloTitulo(LTitulo);
-            EstiloUI.AplicarEstiloBoton(BCancelar);
             EstiloUI.AplicarEstiloBoton(BGuardar);
+            EstiloUI.AplicarEstiloBotonSecundario(BCancelar);
+            EstiloUI.AplicarEstiloTextBox(TNuevaCategoria);
+            EstiloUI.CentrarControl(panelCard, this);
+        }
+
+        private void FormNuevaCategoria_Resize(object sender, EventArgs e)
+        {
+            EstiloUI.CentrarControl(panelCard, this);
         }
 
         private void LCategorias_Click(object sender, EventArgs e)

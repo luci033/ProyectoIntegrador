@@ -1,4 +1,4 @@
-﻿namespace ProyectoIntegrador.Formularios.Productos
+namespace ProyectoIntegrador.Formularios.Productos
 {
     partial class FormProductos
     {
@@ -59,56 +59,60 @@
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
+            // 
             // BNuevo
             // 
+            this.BNuevo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BNuevo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
             this.BNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BNuevo.Font = new System.Drawing.Font("Georgia", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BNuevo.ForeColor = System.Drawing.Color.White;
-            this.BNuevo.Location = new System.Drawing.Point(568, 186);
+            this.BNuevo.Location = new System.Drawing.Point(680, 22);
             this.BNuevo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.BNuevo.Name = "BNuevo";
-            this.BNuevo.Size = new System.Drawing.Size(170, 60);
+            this.BNuevo.Size = new System.Drawing.Size(182, 44);
             this.BNuevo.TabIndex = 10;
-            this.BNuevo.Text = "Nuevo Producto";
+            this.BNuevo.Text = "+ Nuevo Producto";
             this.BNuevo.UseVisualStyleBackColor = false;
             this.BNuevo.Click += new System.EventHandler(this.BNuevo_Click);
             // 
             // LTitulo
             // 
+            this.LTitulo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
             this.LTitulo.AutoSize = true;
-            this.LTitulo.Font = new System.Drawing.Font("Georgia", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LTitulo.Font = new System.Drawing.Font("Georgia", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.LTitulo.Location = new System.Drawing.Point(10, 87);
+            this.LTitulo.Location = new System.Drawing.Point(24, 25);
             this.LTitulo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LTitulo.Name = "LTitulo";
-            this.LTitulo.Size = new System.Drawing.Size(699, 38);
+            this.LTitulo.Size = new System.Drawing.Size(400, 38);
             this.LTitulo.TabIndex = 15;
-            this.LTitulo.Text = "Colección Joyería ALBA - Catálogo de Productos";
+            this.LTitulo.Text = "Catálogo de Productos";
             this.LTitulo.Click += new System.EventHandler(this.LCatalogoProductos_Click);
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.CBGenero);
             this.panel1.Controls.Add(this.CBCategoria);
             this.panel1.Controls.Add(this.LGenero);
             this.panel1.Controls.Add(this.LCategoria);
             this.panel1.Controls.Add(this.TBBuscarProducto);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 412);
+            this.panel1.Location = new System.Drawing.Point(24, 80);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(886, 55);
+            this.panel1.Size = new System.Drawing.Size(838, 48);
             this.panel1.TabIndex = 16;
             // 
             // CBGenero
             // 
             this.CBGenero.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CBGenero.FormattingEnabled = true;
-            this.CBGenero.Location = new System.Drawing.Point(667, 17);
+            this.CBGenero.Location = new System.Drawing.Point(620, 11);
             this.CBGenero.Name = "CBGenero";
-            this.CBGenero.Size = new System.Drawing.Size(121, 23);
+            this.CBGenero.Size = new System.Drawing.Size(140, 23);
             this.CBGenero.TabIndex = 24;
             this.CBGenero.SelectedIndexChanged += new System.EventHandler(this.CBGenero_SelectedIndexChanged);
             // 
@@ -116,46 +120,50 @@
             // 
             this.CBCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CBCategoria.FormattingEnabled = true;
-            this.CBCategoria.Location = new System.Drawing.Point(480, 17);
+            this.CBCategoria.Location = new System.Drawing.Point(375, 11);
             this.CBCategoria.Name = "CBCategoria";
-            this.CBCategoria.Size = new System.Drawing.Size(121, 23);
+            this.CBCategoria.Size = new System.Drawing.Size(140, 23);
             this.CBCategoria.TabIndex = 23;
             this.CBCategoria.SelectedIndexChanged += new System.EventHandler(this.CBCategoria_SelectedIndexChanged);
             // 
             // LGenero
             // 
             this.LGenero.AutoSize = true;
-            this.LGenero.Location = new System.Drawing.Point(613, 20);
+            this.LGenero.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
+            this.LGenero.Location = new System.Drawing.Point(555, 14);
             this.LGenero.Name = "LGenero";
-            this.LGenero.Size = new System.Drawing.Size(48, 15);
+            this.LGenero.Size = new System.Drawing.Size(56, 17);
             this.LGenero.TabIndex = 22;
             this.LGenero.Text = "Género:";
             // 
             // LCategoria
             // 
             this.LCategoria.AutoSize = true;
-            this.LCategoria.Location = new System.Drawing.Point(413, 20);
+            this.LCategoria.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
+            this.LCategoria.Location = new System.Drawing.Point(298, 14);
             this.LCategoria.Name = "LCategoria";
-            this.LCategoria.Size = new System.Drawing.Size(61, 15);
+            this.LCategoria.Size = new System.Drawing.Size(71, 17);
             this.LCategoria.TabIndex = 21;
             this.LCategoria.Text = "Categoría:";
             // 
             // TBBuscarProducto
             // 
-            this.TBBuscarProducto.Location = new System.Drawing.Point(84, 17);
+            this.TBBuscarProducto.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.TBBuscarProducto.Location = new System.Drawing.Point(70, 10);
             this.TBBuscarProducto.Name = "TBBuscarProducto";
-            this.TBBuscarProducto.Size = new System.Drawing.Size(217, 23);
+            this.TBBuscarProducto.Size = new System.Drawing.Size(205, 25);
             this.TBBuscarProducto.TabIndex = 20;
             this.TBBuscarProducto.TextChanged += new System.EventHandler(this.TBBuscarProducto_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 20);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
+            this.label1.Location = new System.Drawing.Point(12, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 15);
+            this.label1.Size = new System.Drawing.Size(53, 17);
             this.label1.TabIndex = 19;
-            this.label1.Text = "Nombre: ";
+            this.label1.Text = "Buscar:";
             // 
             // dataGridCatalogoProd
             // 
@@ -296,11 +304,13 @@
             // 
             // panel2
             // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.dataGridCatalogoProd);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 467);
+            this.panel2.Location = new System.Drawing.Point(24, 138);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(886, 265);
+            this.panel2.Size = new System.Drawing.Size(838, 560);
             this.panel2.TabIndex = 17;
             // 
             // FormProductos
@@ -315,8 +325,11 @@
             this.Controls.Add(this.LTitulo);
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.MinimumSize = new System.Drawing.Size(850, 500);
             this.Name = "FormProductos";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Productos";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FormProductos_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

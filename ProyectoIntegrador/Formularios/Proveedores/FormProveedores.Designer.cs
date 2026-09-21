@@ -1,4 +1,4 @@
-﻿namespace ProyectoIntegrador.Formularios.Proveedores
+namespace ProyectoIntegrador.Formularios.Proveedores
 {
     partial class FormProveedores
     {
@@ -43,27 +43,25 @@
             // 
             // LTitulo
             // 
-            this.LTitulo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.LTitulo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
             this.LTitulo.AutoSize = true;
-            this.LTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LTitulo.Location = new System.Drawing.Point(12, 59);
+            this.LTitulo.Font = new System.Drawing.Font("Georgia", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LTitulo.Location = new System.Drawing.Point(24, 25);
             this.LTitulo.Name = "LTitulo";
-            this.LTitulo.Size = new System.Drawing.Size(444, 42);
+            this.LTitulo.Size = new System.Drawing.Size(423, 38);
             this.LTitulo.TabIndex = 6;
             this.LTitulo.Text = "Gestión de Proveedores";
             this.LTitulo.Click += new System.EventHandler(this.LProveedores_Click);
             // 
             // BAgregarProveedor
             // 
-            this.BAgregarProveedor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.BAgregarProveedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BAgregarProveedor.Location = new System.Drawing.Point(524, 57);
+            this.BAgregarProveedor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BAgregarProveedor.Font = new System.Drawing.Font("Georgia", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BAgregarProveedor.Location = new System.Drawing.Point(576, 24);
             this.BAgregarProveedor.Name = "BAgregarProveedor";
-            this.BAgregarProveedor.Size = new System.Drawing.Size(215, 62);
+            this.BAgregarProveedor.Size = new System.Drawing.Size(200, 44);
             this.BAgregarProveedor.TabIndex = 5;
-            this.BAgregarProveedor.Text = "Agregar Proveedor";
+            this.BAgregarProveedor.Text = "+ Agregar Proveedor";
             this.BAgregarProveedor.UseVisualStyleBackColor = true;
             this.BAgregarProveedor.Click += new System.EventHandler(this.BAgregarProveedor_Click);
             // 
@@ -73,7 +71,8 @@
             this.DGProveedores.AllowUserToDeleteRows = false;
             this.DGProveedores.AllowUserToResizeColumns = false;
             this.DGProveedores.AllowUserToResizeRows = false;
-            this.DGProveedores.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.DGProveedores.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DGProveedores.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DGProveedores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -85,12 +84,12 @@
             this.correo,
             this.ProveedorModificar,
             this.ProveedorDesactivar});
-            this.DGProveedores.Location = new System.Drawing.Point(12, 169);
+            this.DGProveedores.Location = new System.Drawing.Point(24, 85);
             this.DGProveedores.Name = "DGProveedores";
             this.DGProveedores.ReadOnly = true;
             this.DGProveedores.RowHeadersVisible = false;
             this.DGProveedores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGProveedores.Size = new System.Drawing.Size(776, 252);
+            this.DGProveedores.Size = new System.Drawing.Size(752, 335);
             this.DGProveedores.TabIndex = 4;
             this.DGProveedores.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGProveedores_CellContentClick);
             // 

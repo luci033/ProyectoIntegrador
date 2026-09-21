@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -38,10 +38,11 @@ namespace ProyectoIntegrador.Formularios.Compras
 
         private void FormBuscarProveedor_Load(object sender, EventArgs e)
         {
-            EstiloUI.AplicarEstiloGrilla(DGProveedores);
+            this.WindowState = FormWindowState.Maximized;
             EstiloUI.AplicarEstiloFormulario(this);
             EstiloUI.AplicarEstiloTitulo(LTitulo);
-            EstiloUI.AplicarEstiloBoton(BCancelar);
+            EstiloUI.AplicarEstiloBotonSecundario(BCancelar);
+            EstiloUI.AplicarEstiloGrilla(DGProveedores);
 
             //datos de prueba
             DGProveedores.Rows.Add("Joyas del Sur S.A.", "30556667778", "3794223344", "ventas@joyasdelsur.com");

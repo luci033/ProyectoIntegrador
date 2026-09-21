@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -84,10 +84,21 @@ namespace ProyectoIntegrador.Formularios.Proveedores
 
         private void FormProveedorABM_Load(object sender, EventArgs e)
         {
+            this.WindowState = FormWindowState.Maximized;
             EstiloUI.AplicarEstiloFormulario(this);
             EstiloUI.AplicarEstiloTitulo(LTitulo);
-            EstiloUI.AplicarEstiloBoton(BCancelar);
             EstiloUI.AplicarEstiloBoton(BGuardar);
+            EstiloUI.AplicarEstiloBotonSecundario(BCancelar);
+            EstiloUI.AplicarEstiloTextBox(TBRazonSocial);
+            EstiloUI.AplicarEstiloTextBox(TBCUIT);
+            EstiloUI.AplicarEstiloTextBox(TBTelefono);
+            EstiloUI.AplicarEstiloTextBox(TBCorreo);
+            EstiloUI.CentrarControl(panelCard, this);
+        }
+
+        private void FormProveedorABM_Resize(object sender, EventArgs e)
+        {
+            EstiloUI.CentrarControl(panelCard, this);
         }
 
         public void ConfigurarModoEdicion(string razon, string cuit, string tel, string correo)

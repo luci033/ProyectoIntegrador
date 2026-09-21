@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -34,10 +34,17 @@ namespace ProyectoIntegrador
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            EstiloUI.AplicarEstiloTitulo(LTitulo);
-            EstiloUI.AplicarEstiloBoton(BCancelar);
-            EstiloUI.AplicarEstiloBoton(BCrearProducto);
+            this.WindowState = FormWindowState.Maximized;
             EstiloUI.AplicarEstiloFormulario(this);
+            EstiloUI.AplicarEstiloTitulo(LTitulo);
+            EstiloUI.AplicarEstiloBoton(BCrearProducto);
+            EstiloUI.AplicarEstiloBotonSecundario(BCancelar);
+            EstiloUI.AplicarEstiloTextBox(textNombre);
+            EstiloUI.AplicarEstiloTextBox(textPrecio);
+            EstiloUI.AplicarEstiloTextBox(textStockInicial);
+            EstiloUI.AplicarEstiloTextBox(textStockMinimo);
+            EstiloUI.AplicarEstiloTextBox(textDescripcion);
+            EstiloUI.CentrarControl(panelCard, this);
 
             // 2. Solo reseteamos los campos si estamos creando un producto NUEVO
             if (!esModificacion && !esDetalle)
@@ -49,6 +56,11 @@ namespace ProyectoIntegrador
                 cmbCategoria.SelectedIndex = -1;
                 combGenero.SelectedIndex = -1;
             }
+        }
+
+        private void FormProductoABM_Resize(object sender, EventArgs e)
+        {
+            EstiloUI.CentrarControl(panelCard, this);
         }
 
         private bool ValidarCampos()

@@ -1,4 +1,4 @@
-﻿namespace ProyectoIntegrador.Formularios.Compras
+namespace ProyectoIntegrador.Formularios.Compras
 {
     partial class FormBuscarProveedor
     {
@@ -40,11 +40,12 @@
             // 
             // LTitulo
             // 
+            this.LTitulo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
             this.LTitulo.AutoSize = true;
-            this.LTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LTitulo.Location = new System.Drawing.Point(183, 70);
+            this.LTitulo.Font = new System.Drawing.Font("Georgia", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LTitulo.Location = new System.Drawing.Point(24, 25);
             this.LTitulo.Name = "LTitulo";
-            this.LTitulo.Size = new System.Drawing.Size(532, 55);
+            this.LTitulo.Size = new System.Drawing.Size(408, 38);
             this.LTitulo.TabIndex = 0;
             this.LTitulo.Text = "Seleccionar Proveedor";
             this.LTitulo.Click += new System.EventHandler(this.label1_Click);
@@ -55,6 +56,9 @@
             this.DGProveedores.AllowUserToDeleteRows = false;
             this.DGProveedores.AllowUserToResizeColumns = false;
             this.DGProveedores.AllowUserToResizeRows = false;
+            this.DGProveedores.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DGProveedores.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DGProveedores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGProveedores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -62,47 +66,51 @@
             this.colCUIT,
             this.colTelefono,
             this.colCorreo});
-            this.DGProveedores.Location = new System.Drawing.Point(12, 181);
+            this.DGProveedores.Location = new System.Drawing.Point(24, 85);
             this.DGProveedores.Name = "DGProveedores";
             this.DGProveedores.ReadOnly = true;
             this.DGProveedores.RowHeadersVisible = false;
             this.DGProveedores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGProveedores.Size = new System.Drawing.Size(776, 207);
+            this.DGProveedores.Size = new System.Drawing.Size(752, 305);
             this.DGProveedores.TabIndex = 1;
             this.DGProveedores.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGProveedores_CellContentClick);
             this.DGProveedores.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGProveedores_CellDoubleClick);
             // 
             // colRazonSocial
             // 
+            this.colRazonSocial.FillWeight = 35F;
             this.colRazonSocial.HeaderText = "Razón Social";
             this.colRazonSocial.Name = "colRazonSocial";
             this.colRazonSocial.ReadOnly = true;
             // 
             // colCUIT
             // 
-            this.colCUIT.FillWeight = 70F;
+            this.colCUIT.FillWeight = 20F;
             this.colCUIT.HeaderText = "CUIT";
             this.colCUIT.Name = "colCUIT";
             this.colCUIT.ReadOnly = true;
             // 
             // colTelefono
             // 
-            this.colTelefono.FillWeight = 50F;
-            this.colTelefono.HeaderText = "Telefono";
+            this.colTelefono.FillWeight = 20F;
+            this.colTelefono.HeaderText = "Teléfono";
             this.colTelefono.Name = "colTelefono";
             this.colTelefono.ReadOnly = true;
             // 
             // colCorreo
             // 
+            this.colCorreo.FillWeight = 25F;
             this.colCorreo.HeaderText = "Correo";
             this.colCorreo.Name = "colCorreo";
             this.colCorreo.ReadOnly = true;
             // 
             // BCancelar
             // 
-            this.BCancelar.Location = new System.Drawing.Point(692, 406);
+            this.BCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BCancelar.Font = new System.Drawing.Font("Georgia", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BCancelar.Location = new System.Drawing.Point(626, 400);
             this.BCancelar.Name = "BCancelar";
-            this.BCancelar.Size = new System.Drawing.Size(96, 32);
+            this.BCancelar.Size = new System.Drawing.Size(150, 38);
             this.BCancelar.TabIndex = 2;
             this.BCancelar.Text = "Cancelar";
             this.BCancelar.UseVisualStyleBackColor = true;
@@ -116,10 +124,11 @@
             this.Controls.Add(this.BCancelar);
             this.Controls.Add(this.DGProveedores);
             this.Controls.Add(this.LTitulo);
-            this.MaximumSize = new System.Drawing.Size(816, 489);
-            this.MinimumSize = new System.Drawing.Size(816, 489);
+            this.MinimumSize = new System.Drawing.Size(700, 450);
             this.Name = "FormBuscarProveedor";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Seleccionar Proveedor";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FormBuscarProveedor_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DGProveedores)).EndInit();
             this.ResumeLayout(false);

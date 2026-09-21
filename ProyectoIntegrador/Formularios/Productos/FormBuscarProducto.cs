@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,10 +28,12 @@ namespace ProyectoIntegrador.Formularios.Productos
 
         private void FormBuscarProducto_Load(object sender, EventArgs e)
         {
-            EstiloUI.AplicarEstiloGrilla(DGProductos);
+            this.WindowState = FormWindowState.Maximized;
             EstiloUI.AplicarEstiloFormulario(this);
             EstiloUI.AplicarEstiloTitulo(LTitulo);
-            EstiloUI.AplicarEstiloBoton(BCancelar);
+            EstiloUI.AplicarEstiloBotonSecundario(BCancelar);
+            EstiloUI.AplicarEstiloGrilla(DGProductos);
+            EstiloUI.AplicarEstiloTextBox(TBBuscar);
 
             CBCategoria.Items.AddRange(new string[] { "Todos", "Collares", "Aros", "Anillos", "Pulseras", "Dijes", "Cadenas" });
             CBCategoria.SelectedIndex = 0;

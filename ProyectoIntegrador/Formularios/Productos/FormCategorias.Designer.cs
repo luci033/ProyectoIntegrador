@@ -1,4 +1,4 @@
-﻿namespace ProyectoIntegrador.Formularios.Productos
+namespace ProyectoIntegrador.Formularios.Productos
 {
     partial class FormCategorias
     {
@@ -38,6 +38,32 @@
             ((System.ComponentModel.ISupportInitialize)(this.DGCategoria)).BeginInit();
             this.SuspendLayout();
             // 
+            // LTitulo
+            // 
+            this.LTitulo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
+            this.LTitulo.AutoSize = true;
+            this.LTitulo.Font = new System.Drawing.Font("Georgia", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LTitulo.Location = new System.Drawing.Point(24, 25);
+            this.LTitulo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.LTitulo.Name = "LTitulo";
+            this.LTitulo.Size = new System.Drawing.Size(394, 38);
+            this.LTitulo.TabIndex = 2;
+            this.LTitulo.Text = "Gestión de Categorías";
+            this.LTitulo.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // BAgregarCategoria
+            // 
+            this.BAgregarCategoria.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BAgregarCategoria.Font = new System.Drawing.Font("Georgia", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BAgregarCategoria.Location = new System.Drawing.Point(576, 24);
+            this.BAgregarCategoria.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.BAgregarCategoria.Name = "BAgregarCategoria";
+            this.BAgregarCategoria.Size = new System.Drawing.Size(204, 44);
+            this.BAgregarCategoria.TabIndex = 1;
+            this.BAgregarCategoria.Text = "+ Agregar Categoría";
+            this.BAgregarCategoria.UseVisualStyleBackColor = true;
+            this.BAgregarCategoria.Click += new System.EventHandler(this.BAgregarCategoria_Click);
+            // 
             // DGCategoria
             // 
             this.DGCategoria.AllowUserToAddRows = false;
@@ -45,6 +71,9 @@
             this.DGCategoria.AllowUserToOrderColumns = true;
             this.DGCategoria.AllowUserToResizeColumns = false;
             this.DGCategoria.AllowUserToResizeRows = false;
+            this.DGCategoria.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DGCategoria.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DGCategoria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGCategoria.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -52,44 +81,16 @@
             this.CategoriaNombre,
             this.colModificar,
             this.colDesactivar});
-            this.DGCategoria.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.DGCategoria.EnableHeadersVisualStyles = false;
-            this.DGCategoria.Location = new System.Drawing.Point(0, 212);
+            this.DGCategoria.Location = new System.Drawing.Point(24, 85);
             this.DGCategoria.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.DGCategoria.Name = "DGCategoria";
             this.DGCategoria.ReadOnly = true;
             this.DGCategoria.RowHeadersVisible = false;
             this.DGCategoria.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGCategoria.Size = new System.Drawing.Size(807, 291);
+            this.DGCategoria.Size = new System.Drawing.Size(756, 390);
             this.DGCategoria.TabIndex = 0;
             this.DGCategoria.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGCategoria_CellContentClick);
-            // 
-            // BAgregarCategoria
-            // 
-            this.BAgregarCategoria.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.BAgregarCategoria.Location = new System.Drawing.Point(528, 77);
-            this.BAgregarCategoria.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.BAgregarCategoria.Name = "BAgregarCategoria";
-            this.BAgregarCategoria.Size = new System.Drawing.Size(204, 51);
-            this.BAgregarCategoria.TabIndex = 1;
-            this.BAgregarCategoria.Text = "Agregar Categoría";
-            this.BAgregarCategoria.UseVisualStyleBackColor = true;
-            this.BAgregarCategoria.Click += new System.EventHandler(this.BAgregarCategoria_Click);
-            // 
-            // LTitulo
-            // 
-            this.LTitulo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.LTitulo.AutoSize = true;
-            this.LTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LTitulo.Location = new System.Drawing.Point(14, 55);
-            this.LTitulo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.LTitulo.Name = "LTitulo";
-            this.LTitulo.Size = new System.Drawing.Size(411, 42);
-            this.LTitulo.TabIndex = 2;
-            this.LTitulo.Text = "Gestión de Categorías";
-            this.LTitulo.Click += new System.EventHandler(this.label1_Click);
             // 
             // Número
             // 
@@ -100,7 +101,7 @@
             // 
             // CategoriaNombre
             // 
-            this.CategoriaNombre.FillWeight = 30F;
+            this.CategoriaNombre.FillWeight = 50F;
             this.CategoriaNombre.HeaderText = "Nombre Categoría";
             this.CategoriaNombre.Name = "CategoriaNombre";
             this.CategoriaNombre.ReadOnly = true;
@@ -108,6 +109,7 @@
             // colModificar
             // 
             this.colModificar.FillWeight = 20F;
+            this.colModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.colModificar.HeaderText = "Modificar";
             this.colModificar.Name = "colModificar";
             this.colModificar.ReadOnly = true;
@@ -115,7 +117,8 @@
             // 
             // colDesactivar
             // 
-            this.colDesactivar.FillWeight = 15F;
+            this.colDesactivar.FillWeight = 20F;
+            this.colDesactivar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.colDesactivar.HeaderText = "Desactivar";
             this.colDesactivar.Name = "colDesactivar";
             this.colDesactivar.ReadOnly = true;
@@ -133,8 +136,11 @@
             this.Controls.Add(this.DGCategoria);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.MinimumSize = new System.Drawing.Size(700, 450);
             this.Name = "FormCategorias";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Categorías";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FCategorias_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DGCategoria)).EndInit();
             this.ResumeLayout(false);

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,10 +20,12 @@ namespace ProyectoIntegrador.Formularios.Productos
 
         private void FormProductos_Load(object sender, EventArgs e)
         {
-            EstiloUI.AplicarEstiloGrilla(dataGridCatalogoProd);
+            this.WindowState = FormWindowState.Maximized;
             EstiloUI.AplicarEstiloFormulario(this);
             EstiloUI.AplicarEstiloTitulo(LTitulo);
             EstiloUI.AplicarEstiloBoton(BNuevo);
+            EstiloUI.AplicarEstiloGrilla(dataGridCatalogoProd);
+            EstiloUI.AplicarEstiloTextBox(TBBuscarProducto);
 
             CBCategoria.Items.AddRange(new string[] { "Todos", "Collares", "Aros", "Anillos", "Pulseras", "Dijes", "Cadenas" });
             CBCategoria.SelectedIndex = 0;

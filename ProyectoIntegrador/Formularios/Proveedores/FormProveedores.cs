@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -137,10 +137,11 @@ namespace ProyectoIntegrador.Formularios.Proveedores
 
         private void FormProveedores_Load(object sender, EventArgs e)
         {
-            EstiloUI.AplicarEstiloGrilla(DGProveedores);
+            this.WindowState = FormWindowState.Maximized;
             EstiloUI.AplicarEstiloFormulario(this);
             EstiloUI.AplicarEstiloTitulo(LTitulo);
             EstiloUI.AplicarEstiloBoton(BAgregarProveedor);
+            EstiloUI.AplicarEstiloGrilla(DGProveedores);
 
             // Hardcodeo de 5 proveedores coincidiendo con las 7 columnas
             DGProveedores.Rows.Add("1", "Joyas del Norte", "30111111111", "3794111111", "ventas@joyasdelnorte.com", "Editar", "Desactivar");

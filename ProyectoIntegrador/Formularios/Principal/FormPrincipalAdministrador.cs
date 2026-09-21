@@ -1,4 +1,4 @@
-﻿using ProyectoIntegrador.Formularios.Clientes;
+using ProyectoIntegrador.Formularios.Clientes;
 using ProyectoIntegrador.Formularios.Compras;
 using ProyectoIntegrador.Formularios.Devoluciones;
 using ProyectoIntegrador.Formularios.Inventario;
@@ -97,6 +97,7 @@ namespace ProyectoIntegrador.Formularios.Principal
             // 2. Si el bucle termina sin encontrarlo, lo creamos
             FormProveedores formProveedores = new FormProveedores();
             formProveedores.MdiParent = this;
+            formProveedores.WindowState = FormWindowState.Maximized;
             formProveedores.Show();
         }
 
