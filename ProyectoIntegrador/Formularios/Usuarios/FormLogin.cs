@@ -1,4 +1,4 @@
-﻿using CapaNegocio;
+using CapaNegocio;
 using CapaEntidades; 
 using ProyectoIntegrador.Formularios.Principal;
 using System;
@@ -22,19 +22,20 @@ namespace ProyectoIntegrador.Formularios.Usuarios
         {
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
-            panelGlass1.Left = (this.ClientSize.Width - panelGlass1.Width) / 2;
-            panelGlass1.Top = (this.ClientSize.Height - panelGlass1.Height) / 2;
+            EstiloUI.AplicarEstiloFormulario(this);
+            EstiloUI.AplicarEstiloCard(panelCard, 16);
+            EstiloUI.AplicarEstiloBoton(BLogin);
+            EstiloUI.CentrarControl(panelCard, this);
         }
 
         private void FormLogin_Resize(object sender, EventArgs e)
         {
-            panelGlass1.Left = (this.ClientSize.Width - panelGlass1.Width) / 2;
-            panelGlass1.Top = (this.ClientSize.Height - panelGlass1.Height) / 2;
+            EstiloUI.CentrarControl(panelCard, this);
         }
 
         private void Login_Load(object sender, EventArgs e)
         {
-
+            EstiloUI.CentrarControl(panelCard, this);
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -111,13 +112,16 @@ namespace ProyectoIntegrador.Formularios.Usuarios
 
         private void TBUsuario_Validating(object sender, CancelEventArgs e)
         {
-            // 1. Ignorar si tiene la marca de agua
-            if (TBUsuario.Text == "Usuario") return;
-
-            // 2. Validar que no este vacio y (opcional) que sean letras o numeros
-            if (string.IsNullOrWhiteSpace(TBUsuario.Text) || !TBUsuario.Text.All(char.IsLetterOrDigit))
+            // 1. Ignorar si está vacío o tiene la marca de agua
+            if (string.IsNullOrWhiteSpace(TBUsuario.Text) || TBUsuario.Text == "Usuario")
             {
-                e.Cancel = true;
+                errorProvider1.SetError(TBUsuario, "");
+                return;
+            }
+
+            // 2. Validar formato si contiene texto
+            if (!TBUsuario.Text.All(char.IsLetterOrDigit))
+            {
                 errorProvider1.SetError(TBUsuario, "Ingrese un usuario válido (letras y números).");
             }
             else
@@ -128,19 +132,7 @@ namespace ProyectoIntegrador.Formularios.Usuarios
 
         private void TBContrasena_Validating(object sender, CancelEventArgs e)
         {
-            // 1. Ignorar si tiene la marca de agua
-            if (TBContrasena.Text == "Contraseña") return;
-
-            // 2. Solo validar que no esté en blanco
-            if (string.IsNullOrWhiteSpace(TBContrasena.Text))
-            {
-                e.Cancel = true;
-                errorProvider1.SetError(TBContrasena, "La contraseña es obligatoria.");
-            }
-            else
-            {
-                errorProvider1.SetError(TBContrasena, "");
-            }
+            errorProvider1.SetError(TBContrasena, "");
         }
 
         private void BVerContraena_Click_1(object sender, EventArgs e)

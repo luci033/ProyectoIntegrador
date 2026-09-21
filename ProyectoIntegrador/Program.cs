@@ -24,11 +24,11 @@ namespace ProyectoIntegrador
 
 
             //Application.Run(new FormPrincipalAdministrador());
-            Application.Run(new FormPrincipalAdministrador());
+            //Application.Run(new FormPrincipalAdministrador());
             //Application.Run(new FormPrincipalVendedor());
             //Application.Run(new FormPrincipalLogistica());
 
-            /*
+            
             using (FormLogin login = new FormLogin())
             {
                 // si el login fue exitoso, el Login devuelve DialogResult.OK
@@ -50,7 +50,7 @@ namespace ProyectoIntegrador
                 }
             
             }
-            */
+            
         }
     }
 }
