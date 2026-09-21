@@ -21,54 +21,62 @@ namespace ProyectoIntegrador.Formularios.Ventas
             public decimal Subtotal => Cantidad * PrecioUnitario;
         }
 
-        public FDetalleVenta(int IdVenta)
+        // Reemplazá tu constructor y tu método de carga por estos dos:
+        public FDetalleVenta(FormVentas.DatosVenta ventaData)
         {
             InitializeComponent();
 
-            //se configura la cabecera
-            LInfoVenta.Text = $"Detalle del Comprobante N°: {IdVenta}";
-                CargarArticulosSimulados(IdVenta);
+            LInfoVenta.Text = $"Detalle del Comprobante N°: {ventaData.Nro}";
+            TBNroVenta.Text = ventaData.Nro.ToString("D5");
+            textBox5.Text = ventaData.Fecha;
+            textBox3.Text = ventaData.MetodoPago;
+            TBRazonSocial.Text = ventaData.Cliente;
+            TBCondicionIVA.Text = ventaData.Iva;
 
+            // CUIT y Teléfono quedan fijos temporales ya que no los estamos trayendo del buscador
+            TBCUITDNI.Text = "20-11222333-3";
+            TBTeléfono.Text = "3794111111";
+
+            CargarArticulosDinámicos(ventaData);
         }
 
-        private void CargarArticulosSimulados (int IdVenta)
+        private void CargarArticulosDinámicos(FormVentas.DatosVenta ventaData)
         {
             dataGridDetalle.Rows.Clear();
+            decimal totalGeneral = 0;
 
-            // simulamos articulos segun el id seleccionado
-            List<ItemDetalle> articulos = new List<ItemDetalle>();
-
-            if (IdVenta == 1001)
-            {
-                articulos.Add(new ItemDetalle { Producto = "Anillo de Oro 18k", Cantidad = 1, PrecioUnitario = 150000m });
-            }
-            else if (IdVenta == 1002)
-            {
-                articulos.Add(new ItemDetalle { Producto = "Aros de Plata 925", Cantidad = 2, PrecioUnitario = 22750.25m });
-            }
-            else
-            {
-                articulos.Add(new ItemDetalle { Producto = "Cadena de Oro Blanco", Cantidad = 1, PrecioUnitario = 320000m });
-            }
-
-            // poblamos la grilla
-            foreach (var item in articulos)
+            foreach (var item in ventaData.Articulos)
             {
                 dataGridDetalle.Rows.Add(
+                    "", // Espacio vacío para la columna oculta ID
                     item.Producto,
                     item.Cantidad,
                     item.PrecioUnitario.ToString("C2"),
                     item.Subtotal.ToString("C2")
                 );
+                totalGeneral += item.Subtotal;
             }
+
+            // Asumiendo que tenés un textbox llamado TBTotal en tu diseño
+            TBTotal.Text = totalGeneral.ToString("C2"); 
         }
 
         private void FDetalleVenta_Load(object sender, EventArgs e)
         {
             EstiloUI.AplicarEstiloFormulario(this);
-            EstiloUI.AplicarEstiloCard(panelCard, 14);
+            EstiloUI.AplicarEstiloPanelSeccion(panel1, 10);
+            EstiloUI.AplicarEstiloPanelSeccion(panel2, 10);
+            EstiloUI.AplicarEstiloCard(panelCard, 12);
             EstiloUI.AplicarEstiloBoton(BCerrar);
             EstiloUI.AplicarEstiloGrilla(dataGridDetalle);
+
+            EstiloUI.AplicarEstiloTextBox(TBNroVenta);
+            EstiloUI.AplicarEstiloTextBox(textBox5);
+            EstiloUI.AplicarEstiloTextBox(TBCUITDNI);
+            EstiloUI.AplicarEstiloTextBox(TBRazonSocial);
+            EstiloUI.AplicarEstiloTextBox(TBCondicionIVA);
+            EstiloUI.AplicarEstiloTextBox(TBTeléfono);
+            EstiloUI.AplicarEstiloTextBox(textBox3);
         }
 
         private void BCerrar_Click(object sender, EventArgs e)

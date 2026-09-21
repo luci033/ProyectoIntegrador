@@ -37,6 +37,14 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorProvider3 = new System.Windows.Forms.ErrorProvider(this.components);
             this.dataGridProducto = new System.Windows.Forms.DataGridView();
+            this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colGenero = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPrecioUnitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.colSubTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LTitulo = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -53,14 +61,6 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.TBNroVenta = new System.Windows.Forms.TextBox();
             this.LNroComprobante = new System.Windows.Forms.Label();
             this.BAgregarProducto = new System.Windows.Forms.Button();
-            this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colGenero = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPrecioUnitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.colSubTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider3)).BeginInit();
@@ -168,6 +168,58 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.dataGridProducto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridProducto.Size = new System.Drawing.Size(871, 305);
             this.dataGridProducto.TabIndex = 1;
+            this.dataGridProducto.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridProducto_CellContentClick);
+            // 
+            // colCodigo
+            // 
+            this.colCodigo.FillWeight = 20F;
+            this.colCodigo.HeaderText = "Cod.";
+            this.colCodigo.Name = "colCodigo";
+            // 
+            // colProducto
+            // 
+            this.colProducto.FillWeight = 50F;
+            this.colProducto.HeaderText = "Producto";
+            this.colProducto.Name = "colProducto";
+            // 
+            // colCategoria
+            // 
+            this.colCategoria.FillWeight = 40F;
+            this.colCategoria.HeaderText = "Categoría";
+            this.colCategoria.Name = "colCategoria";
+            // 
+            // colGenero
+            // 
+            this.colGenero.FillWeight = 40F;
+            this.colGenero.HeaderText = "Género";
+            this.colGenero.Name = "colGenero";
+            // 
+            // colPrecioUnitario
+            // 
+            this.colPrecioUnitario.FillWeight = 30F;
+            this.colPrecioUnitario.HeaderText = "Precio Unit.";
+            this.colPrecioUnitario.Name = "colPrecioUnitario";
+            // 
+            // colCantidad
+            // 
+            this.colCantidad.FillWeight = 25F;
+            this.colCantidad.HeaderText = "Cantidad";
+            this.colCantidad.Name = "colCantidad";
+            // 
+            // colEliminar
+            // 
+            this.colEliminar.FillWeight = 25F;
+            this.colEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.colEliminar.HeaderText = "Eliminar";
+            this.colEliminar.Name = "colEliminar";
+            this.colEliminar.Text = "Eliminar";
+            this.colEliminar.UseColumnTextForButtonValue = true;
+            // 
+            // colSubTotal
+            // 
+            this.colSubTotal.FillWeight = 35F;
+            this.colSubTotal.HeaderText = "Sub Total";
+            this.colSubTotal.Name = "colSubTotal";
             // 
             // panel1
             // 
@@ -358,55 +410,6 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.BAgregarProducto.Text = "+ Agregar Joya";
             this.BAgregarProducto.UseVisualStyleBackColor = false;
             this.BAgregarProducto.Click += new System.EventHandler(this.BAgregarProducto_Click_1);
-            // 
-            // colCodigo
-            // 
-            this.colCodigo.FillWeight = 20F;
-            this.colCodigo.HeaderText = "Cod.";
-            this.colCodigo.Name = "colCodigo";
-            // 
-            // colProducto
-            // 
-            this.colProducto.FillWeight = 50F;
-            this.colProducto.HeaderText = "Producto";
-            this.colProducto.Name = "colProducto";
-            // 
-            // colCategoria
-            // 
-            this.colCategoria.FillWeight = 40F;
-            this.colCategoria.HeaderText = "Categoría";
-            this.colCategoria.Name = "colCategoria";
-            // 
-            // colGenero
-            // 
-            this.colGenero.FillWeight = 40F;
-            this.colGenero.HeaderText = "Género";
-            this.colGenero.Name = "colGenero";
-            // 
-            // colPrecioUnitario
-            // 
-            this.colPrecioUnitario.FillWeight = 30F;
-            this.colPrecioUnitario.HeaderText = "Precio Unit.";
-            this.colPrecioUnitario.Name = "colPrecioUnitario";
-            // 
-            // colCantidad
-            // 
-            this.colCantidad.FillWeight = 25F;
-            this.colCantidad.HeaderText = "Cantidad";
-            this.colCantidad.Name = "colCantidad";
-            // 
-            // colEliminar
-            // 
-            this.colEliminar.FillWeight = 25F;
-            this.colEliminar.HeaderText = "Eliminar";
-            this.colEliminar.Name = "colEliminar";
-            this.colEliminar.Text = "Eliminar";
-            // 
-            // colSubTotal
-            // 
-            this.colSubTotal.FillWeight = 35F;
-            this.colSubTotal.HeaderText = "Sub Total";
-            this.colSubTotal.Name = "colSubTotal";
             // 
             // FormRegistroVentas
             // 

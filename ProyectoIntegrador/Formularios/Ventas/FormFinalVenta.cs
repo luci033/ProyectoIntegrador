@@ -78,8 +78,13 @@ namespace ProyectoIntegrador.Formularios.Ventas
         //anula la operacion completa
         private void BCancelar_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Abort; //se usa abort para distinguir de volver
-            this.Close();
+            DialogResult respuesta = MessageBox.Show("¿Estás seguro de que querés anular toda la venta?", "Confirmar anulación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (respuesta == DialogResult.Yes)
+            {
+                this.DialogResult = DialogResult.Abort; // Se usa abort para distinguir del botón volver
+                this.Close();
+            }
         }
 
 

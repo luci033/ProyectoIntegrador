@@ -48,6 +48,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
             this.TBBuscar = new System.Windows.Forms.TextBox();
             this.CBCondiciónIVA = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.DGClientes)).BeginInit();
+            this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -86,12 +87,14 @@ namespace ProyectoIntegrador.Formularios.Clientes
             this.colCondicionIVA,
             this.colHistorial,
             this.colModificar});
-            this.DGClientes.Location = new System.Drawing.Point(24, 154);
+            this.DGClientes.BackgroundColor = System.Drawing.Color.White;
+            this.DGClientes.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.DGClientes.Location = new System.Drawing.Point(12, 12);
             this.DGClientes.Name = "DGClientes";
             this.DGClientes.ReadOnly = true;
             this.DGClientes.RowHeadersVisible = false;
             this.DGClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGClientes.Size = new System.Drawing.Size(768, 386);
+            this.DGClientes.Size = new System.Drawing.Size(744, 376);
             this.DGClientes.TabIndex = 2;
             this.DGClientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridHistorialClientes_CellContentClick);
             this.DGClientes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGClientes_CellDoubleClick);
@@ -170,6 +173,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
             this.colModificar.ReadOnly = true;
             this.colModificar.Text = "Modificar";
             // 
+            // 
             // LTitulo
             // 
             this.LTitulo.AutoSize = true;
@@ -183,56 +187,69 @@ namespace ProyectoIntegrador.Formularios.Clientes
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.DGClientes);
+            this.panel1.Location = new System.Drawing.Point(24, 142);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(0, 0);
+            this.panel1.Size = new System.Drawing.Size(768, 400);
             this.panel1.TabIndex = 3;
-            this.panel1.Visible = false;
             // 
             // panel2
             // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.Controls.Add(this.LCondiciónIVA);
             this.panel2.Controls.Add(this.LBucar);
             this.panel2.Controls.Add(this.TBBuscar);
             this.panel2.Controls.Add(this.CBCondiciónIVA);
-            this.panel2.Location = new System.Drawing.Point(24, 104);
+            this.panel2.Location = new System.Drawing.Point(24, 82);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(768, 44);
+            this.panel2.Size = new System.Drawing.Size(768, 48);
             this.panel2.TabIndex = 4;
             // 
             // LCondiciónIVA
             // 
             this.LCondiciónIVA.AutoSize = true;
-            this.LCondiciónIVA.Location = new System.Drawing.Point(471, 14);
+            this.LCondiciónIVA.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
+            this.LCondiciónIVA.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LCondiciónIVA.Location = new System.Drawing.Point(320, 14);
             this.LCondiciónIVA.Name = "LCondiciónIVA";
-            this.LCondiciónIVA.Size = new System.Drawing.Size(77, 13);
+            this.LCondiciónIVA.Size = new System.Drawing.Size(100, 17);
             this.LCondiciónIVA.TabIndex = 6;
             this.LCondiciónIVA.Text = "Condición IVA:";
             // 
             // LBucar
             // 
             this.LBucar.AutoSize = true;
-            this.LBucar.Location = new System.Drawing.Point(40, 13);
+            this.LBucar.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
+            this.LBucar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LBucar.Location = new System.Drawing.Point(15, 14);
             this.LBucar.Name = "LBucar";
-            this.LBucar.Size = new System.Drawing.Size(43, 13);
+            this.LBucar.Size = new System.Drawing.Size(53, 17);
             this.LBucar.TabIndex = 4;
             this.LBucar.Text = "Buscar:";
             // 
             // TBBuscar
             // 
-            this.TBBuscar.Location = new System.Drawing.Point(100, 11);
+            this.TBBuscar.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.TBBuscar.Location = new System.Drawing.Point(74, 11);
             this.TBBuscar.Name = "TBBuscar";
-            this.TBBuscar.Size = new System.Drawing.Size(100, 20);
+            this.TBBuscar.Size = new System.Drawing.Size(220, 25);
             this.TBBuscar.TabIndex = 2;
             this.TBBuscar.TextChanged += new System.EventHandler(this.TBuscar_TextChanged);
             // 
             // CBCondiciónIVA
             // 
             this.CBCondiciónIVA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CBCondiciónIVA.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             this.CBCondiciónIVA.FormattingEnabled = true;
-            this.CBCondiciónIVA.Location = new System.Drawing.Point(554, 10);
+            this.CBCondiciónIVA.Location = new System.Drawing.Point(428, 11);
             this.CBCondiciónIVA.Name = "CBCondiciónIVA";
-            this.CBCondiciónIVA.Size = new System.Drawing.Size(121, 21);
+            this.CBCondiciónIVA.Size = new System.Drawing.Size(180, 25);
             this.CBCondiciónIVA.TabIndex = 1;
             this.CBCondiciónIVA.SelectedIndexChanged += new System.EventHandler(this.CBCondiciónIVA_SelectedIndexChanged);
             // 
@@ -242,9 +259,8 @@ namespace ProyectoIntegrador.Formularios.Clientes
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(232)))));
             this.ClientSize = new System.Drawing.Size(816, 564);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.DGClientes);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.LTitulo);
             this.Controls.Add(this.BNuevoCliente);
             this.MinimumSize = new System.Drawing.Size(800, 500);
@@ -254,6 +270,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FormClientes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DGClientes)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);

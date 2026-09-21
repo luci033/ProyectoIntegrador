@@ -32,34 +32,24 @@ namespace ProyectoIntegrador.Formularios.Ventas
 
         private void dataGridHistorialVenta_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            // e.RowIndex >= 0 evita clics accidentales sobre la fila de encabezados
-            // Verificamos que el clic sea en la columna del botón (colDetalle)
-            //if (e.RowIndex >= 0 && DataGridHistorialVenta.Columns[e.ColumnIndex].Name == "colDetalle")
-                if (e.RowIndex >= 0 && e.ColumnIndex == 1)
+            // Verificamos que el clic sea en la columna del botón
+            if (e.RowIndex >= 0 && e.ColumnIndex == 1)
             {
-
-                //se obtiene el ID de la fila seleccionada y se lo convierte a numero
+                // Se obtiene el ID de la fila seleccionada
                 int IdVentaSeleccionada = Convert.ToInt32(DataGridHistorialVenta.Rows[e.RowIndex].Cells[0].Value);
 
-                // Cartel temporal para confirmar que el código agarró bien el ID
-                MessageBox.Show($"¡Atrapaste el ID {IdVentaSeleccionada}!\nYa estás listo para conectarlo al formulario de detalles.", "Excelente", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //se abre el modla pasandole el id como argumento
-                FDetalleVenta modalDetalle = new FDetalleVenta(IdVentaSeleccionada);
-                modalDetalle.ShowDialog();
-
-
-                /*
-                // Obtenemos el ID de la venta seleccionada leyendo la primera celda del renglón
-                string idVentaSeleccionada = DataGridHistorialVenta.Rows[e.RowIndex].Cells[0].Value.ToString();
-
-                MessageBox.Show(
-                    $"Detalle de la venta N°: {idVentaSeleccionada}\n(Próximamente conectará al desglose de joyas)",
-                    "Detalle",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information
-                );
-                */
-
+                // Buscamos si ese ID existe en el diccionario de memoria de FormVentas
+                if (FormVentas.HistorialVentas.ContainsKey(IdVentaSeleccionada))
+                {
+                    // Le pasamos el paquete completo de DatosVenta al comprobante
+                    FDetalleVenta modalDetalle = new FDetalleVenta(FormVentas.HistorialVentas[IdVentaSeleccionada]);
+                    modalDetalle.ShowDialog();
+                }
+                else
+                {
+                    // Si no está en el diccionario, es uno de tus registros simulados del Load
+                    MessageBox.Show("Esta venta es simulada de prueba y no contiene un detalle guardado en memoria.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
 

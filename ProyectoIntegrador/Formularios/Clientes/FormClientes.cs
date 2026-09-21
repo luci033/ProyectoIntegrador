@@ -23,10 +23,13 @@ namespace ProyectoIntegrador.Formularios.Clientes
         private void FormClientes_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
-            EstiloUI.AplicarEstiloGrilla(DGClientes);
             EstiloUI.AplicarEstiloFormulario(this);
             EstiloUI.AplicarEstiloTitulo(LTitulo);
             EstiloUI.AplicarEstiloBoton(BNuevoCliente);
+            EstiloUI.AplicarEstiloPanelSeccion(panel2, 10);
+            EstiloUI.AplicarEstiloPanelSeccion(panel1, 12);
+            EstiloUI.AplicarEstiloGrilla(DGClientes);
+            EstiloUI.AplicarEstiloTextBox(TBBuscar);
 
             // 1. Hardcodeo de 6 clientes
             listaTemporalClientes.Add(new ClienteSimulado { Nombre = "Juan", Apellido = "Pérez", DNI = "11222333", Telefono = "3794111111", Correo = "juan@mail.com", CondicionIVA = "Consumidor Final" });

@@ -114,6 +114,7 @@
     <Compile Include="Formularios\Inventario\FormAjusteStock.Designer.cs">
       <DependentUpon>FormAjusteStock.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModelosSimulados\StockSimulado.cs" />
     <Compile Include="Formularios\PanelGlass.cs">
       <SubType>Component</SubType>
     </Compile>

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,6 +22,14 @@ namespace ProyectoIntegrador.Formularios.Clientes
 
         private void FormBuscarCliente_Load(object sender, EventArgs e)
         {
+            EstiloUI.AplicarEstiloFormulario(this);
+            EstiloUI.AplicarEstiloTitulo(label1);
+            EstiloUI.AplicarEstiloPanelSeccion(panel2, 10);
+            EstiloUI.AplicarEstiloPanelSeccion(panel1, 12);
+            EstiloUI.AplicarEstiloGrilla(DGClientes);
+            EstiloUI.AplicarEstiloTextBox(TBBuscar);
+            EstiloUI.AplicarEstiloBotonSecundario(BCancelar);
+
             // 1. Hardcodeo de 6 clientes
             listaTemporalClientes.Add(new ClienteSimulado { Nombre = "Juan", Apellido = "Pérez", DNI = "11222333", Telefono = "3794111111", Correo = "juan@mail.com", CondicionIVA = "Consumidor Final" });
             listaTemporalClientes.Add(new ClienteSimulado { Nombre = "María", Apellido = "Gómez", DNI = "22333444", Telefono = "3794222222", Correo = "maria@mail.com", CondicionIVA = "Monotributo" });
@@ -120,6 +128,12 @@ namespace ProyectoIntegrador.Formularios.Clientes
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
+        }
+
+        private void BCancelar_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
 
     }
