@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -42,10 +42,14 @@ namespace ProyectoIntegrador.Formularios.Usuarios
 
         private void FormUsuarios_Load(object sender, EventArgs e)
         {
-            EstiloUI.AplicarEstiloGrilla(dataGridRegistroUsuario);
             EstiloUI.AplicarEstiloFormulario(this);
             EstiloUI.AplicarEstiloTitulo(LTitulo);
             EstiloUI.AplicarEstiloBoton(BAgregarUsuario);
+            EstiloUI.AplicarEstiloPanelSeccion(panel2, 10);
+            EstiloUI.AplicarEstiloPanelSeccion(panel1, 12);
+            EstiloUI.AplicarEstiloTextBox(TBBuscar);
+            EstiloUI.AplicarEstiloGrilla(dataGridRegistroUsuario);
+
             // 1. Llamamos a la Capa de Negocio para que nos traiga la lista real de SQL
             CN_Usuario negocioUsuario = new CN_Usuario();
             List<Usuario> listaUsuarios = negocioUsuario.Listar();

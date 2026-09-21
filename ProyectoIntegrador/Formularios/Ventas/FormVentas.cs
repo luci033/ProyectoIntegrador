@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,10 +19,11 @@ namespace ProyectoIntegrador.Formularios.Ventas
 
         private void FormVentas_Load_1(object sender, EventArgs e)
         {
-            EstiloUI.AplicarEstiloGrilla(dgVentas);
             EstiloUI.AplicarEstiloFormulario(this);
             EstiloUI.AplicarEstiloTitulo(LTitulo);
             EstiloUI.AplicarEstiloBoton(BRegistrarVenta);
+            EstiloUI.AplicarEstiloPanelSeccion(panelGrid, 12);
+            EstiloUI.AplicarEstiloGrilla(dgVentas);
         }
 
         private void BRegistrarVenta_Click(object sender, EventArgs e)

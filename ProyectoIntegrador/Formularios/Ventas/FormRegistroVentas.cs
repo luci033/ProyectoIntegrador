@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,13 +19,22 @@ namespace ProyectoIntegrador.Formularios.Ventas
 
         private void FormRegistrarVenta_Load(object sender, EventArgs e)
         {
-            EstiloUI.AplicarEstiloGrilla(dataGridProducto);
             EstiloUI.AplicarEstiloFormulario(this);
             EstiloUI.AplicarEstiloTitulo(LTitulo);
+            EstiloUI.AplicarEstiloPanelSeccion(panel2, 10);
+            EstiloUI.AplicarEstiloPanelSeccion(panel3, 10);
+            EstiloUI.AplicarEstiloPanelSeccion(panel1, 12);
             EstiloUI.AplicarEstiloBoton(BAgregarProducto);
             EstiloUI.AplicarEstiloBoton(BBuscarCliente);
-            EstiloUI.AplicarEstiloBoton(BCancelar);
             EstiloUI.AplicarEstiloBoton(BCobrar);
+            EstiloUI.AplicarEstiloBotonSecundario(BCancelar);
+            EstiloUI.AplicarEstiloTextBox(textBox1);
+            EstiloUI.AplicarEstiloTextBox(TBVendedor);
+            EstiloUI.AplicarEstiloTextBox(TBFecha);
+            EstiloUI.AplicarEstiloTextBox(TBCliente);
+            EstiloUI.AplicarEstiloTextBox(TBCondicionIVA);
+            EstiloUI.AplicarEstiloTextBox(TBTotal);
+            EstiloUI.AplicarEstiloGrilla(dataGridProducto);
         }
 
         private void label1_Click(object sender, EventArgs e)
