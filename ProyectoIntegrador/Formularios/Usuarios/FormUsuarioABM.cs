@@ -1,4 +1,4 @@
-﻿using CapaDatos;
+using CapaDatos;
 using CapaEntidades;
 using CapaNegocio;
 using ProyectoIntegrador.Properties;
@@ -36,6 +36,18 @@ namespace ProyectoIntegrador
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            EstiloUI.AplicarEstiloFormulario(this);
+            EstiloUI.AplicarEstiloCard(panelCard, 14);
+            EstiloUI.AplicarEstiloBoton(BCrearUsuario);
+            EstiloUI.AplicarEstiloBotonSecundario(BCancelar);
+            EstiloUI.AplicarEstiloBotonSecundario(BBuscarArchivo);
+            EstiloUI.AplicarEstiloTextBox(TBNombre);
+            EstiloUI.AplicarEstiloTextBox(TBApellido);
+            EstiloUI.AplicarEstiloTextBox(TBDni);
+            EstiloUI.AplicarEstiloTextBox(TBUsuario);
+            EstiloUI.AplicarEstiloTextBox(TBContraseña);
+            EstiloUI.AplicarEstiloTextBox(TBContraseñaRepetir);
+
             // Pedimos los roles a la base de datos
             CD_Rol datosRol = new CD_Rol();
             List<Rol> listaRoles = datosRol.ListarRoles();
