@@ -39,13 +39,13 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.LHistorialVenta = new System.Windows.Forms.Label();
             this.LFechaDesde = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.TBBuscar = new System.Windows.Forms.TextBox();
-            this.BLimpiar = new System.Windows.Forms.Button();
-            this.BBuscar = new System.Windows.Forms.Button();
-            this.DTPFechaHasta = new System.Windows.Forms.DateTimePicker();
             this.DTPFechaDesde = new System.Windows.Forms.DateTimePicker();
-            this.cmbBuscar = new System.Windows.Forms.ComboBox();
             this.LFechaHasta = new System.Windows.Forms.Label();
+            this.DTPFechaHasta = new System.Windows.Forms.DateTimePicker();
+            this.cmbBuscar = new System.Windows.Forms.ComboBox();
+            this.TBBuscar = new System.Windows.Forms.TextBox();
+            this.BBuscar = new System.Windows.Forms.Button();
+            this.BLimpiar = new System.Windows.Forms.Button();
             this.panelGrid = new System.Windows.Forms.Panel();
             this.TBTotalFiltrado = new System.Windows.Forms.TextBox();
             this.LTotal = new System.Windows.Forms.Label();
@@ -54,77 +54,6 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.panelGrid.SuspendLayout();
             this.SuspendLayout();
             // 
-            // LHistorialVenta
-            // 
-            this.LHistorialVenta.AutoSize = true;
-            this.LHistorialVenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.LHistorialVenta.Font = new System.Drawing.Font("Georgia", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LHistorialVenta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.LHistorialVenta.Location = new System.Drawing.Point(25, 20);
-            this.LHistorialVenta.Name = "LHistorialVenta";
-            this.LHistorialVenta.Size = new System.Drawing.Size(359, 31);
-            this.LHistorialVenta.TabIndex = 0;
-            this.LHistorialVenta.Text = "HISTORIAL DE VENTAS";
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.LFechaDesde);
-            this.panel1.Controls.Add(this.DTPFechaDesde);
-            this.panel1.Controls.Add(this.LFechaHasta);
-            this.panel1.Controls.Add(this.DTPFechaHasta);
-            this.panel1.Controls.Add(this.LBuscar);
-            this.panel1.Controls.Add(this.cmbBuscar);
-            this.panel1.Controls.Add(this.TBBuscar);
-            this.panel1.Controls.Add(this.BBuscar);
-            this.panel1.Controls.Add(this.BLimpiar);
-            this.panel1.Location = new System.Drawing.Point(25, 62);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(840, 88);
-            this.panel1.TabIndex = 1;
-            // 
-            // LFechaDesde
-            // 
-            this.LFechaDesde.AutoSize = true;
-            this.LFechaDesde.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.LFechaDesde.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.LFechaDesde.Location = new System.Drawing.Point(18, 16);
-            this.LFechaDesde.Name = "LFechaDesde";
-            this.LFechaDesde.Size = new System.Drawing.Size(46, 15);
-            this.LFechaDesde.TabIndex = 0;
-            this.LFechaDesde.Text = "Desde:";
-            // 
-            // DTPFechaDesde
-            // 
-            this.DTPFechaDesde.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.DTPFechaDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.DTPFechaDesde.Location = new System.Drawing.Point(70, 12);
-            this.DTPFechaDesde.Name = "DTPFechaDesde";
-            this.DTPFechaDesde.Size = new System.Drawing.Size(115, 23);
-            this.DTPFechaDesde.TabIndex = 1;
-            // 
-            // LFechaHasta
-            // 
-            this.LFechaHasta.AutoSize = true;
-            this.LFechaHasta.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.LFechaHasta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.LFechaHasta.Location = new System.Drawing.Point(210, 16);
-            this.LFechaHasta.Name = "LFechaHasta";
-            this.LFechaHasta.Size = new System.Drawing.Size(41, 15);
-            this.LFechaHasta.TabIndex = 2;
-            this.LFechaHasta.Text = "Hasta:";
-            // 
-            // DTPFechaHasta
-            // 
-            this.DTPFechaHasta.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.DTPFechaHasta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.DTPFechaHasta.Location = new System.Drawing.Point(257, 12);
-            this.DTPFechaHasta.Name = "DTPFechaHasta";
-            this.DTPFechaHasta.Size = new System.Drawing.Size(115, 23);
-            this.DTPFechaHasta.TabIndex = 3;
-            // 
             // LBuscar
             // 
             this.LBuscar.AutoSize = true;
@@ -132,70 +61,9 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.LBuscar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
             this.LBuscar.Location = new System.Drawing.Point(18, 52);
             this.LBuscar.Name = "LBuscar";
-            this.LBuscar.Size = new System.Drawing.Size(70, 15);
+            this.LBuscar.Size = new System.Drawing.Size(69, 15);
             this.LBuscar.TabIndex = 4;
             this.LBuscar.Text = "Buscar por:";
-            // 
-            // cmbBuscar
-            // 
-            this.cmbBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbBuscar.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.cmbBuscar.FormattingEnabled = true;
-            this.cmbBuscar.Location = new System.Drawing.Point(94, 48);
-            this.cmbBuscar.Name = "cmbBuscar";
-            this.cmbBuscar.Size = new System.Drawing.Size(125, 23);
-            this.cmbBuscar.TabIndex = 5;
-            // 
-            // TBBuscar
-            // 
-            this.TBBuscar.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.TBBuscar.Location = new System.Drawing.Point(228, 47);
-            this.TBBuscar.Name = "TBBuscar";
-            this.TBBuscar.Size = new System.Drawing.Size(160, 24);
-            this.TBBuscar.TabIndex = 6;
-            this.TBBuscar.TextChanged += new System.EventHandler(this.TBBuscar_TextChanged);
-            // 
-            // BBuscar
-            // 
-            this.BBuscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.BBuscar.FlatAppearance.BorderSize = 0;
-            this.BBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BBuscar.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Bold);
-            this.BBuscar.ForeColor = System.Drawing.Color.White;
-            this.BBuscar.Location = new System.Drawing.Point(405, 45);
-            this.BBuscar.Name = "BBuscar";
-            this.BBuscar.Size = new System.Drawing.Size(95, 28);
-            this.BBuscar.TabIndex = 7;
-            this.BBuscar.Text = "Buscar";
-            this.BBuscar.UseVisualStyleBackColor = false;
-            this.BBuscar.Click += new System.EventHandler(this.BBuscar_Click);
-            // 
-            // BLimpiar
-            // 
-            this.BLimpiar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(208)))), ((int)(((byte)(201)))));
-            this.BLimpiar.FlatAppearance.BorderSize = 0;
-            this.BLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BLimpiar.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Bold);
-            this.BLimpiar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.BLimpiar.Location = new System.Drawing.Point(510, 45);
-            this.BLimpiar.Name = "BLimpiar";
-            this.BLimpiar.Size = new System.Drawing.Size(90, 28);
-            this.BLimpiar.TabIndex = 8;
-            this.BLimpiar.Text = "Limpiar";
-            this.BLimpiar.UseVisualStyleBackColor = false;
-            this.BLimpiar.Click += new System.EventHandler(this.BLimpiar_Click);
-            // 
-            // panelGrid
-            // 
-            this.panelGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelGrid.BackColor = System.Drawing.Color.White;
-            this.panelGrid.Controls.Add(this.DataGridHistorialVenta);
-            this.panelGrid.Location = new System.Drawing.Point(25, 160);
-            this.panelGrid.Name = "panelGrid";
-            this.panelGrid.Size = new System.Drawing.Size(840, 360);
-            this.panelGrid.TabIndex = 2;
             // 
             // DataGridHistorialVenta
             // 
@@ -267,17 +135,137 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.total.Name = "total";
             this.total.ReadOnly = true;
             // 
-            // LTotal
+            // LHistorialVenta
             // 
-            this.LTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.LTotal.AutoSize = true;
-            this.LTotal.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.LTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.LTotal.Location = new System.Drawing.Point(595, 535);
-            this.LTotal.Name = "LTotal";
-            this.LTotal.Size = new System.Drawing.Size(127, 19);
-            this.LTotal.TabIndex = 3;
-            this.LTotal.Text = "TOTAL FILTRADO:";
+            this.LHistorialVenta.AutoSize = true;
+            this.LHistorialVenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LHistorialVenta.Font = new System.Drawing.Font("Georgia", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LHistorialVenta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LHistorialVenta.Location = new System.Drawing.Point(25, 20);
+            this.LHistorialVenta.Name = "LHistorialVenta";
+            this.LHistorialVenta.Size = new System.Drawing.Size(283, 31);
+            this.LHistorialVenta.TabIndex = 0;
+            this.LHistorialVenta.Text = "Historial de Ventas";
+            // 
+            // LFechaDesde
+            // 
+            this.LFechaDesde.AutoSize = true;
+            this.LFechaDesde.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.LFechaDesde.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LFechaDesde.Location = new System.Drawing.Point(18, 16);
+            this.LFechaDesde.Name = "LFechaDesde";
+            this.LFechaDesde.Size = new System.Drawing.Size(45, 15);
+            this.LFechaDesde.TabIndex = 0;
+            this.LFechaDesde.Text = "Desde:";
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.LFechaDesde);
+            this.panel1.Controls.Add(this.DTPFechaDesde);
+            this.panel1.Controls.Add(this.LFechaHasta);
+            this.panel1.Controls.Add(this.DTPFechaHasta);
+            this.panel1.Controls.Add(this.LBuscar);
+            this.panel1.Controls.Add(this.cmbBuscar);
+            this.panel1.Controls.Add(this.TBBuscar);
+            this.panel1.Controls.Add(this.BBuscar);
+            this.panel1.Controls.Add(this.BLimpiar);
+            this.panel1.Location = new System.Drawing.Point(25, 62);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(840, 88);
+            this.panel1.TabIndex = 1;
+            // 
+            // DTPFechaDesde
+            // 
+            this.DTPFechaDesde.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.DTPFechaDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.DTPFechaDesde.Location = new System.Drawing.Point(70, 12);
+            this.DTPFechaDesde.Name = "DTPFechaDesde";
+            this.DTPFechaDesde.Size = new System.Drawing.Size(115, 23);
+            this.DTPFechaDesde.TabIndex = 1;
+            // 
+            // LFechaHasta
+            // 
+            this.LFechaHasta.AutoSize = true;
+            this.LFechaHasta.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.LFechaHasta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LFechaHasta.Location = new System.Drawing.Point(210, 16);
+            this.LFechaHasta.Name = "LFechaHasta";
+            this.LFechaHasta.Size = new System.Drawing.Size(41, 15);
+            this.LFechaHasta.TabIndex = 2;
+            this.LFechaHasta.Text = "Hasta:";
+            // 
+            // DTPFechaHasta
+            // 
+            this.DTPFechaHasta.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.DTPFechaHasta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.DTPFechaHasta.Location = new System.Drawing.Point(257, 12);
+            this.DTPFechaHasta.Name = "DTPFechaHasta";
+            this.DTPFechaHasta.Size = new System.Drawing.Size(115, 23);
+            this.DTPFechaHasta.TabIndex = 3;
+            // 
+            // cmbBuscar
+            // 
+            this.cmbBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbBuscar.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.cmbBuscar.FormattingEnabled = true;
+            this.cmbBuscar.Location = new System.Drawing.Point(94, 48);
+            this.cmbBuscar.Name = "cmbBuscar";
+            this.cmbBuscar.Size = new System.Drawing.Size(125, 23);
+            this.cmbBuscar.TabIndex = 5;
+            // 
+            // TBBuscar
+            // 
+            this.TBBuscar.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.TBBuscar.Location = new System.Drawing.Point(228, 47);
+            this.TBBuscar.Name = "TBBuscar";
+            this.TBBuscar.Size = new System.Drawing.Size(160, 24);
+            this.TBBuscar.TabIndex = 6;
+            this.TBBuscar.TextChanged += new System.EventHandler(this.TBBuscar_TextChanged);
+            // 
+            // BBuscar
+            // 
+            this.BBuscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.BBuscar.FlatAppearance.BorderSize = 0;
+            this.BBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BBuscar.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Bold);
+            this.BBuscar.ForeColor = System.Drawing.Color.White;
+            this.BBuscar.Location = new System.Drawing.Point(405, 45);
+            this.BBuscar.Name = "BBuscar";
+            this.BBuscar.Size = new System.Drawing.Size(95, 28);
+            this.BBuscar.TabIndex = 7;
+            this.BBuscar.Text = "Buscar";
+            this.BBuscar.UseVisualStyleBackColor = false;
+            this.BBuscar.Click += new System.EventHandler(this.BBuscar_Click);
+            // 
+            // BLimpiar
+            // 
+            this.BLimpiar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(208)))), ((int)(((byte)(201)))));
+            this.BLimpiar.FlatAppearance.BorderSize = 0;
+            this.BLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BLimpiar.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Bold);
+            this.BLimpiar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.BLimpiar.Location = new System.Drawing.Point(510, 45);
+            this.BLimpiar.Name = "BLimpiar";
+            this.BLimpiar.Size = new System.Drawing.Size(90, 28);
+            this.BLimpiar.TabIndex = 8;
+            this.BLimpiar.Text = "Limpiar";
+            this.BLimpiar.UseVisualStyleBackColor = false;
+            this.BLimpiar.Click += new System.EventHandler(this.BLimpiar_Click);
+            // 
+            // panelGrid
+            // 
+            this.panelGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelGrid.BackColor = System.Drawing.Color.White;
+            this.panelGrid.Controls.Add(this.DataGridHistorialVenta);
+            this.panelGrid.Location = new System.Drawing.Point(25, 160);
+            this.panelGrid.Name = "panelGrid";
+            this.panelGrid.Size = new System.Drawing.Size(840, 360);
+            this.panelGrid.TabIndex = 2;
             // 
             // TBTotalFiltrado
             // 
@@ -289,6 +277,18 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.TBTotalFiltrado.Size = new System.Drawing.Size(137, 25);
             this.TBTotalFiltrado.TabIndex = 4;
             this.TBTotalFiltrado.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // LTotal
+            // 
+            this.LTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.LTotal.AutoSize = true;
+            this.LTotal.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.LTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LTotal.Location = new System.Drawing.Point(595, 535);
+            this.LTotal.Name = "LTotal";
+            this.LTotal.Size = new System.Drawing.Size(123, 19);
+            this.LTotal.TabIndex = 3;
+            this.LTotal.Text = "TOTAL FILTRADO:";
             // 
             // FHistorialVentas
             // 

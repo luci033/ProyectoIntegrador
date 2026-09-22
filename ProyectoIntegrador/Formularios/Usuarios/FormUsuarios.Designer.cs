@@ -28,9 +28,17 @@ namespace ProyectoIntegrador.Formularios.Usuarios
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.BAgregarUsuario = new System.Windows.Forms.Button();
             this.dataGridRegistroUsuario = new System.Windows.Forms.DataGridView();
+            this.colIdUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDni = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colApellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colModificar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.colDesactivar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.LTitulo = new System.Windows.Forms.Label();
             this.TBBuscar = new System.Windows.Forms.TextBox();
             this.LBuscar = new System.Windows.Forms.Label();
@@ -40,14 +48,6 @@ namespace ProyectoIntegrador.Formularios.Usuarios
             this.LRol = new System.Windows.Forms.Label();
             this.CBEstado = new System.Windows.Forms.ComboBox();
             this.CBRol = new System.Windows.Forms.ComboBox();
-            this.colIdUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDni = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colApellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colModificar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.colDesactivar = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridRegistroUsuario)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -67,110 +67,6 @@ namespace ProyectoIntegrador.Formularios.Usuarios
             this.BAgregarUsuario.Text = "+ Agregar Usuario";
             this.BAgregarUsuario.UseVisualStyleBackColor = false;
             this.BAgregarUsuario.Click += new System.EventHandler(this.BAgregarUsuario_Click);
-            // 
-            // LTitulo
-            // 
-            this.LTitulo.AutoSize = true;
-            this.LTitulo.Font = new System.Drawing.Font("Georgia", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.LTitulo.Location = new System.Drawing.Point(25, 20);
-            this.LTitulo.Name = "LTitulo";
-            this.LTitulo.Size = new System.Drawing.Size(359, 31);
-            this.LTitulo.TabIndex = 1;
-            this.LTitulo.Text = "GESTIÓN DE USUARIOS";
-            this.LTitulo.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // panel2
-            // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Controls.Add(this.LEstado);
-            this.panel2.Controls.Add(this.LRol);
-            this.panel2.Controls.Add(this.CBEstado);
-            this.panel2.Controls.Add(this.CBRol);
-            this.panel2.Controls.Add(this.TBBuscar);
-            this.panel2.Controls.Add(this.LBuscar);
-            this.panel2.Location = new System.Drawing.Point(25, 68);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(825, 52);
-            this.panel2.TabIndex = 2;
-            // 
-            // LBuscar
-            // 
-            this.LBuscar.AutoSize = true;
-            this.LBuscar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.LBuscar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.LBuscar.Location = new System.Drawing.Point(15, 17);
-            this.LBuscar.Name = "LBuscar";
-            this.LBuscar.Size = new System.Drawing.Size(47, 15);
-            this.LBuscar.TabIndex = 0;
-            this.LBuscar.Text = "Buscar:";
-            // 
-            // TBBuscar
-            // 
-            this.TBBuscar.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.TBBuscar.Location = new System.Drawing.Point(68, 14);
-            this.TBBuscar.Name = "TBBuscar";
-            this.TBBuscar.Size = new System.Drawing.Size(220, 24);
-            this.TBBuscar.TabIndex = 1;
-            this.TBBuscar.TextChanged += new System.EventHandler(this.TBBuscar_TextChanged);
-            // 
-            // LRol
-            // 
-            this.LRol.AutoSize = true;
-            this.LRol.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.LRol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.LRol.Location = new System.Drawing.Point(310, 17);
-            this.LRol.Name = "LRol";
-            this.LRol.Size = new System.Drawing.Size(28, 15);
-            this.LRol.TabIndex = 2;
-            this.LRol.Text = "Rol:";
-            // 
-            // CBRol
-            // 
-            this.CBRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CBRol.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.CBRol.FormattingEnabled = true;
-            this.CBRol.Location = new System.Drawing.Point(345, 14);
-            this.CBRol.Name = "CBRol";
-            this.CBRol.Size = new System.Drawing.Size(140, 23);
-            this.CBRol.TabIndex = 3;
-            this.CBRol.SelectedIndexChanged += new System.EventHandler(this.CBRol_SelectedIndexChanged);
-            // 
-            // LEstado
-            // 
-            this.LEstado.AutoSize = true;
-            this.LEstado.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.LEstado.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.LEstado.Location = new System.Drawing.Point(510, 17);
-            this.LEstado.Name = "LEstado";
-            this.LEstado.Size = new System.Drawing.Size(46, 15);
-            this.LEstado.TabIndex = 4;
-            this.LEstado.Text = "Estado:";
-            // 
-            // CBEstado
-            // 
-            this.CBEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CBEstado.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.CBEstado.FormattingEnabled = true;
-            this.CBEstado.Location = new System.Drawing.Point(565, 14);
-            this.CBEstado.Name = "CBEstado";
-            this.CBEstado.Size = new System.Drawing.Size(130, 23);
-            this.CBEstado.TabIndex = 5;
-            this.CBEstado.SelectedIndexChanged += new System.EventHandler(this.CBEstado_SelectedIndexChanged);
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.dataGridRegistroUsuario);
-            this.panel1.Location = new System.Drawing.Point(25, 130);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(825, 420);
-            this.panel1.TabIndex = 3;
             // 
             // dataGridRegistroUsuario
             // 
@@ -194,14 +90,14 @@ namespace ProyectoIntegrador.Formularios.Usuarios
             this.colRol,
             this.colModificar,
             this.colDesactivar});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridRegistroUsuario.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridRegistroUsuario.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridRegistroUsuario.EnableHeadersVisualStyles = false;
             this.dataGridRegistroUsuario.Location = new System.Drawing.Point(12, 12);
             this.dataGridRegistroUsuario.Name = "dataGridRegistroUsuario";
@@ -273,6 +169,110 @@ namespace ProyectoIntegrador.Formularios.Usuarios
             this.colDesactivar.Name = "colDesactivar";
             this.colDesactivar.ReadOnly = true;
             this.colDesactivar.Text = "Desactivar";
+            // 
+            // LTitulo
+            // 
+            this.LTitulo.AutoSize = true;
+            this.LTitulo.Font = new System.Drawing.Font("Georgia", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LTitulo.Location = new System.Drawing.Point(25, 20);
+            this.LTitulo.Name = "LTitulo";
+            this.LTitulo.Size = new System.Drawing.Size(295, 31);
+            this.LTitulo.TabIndex = 1;
+            this.LTitulo.Text = "Gestión de Usuarios";
+            this.LTitulo.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // TBBuscar
+            // 
+            this.TBBuscar.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.TBBuscar.Location = new System.Drawing.Point(68, 14);
+            this.TBBuscar.Name = "TBBuscar";
+            this.TBBuscar.Size = new System.Drawing.Size(220, 24);
+            this.TBBuscar.TabIndex = 1;
+            this.TBBuscar.TextChanged += new System.EventHandler(this.TBBuscar_TextChanged);
+            // 
+            // LBuscar
+            // 
+            this.LBuscar.AutoSize = true;
+            this.LBuscar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.LBuscar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LBuscar.Location = new System.Drawing.Point(15, 17);
+            this.LBuscar.Name = "LBuscar";
+            this.LBuscar.Size = new System.Drawing.Size(47, 15);
+            this.LBuscar.TabIndex = 0;
+            this.LBuscar.Text = "Buscar:";
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.dataGridRegistroUsuario);
+            this.panel1.Location = new System.Drawing.Point(25, 130);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(825, 420);
+            this.panel1.TabIndex = 3;
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.LEstado);
+            this.panel2.Controls.Add(this.LRol);
+            this.panel2.Controls.Add(this.CBEstado);
+            this.panel2.Controls.Add(this.CBRol);
+            this.panel2.Controls.Add(this.TBBuscar);
+            this.panel2.Controls.Add(this.LBuscar);
+            this.panel2.Location = new System.Drawing.Point(25, 68);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(825, 52);
+            this.panel2.TabIndex = 2;
+            // 
+            // LEstado
+            // 
+            this.LEstado.AutoSize = true;
+            this.LEstado.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.LEstado.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LEstado.Location = new System.Drawing.Point(510, 17);
+            this.LEstado.Name = "LEstado";
+            this.LEstado.Size = new System.Drawing.Size(46, 15);
+            this.LEstado.TabIndex = 4;
+            this.LEstado.Text = "Estado:";
+            // 
+            // LRol
+            // 
+            this.LRol.AutoSize = true;
+            this.LRol.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.LRol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LRol.Location = new System.Drawing.Point(310, 17);
+            this.LRol.Name = "LRol";
+            this.LRol.Size = new System.Drawing.Size(28, 15);
+            this.LRol.TabIndex = 2;
+            this.LRol.Text = "Rol:";
+            // 
+            // CBEstado
+            // 
+            this.CBEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CBEstado.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.CBEstado.FormattingEnabled = true;
+            this.CBEstado.Location = new System.Drawing.Point(565, 14);
+            this.CBEstado.Name = "CBEstado";
+            this.CBEstado.Size = new System.Drawing.Size(130, 23);
+            this.CBEstado.TabIndex = 5;
+            this.CBEstado.SelectedIndexChanged += new System.EventHandler(this.CBEstado_SelectedIndexChanged);
+            // 
+            // CBRol
+            // 
+            this.CBRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CBRol.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.CBRol.FormattingEnabled = true;
+            this.CBRol.Location = new System.Drawing.Point(345, 14);
+            this.CBRol.Name = "CBRol";
+            this.CBRol.Size = new System.Drawing.Size(140, 23);
+            this.CBRol.TabIndex = 3;
+            this.CBRol.SelectedIndexChanged += new System.EventHandler(this.CBRol_SelectedIndexChanged);
             // 
             // FormUsuarios
             // 
