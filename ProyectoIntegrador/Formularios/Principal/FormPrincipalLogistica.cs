@@ -25,6 +25,7 @@ namespace ProyectoIntegrador.Formularios.Principal
             EstiloUI.AplicarBordesRedondeados(BProductos, 14);
             EstiloUI.AplicarBordesRedondeados(BCompras, 14);
             EstiloUI.AplicarBordesRedondeados(BAjusteStock, 14);
+            EstiloUI.AplicarBordesRedondeados(BCerrarSesion, 8);
         }
 
         private void CerrarFormulariosHijos()
@@ -86,6 +87,27 @@ namespace ProyectoIntegrador.Formularios.Principal
             frmAjuste.MdiParent = this;
             frmAjuste.WindowState = FormWindowState.Maximized;
             frmAjuste.Show();
+        }
+
+        private void BCerrarSesion_Click(object sender, EventArgs e)
+        {
+            DialogResult respuesta = MessageBox.Show(
+                "¿Está seguro de que desea cerrar la sesión de Logística?",
+                "Cerrar Sesión - Joyería ALBA",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (respuesta == DialogResult.Yes)
+            {
+                Application.Restart();
+                Environment.Exit(0);
+            }
+        }
+
+        private void FormPrincipalLogistica_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)

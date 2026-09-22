@@ -1,178 +1,423 @@
+using ProyectoIntegrador.ModelosSimulados;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ProyectoIntegrador.Formularios.Ventas
 {
     public partial class FHistorialVentas : Form
     {
-        // Clase simple para representar una venta en memoria. REVISAR
-        public class VentaResumen
-        {
-            public int IdVenta { get; set; }
-            public string Vendedor { get; set; }
-            public DateTime Fecha { get; set; }
-            public decimal Total { get; set; }
-        }
-
-        // Lista que simula los registros que luego iran de la Base de Datos
-        private List<VentaResumen> listaVentas = new List<VentaResumen>();
+        private List<VentaHistorica> listaVentasCompleta = new List<VentaHistorica>();
+        private List<VentaHistorica> listaVentasActuales = new List<VentaHistorica>();
+        private bool inicializando = true;
 
         public FHistorialVentas()
-
         {
             InitializeComponent();
-        }
-
-        private void dataGridHistorialVenta_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            // Verificamos que el clic sea en la columna del botón
-            if (e.RowIndex >= 0 && e.ColumnIndex == 1)
-            {
-                // Se obtiene el ID de la fila seleccionada
-                int IdVentaSeleccionada = Convert.ToInt32(DataGridHistorialVenta.Rows[e.RowIndex].Cells[0].Value);
-
-                // Buscamos si ese ID existe en el diccionario de memoria de FormVentas
-                if (FormVentas.HistorialVentas.ContainsKey(IdVentaSeleccionada))
-                {
-                    // Le pasamos el paquete completo de DatosVenta al comprobante
-                    FDetalleVenta modalDetalle = new FDetalleVenta(FormVentas.HistorialVentas[IdVentaSeleccionada]);
-                    modalDetalle.ShowDialog();
-                }
-                else
-                {
-                    // Si no está en el diccionario, es uno de tus registros simulados del Load
-                    MessageBox.Show("Esta venta es simulada de prueba y no contiene un detalle guardado en memoria.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-        }
-
-
-        // metodo auxiliar: recibe una lista de ventas y las dibuja en el DataGridView
-        private void CargarGrilla(List<VentaResumen> ventas)
-        {
-            // cremoas una variable en cero para ir guardando la suma
-            decimal totalSuma = 0;
-
-            // Vaciamos filas anteriores para evitar duplicar datos al filtrar
-            DataGridHistorialVenta.Rows.Clear();
-
-            foreach (var venta in ventas)
-            {
-                // El DataGridViewButtonColumn genera el botón automáticamente en cada fila agregada
-                DataGridHistorialVenta.Rows.Add(
-                    venta.IdVenta,
-                    "",
-                    venta.IdVenta,
-                    venta.Vendedor,
-                    venta.Fecha.ToString("dd/MM/yyyy HH:mm"),
-                    venta.Total.ToString("C2")
-                );
-
-                // a medida que dibuja la fila, le sumamos la plata a nuestra variable
-                totalSuma += venta.Total;
-            }
-
-            // al terminar de dibujar todas las filas, mostramos el total en tu control
-            // OJO: Cambia "TBTotalFiltrado" por el nombre real que le pusiste a tu cajita o Label en el diseño
-            TBTotalFiltrado.Text = totalSuma.ToString("C2");
         }
 
         private void FHistorialVentas_Load(object sender, EventArgs e)
         {
             EstiloUI.AplicarEstiloFormulario(this);
             EstiloUI.AplicarEstiloTitulo(LHistorialVenta);
-            EstiloUI.AplicarEstiloPanelSeccion(panel1, 12);
-            EstiloUI.AplicarEstiloPanelSeccion(panelGrid, 14);
+
+            EstiloUI.AplicarEstiloCard(cardTotal, 10);
+            EstiloUI.AplicarEstiloCard(cardCantidad, 10);
+            EstiloUI.AplicarEstiloCard(cardPromedio, 10);
+
+            EstiloUI.AplicarEstiloPanelSeccion(panel1, 10);
+            EstiloUI.AplicarEstiloPanelSeccion(panelGrid, 12);
+
             EstiloUI.AplicarEstiloBoton(BBuscar);
             EstiloUI.AplicarEstiloBotonSecundario(BLimpiar);
+            EstiloUI.AplicarEstiloBotonSecundario(BExportar);
+
             EstiloUI.AplicarEstiloTextBox(TBBuscar);
             EstiloUI.AplicarEstiloTextBox(TBTotalFiltrado);
             EstiloUI.AplicarEstiloGrilla(DataGridHistorialVenta);
 
-            // Llenamos el ComboBox con las opciones de búsqueda
+            ConfigurarEstilosColumnas();
+
+            // Configuración de combos de búsqueda
+            cmbBuscar.Items.Clear();
             cmbBuscar.Items.Add("Nro. Venta");
             cmbBuscar.Items.Add("Vendedor");
-            cmbBuscar.SelectedIndex = 0; // Selecciona el primero por defecto
+            cmbBuscar.Items.Add("Cliente");
+            cmbBuscar.SelectedIndex = 0;
 
-            // se cargan registros simulados para verificar el funcionamiento de la grilla
-            listaVentas = new List<VentaResumen>
-            {
-                new VentaResumen { IdVenta = 1001, Fecha = DateTime.Now.AddDays(-2), Total = 150000m },
-                new VentaResumen { IdVenta = 1002, Fecha = DateTime.Now.AddDays(-1), Total = 45500.50m },
-                new VentaResumen { IdVenta = 1003, Fecha = DateTime.Now, Total = 320000m }
-            };
+            // Inicializar rango con "Mes Actual"
+            cmbPeriodo.SelectedIndex = 0; // "Mes Actual"
+            AplicarPresetPeriodo("Mes Actual");
 
-            // Poblamos el DataGridView con la lista inicial
-            CargarGrilla(listaVentas);
+            // Cargar datos estáticos combinados
+            CargarDatosDesdeMemoria();
+
+            inicializando = false;
+            AplicarFiltros();
+            AjustarTarjetasResponsive();
         }
 
-        private void TBBuscar_TextChanged(object sender, EventArgs e)
+        private void ConfigurarEstilosColumnas()
         {
-            string textoFiltro = TBBuscar.Text.Trim();
-
-            // si el buscador esta vacio, mostramos el listado completo original
-            if (string.IsNullOrEmpty(textoFiltro))
+            if (DataGridHistorialVenta.Columns.Contains("total"))
             {
-                CargarGrilla(listaVentas);
+                DataGridHistorialVenta.Columns["total"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                DataGridHistorialVenta.Columns["total"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
+
+            if (DataGridHistorialVenta.Columns.Contains("colNroVenta"))
+            {
+                DataGridHistorialVenta.Columns["colNroVenta"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                DataGridHistorialVenta.Columns["colNroVenta"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
+
+            if (DataGridHistorialVenta.Columns.Contains("Fecha"))
+            {
+                DataGridHistorialVenta.Columns["Fecha"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                DataGridHistorialVenta.Columns["Fecha"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
+
+            if (DataGridHistorialVenta.Columns.Contains("colAccion"))
+            {
+                DataGridHistorialVenta.Columns["colAccion"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
+        }
+
+        private void CargarDatosDesdeMemoria()
+        {
+            // Sincroniza y trae todas las ventas de EstadisticasSimuladas y FormVentas.HistorialVentas
+            listaVentasCompleta = EstadisticasSimuladas.ObtenerHistorialVentas();
+        }
+
+        private void AplicarPresetPeriodo(string preset)
+        {
+            DateTime hoy = DateTime.Today;
+            switch (preset)
+            {
+                case "Hoy":
+                    DTPFechaDesde.Value = hoy;
+                    DTPFechaHasta.Value = hoy;
+                    break;
+                case "Últimos 7 días":
+                    DTPFechaDesde.Value = hoy.AddDays(-6);
+                    DTPFechaHasta.Value = hoy;
+                    break;
+                case "Mes Actual":
+                    DTPFechaDesde.Value = new DateTime(hoy.Year, hoy.Month, 1);
+                    DTPFechaHasta.Value = hoy;
+                    break;
+                case "Todo el Historial":
+                    DTPFechaDesde.Value = hoy.AddMonths(-12);
+                    DTPFechaHasta.Value = hoy;
+                    break;
+                case "Personalizado":
+                    // No modifica los valores seleccionados manualmente
+                    break;
+            }
+        }
+
+        private void cmbPeriodo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (inicializando) return;
+
+            string preset = cmbPeriodo.SelectedItem?.ToString() ?? "Mes Actual";
+            AplicarPresetPeriodo(preset);
+            AplicarFiltros();
+        }
+
+        private void DTPFecha_ValueChanged(object sender, EventArgs e)
+        {
+            if (inicializando) return;
+
+            // Si el usuario cambia las fechas manualmente, cambia el preset a Personalizado
+            if (cmbPeriodo.SelectedItem?.ToString() != "Personalizado")
+            {
+                inicializando = true;
+                cmbPeriodo.SelectedItem = "Personalizado";
+                inicializando = false;
+            }
+
+            ValidarFechas(false);
+            AplicarFiltros();
+        }
+
+        private bool ValidarFechas(bool mostrarAlertaModal)
+        {
+            if (DTPFechaDesde.Value.Date > DTPFechaHasta.Value.Date)
+            {
+                errorProvider1.SetError(DTPFechaHasta, "La fecha 'Hasta' no puede ser anterior a la fecha 'Desde'.");
+                if (mostrarAlertaModal)
+                {
+                    MessageBox.Show(
+                        "El rango de fechas ingresado es inválido.\nLa fecha final no puede ser anterior a la fecha inicial.",
+                        "Rango de Fechas Inválido",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                }
+                return false;
+            }
+
+            errorProvider1.SetError(DTPFechaHasta, "");
+            return true;
+        }
+
+        private bool ValidarTextoBusqueda()
+        {
+            string criterio = cmbBuscar.SelectedItem?.ToString() ?? "Nro. Venta";
+            string texto = TBBuscar.Text.Trim();
+
+            if (!string.IsNullOrEmpty(texto) && criterio == "Nro. Venta")
+            {
+                if (!texto.All(char.IsDigit))
+                {
+                    errorProvider1.SetError(TBBuscar, "El número de venta solo debe contener dígitos numéricos.");
+                    return false;
+                }
+            }
+
+            errorProvider1.SetError(TBBuscar, "");
+            return true;
+        }
+
+        private void AplicarFiltros()
+        {
+            if (!ValidarFechas(false) || !ValidarTextoBusqueda())
+            {
+                // Si hay error de validación, no se rompe pero se detiene el filtrado
                 return;
             }
 
-            // filtramos la lista buscando coincidencias en el ID de la venta mediante LINQ (evalua de forma rapida si el texto ingresado
-            // en el buscador, coincide .
-            List<VentaResumen> ventasFiltradas = listaVentas
-                .Where(v => v.IdVenta.ToString().Contains(textoFiltro))
-                .ToList();
-
-            CargarGrilla(ventasFiltradas);
-        }
-
-        private void BBuscar_Click(object sender, EventArgs e)
-        {
-            // Atrapamos las fechas (al "Hasta" le sumamos 1 día para incluir todo ese día hasta las 23:59)
             DateTime fechaDesde = DTPFechaDesde.Value.Date;
             DateTime fechaHasta = DTPFechaHasta.Value.Date.AddDays(1).AddSeconds(-1);
 
-            // filtramos por rango de fechas
-            var ventasFiltradas = listaVentas
-                .Where(v => v.Fecha >= fechaDesde && v.Fecha <= fechaHasta)
-                .ToList();
+            IEnumerable<VentaHistorica> query = listaVentasCompleta
+                .Where(v => v.Fecha >= fechaDesde && v.Fecha <= fechaHasta);
 
-            // filtramos por el ComboBox y el TextBox
-            string criterio = cmbBuscar.Text;
+            string criterio = cmbBuscar.SelectedItem?.ToString() ?? "Nro. Venta";
             string texto = TBBuscar.Text.Trim().ToLower();
 
             if (!string.IsNullOrEmpty(texto))
             {
                 if (criterio == "Nro. Venta")
                 {
-                    ventasFiltradas = ventasFiltradas.Where(v => v.IdVenta.ToString().Contains(texto)).ToList();
+                    query = query.Where(v => v.NroVenta.ToString().Contains(texto));
                 }
                 else if (criterio == "Vendedor")
                 {
-                    ventasFiltradas = ventasFiltradas.Where(v => v.Vendedor.ToLower().Contains(texto)).ToList();
+                    query = query.Where(v => v.Vendedor != null && v.Vendedor.ToLower().Contains(texto));
+                }
+                else if (criterio == "Cliente")
+                {
+                    query = query.Where(v => v.Cliente != null && v.Cliente.ToLower().Contains(texto));
                 }
             }
-            // mostramos el resultado final en la grilla
-            CargarGrilla(ventasFiltradas);
+
+            listaVentasActuales = query.OrderByDescending(v => v.Fecha).ToList();
+            ActualizarGrillaYMetricas(listaVentasActuales);
+        }
+
+        private void ActualizarGrillaYMetricas(List<VentaHistorica> ventas)
+        {
+            DataGridHistorialVenta.Rows.Clear();
+
+            decimal totalSuma = 0;
+            int cantidad = ventas.Count;
+
+            foreach (var venta in ventas)
+            {
+                DataGridHistorialVenta.Rows.Add(
+                    venta.NroVenta,
+                    "Ver Detalle",
+                    $"#{venta.NroVenta:D5}",
+                    venta.Fecha.ToString("dd/MM/yyyy HH:mm"),
+                    venta.Cliente,
+                    venta.Vendedor ?? "Vendedor Local",
+                    venta.Total.ToString("C2")
+                );
+
+                totalSuma += venta.Total;
+            }
+
+            decimal ticketPromedio = cantidad > 0 ? (totalSuma / cantidad) : 0;
+
+            // Actualizar tarjetas de métricas
+            LValorTotal.Text = totalSuma.ToString("C2");
+            LValorCantidad.Text = $"{cantidad} {(cantidad == 1 ? "operación" : "operaciones")}";
+            LValorPromedio.Text = ticketPromedio.ToString("C2");
+
+            TBTotalFiltrado.Text = totalSuma.ToString("C2");
+
+            // Control de vista vacía
+            bool hayDatos = cantidad > 0;
+            DataGridHistorialVenta.Visible = hayDatos;
+            LEstadoVacio.Visible = !hayDatos;
+        }
+
+        private void dataGridHistorialVenta_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Columna 1 corresponde al botón "Ver Detalle"
+            if (e.RowIndex >= 0 && e.ColumnIndex == 1)
+            {
+                int nroVenta = Convert.ToInt32(DataGridHistorialVenta.Rows[e.RowIndex].Cells[0].Value);
+
+                // Verificamos si existe en el diccionario estático de comprobantes
+                if (FormVentas.HistorialVentas != null && FormVentas.HistorialVentas.ContainsKey(nroVenta))
+                {
+                    FDetalleVenta modalDetalle = new FDetalleVenta(FormVentas.HistorialVentas[nroVenta]);
+                    modalDetalle.ShowDialog();
+                }
+                else
+                {
+                    // Respaldo preventivo: si por alguna razón no estuviera en el diccionario,
+                    // generamos un comprobante fiel al registro seleccionado para que el usuario siempre vea su detalle
+                    var ventaRespaldo = listaVentasCompleta.FirstOrDefault(v => v.NroVenta == nroVenta);
+                    if (ventaRespaldo != null)
+                    {
+                        var datos = new FormVentas.DatosVenta
+                        {
+                            Nro = ventaRespaldo.NroVenta,
+                            Fecha = ventaRespaldo.Fecha.ToString("dd/MM/yyyy HH:mm"),
+                            Cliente = ventaRespaldo.Cliente,
+                            Iva = "Consumidor Final",
+                            MetodoPago = (ventaRespaldo.NroVenta % 2 == 0) ? "Tarjeta de Crédito" : "Efectivo",
+                            Total = ventaRespaldo.Total.ToString("C2")
+                        };
+
+                        datos.Articulos.Add(new FDetalleVenta.ItemDetalle
+                        {
+                            Producto = $"Joya ALBA - {ventaRespaldo.CategoriaPrincipal} Colección Fina",
+                            Cantidad = Math.Max(1, ventaRespaldo.CantidadArticulos),
+                            PrecioUnitario = Math.Round(ventaRespaldo.Total / Math.Max(1, ventaRespaldo.CantidadArticulos), 2)
+                        });
+
+                        FormVentas.HistorialVentas[nroVenta] = datos;
+
+                        FDetalleVenta modalDetalle = new FDetalleVenta(datos);
+                        modalDetalle.ShowDialog();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontró el comprobante detallado para la venta seleccionada.", "Comprobante no disponible", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+        }
+
+        private void TBBuscar_TextChanged(object sender, EventArgs e)
+        {
+            if (inicializando) return;
+            AplicarFiltros();
+        }
+
+        private void cmbBuscar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (inicializando) return;
+            ValidarTextoBusqueda();
+            AplicarFiltros();
+        }
+
+        private void BBuscar_Click(object sender, EventArgs e)
+        {
+            if (!ValidarFechas(true)) return;
+            if (!ValidarTextoBusqueda()) return;
+
+            AplicarFiltros();
         }
 
         private void BLimpiar_Click(object sender, EventArgs e)
         {
+            inicializando = true;
             TBBuscar.Clear();
+            errorProvider1.Clear();
             cmbBuscar.SelectedIndex = 0;
-            DTPFechaDesde.Value = DateTime.Now.AddMonths(-1);
-            DTPFechaHasta.Value = DateTime.Now;
+            cmbPeriodo.SelectedIndex = 0;
+            AplicarPresetPeriodo("Mes Actual");
+            inicializando = false;
 
-            CargarGrilla(listaVentas);
+            AplicarFiltros();
+        }
+
+        private void BExportar_Click(object sender, EventArgs e)
+        {
+            if (listaVentasActuales == null || listaVentasActuales.Count == 0)
+            {
+                MessageBox.Show(
+                    "No hay ventas para exportar con los filtros actuales.",
+                    "Exportación no disponible",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+                return;
+            }
+
+            using (SaveFileDialog sfd = new SaveFileDialog())
+            {
+                sfd.Filter = "Archivo CSV (*.csv)|*.csv";
+                sfd.FileName = $"Historial_Ventas_ALBA_{DateTime.Now:yyyyMMdd_HHmm}.csv";
+                sfd.Title = "Guardar Historial de Ventas";
+
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine("Nro Comprobante;Fecha;Cliente;Vendedor;Total Facturado");
+
+                        foreach (var v in listaVentasActuales)
+                        {
+                            sb.AppendLine($"#{v.NroVenta:D5};{v.Fecha:dd/MM/yyyy HH:mm};\"{v.Cliente}\";\"{v.Vendedor}\";{v.Total:F2}");
+                        }
+
+                        File.WriteAllText(sfd.FileName, sb.ToString(), Encoding.UTF8);
+
+                        MessageBox.Show(
+                            $"Historial exportado exitosamente ({listaVentasActuales.Count} registros).\nGuardado en:\n{sfd.FileName}",
+                            "Exportación Exitosa",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information
+                        );
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(
+                            "Ocurrió un error al intentar exportar el archivo:\n" + ex.Message,
+                            "Error de Exportación",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error
+                        );
+                    }
+                }
+            }
+        }
+
+        private void FHistorialVentas_Resize(object sender, EventArgs e)
+        {
+            AjustarTarjetasResponsive();
+        }
+
+        private void AjustarTarjetasResponsive()
+        {
+            if (panelCards == null || cardTotal == null || cardCantidad == null || cardPromedio == null) return;
+
+            int espacioDisponible = panelCards.ClientSize.Width;
+            int margen = 16;
+            int anchoCard = Math.Max(180, (espacioDisponible - (margen * 2)) / 3);
+
+            cardTotal.Location = new Point(0, 0);
+            cardTotal.Size = new Size(anchoCard, panelCards.ClientSize.Height - 4);
+
+            cardCantidad.Location = new Point(anchoCard + margen, 0);
+            cardCantidad.Size = new Size(anchoCard, panelCards.ClientSize.Height - 4);
+
+            cardPromedio.Location = new Point((anchoCard + margen) * 2, 0);
+            cardPromedio.Size = new Size(anchoCard, panelCards.ClientSize.Height - 4);
         }
     }
 }
-
-

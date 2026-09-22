@@ -46,6 +46,7 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.panelSeparador = new System.Windows.Forms.Panel();
             this.LSeccion = new System.Windows.Forms.Label();
             this.panelFooter = new System.Windows.Forms.Panel();
+            this.BCerrarSesion = new System.Windows.Forms.Button();
             this.LFooter = new System.Windows.Forms.Label();
             this.menuContextProductos = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.itemCatalogoProductos = new System.Windows.Forms.ToolStripMenuItem();
@@ -295,22 +296,39 @@ namespace ProyectoIntegrador.Formularios.Principal
             // panelFooter
             // 
             this.panelFooter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(6)))), ((int)(((byte)(9)))));
+            this.panelFooter.Controls.Add(this.BCerrarSesion);
             this.panelFooter.Controls.Add(this.LFooter);
             this.panelFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelFooter.Location = new System.Drawing.Point(0, 676);
+            this.panelFooter.Location = new System.Drawing.Point(0, 632);
             this.panelFooter.Name = "panelFooter";
-            this.panelFooter.Size = new System.Drawing.Size(250, 44);
+            this.panelFooter.Size = new System.Drawing.Size(250, 88);
             this.panelFooter.TabIndex = 1;
+            // 
+            // BCerrarSesion
+            // 
+            this.BCerrarSesion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(18)))), ((int)(((byte)(24)))));
+            this.BCerrarSesion.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BCerrarSesion.FlatAppearance.BorderSize = 0;
+            this.BCerrarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BCerrarSesion.Font = new System.Drawing.Font("Segoe UI", 9.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BCerrarSesion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(210)))), ((int)(((byte)(210)))));
+            this.BCerrarSesion.Location = new System.Drawing.Point(18, 10);
+            this.BCerrarSesion.Name = "BCerrarSesion";
+            this.BCerrarSesion.Size = new System.Drawing.Size(214, 38);
+            this.BCerrarSesion.TabIndex = 1;
+            this.BCerrarSesion.Text = "🚪  Cerrar Sesión";
+            this.BCerrarSesion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BCerrarSesion.UseVisualStyleBackColor = false;
+            this.BCerrarSesion.Click += new System.EventHandler(this.BCerrarSesion_Click);
             // 
             // LFooter
             // 
             this.LFooter.BackColor = System.Drawing.Color.Transparent;
-            this.LFooter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LFooter.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LFooter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(180)))), ((int)(((byte)(165)))));
-            this.LFooter.Location = new System.Drawing.Point(0, 0);
+            this.LFooter.Location = new System.Drawing.Point(0, 52);
             this.LFooter.Name = "LFooter";
-            this.LFooter.Size = new System.Drawing.Size(250, 44);
+            this.LFooter.Size = new System.Drawing.Size(250, 30);
             this.LFooter.TabIndex = 0;
             this.LFooter.Text = "Sesión activa: Administrador | Control Total";
             this.LFooter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -411,6 +429,7 @@ namespace ProyectoIntegrador.Formularios.Principal
         private System.Windows.Forms.Button BClientes;
         private System.Windows.Forms.Button BAjusteStock;
         private System.Windows.Forms.Panel panelFooter;
+        private System.Windows.Forms.Button BCerrarSesion;
         private System.Windows.Forms.Label LFooter;
         private System.Windows.Forms.ContextMenuStrip menuContextProductos;
         private System.Windows.Forms.ToolStripMenuItem itemCatalogoProductos;

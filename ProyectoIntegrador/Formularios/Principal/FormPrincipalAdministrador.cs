@@ -29,6 +29,7 @@ namespace ProyectoIntegrador.Formularios.Principal
             EstiloUI.AplicarBordesRedondeados(BProveedores, 14);
             EstiloUI.AplicarBordesRedondeados(BClientes, 14);
             EstiloUI.AplicarBordesRedondeados(BAjusteStock, 14);
+            EstiloUI.AplicarBordesRedondeados(BCerrarSesion, 8);
         }
 
         private void CerrarFormulariosHijos()
@@ -136,6 +137,22 @@ namespace ProyectoIntegrador.Formularios.Principal
         private void itemHistorialVentas_Click(object sender, EventArgs e)
         {
             AbrirFormulario<FHistorialVentas>();
+        }
+
+        private void BCerrarSesion_Click(object sender, EventArgs e)
+        {
+            DialogResult respuesta = MessageBox.Show(
+                "¿Está seguro de que desea cerrar la sesión de Administrador?",
+                "Cerrar Sesión - Joyería ALBA",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (respuesta == DialogResult.Yes)
+            {
+                Application.Restart();
+                Environment.Exit(0);
+            }
         }
 
         private void FormPrincipalAdministrador_FormClosed(object sender, FormClosedEventArgs e)

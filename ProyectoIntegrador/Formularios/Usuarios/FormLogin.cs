@@ -223,6 +223,13 @@ namespace ProyectoIntegrador.Formularios.Usuarios
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
+            else if (usuario == "gerente" && clave == "1234")
+            {
+                // Abre el formulario de Gerente
+                RolUsuario = "Gerente";
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
             else
             {
                 // Si no coincide con ninguno

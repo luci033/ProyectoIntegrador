@@ -62,6 +62,7 @@ namespace ProyectoIntegrador.Formularios.Usuarios
                 if (item.IdRol == 1) nombreRol = "Administrador";
                 else if (item.IdRol == 2) nombreRol = "Vendedor";
                 else if (item.IdRol == 3) nombreRol = "Logística";
+                else if (item.IdRol == 4) nombreRol = "Gerente";
 
                 // Agregamo la fila a tu DataGridView
                 int indiceFila = dataGridRegistroUsuario.Rows.Add(
@@ -279,6 +280,7 @@ namespace ProyectoIntegrador.Formularios.Usuarios
                 if (item.IdRol == 1) nombreRol = "Administrador";
                 else if (item.IdRol == 2) nombreRol = "Vendedor";
                 else if (item.IdRol == 3) nombreRol = "Logística";
+                else if (item.IdRol == 4) nombreRol = "Gerente";
 
                 int indiceFila = dataGridRegistroUsuario.Rows.Add(
                     item.IdUsuario,

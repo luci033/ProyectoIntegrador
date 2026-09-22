@@ -40,6 +40,7 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.BDevoluciones = new System.Windows.Forms.Button();
             this.BClientes = new System.Windows.Forms.Button();
             this.panelFooter = new System.Windows.Forms.Panel();
+            this.BCerrarSesion = new System.Windows.Forms.Button();
             this.LFooter = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PBLogo)).BeginInit();
@@ -187,22 +188,39 @@ namespace ProyectoIntegrador.Formularios.Principal
             // panelFooter
             // 
             this.panelFooter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(6)))), ((int)(((byte)(9)))));
+            this.panelFooter.Controls.Add(this.BCerrarSesion);
             this.panelFooter.Controls.Add(this.LFooter);
             this.panelFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelFooter.Location = new System.Drawing.Point(0, 636);
+            this.panelFooter.Location = new System.Drawing.Point(0, 592);
             this.panelFooter.Name = "panelFooter";
-            this.panelFooter.Size = new System.Drawing.Size(240, 44);
+            this.panelFooter.Size = new System.Drawing.Size(240, 88);
             this.panelFooter.TabIndex = 5;
+            // 
+            // BCerrarSesion
+            // 
+            this.BCerrarSesion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(18)))), ((int)(((byte)(24)))));
+            this.BCerrarSesion.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BCerrarSesion.FlatAppearance.BorderSize = 0;
+            this.BCerrarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BCerrarSesion.Font = new System.Drawing.Font("Segoe UI", 9.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BCerrarSesion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(210)))), ((int)(((byte)(210)))));
+            this.BCerrarSesion.Location = new System.Drawing.Point(15, 10);
+            this.BCerrarSesion.Name = "BCerrarSesion";
+            this.BCerrarSesion.Size = new System.Drawing.Size(210, 38);
+            this.BCerrarSesion.TabIndex = 1;
+            this.BCerrarSesion.Text = "🚪  Cerrar Sesión";
+            this.BCerrarSesion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BCerrarSesion.UseVisualStyleBackColor = false;
+            this.BCerrarSesion.Click += new System.EventHandler(this.BCerrarSesion_Click);
             // 
             // LFooter
             // 
             this.LFooter.BackColor = System.Drawing.Color.Transparent;
-            this.LFooter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LFooter.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LFooter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(180)))), ((int)(((byte)(165)))));
-            this.LFooter.Location = new System.Drawing.Point(0, 0);
+            this.LFooter.Location = new System.Drawing.Point(0, 52);
             this.LFooter.Name = "LFooter";
-            this.LFooter.Size = new System.Drawing.Size(240, 44);
+            this.LFooter.Size = new System.Drawing.Size(240, 30);
             this.LFooter.TabIndex = 0;
             this.LFooter.Text = "Sesión activa: Vendedor";
             this.LFooter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -217,6 +235,7 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.Name = "FormPrincipalVendedor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Joyería ALBA - Vendedor";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormPrincipalVendedor_FormClosed);
             this.Load += new System.EventHandler(this.FormPrincipalVendedor_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PBLogo)).EndInit();
@@ -238,6 +257,7 @@ namespace ProyectoIntegrador.Formularios.Principal
         private System.Windows.Forms.Button BDevoluciones;
         private System.Windows.Forms.Button BClientes;
         private System.Windows.Forms.Panel panelFooter;
+        private System.Windows.Forms.Button BCerrarSesion;
         private System.Windows.Forms.Label LFooter;
     }
 }

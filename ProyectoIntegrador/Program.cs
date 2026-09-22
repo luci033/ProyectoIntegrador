@@ -1,4 +1,4 @@
-﻿using ProyectoIntegrador.Formularios.Principal;
+using ProyectoIntegrador.Formularios.Principal;
 using ProyectoIntegrador.Formularios.Usuarios;
 using System;
 using System.Collections.Generic;
@@ -46,6 +46,10 @@ namespace ProyectoIntegrador
                     else if (login.RolUsuario == "Logistica")
                     {
                         Application.Run(new FormPrincipalLogistica());
+                    }
+                    else if (login.RolUsuario == "Gerente")
+                    {
+                        Application.Run(new FormPrincipalGerente());
                     }
                 }
             

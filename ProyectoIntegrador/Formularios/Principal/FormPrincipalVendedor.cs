@@ -27,6 +27,7 @@ namespace ProyectoIntegrador.Formularios.Principal
             EstiloUI.AplicarBordesRedondeados(BVentas, 14);
             EstiloUI.AplicarBordesRedondeados(BDevoluciones, 14);
             EstiloUI.AplicarBordesRedondeados(BClientes, 14);
+            EstiloUI.AplicarBordesRedondeados(BCerrarSesion, 8);
         }
 
         private void CerrarFormulariosHijos()
@@ -89,6 +90,27 @@ namespace ProyectoIntegrador.Formularios.Principal
 
             // Inicia abriendo el módulo de ventas por defecto
             BVentas_Click(this, EventArgs.Empty);
+        }
+
+        private void BCerrarSesion_Click(object sender, EventArgs e)
+        {
+            DialogResult respuesta = MessageBox.Show(
+                "¿Está seguro de que desea cerrar la sesión de Vendedor?",
+                "Cerrar Sesión - Joyería ALBA",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (respuesta == DialogResult.Yes)
+            {
+                Application.Restart();
+                Environment.Exit(0);
+            }
+        }
+
+        private void FormPrincipalVendedor_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
 
         private void s(object sender, EventArgs e)
