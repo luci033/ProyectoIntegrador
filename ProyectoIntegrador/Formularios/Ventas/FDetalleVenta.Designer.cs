@@ -29,6 +29,8 @@ namespace ProyectoIntegrador.Formularios.Ventas
         private void InitializeComponent()
         {
             this.panelCard = new System.Windows.Forms.Panel();
+            this.LTotal = new System.Windows.Forms.Label();
+            this.TBTotal = new System.Windows.Forms.TextBox();
             this.LInfoVenta = new System.Windows.Forms.Label();
             this.LSubtitulo = new System.Windows.Forms.Label();
             this.dataGridDetalle = new System.Windows.Forms.DataGridView();
@@ -57,8 +59,6 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.LCondicionIVA = new System.Windows.Forms.Label();
             this.LRazonSocial = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.LTotal = new System.Windows.Forms.Label();
-            this.TBTotal = new System.Windows.Forms.TextBox();
             this.panelCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridDetalle)).BeginInit();
             this.panel1.SuspendLayout();
@@ -81,6 +81,30 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.panelCard.Name = "panelCard";
             this.panelCard.Size = new System.Drawing.Size(753, 404);
             this.panelCard.TabIndex = 0;
+            // 
+            // LTotal
+            // 
+            this.LTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.LTotal.AutoSize = true;
+            this.LTotal.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.LTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LTotal.Location = new System.Drawing.Point(563, 326);
+            this.LTotal.Name = "LTotal";
+            this.LTotal.Size = new System.Drawing.Size(54, 19);
+            this.LTotal.TabIndex = 6;
+            this.LTotal.Text = "TOTAL:";
+            // 
+            // TBTotal
+            // 
+            this.TBTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.TBTotal.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TBTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.TBTotal.Location = new System.Drawing.Point(623, 321);
+            this.TBTotal.Name = "TBTotal";
+            this.TBTotal.ReadOnly = true;
+            this.TBTotal.Size = new System.Drawing.Size(110, 27);
+            this.TBTotal.TabIndex = 7;
+            this.TBTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // LInfoVenta
             // 
@@ -398,30 +422,6 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(753, 122);
             this.panel2.TabIndex = 2;
-            // 
-            // LTotal
-            // 
-            this.LTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.LTotal.AutoSize = true;
-            this.LTotal.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.LTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.LTotal.Location = new System.Drawing.Point(563, 326);
-            this.LTotal.Name = "LTotal";
-            this.LTotal.Size = new System.Drawing.Size(54, 19);
-            this.LTotal.TabIndex = 6;
-            this.LTotal.Text = "TOTAL:";
-            // 
-            // TBTotal
-            // 
-            this.TBTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.TBTotal.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TBTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.TBTotal.Location = new System.Drawing.Point(623, 321);
-            this.TBTotal.Name = "TBTotal";
-            this.TBTotal.ReadOnly = true;
-            this.TBTotal.Size = new System.Drawing.Size(83, 27);
-            this.TBTotal.TabIndex = 7;
-            this.TBTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // FDetalleVenta
             // 

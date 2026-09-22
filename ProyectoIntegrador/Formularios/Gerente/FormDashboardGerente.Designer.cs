@@ -28,11 +28,11 @@ namespace ProyectoIntegrador.Formularios.Gerente
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panelTopHeader = new System.Windows.Forms.Panel();
             this.LTitulo = new System.Windows.Forms.Label();
             this.LSubtitulo = new System.Windows.Forms.Label();
@@ -323,13 +323,13 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.chartEvolucion.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea7.Name = "ChartAreaEvolucion";
-            this.chartEvolucion.ChartAreas.Add(chartArea7);
+            chartArea1.Name = "ChartAreaEvolucion";
+            this.chartEvolucion.ChartAreas.Add(chartArea1);
             this.chartEvolucion.Location = new System.Drawing.Point(10, 38);
             this.chartEvolucion.Name = "chartEvolucion";
-            series7.ChartArea = "ChartAreaEvolucion";
-            series7.Name = "Recaudacion";
-            this.chartEvolucion.Series.Add(series7);
+            series1.ChartArea = "ChartAreaEvolucion";
+            series1.Name = "Recaudacion";
+            this.chartEvolucion.Series.Add(series1);
             this.chartEvolucion.Size = new System.Drawing.Size(565, 205);
             this.chartEvolucion.TabIndex = 1;
             // 
@@ -361,17 +361,17 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.chartCategorias.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea8.Name = "ChartAreaCategorias";
-            this.chartCategorias.ChartAreas.Add(chartArea8);
-            legend4.Name = "LegendCategorias";
-            this.chartCategorias.Legends.Add(legend4);
+            chartArea2.Name = "ChartAreaCategorias";
+            this.chartCategorias.ChartAreas.Add(chartArea2);
+            legend1.Name = "LegendCategorias";
+            this.chartCategorias.Legends.Add(legend1);
             this.chartCategorias.Location = new System.Drawing.Point(10, 38);
             this.chartCategorias.Name = "chartCategorias";
-            series8.ChartArea = "ChartAreaCategorias";
-            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series8.Legend = "LegendCategorias";
-            series8.Name = "Categorias";
-            this.chartCategorias.Series.Add(series8);
+            series2.ChartArea = "ChartAreaCategorias";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series2.Legend = "LegendCategorias";
+            series2.Name = "Categorias";
+            this.chartCategorias.Series.Add(series2);
             this.chartCategorias.Size = new System.Drawing.Size(480, 205);
             this.chartCategorias.TabIndex = 1;
             // 
@@ -523,7 +523,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.BIngresoStock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BIngresoStock.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BIngresoStock.ForeColor = System.Drawing.Color.White;
-            this.BIngresoStock.Location = new System.Drawing.Point(14, 86);
+            this.BIngresoStock.Location = new System.Drawing.Point(14, 82);
             this.BIngresoStock.Name = "BIngresoStock";
             this.BIngresoStock.Size = new System.Drawing.Size(202, 38);
             this.BIngresoStock.TabIndex = 2;
@@ -541,12 +541,13 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.BDevoluciones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BDevoluciones.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BDevoluciones.ForeColor = System.Drawing.Color.White;
-            this.BDevoluciones.Location = new System.Drawing.Point(14, 134);
+            this.BDevoluciones.Location = new System.Drawing.Point(14, 170);
             this.BDevoluciones.Name = "BDevoluciones";
             this.BDevoluciones.Size = new System.Drawing.Size(202, 38);
             this.BDevoluciones.TabIndex = 3;
             this.BDevoluciones.Text = "🔄 Devoluciones";
             this.BDevoluciones.UseVisualStyleBackColor = false;
+            this.BDevoluciones.Visible = false;
             this.BDevoluciones.Click += new System.EventHandler(this.BDevoluciones_Click);
             // 
             // BVerInformes
@@ -559,7 +560,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.BVerInformes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BVerInformes.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BVerInformes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.BVerInformes.Location = new System.Drawing.Point(14, 182);
+            this.BVerInformes.Location = new System.Drawing.Point(14, 126);
             this.BVerInformes.Name = "BVerInformes";
             this.BVerInformes.Size = new System.Drawing.Size(202, 38);
             this.BVerInformes.TabIndex = 4;

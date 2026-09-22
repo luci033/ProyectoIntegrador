@@ -54,6 +54,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.BLimpiar = new System.Windows.Forms.Button();
             this.BExportar = new System.Windows.Forms.Button();
             this.panelGrid = new System.Windows.Forms.Panel();
+            this.LEstadoVacio = new System.Windows.Forms.Label();
             this.DataGridHistorialVenta = new System.Windows.Forms.DataGridView();
             this.IDVenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAccion = new System.Windows.Forms.DataGridViewButtonColumn();
@@ -62,10 +63,10 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.colCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colVendedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LEstadoVacio = new System.Windows.Forms.Label();
-            this.TBTotalFiltrado = new System.Windows.Forms.TextBox();
             this.LTotal = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.TBTotalFiltrado = new System.Windows.Forms.TextBox();
             this.panelCards.SuspendLayout();
             this.cardTotal.SuspendLayout();
             this.cardCantidad.SuspendLayout();
@@ -74,6 +75,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.panelGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridHistorialVenta)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // LHistorialVenta
@@ -84,7 +86,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.LHistorialVenta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
             this.LHistorialVenta.Location = new System.Drawing.Point(24, 16);
             this.LHistorialVenta.Name = "LHistorialVenta";
-            this.LHistorialVenta.Size = new System.Drawing.Size(248, 29);
+            this.LHistorialVenta.Size = new System.Drawing.Size(249, 29);
             this.LHistorialVenta.TabIndex = 0;
             this.LHistorialVenta.Text = "Historial de Ventas";
             // 
@@ -129,7 +131,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.LTituloCardTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(110)))), ((int)(((byte)(105)))));
             this.LTituloCardTotal.Location = new System.Drawing.Point(14, 10);
             this.LTituloCardTotal.Name = "LTituloCardTotal";
-            this.LTituloCardTotal.Size = new System.Drawing.Size(107, 12);
+            this.LTituloCardTotal.Size = new System.Drawing.Size(98, 12);
             this.LTituloCardTotal.TabIndex = 0;
             this.LTituloCardTotal.Text = "TOTAL FACTURADO";
             // 
@@ -161,7 +163,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.LTituloCardCantidad.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(110)))), ((int)(((byte)(105)))));
             this.LTituloCardCantidad.Location = new System.Drawing.Point(14, 10);
             this.LTituloCardCantidad.Name = "LTituloCardCantidad";
-            this.LTituloCardCantidad.Size = new System.Drawing.Size(130, 12);
+            this.LTituloCardCantidad.Size = new System.Drawing.Size(112, 12);
             this.LTituloCardCantidad.TabIndex = 0;
             this.LTituloCardCantidad.Text = "CANTIDAD DE VENTAS";
             // 
@@ -193,7 +195,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.LTituloCardPromedio.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(110)))), ((int)(((byte)(105)))));
             this.LTituloCardPromedio.Location = new System.Drawing.Point(14, 10);
             this.LTituloCardPromedio.Name = "LTituloCardPromedio";
-            this.LTituloCardPromedio.Size = new System.Drawing.Size(107, 12);
+            this.LTituloCardPromedio.Size = new System.Drawing.Size(94, 12);
             this.LTituloCardPromedio.TabIndex = 0;
             this.LTituloCardPromedio.Text = "TICKET PROMEDIO";
             // 
@@ -296,7 +298,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.LBuscar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
             this.LBuscar.Location = new System.Drawing.Point(14, 56);
             this.LBuscar.Name = "LBuscar";
-            this.LBuscar.Size = new System.Drawing.Size(56, 15);
+            this.LBuscar.Size = new System.Drawing.Size(65, 15);
             this.LBuscar.TabIndex = 6;
             this.LBuscar.Text = "Filtrar por:";
             // 
@@ -380,6 +382,19 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.panelGrid.Size = new System.Drawing.Size(950, 370);
             this.panelGrid.TabIndex = 3;
             // 
+            // LEstadoVacio
+            // 
+            this.LEstadoVacio.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LEstadoVacio.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LEstadoVacio.ForeColor = System.Drawing.Color.Gray;
+            this.LEstadoVacio.Location = new System.Drawing.Point(10, 10);
+            this.LEstadoVacio.Name = "LEstadoVacio";
+            this.LEstadoVacio.Size = new System.Drawing.Size(930, 350);
+            this.LEstadoVacio.TabIndex = 1;
+            this.LEstadoVacio.Text = "No se encontraron ventas para los criterios seleccionados.";
+            this.LEstadoVacio.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LEstadoVacio.Visible = false;
+            // 
             // DataGridHistorialVenta
             // 
             this.DataGridHistorialVenta.AllowUserToAddRows = false;
@@ -458,46 +473,45 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.total.Name = "total";
             this.total.ReadOnly = true;
             // 
-            // LEstadoVacio
-            // 
-            this.LEstadoVacio.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LEstadoVacio.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LEstadoVacio.ForeColor = System.Drawing.Color.Gray;
-            this.LEstadoVacio.Location = new System.Drawing.Point(10, 10);
-            this.LEstadoVacio.Name = "LEstadoVacio";
-            this.LEstadoVacio.Size = new System.Drawing.Size(930, 350);
-            this.LEstadoVacio.TabIndex = 1;
-            this.LEstadoVacio.Text = "No se encontraron ventas para los criterios seleccionados.";
-            this.LEstadoVacio.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.LEstadoVacio.Visible = false;
-            // 
-            // TBTotalFiltrado
-            // 
-            this.TBTotalFiltrado.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.TBTotalFiltrado.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.TBTotalFiltrado.Location = new System.Drawing.Point(837, 614);
-            this.TBTotalFiltrado.Name = "TBTotalFiltrado";
-            this.TBTotalFiltrado.ReadOnly = true;
-            this.TBTotalFiltrado.Size = new System.Drawing.Size(137, 25);
-            this.TBTotalFiltrado.TabIndex = 5;
-            this.TBTotalFiltrado.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // LTotal
             // 
             this.LTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.LTotal.AutoSize = true;
             this.LTotal.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.LTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.LTotal.Location = new System.Drawing.Point(704, 617);
+            this.LTotal.Location = new System.Drawing.Point(6, 13);
             this.LTotal.Name = "LTotal";
-            this.LTotal.Size = new System.Drawing.Size(123, 19);
+            this.LTotal.Size = new System.Drawing.Size(46, 19);
             this.LTotal.TabIndex = 4;
-            this.LTotal.Text = "TOTAL FILTRADO:";
+            this.LTotal.Text = "Total:";
+            this.LTotal.Click += new System.EventHandler(this.LTotal_Click);
             // 
             // errorProvider1
             // 
             this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider1.ContainerControl = this;
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.TBTotalFiltrado);
+            this.panel2.Controls.Add(this.LTotal);
+            this.panel2.Location = new System.Drawing.Point(770, 605);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(198, 38);
+            this.panel2.TabIndex = 6;
+            // 
+            // TBTotalFiltrado
+            // 
+            this.TBTotalFiltrado.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.TBTotalFiltrado.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.TBTotalFiltrado.Location = new System.Drawing.Point(58, 10);
+            this.TBTotalFiltrado.Name = "TBTotalFiltrado";
+            this.TBTotalFiltrado.ReadOnly = true;
+            this.TBTotalFiltrado.Size = new System.Drawing.Size(137, 25);
+            this.TBTotalFiltrado.TabIndex = 5;
+            this.TBTotalFiltrado.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.TBTotalFiltrado.TextChanged += new System.EventHandler(this.TBTotalFiltrado_TextChanged);
             // 
             // FHistorialVentas
             // 
@@ -505,8 +519,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(232)))));
             this.ClientSize = new System.Drawing.Size(1000, 650);
-            this.Controls.Add(this.LTotal);
-            this.Controls.Add(this.TBTotalFiltrado);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panelGrid);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelCards);
@@ -529,6 +542,8 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.panelGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridHistorialVenta)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -570,8 +585,9 @@ namespace ProyectoIntegrador.Formularios.Ventas
         private System.Windows.Forms.DataGridViewTextBoxColumn colCliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn colVendedor;
         private System.Windows.Forms.DataGridViewTextBoxColumn total;
-        private System.Windows.Forms.TextBox TBTotalFiltrado;
         private System.Windows.Forms.Label LTotal;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.TextBox TBTotalFiltrado;
     }
 }

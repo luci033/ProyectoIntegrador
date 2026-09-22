@@ -44,6 +44,18 @@ namespace ProyectoIntegrador.Formularios.Ventas
 
             ConfigurarEstilosColumnas();
 
+            // Bloquea el redimensionamiento de las columnas por parte del usuario
+            DataGridHistorialVenta.AllowUserToResizeColumns = false;
+
+            // Bloquea el redimensionamiento de las filas por parte del usuario
+            DataGridHistorialVenta.AllowUserToResizeRows = false;
+
+            // Bloquea que el usuario pueda arrastrar las columnas para cambiar su orden
+            DataGridHistorialVenta.AllowUserToOrderColumns = false;
+
+            // Oculta la columna de cabecera de las filas (el selector vacío que aparece a la izquierda)
+            DataGridHistorialVenta.RowHeadersVisible = false;   
+
             // Configuración de combos de búsqueda
             cmbBuscar.Items.Clear();
             cmbBuscar.Items.Add("Nro. Venta");
@@ -418,6 +430,16 @@ namespace ProyectoIntegrador.Formularios.Ventas
 
             cardPromedio.Location = new Point((anchoCard + margen) * 2, 0);
             cardPromedio.Size = new Size(anchoCard, panelCards.ClientSize.Height - 4);
+        }
+
+        private void LTotal_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TBTotalFiltrado_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

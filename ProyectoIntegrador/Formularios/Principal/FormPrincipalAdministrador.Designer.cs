@@ -33,35 +33,35 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.panelContenedorBotones = new System.Windows.Forms.Panel();
             this.BUsuarios = new System.Windows.Forms.Button();
             this.BProductos = new System.Windows.Forms.Button();
+            this.menuContextProductos = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.itemCatalogoProductos = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemGestionCategorias = new System.Windows.Forms.ToolStripMenuItem();
             this.BVentas = new System.Windows.Forms.Button();
+            this.menuContextVentas = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.itemOpcionesVenta = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemGestionVentas = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemHistorialVentas = new System.Windows.Forms.ToolStripMenuItem();
             this.BDevoluciones = new System.Windows.Forms.Button();
             this.BCompras = new System.Windows.Forms.Button();
             this.BProveedores = new System.Windows.Forms.Button();
             this.BClientes = new System.Windows.Forms.Button();
             this.BAjusteStock = new System.Windows.Forms.Button();
+            this.panelFooter = new System.Windows.Forms.Panel();
+            this.BCerrarSesion = new System.Windows.Forms.Button();
+            this.LFooter = new System.Windows.Forms.Label();
             this.panelHeader = new System.Windows.Forms.Panel();
             this.PBLogo = new System.Windows.Forms.PictureBox();
             this.LTituloAlba = new System.Windows.Forms.Label();
             this.LSubtituloAdmin = new System.Windows.Forms.Label();
             this.panelSeparador = new System.Windows.Forms.Panel();
             this.LSeccion = new System.Windows.Forms.Label();
-            this.panelFooter = new System.Windows.Forms.Panel();
-            this.BCerrarSesion = new System.Windows.Forms.Button();
-            this.LFooter = new System.Windows.Forms.Label();
-            this.menuContextProductos = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.itemCatalogoProductos = new System.Windows.Forms.ToolStripMenuItem();
-            this.itemGestionCategorias = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuContextVentas = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.itemOpcionesVenta = new System.Windows.Forms.ToolStripMenuItem();
-            this.itemGestionVentas = new System.Windows.Forms.ToolStripMenuItem();
-            this.itemHistorialVentas = new System.Windows.Forms.ToolStripMenuItem();
             this.panelSidebar.SuspendLayout();
             this.panelContenedorBotones.SuspendLayout();
-            this.panelHeader.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PBLogo)).BeginInit();
-            this.panelFooter.SuspendLayout();
             this.menuContextProductos.SuspendLayout();
             this.menuContextVentas.SuspendLayout();
+            this.panelFooter.SuspendLayout();
+            this.panelHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PBLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // panelSidebar
@@ -91,7 +91,7 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.panelContenedorBotones.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelContenedorBotones.Location = new System.Drawing.Point(0, 144);
             this.panelContenedorBotones.Name = "panelContenedorBotones";
-            this.panelContenedorBotones.Size = new System.Drawing.Size(250, 532);
+            this.panelContenedorBotones.Size = new System.Drawing.Size(250, 488);
             this.panelContenedorBotones.TabIndex = 2;
             // 
             // BUsuarios
@@ -127,6 +127,28 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.BProductos.UseVisualStyleBackColor = false;
             this.BProductos.Click += new System.EventHandler(this.BProductos_Click);
             // 
+            // menuContextProductos
+            // 
+            this.menuContextProductos.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.itemCatalogoProductos,
+            this.itemGestionCategorias});
+            this.menuContextProductos.Name = "menuContextProductos";
+            this.menuContextProductos.Size = new System.Drawing.Size(196, 48);
+            // 
+            // itemCatalogoProductos
+            // 
+            this.itemCatalogoProductos.Name = "itemCatalogoProductos";
+            this.itemCatalogoProductos.Size = new System.Drawing.Size(195, 22);
+            this.itemCatalogoProductos.Text = "Catálogo de Productos";
+            this.itemCatalogoProductos.Click += new System.EventHandler(this.itemCatalogoProductos_Click);
+            // 
+            // itemGestionCategorias
+            // 
+            this.itemGestionCategorias.Name = "itemGestionCategorias";
+            this.itemGestionCategorias.Size = new System.Drawing.Size(195, 22);
+            this.itemGestionCategorias.Text = "Gestión de Categorías";
+            this.itemGestionCategorias.Click += new System.EventHandler(this.itemGestionCategorias_Click);
+            // 
             // BVentas
             // 
             this.BVentas.BackColor = System.Drawing.Color.Transparent;
@@ -144,6 +166,36 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.BVentas.UseVisualStyleBackColor = false;
             this.BVentas.Click += new System.EventHandler(this.BVentas_Click);
             // 
+            // menuContextVentas
+            // 
+            this.menuContextVentas.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.itemOpcionesVenta,
+            this.itemGestionVentas,
+            this.itemHistorialVentas});
+            this.menuContextVentas.Name = "menuContextVentas";
+            this.menuContextVentas.Size = new System.Drawing.Size(207, 70);
+            // 
+            // itemOpcionesVenta
+            // 
+            this.itemOpcionesVenta.Name = "itemOpcionesVenta";
+            this.itemOpcionesVenta.Size = new System.Drawing.Size(206, 22);
+            this.itemOpcionesVenta.Text = "Menú Opciones de Venta";
+            this.itemOpcionesVenta.Click += new System.EventHandler(this.itemOpcionesVenta_Click);
+            // 
+            // itemGestionVentas
+            // 
+            this.itemGestionVentas.Name = "itemGestionVentas";
+            this.itemGestionVentas.Size = new System.Drawing.Size(206, 22);
+            this.itemGestionVentas.Text = "Gestión de Ventas";
+            this.itemGestionVentas.Click += new System.EventHandler(this.itemGestionVentas_Click);
+            // 
+            // itemHistorialVentas
+            // 
+            this.itemHistorialVentas.Name = "itemHistorialVentas";
+            this.itemHistorialVentas.Size = new System.Drawing.Size(206, 22);
+            this.itemHistorialVentas.Text = "Historial de Ventas";
+            this.itemHistorialVentas.Click += new System.EventHandler(this.itemHistorialVentas_Click);
+            // 
             // BDevoluciones
             // 
             this.BDevoluciones.BackColor = System.Drawing.Color.Transparent;
@@ -153,11 +205,12 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.BDevoluciones.FlatAppearance.BorderSize = 0;
             this.BDevoluciones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BDevoluciones.ForeColor = System.Drawing.Color.Transparent;
-            this.BDevoluciones.Location = new System.Drawing.Point(56, 394);
+            this.BDevoluciones.Location = new System.Drawing.Point(56, 901);
             this.BDevoluciones.Name = "BDevoluciones";
             this.BDevoluciones.Size = new System.Drawing.Size(120, 120);
             this.BDevoluciones.TabIndex = 3;
             this.BDevoluciones.UseVisualStyleBackColor = false;
+            this.BDevoluciones.Visible = false;
             this.BDevoluciones.Click += new System.EventHandler(this.BDevoluciones_Click);
             // 
             // BCompras
@@ -169,7 +222,7 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.BCompras.FlatAppearance.BorderSize = 0;
             this.BCompras.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BCompras.ForeColor = System.Drawing.Color.Transparent;
-            this.BCompras.Location = new System.Drawing.Point(56, 522);
+            this.BCompras.Location = new System.Drawing.Point(56, 393);
             this.BCompras.Name = "BCompras";
             this.BCompras.Size = new System.Drawing.Size(120, 120);
             this.BCompras.TabIndex = 4;
@@ -185,7 +238,7 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.BProveedores.FlatAppearance.BorderSize = 0;
             this.BProveedores.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BProveedores.ForeColor = System.Drawing.Color.Transparent;
-            this.BProveedores.Location = new System.Drawing.Point(56, 650);
+            this.BProveedores.Location = new System.Drawing.Point(56, 521);
             this.BProveedores.Name = "BProveedores";
             this.BProveedores.Size = new System.Drawing.Size(120, 120);
             this.BProveedores.TabIndex = 5;
@@ -201,7 +254,7 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.BClientes.FlatAppearance.BorderSize = 0;
             this.BClientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BClientes.ForeColor = System.Drawing.Color.Transparent;
-            this.BClientes.Location = new System.Drawing.Point(56, 778);
+            this.BClientes.Location = new System.Drawing.Point(56, 649);
             this.BClientes.Name = "BClientes";
             this.BClientes.Size = new System.Drawing.Size(120, 120);
             this.BClientes.TabIndex = 6;
@@ -217,12 +270,51 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.BAjusteStock.FlatAppearance.BorderSize = 0;
             this.BAjusteStock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BAjusteStock.ForeColor = System.Drawing.Color.Transparent;
-            this.BAjusteStock.Location = new System.Drawing.Point(56, 906);
+            this.BAjusteStock.Location = new System.Drawing.Point(56, 775);
             this.BAjusteStock.Name = "BAjusteStock";
             this.BAjusteStock.Size = new System.Drawing.Size(120, 120);
             this.BAjusteStock.TabIndex = 7;
             this.BAjusteStock.UseVisualStyleBackColor = false;
             this.BAjusteStock.Click += new System.EventHandler(this.BAjusteStock_Click);
+            // 
+            // panelFooter
+            // 
+            this.panelFooter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(6)))), ((int)(((byte)(9)))));
+            this.panelFooter.Controls.Add(this.BCerrarSesion);
+            this.panelFooter.Controls.Add(this.LFooter);
+            this.panelFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelFooter.Location = new System.Drawing.Point(0, 632);
+            this.panelFooter.Name = "panelFooter";
+            this.panelFooter.Size = new System.Drawing.Size(250, 88);
+            this.panelFooter.TabIndex = 1;
+            // 
+            // BCerrarSesion
+            // 
+            this.BCerrarSesion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(18)))), ((int)(((byte)(24)))));
+            this.BCerrarSesion.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BCerrarSesion.FlatAppearance.BorderSize = 0;
+            this.BCerrarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BCerrarSesion.Font = new System.Drawing.Font("Segoe UI", 9.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BCerrarSesion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(210)))), ((int)(((byte)(210)))));
+            this.BCerrarSesion.Location = new System.Drawing.Point(18, 10);
+            this.BCerrarSesion.Name = "BCerrarSesion";
+            this.BCerrarSesion.Size = new System.Drawing.Size(214, 38);
+            this.BCerrarSesion.TabIndex = 1;
+            this.BCerrarSesion.Text = "🚪  Cerrar Sesión";
+            this.BCerrarSesion.UseVisualStyleBackColor = false;
+            this.BCerrarSesion.Click += new System.EventHandler(this.BCerrarSesion_Click);
+            // 
+            // LFooter
+            // 
+            this.LFooter.BackColor = System.Drawing.Color.Transparent;
+            this.LFooter.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LFooter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(180)))), ((int)(((byte)(165)))));
+            this.LFooter.Location = new System.Drawing.Point(0, 52);
+            this.LFooter.Name = "LFooter";
+            this.LFooter.Size = new System.Drawing.Size(250, 30);
+            this.LFooter.TabIndex = 0;
+            this.LFooter.Text = "Sesión activa: Administrador | Control Total";
+            this.LFooter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panelHeader
             // 
@@ -293,98 +385,6 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.LSeccion.Text = "MÓDULOS DEL SISTEMA";
             this.LSeccion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // panelFooter
-            // 
-            this.panelFooter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(6)))), ((int)(((byte)(9)))));
-            this.panelFooter.Controls.Add(this.BCerrarSesion);
-            this.panelFooter.Controls.Add(this.LFooter);
-            this.panelFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelFooter.Location = new System.Drawing.Point(0, 632);
-            this.panelFooter.Name = "panelFooter";
-            this.panelFooter.Size = new System.Drawing.Size(250, 88);
-            this.panelFooter.TabIndex = 1;
-            // 
-            // BCerrarSesion
-            // 
-            this.BCerrarSesion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(18)))), ((int)(((byte)(24)))));
-            this.BCerrarSesion.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BCerrarSesion.FlatAppearance.BorderSize = 0;
-            this.BCerrarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BCerrarSesion.Font = new System.Drawing.Font("Segoe UI", 9.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BCerrarSesion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(210)))), ((int)(((byte)(210)))));
-            this.BCerrarSesion.Location = new System.Drawing.Point(18, 10);
-            this.BCerrarSesion.Name = "BCerrarSesion";
-            this.BCerrarSesion.Size = new System.Drawing.Size(214, 38);
-            this.BCerrarSesion.TabIndex = 1;
-            this.BCerrarSesion.Text = "🚪  Cerrar Sesión";
-            this.BCerrarSesion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.BCerrarSesion.UseVisualStyleBackColor = false;
-            this.BCerrarSesion.Click += new System.EventHandler(this.BCerrarSesion_Click);
-            // 
-            // LFooter
-            // 
-            this.LFooter.BackColor = System.Drawing.Color.Transparent;
-            this.LFooter.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LFooter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(180)))), ((int)(((byte)(165)))));
-            this.LFooter.Location = new System.Drawing.Point(0, 52);
-            this.LFooter.Name = "LFooter";
-            this.LFooter.Size = new System.Drawing.Size(250, 30);
-            this.LFooter.TabIndex = 0;
-            this.LFooter.Text = "Sesión activa: Administrador | Control Total";
-            this.LFooter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // menuContextProductos
-            // 
-            this.menuContextProductos.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.itemCatalogoProductos,
-            this.itemGestionCategorias});
-            this.menuContextProductos.Name = "menuContextProductos";
-            this.menuContextProductos.Size = new System.Drawing.Size(195, 48);
-            // 
-            // itemCatalogoProductos
-            // 
-            this.itemCatalogoProductos.Name = "itemCatalogoProductos";
-            this.itemCatalogoProductos.Size = new System.Drawing.Size(194, 22);
-            this.itemCatalogoProductos.Text = "Catálogo de Productos";
-            this.itemCatalogoProductos.Click += new System.EventHandler(this.itemCatalogoProductos_Click);
-            // 
-            // itemGestionCategorias
-            // 
-            this.itemGestionCategorias.Name = "itemGestionCategorias";
-            this.itemGestionCategorias.Size = new System.Drawing.Size(194, 22);
-            this.itemGestionCategorias.Text = "Gestión de Categorías";
-            this.itemGestionCategorias.Click += new System.EventHandler(this.itemGestionCategorias_Click);
-            // 
-            // menuContextVentas
-            // 
-            this.menuContextVentas.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.itemOpcionesVenta,
-            this.itemGestionVentas,
-            this.itemHistorialVentas});
-            this.menuContextVentas.Name = "menuContextVentas";
-            this.menuContextVentas.Size = new System.Drawing.Size(206, 70);
-            // 
-            // itemOpcionesVenta
-            // 
-            this.itemOpcionesVenta.Name = "itemOpcionesVenta";
-            this.itemOpcionesVenta.Size = new System.Drawing.Size(205, 22);
-            this.itemOpcionesVenta.Text = "Menú Opciones de Venta";
-            this.itemOpcionesVenta.Click += new System.EventHandler(this.itemOpcionesVenta_Click);
-            // 
-            // itemGestionVentas
-            // 
-            this.itemGestionVentas.Name = "itemGestionVentas";
-            this.itemGestionVentas.Size = new System.Drawing.Size(205, 22);
-            this.itemGestionVentas.Text = "Gestión de Ventas";
-            this.itemGestionVentas.Click += new System.EventHandler(this.itemGestionVentas_Click);
-            // 
-            // itemHistorialVentas
-            // 
-            this.itemHistorialVentas.Name = "itemHistorialVentas";
-            this.itemHistorialVentas.Size = new System.Drawing.Size(205, 22);
-            this.itemHistorialVentas.Text = "Historial de Ventas";
-            this.itemHistorialVentas.Click += new System.EventHandler(this.itemHistorialVentas_Click);
-            // 
             // FormPrincipalAdministrador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -401,11 +401,11 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.Load += new System.EventHandler(this.FormPrincipalAdministrador_Load);
             this.panelSidebar.ResumeLayout(false);
             this.panelContenedorBotones.ResumeLayout(false);
-            this.panelHeader.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.PBLogo)).EndInit();
-            this.panelFooter.ResumeLayout(false);
             this.menuContextProductos.ResumeLayout(false);
             this.menuContextVentas.ResumeLayout(false);
+            this.panelFooter.ResumeLayout(false);
+            this.panelHeader.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PBLogo)).EndInit();
             this.ResumeLayout(false);
 
         }

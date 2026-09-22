@@ -69,7 +69,7 @@ namespace ProyectoIntegrador.Formularios.Principal
             // PBLogo
             // 
             this.PBLogo.BackColor = System.Drawing.Color.Transparent;
-            this.PBLogo.Image = global::ProyectoIntegrador.Properties.Resources.diamante; // Asegúrate de tener este recurso o coméntalo si no existe
+            this.PBLogo.Image = global::ProyectoIntegrador.Properties.Resources.diamante;
             this.PBLogo.Location = new System.Drawing.Point(98, 16);
             this.PBLogo.Name = "PBLogo";
             this.PBLogo.Size = new System.Drawing.Size(44, 44);
@@ -162,11 +162,12 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.BDevoluciones.FlatAppearance.BorderSize = 0;
             this.BDevoluciones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BDevoluciones.ForeColor = System.Drawing.Color.Transparent;
-            this.BDevoluciones.Location = new System.Drawing.Point(62, 386);
+            this.BDevoluciones.Location = new System.Drawing.Point(62, 512);
             this.BDevoluciones.Name = "BDevoluciones";
             this.BDevoluciones.Size = new System.Drawing.Size(116, 116);
             this.BDevoluciones.TabIndex = 3;
             this.BDevoluciones.UseVisualStyleBackColor = false;
+            this.BDevoluciones.Visible = false;
             this.BDevoluciones.Click += new System.EventHandler(this.BDevoluciones_Click);
             // 
             // BClientes
@@ -178,7 +179,7 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.BClientes.FlatAppearance.BorderSize = 0;
             this.BClientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BClientes.ForeColor = System.Drawing.Color.Transparent;
-            this.BClientes.Location = new System.Drawing.Point(62, 512);
+            this.BClientes.Location = new System.Drawing.Point(62, 386);
             this.BClientes.Name = "BClientes";
             this.BClientes.Size = new System.Drawing.Size(116, 116);
             this.BClientes.TabIndex = 4;
@@ -209,7 +210,6 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.BCerrarSesion.Size = new System.Drawing.Size(210, 38);
             this.BCerrarSesion.TabIndex = 1;
             this.BCerrarSesion.Text = "🚪  Cerrar Sesión";
-            this.BCerrarSesion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.BCerrarSesion.UseVisualStyleBackColor = false;
             this.BCerrarSesion.Click += new System.EventHandler(this.BCerrarSesion_Click);
             // 
