@@ -33,7 +33,7 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.BDashboard = new System.Windows.Forms.Button();
             this.BInformes = new System.Windows.Forms.Button();
             this.BAjusteStock = new System.Windows.Forms.Button();
-            this.BVentas = new System.Windows.Forms.Button();
+            this.BHistorialVentas = new System.Windows.Forms.Button();
             this.BCerrarSesion = new System.Windows.Forms.Button();
             this.panelFooter = new System.Windows.Forms.Panel();
             this.LFooter = new System.Windows.Forms.Label();
@@ -69,7 +69,7 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.panelContenedorBotones.Controls.Add(this.BDashboard);
             this.panelContenedorBotones.Controls.Add(this.BInformes);
             this.panelContenedorBotones.Controls.Add(this.BAjusteStock);
-            this.panelContenedorBotones.Controls.Add(this.BVentas);
+            this.panelContenedorBotones.Controls.Add(this.BHistorialVentas);
             this.panelContenedorBotones.Controls.Add(this.BCerrarSesion);
             this.panelContenedorBotones.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelContenedorBotones.Location = new System.Drawing.Point(0, 144);
@@ -131,23 +131,23 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.BAjusteStock.UseVisualStyleBackColor = false;
             this.BAjusteStock.Click += new System.EventHandler(this.BAjusteStock_Click);
             // 
-            // BVentas
+            // BHistorialVentas
             // 
-            this.BVentas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.BVentas.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BVentas.FlatAppearance.BorderSize = 0;
-            this.BVentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BVentas.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BVentas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(215)))), ((int)(((byte)(210)))));
-            this.BVentas.Location = new System.Drawing.Point(18, 184);
-            this.BVentas.Name = "BVentas";
-            this.BVentas.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.BVentas.Size = new System.Drawing.Size(214, 46);
-            this.BVentas.TabIndex = 3;
-            this.BVentas.Text = "💳  Historial de Ventas";
-            this.BVentas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BVentas.UseVisualStyleBackColor = false;
-            this.BVentas.Click += new System.EventHandler(this.BVentas_Click);
+            this.BHistorialVentas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.BHistorialVentas.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BHistorialVentas.FlatAppearance.BorderSize = 0;
+            this.BHistorialVentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BHistorialVentas.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BHistorialVentas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(215)))), ((int)(((byte)(210)))));
+            this.BHistorialVentas.Location = new System.Drawing.Point(18, 184);
+            this.BHistorialVentas.Name = "BHistorialVentas";
+            this.BHistorialVentas.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.BHistorialVentas.Size = new System.Drawing.Size(214, 46);
+            this.BHistorialVentas.TabIndex = 3;
+            this.BHistorialVentas.Text = "💳  Historial de Ventas";
+            this.BHistorialVentas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BHistorialVentas.UseVisualStyleBackColor = false;
+            this.BHistorialVentas.Click += new System.EventHandler(this.BVentas_Click);
             // 
             // BCerrarSesion
             // 
@@ -294,7 +294,7 @@ namespace ProyectoIntegrador.Formularios.Principal
         private System.Windows.Forms.Button BDashboard;
         private System.Windows.Forms.Button BInformes;
         private System.Windows.Forms.Button BAjusteStock;
-        private System.Windows.Forms.Button BVentas;
+        private System.Windows.Forms.Button BHistorialVentas;
         private System.Windows.Forms.Button BCerrarSesion;
         private System.Windows.Forms.Panel panelFooter;
         private System.Windows.Forms.Label LFooter;

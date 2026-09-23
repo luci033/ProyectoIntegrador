@@ -358,7 +358,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
 
         private void BExportar_Click(object sender, EventArgs e)
         {
-            if (listaVentasActuales == null || listaVentasActuales.Count == 0)
+            /*if (listaVentasActuales == null || listaVentasActuales.Count == 0)
             {
                 MessageBox.Show(
                     "No hay ventas para exportar con los filtros actuales.",
@@ -406,7 +406,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
                         );
                     }
                 }
-            }
+            }*/
         }
 
         private void FHistorialVentas_Resize(object sender, EventArgs e)

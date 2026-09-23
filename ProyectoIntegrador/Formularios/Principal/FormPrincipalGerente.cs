@@ -26,7 +26,7 @@ namespace ProyectoIntegrador.Formularios.Principal
             EstiloUI.AplicarBordesRedondeados(BDashboard, 8);
             EstiloUI.AplicarBordesRedondeados(BInformes, 8);
             EstiloUI.AplicarBordesRedondeados(BAjusteStock, 8);
-            EstiloUI.AplicarBordesRedondeados(BVentas, 8);
+            EstiloUI.AplicarBordesRedondeados(BHistorialVentas, 8);
             EstiloUI.AplicarBordesRedondeados(BCerrarSesion, 8);
         }
 
@@ -53,7 +53,7 @@ namespace ProyectoIntegrador.Formularios.Principal
             Color colorBotonActivo = Color.FromArgb(85, 22, 32);
             Color colorTextoActivo = Color.White;
 
-            Button[] botones = { BDashboard, BInformes, BAjusteStock, BVentas };
+            Button[] botones = { BDashboard, BInformes, BAjusteStock, BHistorialVentas };
             foreach (Button b in botones)
             {
                 b.BackColor = colorBotonNormal;
@@ -144,7 +144,7 @@ namespace ProyectoIntegrador.Formularios.Principal
         private void BVentas_Click(object sender, EventArgs e)
         {
             // Verificamos si ya está abierto para traerlo al frente
-            Form formAbierto = this.MdiChildren.FirstOrDefault(x => x is FormRegistroVentas);
+            Form formAbierto = this.MdiChildren.FirstOrDefault(x => x is FHistorialVentas);
 
             if (formAbierto != null)
             {
@@ -154,7 +154,7 @@ namespace ProyectoIntegrador.Formularios.Principal
 
             CerrarFormulariosHijos();
 
-            FormRegistroVentas formVenta = new FormRegistroVentas(nombreUsuarioLogueado);
+            FHistorialVentas formVenta = new FHistorialVentas();
             formVenta.MdiParent = this;
             formVenta.WindowState = FormWindowState.Maximized;
             formVenta.Show();

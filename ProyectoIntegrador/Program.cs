@@ -23,10 +23,10 @@ namespace ProyectoIntegrador
             //Application.Run(new FormLogin());
 
 
-            //Application.Run(new FormPrincipalAdministrador());
-            //Application.Run(new FormPrincipalAdministrador());
-            //Application.Run(new FormPrincipalVendedor());
-            //Application.Run(new FormPrincipalLogistica());
+            //Application.Run(new FormPrincipalGerente("Leandrin"));
+            //Application.Run(new FormPrincipalAdministrador("Leandrin"));
+            //Application.Run(new FormPrincipalVendedor("Leandrin"));
+            //Application.Run(new FormPrincipalLogistica("Leandrin"));
 
             
             using (FormLogin login = new FormLogin())
@@ -54,6 +54,7 @@ namespace ProyectoIntegrador
                 }
             
             }
+            
             
         }
     }

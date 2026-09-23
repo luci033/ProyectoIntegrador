@@ -117,7 +117,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
 
         private void BExportar_Click(object sender, EventArgs e)
         {
-            if (DGInforme.Rows.Count == 0)
+            /*if (DGInforme.Rows.Count == 0)
             {
                 MessageBox.Show("No hay datos en el informe para exportar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -161,7 +161,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
                         MessageBox.Show("Error al exportar el archivo: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-            }
+            }*/
         }
     }
 }
