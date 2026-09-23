@@ -12,9 +12,11 @@ namespace ProyectoIntegrador.Formularios.Compras
 {
     public partial class FormCompras : Form
     {
-        public FormCompras()
+        private string nombreUsuarioLogueado;
+        public FormCompras(string nombreUsuario)
         {
             InitializeComponent();
+            nombreUsuarioLogueado = nombreUsuario;
         }
 
         private void LProveedores_Click(object sender, EventArgs e)
@@ -24,7 +26,7 @@ namespace ProyectoIntegrador.Formularios.Compras
 
         private void BAgregarOrden_Click(object sender, EventArgs e)
         {
-            using (FormOrdenCompra formNueva = new FormOrdenCompra())
+            using (FormOrdenCompra formNueva = new FormOrdenCompra(nombreUsuarioLogueado))
             {
                 if (formNueva.ShowDialog() == DialogResult.OK)
                 {

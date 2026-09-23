@@ -13,9 +13,15 @@ namespace ProyectoIntegrador.Formularios.Compras
 {
     public partial class FormOrdenCompra : Form
     {
-        public FormOrdenCompra()
+        private string usuarioLogueado;
+        public FormOrdenCompra(string nombreUsuario)
         {
             InitializeComponent();
+
+            usuarioLogueado = nombreUsuario;
+
+            TBUsuario.Text = usuarioLogueado;
+            TBUsuario.ReadOnly = true; // Opcional: para que no lo puedan modificar a mano
         }
 
         private void FormOrdenCompra_Load(object sender, EventArgs e)
@@ -145,7 +151,7 @@ namespace ProyectoIntegrador.Formularios.Compras
                 }
             }
 
-            TBTotal.Text = total.ToString("C2");
+            TBTotal.Text = total.ToString("N2");
         }
 
         private void BCancelar_Click(object sender, EventArgs e)
@@ -165,7 +171,7 @@ namespace ProyectoIntegrador.Formularios.Compras
         {
             // Validación de Total > 0
             decimal totalOrden = 0;
-            decimal.TryParse(TBTotal.Text.Replace("$", "").Trim(), out totalOrden);
+            decimal.TryParse(TBTotal.Text.Replace("$", "").Replace("€", "").Trim(), out totalOrden);
 
             if (totalOrden <= 0)
             {
@@ -289,6 +295,11 @@ namespace ProyectoIntegrador.Formularios.Compras
                     DGDetalleOrden.CancelEdit();
                 }
             }
+        }
+
+        private void DGDetalleOrden_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

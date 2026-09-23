@@ -42,7 +42,7 @@ namespace ProyectoIntegrador.Formularios.Compras
             this.LFecha = new System.Windows.Forms.Label();
             this.TBFecha = new System.Windows.Forms.TextBox();
             this.LUsuario = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.TBUsuario = new System.Windows.Forms.TextBox();
             this.LTelefono = new System.Windows.Forms.Label();
             this.TBContacto = new System.Windows.Forms.TextBox();
             this.LCorreo = new System.Windows.Forms.Label();
@@ -71,7 +71,6 @@ namespace ProyectoIntegrador.Formularios.Compras
             // panelCard
             // 
             this.panelCard.BackColor = System.Drawing.Color.White;
-            this.panelCard.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.panelCard.Controls.Add(this.LTitulo);
             this.panelCard.Controls.Add(this.LSubtitulo);
             this.panelCard.Controls.Add(this.panel1);
@@ -90,7 +89,7 @@ namespace ProyectoIntegrador.Formularios.Compras
             this.LTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
             this.LTitulo.Location = new System.Drawing.Point(30, 16);
             this.LTitulo.Name = "LTitulo";
-            this.LTitulo.Size = new System.Drawing.Size(370, 31);
+            this.LTitulo.Size = new System.Drawing.Size(354, 31);
             this.LTitulo.TabIndex = 0;
             this.LTitulo.Text = "Nueva Orden de Compra";
             this.LTitulo.Click += new System.EventHandler(this.label4_Click);
@@ -102,14 +101,14 @@ namespace ProyectoIntegrador.Formularios.Compras
             this.LSubtitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(110)))), ((int)(((byte)(110)))));
             this.LSubtitulo.Location = new System.Drawing.Point(32, 52);
             this.LSubtitulo.Name = "LSubtitulo";
-            this.LSubtitulo.Size = new System.Drawing.Size(517, 17);
+            this.LSubtitulo.Size = new System.Drawing.Size(546, 17);
             this.LSubtitulo.TabIndex = 1;
-            this.LSubtitulo.Text = "Seleccione el proveedor, agregue los productos del catálogo y genere la orden de compra.";
+            this.LSubtitulo.Text = "Seleccione el proveedor, agregue los productos del catálogo y genere la orden de " +
+    "compra.";
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(249)))), ((int)(((byte)(247)))));
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.panel1.Controls.Add(this.BSeleccionarProveedor);
             this.panel1.Controls.Add(this.LRazonSocial);
             this.panel1.Controls.Add(this.TBRazonSocial);
@@ -118,7 +117,7 @@ namespace ProyectoIntegrador.Formularios.Compras
             this.panel1.Controls.Add(this.LFecha);
             this.panel1.Controls.Add(this.TBFecha);
             this.panel1.Controls.Add(this.LUsuario);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.TBUsuario);
             this.panel1.Controls.Add(this.LTelefono);
             this.panel1.Controls.Add(this.TBContacto);
             this.panel1.Controls.Add(this.LCorreo);
@@ -212,14 +211,14 @@ namespace ProyectoIntegrador.Formularios.Compras
             this.LUsuario.TabIndex = 7;
             this.LUsuario.Text = "Usuario:";
             // 
-            // textBox1
+            // TBUsuario
             // 
-            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(805, 30);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(100, 25);
-            this.textBox1.TabIndex = 8;
+            this.TBUsuario.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TBUsuario.Location = new System.Drawing.Point(805, 30);
+            this.TBUsuario.Name = "TBUsuario";
+            this.TBUsuario.ReadOnly = true;
+            this.TBUsuario.Size = new System.Drawing.Size(100, 25);
+            this.TBUsuario.TabIndex = 8;
             // 
             // LTelefono
             // 
@@ -250,7 +249,7 @@ namespace ProyectoIntegrador.Formularios.Compras
             this.LCorreo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.LCorreo.Location = new System.Drawing.Point(495, 62);
             this.LCorreo.Name = "LCorreo";
-            this.LCorreo.Size = new System.Drawing.Size(111, 15);
+            this.LCorreo.Size = new System.Drawing.Size(113, 15);
             this.LCorreo.TabIndex = 11;
             this.LCorreo.Text = "Correo Electrónico:";
             // 
@@ -266,7 +265,6 @@ namespace ProyectoIntegrador.Formularios.Compras
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(249)))), ((int)(((byte)(247)))));
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.panel2.Controls.Add(this.BAgregarProducto);
             this.panel2.Controls.Add(this.DGDetalleOrden);
             this.panel2.Controls.Add(this.LTotal);
@@ -314,6 +312,7 @@ namespace ProyectoIntegrador.Formularios.Compras
             this.DGDetalleOrden.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGDetalleOrden.Size = new System.Drawing.Size(890, 270);
             this.DGDetalleOrden.TabIndex = 1;
+            this.DGDetalleOrden.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGDetalleOrden_CellContentClick);
             this.DGDetalleOrden.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.DGDetalleOrden_CellValidating);
             this.DGDetalleOrden.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGDetalleOrden_CellValueChanged);
             this.DGDetalleOrden.CurrentCellDirtyStateChanged += new System.EventHandler(this.DGDetalleOrden_CurrentCellDirtyStateChanged);
@@ -480,7 +479,7 @@ namespace ProyectoIntegrador.Formularios.Compras
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn CostoUnitario;
         private System.Windows.Forms.DataGridViewTextBoxColumn Subtotal;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox TBUsuario;
         private System.Windows.Forms.Label LUsuario;
     }
 }

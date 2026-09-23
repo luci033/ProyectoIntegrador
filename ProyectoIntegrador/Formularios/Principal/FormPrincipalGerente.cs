@@ -107,7 +107,23 @@ namespace ProyectoIntegrador.Formularios.Principal
 
         private void BAjusteStock_Click(object sender, EventArgs e)
         {
-            AbrirFormulario<FormAjusteStock>(BAjusteStock);
+            ResaltarBotonActivo(BAjusteStock);
+
+            // Verificamos si ya está abierto para traerlo al frente
+            Form formAbierto = this.MdiChildren.FirstOrDefault(x => x is FormAjusteStock);
+            if (formAbierto != null)
+            {
+                formAbierto.BringToFront();
+                return;
+            }
+
+            CerrarFormulariosHijos();
+
+            // Abrimos FormAjusteStock pasándole el usuario logueado
+            FormAjusteStock nuevoForm = new FormAjusteStock(nombreUsuarioLogueado);
+            nuevoForm.MdiParent = this;
+            nuevoForm.WindowState = FormWindowState.Maximized;
+            nuevoForm.Show();
         }
 
         private void BVentas_Click(object sender, EventArgs e)
@@ -134,6 +150,16 @@ namespace ProyectoIntegrador.Formularios.Principal
         private void FormPrincipalGerente_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void LSesionUsuario_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LFooter_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

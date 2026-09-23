@@ -169,11 +169,15 @@ namespace ProyectoIntegrador.Formularios.Usuarios
                 }
                 else if (usuarioLogueado.IdRol == 2)
                 {
-                    RolUsuario = "Vendedor";
+                    RolUsuario = "Gerente";
                 }
                 else if (usuarioLogueado.IdRol == 3)
                 {
-                    RolUsuario = "Logistica";
+                    RolUsuario = "Vendedor";
+                }
+                else if (usuarioLogueado.IdRol == 4) 
+                {
+                    RolUsuario = "Logistica"; 
                 }
 
                 // Guardamos el nombre que vino de la base de datos 

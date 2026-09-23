@@ -23,9 +23,18 @@ namespace ProyectoIntegrador.Formularios.Ventas
             public string Total { get; set; }
             public List<FDetalleVenta.ItemDetalle> Articulos { get; set; } = new List<FDetalleVenta.ItemDetalle>();
         }
-        public FormVentas()
+
+        private string usuarioLogueado;
+        public FormVentas(string nombreUsuario)
         {
             InitializeComponent();
+        
+            usuarioLogueado = nombreUsuario; ;
+        }
+
+        // Constructor vacío para que el método genérico no rompa
+        public FormVentas() : this("Operador Venta")
+        {
         }
 
         private void FormVentas_Load_1(object sender, EventArgs e)
@@ -42,7 +51,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
 
         private void BRegistrarVenta_Click(object sender, EventArgs e)
         {
-            using (FormRegistroVentas formRegistroVenta = new FormRegistroVentas())
+            using (FormRegistroVentas formRegistroVenta = new FormRegistroVentas(usuarioLogueado))
             {
                 if (formRegistroVenta.ShowDialog() == DialogResult.OK)
                 {

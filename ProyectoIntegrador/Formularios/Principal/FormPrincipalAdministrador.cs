@@ -110,7 +110,22 @@ namespace ProyectoIntegrador.Formularios.Principal
 
         private void BCompras_Click(object sender, EventArgs e)
         {
-            AbrirFormulario<FormCompras>();
+            // Verificamos si ya está abierto para traerlo al frente y no duplicarlo
+            Form formAbierto = this.MdiChildren.FirstOrDefault(x => x is FormCompras);
+
+            if (formAbierto != null)
+            {
+                formAbierto.BringToFront();
+                return;
+            }
+
+            CerrarFormulariosHijos();
+
+            // Abrimos FormCompras pasándole el nombre del usuario logueado
+            FormCompras nuevoForm = new FormCompras(nombreUsuarioLogueado);
+            nuevoForm.MdiParent = this;
+            nuevoForm.WindowState = FormWindowState.Maximized;
+            nuevoForm.Show();
         }
 
         private void BProveedores_Click(object sender, EventArgs e)
@@ -125,7 +140,22 @@ namespace ProyectoIntegrador.Formularios.Principal
 
         private void BAjusteStock_Click(object sender, EventArgs e)
         {
-            AbrirFormulario<FormAjusteStock>();
+            // Verificamos si ya está abierto para traerlo al frente
+            Form formAbierto = this.MdiChildren.FirstOrDefault(x => x is FormAjusteStock);
+
+            if (formAbierto != null)
+            {
+                formAbierto.BringToFront();
+                return;
+            }
+
+            CerrarFormulariosHijos();
+
+            // Aquí le pasas la variable nombreUsuarioLogueado entre los paréntesis
+            FormAjusteStock formAjuste = new FormAjusteStock(nombreUsuarioLogueado);
+            formAjuste.MdiParent = this;
+            formAjuste.WindowState = FormWindowState.Maximized;
+            formAjuste.Show();
         }
 
         private void itemCatalogoProductos_Click(object sender, EventArgs e)

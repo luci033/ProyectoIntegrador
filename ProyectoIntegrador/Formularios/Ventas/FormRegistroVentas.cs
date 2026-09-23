@@ -23,9 +23,22 @@ namespace ProyectoIntegrador.Formularios.Ventas
         public string MetodoPago { get; private set; }
         public string CondicionIVAVenta => TBCondicionIVA.Text;
 
-        public FormRegistroVentas()
+        private string usuarioLogueado;
+
+        public FormRegistroVentas(string nombreUsuario)
         {
             InitializeComponent();
+
+            usuarioLogueado = nombreUsuario;
+
+            // Asignamos el usuario a la caja de texto correspondiente
+            TBVendedor.Text = usuarioLogueado;
+            TBVendedor.ReadOnly = true;
+        }
+
+        // Constructor vacío para que el método genérico no rompa
+        public FormRegistroVentas() : this("Operador Venta")
+        {
         }
 
         private void FormRegistrarVenta_Load(object sender, EventArgs e)

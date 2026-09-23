@@ -1,3 +1,4 @@
+using CapaEntidades;
 using ProyectoIntegrador.Formularios.Productos;
 using ProyectoIntegrador.ModelosSimulados;
 using System;
@@ -14,10 +15,13 @@ namespace ProyectoIntegrador.Formularios.Inventario
 {
     public partial class FormAjusteStock : Form
     {
-        public FormAjusteStock()
+        private string usuarioLogueado;
+        public FormAjusteStock(string nombreUsuario)
         {
             InitializeComponent();
+            usuarioLogueado = nombreUsuario;
         }
+        
 
         private void LCodigoProducto_Click(object sender, EventArgs e)
         {
@@ -53,8 +57,10 @@ namespace ProyectoIntegrador.Formularios.Inventario
 
             EstiloUI.CentrarControl(panelCard, this);
 
-            // Operador activo por defecto
-            TBUsuarioActivo.Text = "Operador Logística";
+            TBUsuarioActivo.Text = usuarioLogueado;
+            TBUsuarioActivo.ReadOnly = true;
+
+
             TBNombreProducto.ReadOnly = true;
             TBStockActual.ReadOnly = true;
 

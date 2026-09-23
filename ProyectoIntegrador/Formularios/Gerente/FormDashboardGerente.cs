@@ -13,9 +13,17 @@ namespace ProyectoIntegrador.Formularios.Gerente
 {
     public partial class FormDashboardGerente : Form
     {
-        public FormDashboardGerente()
+        private string nombreUsuarioLogueado;
+        public FormDashboardGerente(string nombreUsuario)
         {
             InitializeComponent();
+
+            nombreUsuarioLogueado = nombreUsuario;
+        }
+
+        // Constructor vacío para que el método genérico no rompa
+        public FormDashboardGerente() : this("Gerente")
+        {
         }
 
         private void FormDashboardGerente_Load(object sender, EventArgs e)
@@ -251,7 +259,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
 
         private void BNuevaVenta_Click(object sender, EventArgs e)
         {
-            using (FormRegistroVentas formVenta = new FormRegistroVentas())
+            using (FormRegistroVentas formVenta = new FormRegistroVentas(nombreUsuarioLogueado))
             {
                 if (formVenta.ShowDialog() == DialogResult.OK)
                 {
@@ -262,7 +270,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
 
         private void BIngresoStock_Click(object sender, EventArgs e)
         {
-            using (FormAjusteStock formAjuste = new FormAjusteStock())
+            using (FormAjusteStock formAjuste = new FormAjusteStock(nombreUsuarioLogueado))
             {
                 formAjuste.ShowDialog();
                 CargarDatosDashboard();

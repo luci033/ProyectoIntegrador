@@ -24,7 +24,8 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.IsMdiContainer = true; // Permite que este formulario contenga a los otros
 
             nombreUsuarioLogueado = nombreUsuario;
-            LFooter.Text = $"Sesión activa: {nombreUsuarioLogueado} | Control Total"; 
+            LFooter.Text = $"Sesión activa: {nombreUsuarioLogueado}"; 
+
             EstiloUI.AplicarBordesRedondeados(BProductos, 14);
             EstiloUI.AplicarBordesRedondeados(BCompras, 14);
             EstiloUI.AplicarBordesRedondeados(BAjusteStock, 14);
@@ -77,7 +78,7 @@ namespace ProyectoIntegrador.Formularios.Principal
         private void BCompras_Click(object sender, EventArgs e)
         {
             CerrarFormulariosHijos();
-            FormCompras frmCompras = new FormCompras();
+            FormCompras frmCompras = new FormCompras(nombreUsuarioLogueado);
             frmCompras.MdiParent = this;
             frmCompras.WindowState = FormWindowState.Maximized;
             frmCompras.Show();
@@ -85,8 +86,18 @@ namespace ProyectoIntegrador.Formularios.Principal
 
         private void BAjusteStock_Click(object sender, EventArgs e)
         {
+            // Verificamos si ya está abierto para traerlo al frente
+            Form formAbierto = this.MdiChildren.FirstOrDefault(x => x is FormAjusteStock);
+
+            if (formAbierto != null)
+            {
+                formAbierto.BringToFront();
+                return;
+            }
+
             CerrarFormulariosHijos();
-            FormAjusteStock frmAjuste = new FormAjusteStock();
+            CerrarFormulariosHijos();
+            FormAjusteStock frmAjuste = new FormAjusteStock(nombreUsuarioLogueado);
             frmAjuste.MdiParent = this;
             frmAjuste.WindowState = FormWindowState.Maximized;
             frmAjuste.Show();

@@ -25,7 +25,7 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.IsMdiContainer = true;
 
             nombreUsuarioLogueado = nombreUsuario;
-            LFooter.Text = $"Sesión activa: {nombreUsuarioLogueado} | Control Total";
+            LFooter.Text = $"Sesión activa: {nombreUsuarioLogueado}";
 
             EstiloUI.AplicarBordesRedondeados(BProductos, 14);
             EstiloUI.AplicarBordesRedondeados(BVentas, 14);

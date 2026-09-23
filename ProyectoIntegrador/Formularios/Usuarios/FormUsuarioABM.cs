@@ -259,7 +259,7 @@ namespace ProyectoIntegrador
             // 8. Llamar directo a Capa de Negocio
             CN_Usuario negocioUsuario = new CN_Usuario();
             string mensaje;
-            bool resultado = negocioUsuario.Registrar(nuevoUsuario, out mensaje);
+            bool resultado = false; /*negocioUsuario.Registrar(nuevoUsuario, out mensaje);*/
 
             // Si el DNI está bloqueado, usamos el método EDITAR. Si no, REGISTRAR.
             if (TBDni.Enabled == false)

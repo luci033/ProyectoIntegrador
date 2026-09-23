@@ -317,6 +317,9 @@
     <EmbeddedResource Include="Formularios\Inventario\FormAjusteStock.resx">
       <DependentUpon>FormAjusteStock.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Principal\FormPrincipalGerente.resx">
+      <DependentUpon>FormPrincipalGerente.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Proveedores\FormBuscarProveedor.resx">
       <DependentUpon>FormBuscarProveedor.cs</DependentUpon>
     </EmbeddedResource>

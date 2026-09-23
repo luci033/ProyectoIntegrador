@@ -35,19 +35,19 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.BAjusteStock = new System.Windows.Forms.Button();
             this.BVentas = new System.Windows.Forms.Button();
             this.BCerrarSesion = new System.Windows.Forms.Button();
+            this.panelFooter = new System.Windows.Forms.Panel();
+            this.LFooter = new System.Windows.Forms.Label();
             this.panelHeader = new System.Windows.Forms.Panel();
             this.PBLogo = new System.Windows.Forms.PictureBox();
             this.LTituloAlba = new System.Windows.Forms.Label();
             this.LSubtituloGerente = new System.Windows.Forms.Label();
             this.panelSeparador = new System.Windows.Forms.Panel();
             this.LSeccion = new System.Windows.Forms.Label();
-            this.panelFooter = new System.Windows.Forms.Panel();
-            this.LFooter = new System.Windows.Forms.Label();
             this.panelSidebar.SuspendLayout();
             this.panelContenedorBotones.SuspendLayout();
+            this.panelFooter.SuspendLayout();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PBLogo)).BeginInit();
-            this.panelFooter.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelSidebar
@@ -87,11 +87,11 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.BDashboard.ForeColor = System.Drawing.Color.White;
             this.BDashboard.Location = new System.Drawing.Point(18, 16);
             this.BDashboard.Name = "BDashboard";
+            this.BDashboard.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.BDashboard.Size = new System.Drawing.Size(214, 46);
             this.BDashboard.TabIndex = 0;
             this.BDashboard.Text = "📊  Dashboard General";
             this.BDashboard.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BDashboard.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.BDashboard.UseVisualStyleBackColor = false;
             this.BDashboard.Click += new System.EventHandler(this.BDashboard_Click);
             // 
@@ -105,11 +105,11 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.BInformes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(215)))), ((int)(((byte)(210)))));
             this.BInformes.Location = new System.Drawing.Point(18, 72);
             this.BInformes.Name = "BInformes";
+            this.BInformes.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.BInformes.Size = new System.Drawing.Size(214, 46);
             this.BInformes.TabIndex = 1;
             this.BInformes.Text = "📈  Informes Estadísticos";
             this.BInformes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BInformes.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.BInformes.UseVisualStyleBackColor = false;
             this.BInformes.Click += new System.EventHandler(this.BInformes_Click);
             // 
@@ -123,11 +123,11 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.BAjusteStock.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(215)))), ((int)(((byte)(210)))));
             this.BAjusteStock.Location = new System.Drawing.Point(18, 128);
             this.BAjusteStock.Name = "BAjusteStock";
+            this.BAjusteStock.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.BAjusteStock.Size = new System.Drawing.Size(214, 46);
             this.BAjusteStock.TabIndex = 2;
             this.BAjusteStock.Text = "📦  Ajuste de Stock";
             this.BAjusteStock.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BAjusteStock.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.BAjusteStock.UseVisualStyleBackColor = false;
             this.BAjusteStock.Click += new System.EventHandler(this.BAjusteStock_Click);
             // 
@@ -141,11 +141,11 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.BVentas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(215)))), ((int)(((byte)(210)))));
             this.BVentas.Location = new System.Drawing.Point(18, 184);
             this.BVentas.Name = "BVentas";
+            this.BVentas.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.BVentas.Size = new System.Drawing.Size(214, 46);
             this.BVentas.TabIndex = 3;
             this.BVentas.Text = "💳  Historial de Ventas";
             this.BVentas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BVentas.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.BVentas.UseVisualStyleBackColor = false;
             this.BVentas.Click += new System.EventHandler(this.BVentas_Click);
             // 
@@ -162,9 +162,32 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.BCerrarSesion.Size = new System.Drawing.Size(214, 40);
             this.BCerrarSesion.TabIndex = 4;
             this.BCerrarSesion.Text = "🚪  Cerrar Sesión";
-            this.BCerrarSesion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.BCerrarSesion.UseVisualStyleBackColor = false;
             this.BCerrarSesion.Click += new System.EventHandler(this.BCerrarSesion_Click);
+            // 
+            // panelFooter
+            // 
+            this.panelFooter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(6)))), ((int)(((byte)(9)))));
+            this.panelFooter.Controls.Add(this.LFooter);
+            this.panelFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelFooter.Location = new System.Drawing.Point(0, 676);
+            this.panelFooter.Name = "panelFooter";
+            this.panelFooter.Size = new System.Drawing.Size(250, 44);
+            this.panelFooter.TabIndex = 1;
+            // 
+            // LFooter
+            // 
+            this.LFooter.BackColor = System.Drawing.Color.Transparent;
+            this.LFooter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LFooter.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LFooter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(180)))), ((int)(((byte)(165)))));
+            this.LFooter.Location = new System.Drawing.Point(0, 0);
+            this.LFooter.Name = "LFooter";
+            this.LFooter.Size = new System.Drawing.Size(250, 44);
+            this.LFooter.TabIndex = 0;
+            this.LFooter.Text = "Sesión activa: Gerente | Nivel Ejecutivo";
+            this.LFooter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LFooter.Click += new System.EventHandler(this.LFooter_Click);
             // 
             // panelHeader
             // 
@@ -235,29 +258,6 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.LSeccion.Text = "GESTIÓN Y ANÁLISIS";
             this.LSeccion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // panelFooter
-            // 
-            this.panelFooter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(6)))), ((int)(((byte)(9)))));
-            this.panelFooter.Controls.Add(this.LFooter);
-            this.panelFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelFooter.Location = new System.Drawing.Point(0, 676);
-            this.panelFooter.Name = "panelFooter";
-            this.panelFooter.Size = new System.Drawing.Size(250, 44);
-            this.panelFooter.TabIndex = 1;
-            // 
-            // LFooter
-            // 
-            this.LFooter.BackColor = System.Drawing.Color.Transparent;
-            this.LFooter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LFooter.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LFooter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(180)))), ((int)(((byte)(165)))));
-            this.LFooter.Location = new System.Drawing.Point(0, 0);
-            this.LFooter.Name = "LFooter";
-            this.LFooter.Size = new System.Drawing.Size(250, 44);
-            this.LFooter.TabIndex = 0;
-            this.LFooter.Text = "Sesión activa: Gerente | Nivel Ejecutivo";
-            this.LFooter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // FormPrincipalGerente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -274,9 +274,9 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.Load += new System.EventHandler(this.FormPrincipalGerente_Load);
             this.panelSidebar.ResumeLayout(false);
             this.panelContenedorBotones.ResumeLayout(false);
+            this.panelFooter.ResumeLayout(false);
             this.panelHeader.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PBLogo)).EndInit();
-            this.panelFooter.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
