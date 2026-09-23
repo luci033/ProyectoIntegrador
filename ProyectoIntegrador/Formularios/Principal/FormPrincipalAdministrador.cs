@@ -100,7 +100,21 @@ namespace ProyectoIntegrador.Formularios.Principal
 
         private void BVentas_Click(object sender, EventArgs e)
         {
-            AbrirFormulario<FormOpcionesVenta>();
+            Form formAbierto = this.MdiChildren.FirstOrDefault(x => x is FormOpcionesVenta);
+
+            if (formAbierto != null)
+            {
+                formAbierto.BringToFront();
+                return;
+            }
+
+            CerrarFormulariosHijos();
+
+            // Pasamos el nombre del usuario logueado al menú de opciones de venta
+            FormOpcionesVenta formOpciones = new FormOpcionesVenta(nombreUsuarioLogueado);
+            formOpciones.MdiParent = this;
+            formOpciones.WindowState = FormWindowState.Maximized;
+            formOpciones.Show();
         }
 
         private void BDevoluciones_Click(object sender, EventArgs e)
@@ -170,7 +184,21 @@ namespace ProyectoIntegrador.Formularios.Principal
 
         private void itemOpcionesVenta_Click(object sender, EventArgs e)
         {
-            AbrirFormulario<FormOpcionesVenta>();
+            Form formAbierto = this.MdiChildren.FirstOrDefault(x => x is FormVentas);
+
+            if (formAbierto != null)
+            {
+                formAbierto.BringToFront();
+                return;
+            }
+
+            CerrarFormulariosHijos();
+
+            // Le pasamos el usuario logueado al abrir la gestión de ventas
+            FormVentas formVentas = new FormVentas(nombreUsuarioLogueado);
+            formVentas.MdiParent = this;
+            formVentas.WindowState = FormWindowState.Maximized;
+            formVentas.Show();
         }
 
         private void itemGestionVentas_Click(object sender, EventArgs e)

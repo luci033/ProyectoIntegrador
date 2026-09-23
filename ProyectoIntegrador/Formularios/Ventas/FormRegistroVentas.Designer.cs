@@ -48,6 +48,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.panel1 = new System.Windows.Forms.Panel();
             this.LTitulo = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.BNuevoCliente = new System.Windows.Forms.Button();
             this.BBuscarCliente = new System.Windows.Forms.Button();
             this.TBCondicionIVA = new System.Windows.Forms.TextBox();
             this.TBCliente = new System.Windows.Forms.TextBox();
@@ -61,7 +62,6 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.TBNroVenta = new System.Windows.Forms.TextBox();
             this.LNroComprobante = new System.Windows.Forms.Label();
             this.BAgregarProducto = new System.Windows.Forms.Button();
-            this.BNuevoCliente = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider3)).BeginInit();
@@ -265,6 +265,23 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.panel3.Size = new System.Drawing.Size(895, 55);
             this.panel3.TabIndex = 2;
             // 
+            // BNuevoCliente
+            // 
+            this.BNuevoCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BNuevoCliente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.BNuevoCliente.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BNuevoCliente.FlatAppearance.BorderSize = 0;
+            this.BNuevoCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BNuevoCliente.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Bold);
+            this.BNuevoCliente.ForeColor = System.Drawing.Color.White;
+            this.BNuevoCliente.Location = new System.Drawing.Point(735, 11);
+            this.BNuevoCliente.Name = "BNuevoCliente";
+            this.BNuevoCliente.Size = new System.Drawing.Size(140, 32);
+            this.BNuevoCliente.TabIndex = 5;
+            this.BNuevoCliente.Text = "+ Nuevo Cliente";
+            this.BNuevoCliente.UseVisualStyleBackColor = false;
+            this.BNuevoCliente.Click += new System.EventHandler(this.BNuevoCliente_Click);
+            // 
             // BBuscarCliente
             // 
             this.BBuscarCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -352,6 +369,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.TBVendedor.ReadOnly = true;
             this.TBVendedor.Size = new System.Drawing.Size(160, 24);
             this.TBVendedor.TabIndex = 3;
+            this.TBVendedor.TextChanged += new System.EventHandler(this.TBVendedor_TextChanged);
             // 
             // TBFecha
             // 
@@ -414,23 +432,6 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.BAgregarProducto.Text = "+ Agregar Joya";
             this.BAgregarProducto.UseVisualStyleBackColor = false;
             this.BAgregarProducto.Click += new System.EventHandler(this.BAgregarProducto_Click_1);
-            // 
-            // BNuevoCliente
-            // 
-            this.BNuevoCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BNuevoCliente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.BNuevoCliente.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BNuevoCliente.FlatAppearance.BorderSize = 0;
-            this.BNuevoCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BNuevoCliente.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Bold);
-            this.BNuevoCliente.ForeColor = System.Drawing.Color.White;
-            this.BNuevoCliente.Location = new System.Drawing.Point(735, 11);
-            this.BNuevoCliente.Name = "BNuevoCliente";
-            this.BNuevoCliente.Size = new System.Drawing.Size(140, 32);
-            this.BNuevoCliente.TabIndex = 5;
-            this.BNuevoCliente.Text = "+ Nuevo Cliente";
-            this.BNuevoCliente.UseVisualStyleBackColor = false;
-            this.BNuevoCliente.Click += new System.EventHandler(this.BNuevoCliente_Click);
             // 
             // FormRegistroVentas
             // 

@@ -6,10 +6,18 @@ namespace ProyectoIntegrador.Formularios.Ventas
 {
     public partial class FormOpcionesVenta : Form
     {
-        public FormOpcionesVenta()
+        private string usuarioLogueado;
+        public FormOpcionesVenta(string nombreUsuario)
         {
             InitializeComponent();
+            usuarioLogueado = nombreUsuario;
         }
+
+        // Constructor vacío de respaldo por las dudas
+        public FormOpcionesVenta() : this("Operador Venta")
+        {
+        }
+
 
         private void FormOpcionesVenta_Load(object sender, EventArgs e)
         {
@@ -55,7 +63,22 @@ namespace ProyectoIntegrador.Formularios.Ventas
 
         private void BRegistrarVenta_Click(object sender, EventArgs e)
         {
-            AbrirFormularioDesdeOpciones<FormRegistroVentas>();
+            Form formPadre = this.MdiParent;
+
+            if (formPadre != null)
+            {
+                // Cerramos los formularios hijos actuales
+                foreach (Form hijo in formPadre.MdiChildren.ToList())
+                {
+                    hijo.Close();
+                }
+
+                // Abrimos el registro de ventas pasándole el usuario real
+                FormRegistroVentas nuevoForm = new FormRegistroVentas(usuarioLogueado);
+                nuevoForm.MdiParent = formPadre;
+                nuevoForm.WindowState = FormWindowState.Maximized;
+                nuevoForm.Show();
+            }
         }
 
         private void BHistorialVenta_Click(object sender, EventArgs e)

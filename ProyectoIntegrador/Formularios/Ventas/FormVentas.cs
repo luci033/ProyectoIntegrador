@@ -28,6 +28,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
         public FormVentas(string nombreUsuario)
         {
             InitializeComponent();
+
         
             usuarioLogueado = nombreUsuario; ;
         }
@@ -79,7 +80,6 @@ namespace ProyectoIntegrador.Formularios.Ventas
                             PrecioUnitario = Convert.ToDecimal(fila.Cells[4].Value)
                         });
 
-                        // NOTA: Acá deberías restar la cantidad de tu lista estática de productos.
                     }
 
                     // Guardamos en memoria y en la grilla

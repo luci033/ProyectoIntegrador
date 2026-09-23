@@ -36,6 +36,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             TBVendedor.ReadOnly = true;
         }
 
+        
         // Constructor vacío para que el método genérico no rompa
         public FormRegistroVentas() : this("Operador Venta")
         {
@@ -63,10 +64,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
 
             TBNroVenta.Text = (FormVentas.HistorialVentas.Count + 1).ToString("D5");
 
-            TBVendedor.Text = "Vendedor Prueba";
             TBFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
-
-
 
             // Configuración de edición
             dataGridProducto.ReadOnly = false;
@@ -218,7 +216,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             {
                 if (formBuscar.ShowDialog() == DialogResult.OK)
                 {
-                    // int idClienteBD = formBuscar.IdCliente; // Reservado para la BD
+                    // int idClienteBD = formBuscar.IdCliente; // RESERVADO para la BD
                     TBCliente.Text = formBuscar.NombreCompleto;
                     TBCondicionIVA.Text = formBuscar.CondicionIVA;
                 }
@@ -299,6 +297,11 @@ namespace ProyectoIntegrador.Formularios.Ventas
                     TBCondicionIVA.Text = modalCliente.ClienteCreado.CondicionIVA;
                 }
             }
+        }
+
+        private void TBVendedor_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

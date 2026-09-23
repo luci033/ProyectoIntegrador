@@ -2,7 +2,6 @@ using ProyectoIntegrador.Formularios.Clientes;
 using ProyectoIntegrador.Formularios.Devoluciones;
 using ProyectoIntegrador.Formularios.Productos;
 using ProyectoIntegrador.Formularios.Ventas;
-// Agregá los using de las otras carpetas si te los marca en rojo (ej: .Productos, .Clientes, .Inventario)
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -78,7 +77,25 @@ namespace ProyectoIntegrador.Formularios.Principal
 
         private void BVentas_Click(object sender, EventArgs e)
         {
-            AbrirFormulario<FormOpcionesVenta>();
+            // Verificamos si ya está abierto para traerlo al frente
+            Form formAbierto = this.MdiChildren.FirstOrDefault(x => x is FormOpcionesVenta);
+
+            if (formAbierto != null)
+            {
+                formAbierto.BringToFront();
+                return;
+            }
+
+            // Cerramos los demás hijos
+            foreach (Form hijo in this.MdiChildren)
+            {
+                hijo.Close();
+            }
+
+            FormOpcionesVenta formOpciones = new FormOpcionesVenta(nombreUsuarioLogueado);
+            formOpciones.MdiParent = this;
+            formOpciones.WindowState = FormWindowState.Maximized;
+            formOpciones.Show();
         }
 
         private void FormPrincipalVendedor_Load(object sender, EventArgs e)
