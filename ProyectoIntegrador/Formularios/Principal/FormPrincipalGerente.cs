@@ -10,13 +10,18 @@ namespace ProyectoIntegrador.Formularios.Principal
 {
     public partial class FormPrincipalGerente : Form
     {
+        private string nombreUsuarioLogueado;
         private Button botonSeleccionado = null;
 
-        public FormPrincipalGerente()
+        public FormPrincipalGerente(string nombreUsuario)
         {
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
             this.IsMdiContainer = true;
+
+
+            nombreUsuarioLogueado = nombreUsuario;
+            LFooter.Text = $"Sesión activa: {nombreUsuarioLogueado} | Control Total";
 
             EstiloUI.AplicarBordesRedondeados(BDashboard, 8);
             EstiloUI.AplicarBordesRedondeados(BInformes, 8);

@@ -15,11 +15,19 @@ namespace ProyectoIntegrador.Formularios.Principal
 {
     public partial class FormPrincipalAdministrador : Form
     {
-        public FormPrincipalAdministrador()
+
+        // Creamos una variable privada para guardar el nombre que viene del login
+        private string nombreUsuarioLogueado;
+
+        public FormPrincipalAdministrador(string nombreUsuario)
         {
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
             this.IsMdiContainer = true;
+
+            // Guardamos y mostramos el nombre en el footer
+            nombreUsuarioLogueado = nombreUsuario;
+            LFooter.Text = $"Sesión activa: {nombreUsuarioLogueado} | Control Total";
 
             EstiloUI.AplicarBordesRedondeados(BUsuarios, 14);
             EstiloUI.AplicarBordesRedondeados(BProductos, 14);
@@ -68,6 +76,12 @@ namespace ProyectoIntegrador.Formularios.Principal
                 {
                     mdi.BackColor = EstiloUI.ColorFondo;
                 }
+            }
+
+            // AQUI MOSTRAMOS EL NOMBRE REAL EN EL FOOTER
+            if (!string.IsNullOrEmpty(nombreUsuarioLogueado))
+            {
+                LFooter.Text = $"Sesión activa: {nombreUsuarioLogueado} | Control Total";
             }
 
             // Inicia mostrando el catálogo de productos por defecto

@@ -17,11 +17,15 @@ namespace ProyectoIntegrador.Formularios.Principal
 {
     public partial class FormPrincipalVendedor : Form
     {
-        public FormPrincipalVendedor()
+        private string nombreUsuarioLogueado;
+        public FormPrincipalVendedor(string nombreUsuario)
         {
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
             this.IsMdiContainer = true;
+
+            nombreUsuarioLogueado = nombreUsuario;
+            LFooter.Text = $"Sesión activa: {nombreUsuarioLogueado} | Control Total";
 
             EstiloUI.AplicarBordesRedondeados(BProductos, 14);
             EstiloUI.AplicarBordesRedondeados(BVentas, 14);

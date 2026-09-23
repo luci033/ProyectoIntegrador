@@ -48,6 +48,7 @@ namespace ProyectoIntegrador.Formularios.Principal
             // 
             // panel1
             // 
+            this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
             this.panel1.Controls.Add(this.PBLogo);
             this.panel1.Controls.Add(this.LTituloAlba);
@@ -173,9 +174,9 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.panelFooter.Controls.Add(this.BCerrarSesion);
             this.panelFooter.Controls.Add(this.LFooter);
             this.panelFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelFooter.Location = new System.Drawing.Point(0, 592);
+            this.panelFooter.Location = new System.Drawing.Point(0, 626);
             this.panelFooter.Name = "panelFooter";
-            this.panelFooter.Size = new System.Drawing.Size(240, 88);
+            this.panelFooter.Size = new System.Drawing.Size(225, 88);
             this.panelFooter.TabIndex = 5;
             // 
             // BCerrarSesion
@@ -191,7 +192,6 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.BCerrarSesion.Size = new System.Drawing.Size(210, 38);
             this.BCerrarSesion.TabIndex = 1;
             this.BCerrarSesion.Text = "🚪  Cerrar Sesión";
-            this.BCerrarSesion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.BCerrarSesion.UseVisualStyleBackColor = false;
             this.BCerrarSesion.Click += new System.EventHandler(this.BCerrarSesion_Click);
             // 

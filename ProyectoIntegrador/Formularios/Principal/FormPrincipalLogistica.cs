@@ -16,12 +16,15 @@ namespace ProyectoIntegrador.Formularios.Principal
 {
     public partial class FormPrincipalLogistica : Form
     {
-        public FormPrincipalLogistica()
+        private string nombreUsuarioLogueado;
+        public FormPrincipalLogistica(string nombreUsuario)
         {
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
             this.IsMdiContainer = true; // Permite que este formulario contenga a los otros
 
+            nombreUsuarioLogueado = nombreUsuario;
+            LFooter.Text = $"Sesión activa: {nombreUsuarioLogueado} | Control Total"; 
             EstiloUI.AplicarBordesRedondeados(BProductos, 14);
             EstiloUI.AplicarBordesRedondeados(BCompras, 14);
             EstiloUI.AplicarBordesRedondeados(BAjusteStock, 14);
@@ -114,5 +117,6 @@ namespace ProyectoIntegrador.Formularios.Principal
         {
 
         }
+
     }
 }

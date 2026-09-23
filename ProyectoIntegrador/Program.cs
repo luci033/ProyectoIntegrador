@@ -37,19 +37,19 @@ namespace ProyectoIntegrador
                     // determina que rol accedio y muestra su formulario
                     if (login.RolUsuario == "Vendedor")
                     {
-                        Application.Run(new FormPrincipalVendedor());
+                        Application.Run(new FormPrincipalVendedor(login.NombreUsuarioLogueado));
                     }
                     else if (login.RolUsuario == "Administrador")
                     {
-                        Application.Run(new FormPrincipalAdministrador());
+                        Application.Run(new FormPrincipalAdministrador(login.NombreUsuarioLogueado));
                     }
                     else if (login.RolUsuario == "Logistica")
                     {
-                        Application.Run(new FormPrincipalLogistica());
+                        Application.Run(new FormPrincipalLogistica(login.NombreUsuarioLogueado));
                     }
                     else if (login.RolUsuario == "Gerente")
                     {
-                        Application.Run(new FormPrincipalGerente());
+                        Application.Run(new FormPrincipalGerente(login.NombreUsuarioLogueado));
                     }
                 }
             

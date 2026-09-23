@@ -16,7 +16,8 @@ namespace ProyectoIntegrador.Formularios.Usuarios
     public partial class FormLogin : Form
     {
         //Es necesario?
-        public string RolUsuario { get; set; } = "Admin";
+        public string RolUsuario { get; set; } = "";
+        public string NombreUsuarioLogueado { get; set; } = ""; // se hace esto para capturar el usuario logueado y mostrarlo en el dashboard
 
         public FormLogin()
         {
@@ -142,7 +143,7 @@ namespace ProyectoIntegrador.Formularios.Usuarios
 
         private void BLogin_Click(object sender, EventArgs e)
         {
-            /*
+            
             string usuario = TBUsuario.Text.Trim();
             string clave = TBContrasena.Text.Trim();
             string mensajeError = string.Empty;
@@ -175,7 +176,10 @@ namespace ProyectoIntegrador.Formularios.Usuarios
                     RolUsuario = "Logistica";
                 }
 
-                // se cierra el login y damos el ok apra abrir el sistema
+                // Guardamos el nombre que vino de la base de datos 
+                // (Fijate si en tu entidad se llama .Nombre o .NombreUsuario)
+                NombreUsuarioLogueado = usuarioLogueado.NombreUsuario;
+
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -188,9 +192,9 @@ namespace ProyectoIntegrador.Formularios.Usuarios
                 TBContrasena.Clear();
                 TBContrasena.Focus();
             }
-            */
+            
 
-
+            /*
             string usuario = TBUsuario.Text.Trim();
             string clave = TBContrasena.Text.Trim();
 
@@ -237,6 +241,7 @@ namespace ProyectoIntegrador.Formularios.Usuarios
                 TBContrasena.Clear();
                 TBContrasena.Focus();
             }
+            */
         }
     }
 }
