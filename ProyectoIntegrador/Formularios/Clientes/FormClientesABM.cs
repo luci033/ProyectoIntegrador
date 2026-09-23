@@ -75,36 +75,36 @@ namespace ProyectoIntegrador.Formularios.Clientes
             {
                 try { new MailAddress(TBCorreo.Text); }
                 catch { errorProvider1.SetError(TBCorreo, "Inválido"); esValido = false; }
-
-                if (cmbCondicionIVA.SelectedIndex == -1)
-                { errorProvider1.SetError(cmbCondicionIVA, "Seleccione IVA"); esValido = false; }
-
-                if (!esValido)
-                {
-                    MessageBox.Show("Revise los campos en rojo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                // Validación de DNI duplicado
-                if (DnisExistentes.Contains(TBDni.Text) && TBDni.Text != dniOriginal)
-                {
-                    MessageBox.Show("Ese DNI ya se encuentra registrado en el sistema.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                ClienteCreado = new ClienteSimulado
-                {
-                    Nombre = TBNombre.Text,
-                    Apellido = TBApellido.Text,
-                    DNI = TBDni.Text,
-                    Telefono = TBTelefono.Text,
-                    Correo = TBCorreo.Text,
-                    CondicionIVA = cmbCondicionIVA.Text
-                };
-
-                this.DialogResult = DialogResult.OK;
-                this.Close();
             }
+
+            if (cmbCondicionIVA.SelectedIndex == -1)
+            { errorProvider1.SetError(cmbCondicionIVA, "Seleccione IVA"); esValido = false; }
+
+            if (!esValido)
+            {
+                MessageBox.Show("Revise los campos en rojo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Validación de DNI duplicado
+            if (DnisExistentes != null && DnisExistentes.Contains(TBDni.Text) && TBDni.Text != dniOriginal)
+            {
+                MessageBox.Show("Ese DNI ya se encuentra registrado en el sistema.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            ClienteCreado = new ClienteSimulado
+            {
+                Nombre = TBNombre.Text.Trim(),
+                Apellido = TBApellido.Text.Trim(),
+                DNI = TBDni.Text.Trim(),
+                Telefono = TBTelefono.Text.Trim(),
+                Correo = TBCorreo.Text.Trim(),
+                CondicionIVA = cmbCondicionIVA.Text
+            };
+
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         private void BCancelar_Click(object sender, EventArgs e)

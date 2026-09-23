@@ -13,7 +13,25 @@ namespace ProyectoIntegrador.Formularios.Clientes
 {
     public partial class FormClientes : Form
     {
-        private List<ClienteSimulado> listaTemporalClientes = new List<ClienteSimulado>();
+        public static List<ClienteSimulado> ListaClientes = new List<ClienteSimulado>();
+
+        static FormClientes()
+        {
+            InicializarClientesSiEsNecesario();
+        }
+
+        public static void InicializarClientesSiEsNecesario()
+        {
+            if (ListaClientes.Count == 0)
+            {
+                ListaClientes.Add(new ClienteSimulado { Nombre = "Juan", Apellido = "Pérez", DNI = "11222333", Telefono = "3794111111", Correo = "juan@mail.com", CondicionIVA = "Consumidor Final" });
+                ListaClientes.Add(new ClienteSimulado { Nombre = "María", Apellido = "Gómez", DNI = "22333444", Telefono = "3794222222", Correo = "maria@mail.com", CondicionIVA = "Monotributo" });
+                ListaClientes.Add(new ClienteSimulado { Nombre = "Carlos", Apellido = "López", DNI = "33444555", Telefono = "3794333333", Correo = "carlos@mail.com", CondicionIVA = "Responsable Inscripto" });
+                ListaClientes.Add(new ClienteSimulado { Nombre = "Ana", Apellido = "Díaz", DNI = "44555666", Telefono = "3794444444", Correo = "ana@mail.com", CondicionIVA = "Consumidor Final" });
+                ListaClientes.Add(new ClienteSimulado { Nombre = "Luis", Apellido = "Martínez", DNI = "55666777", Telefono = "3794555555", Correo = "luis@mail.com", CondicionIVA = "Exento" });
+                ListaClientes.Add(new ClienteSimulado { Nombre = "Laura", Apellido = "Romero", DNI = "66777888", Telefono = "3794666666", Correo = "laura@mail.com", CondicionIVA = "Monotributo" });
+            }
+        }
 
         public FormClientes()
         {
@@ -31,13 +49,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
             EstiloUI.AplicarEstiloGrilla(DGClientes);
             EstiloUI.AplicarEstiloTextBox(TBBuscar);
 
-            // 1. Hardcodeo de 6 clientes
-            listaTemporalClientes.Add(new ClienteSimulado { Nombre = "Juan", Apellido = "Pérez", DNI = "11222333", Telefono = "3794111111", Correo = "juan@mail.com", CondicionIVA = "Consumidor Final" });
-            listaTemporalClientes.Add(new ClienteSimulado { Nombre = "María", Apellido = "Gómez", DNI = "22333444", Telefono = "3794222222", Correo = "maria@mail.com", CondicionIVA = "Monotributo" });
-            listaTemporalClientes.Add(new ClienteSimulado { Nombre = "Carlos", Apellido = "López", DNI = "33444555", Telefono = "3794333333", Correo = "carlos@mail.com", CondicionIVA = "Responsable Inscripto" });
-            listaTemporalClientes.Add(new ClienteSimulado { Nombre = "Ana", Apellido = "Díaz", DNI = "44555666", Telefono = "3794444444", Correo = "ana@mail.com", CondicionIVA = "Consumidor Final" });
-            listaTemporalClientes.Add(new ClienteSimulado { Nombre = "Luis", Apellido = "Martínez", DNI = "55666777", Telefono = "3794555555", Correo = "luis@mail.com", CondicionIVA = "Exento" });
-            listaTemporalClientes.Add(new ClienteSimulado { Nombre = "Laura", Apellido = "Romero", DNI = "66777888", Telefono = "3794666666", Correo = "laura@mail.com", CondicionIVA = "Monotributo" });
+            InicializarClientesSiEsNecesario();
 
             CargarGrillaClientes();
 
@@ -51,7 +63,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
             DGClientes.Rows.Clear(); // Limpiamos para no duplicar datos
             int numeroFila = 1;
 
-            foreach (var cliente in listaTemporalClientes)
+            foreach (var cliente in ListaClientes)
             {
                 DGClientes.Rows.Add(
                     "",                   // [0] ID Oculto 
@@ -101,12 +113,12 @@ namespace ProyectoIntegrador.Formularios.Clientes
         {
             FormClientesABM modalCliente = new FormClientesABM();
 
-            // AGREGAR ESTA LÍNEA: Le pasamos la lista de DNIs registrados al formulario nuevo
-            modalCliente.DnisExistentes = listaTemporalClientes.Select(c => c.DNI).ToList();
+            // Pasamos la lista de DNIs registrados al formulario nuevo
+            modalCliente.DnisExistentes = ListaClientes.Select(c => c.DNI).ToList();
 
             if (modalCliente.ShowDialog() == DialogResult.OK)
             {
-                listaTemporalClientes.Add(modalCliente.ClienteCreado);
+                ListaClientes.Add(modalCliente.ClienteCreado);
                 CargarGrillaClientes();
             }
         }
@@ -135,12 +147,12 @@ namespace ProyectoIntegrador.Formularios.Clientes
 
                 FormClientesABM modalABM = new FormClientesABM();
 
-                // Le enviamos la lista de DNIs actuales extraídos de la lista temporal
-                modalABM.DnisExistentes = listaTemporalClientes.Select(c => c.DNI).ToList();
+                // Le enviamos la lista de DNIs actuales extraídos de la lista estática
+                modalABM.DnisExistentes = ListaClientes.Select(c => c.DNI).ToList();
 
                 modalABM.ConfigurarModoEdicion(nombre, apellido, dni, telefono, correo, condicionIVA);
 
-                    if (modalABM.ShowDialog() == DialogResult.OK)
+                if (modalABM.ShowDialog() == DialogResult.OK)
                 {
                     // Actualizamos la fila directamente
                     DGClientes.Rows[e.RowIndex].Cells[2].Value = modalABM.ClienteCreado.Nombre;
@@ -148,6 +160,18 @@ namespace ProyectoIntegrador.Formularios.Clientes
                     DGClientes.Rows[e.RowIndex].Cells[5].Value = modalABM.ClienteCreado.Telefono;
                     DGClientes.Rows[e.RowIndex].Cells[6].Value = modalABM.ClienteCreado.Correo;
                     DGClientes.Rows[e.RowIndex].Cells[7].Value = modalABM.ClienteCreado.CondicionIVA;
+
+                    // Actualizamos en la lista estática
+                    var clienteExistente = ListaClientes.FirstOrDefault(c => c.DNI == dni);
+                    if (clienteExistente != null)
+                    {
+                        clienteExistente.Nombre = modalABM.ClienteCreado.Nombre;
+                        clienteExistente.Apellido = modalABM.ClienteCreado.Apellido;
+                        clienteExistente.DNI = modalABM.ClienteCreado.DNI;
+                        clienteExistente.Telefono = modalABM.ClienteCreado.Telefono;
+                        clienteExistente.Correo = modalABM.ClienteCreado.Correo;
+                        clienteExistente.CondicionIVA = modalABM.ClienteCreado.CondicionIVA;
+                    }
 
                     MessageBox.Show("Cliente modificado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }

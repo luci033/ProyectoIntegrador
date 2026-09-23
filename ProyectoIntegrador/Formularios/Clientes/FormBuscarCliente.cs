@@ -30,13 +30,8 @@ namespace ProyectoIntegrador.Formularios.Clientes
             EstiloUI.AplicarEstiloTextBox(TBBuscar);
             EstiloUI.AplicarEstiloBotonSecundario(BCancelar);
 
-            // 1. Hardcodeo de 6 clientes
-            listaTemporalClientes.Add(new ClienteSimulado { Nombre = "Juan", Apellido = "Pérez", DNI = "11222333", Telefono = "3794111111", Correo = "juan@mail.com", CondicionIVA = "Consumidor Final" });
-            listaTemporalClientes.Add(new ClienteSimulado { Nombre = "María", Apellido = "Gómez", DNI = "22333444", Telefono = "3794222222", Correo = "maria@mail.com", CondicionIVA = "Monotributo" });
-            listaTemporalClientes.Add(new ClienteSimulado { Nombre = "Carlos", Apellido = "López", DNI = "33444555", Telefono = "3794333333", Correo = "carlos@mail.com", CondicionIVA = "Responsable Inscripto" });
-            listaTemporalClientes.Add(new ClienteSimulado { Nombre = "Ana", Apellido = "Díaz", DNI = "44555666", Telefono = "3794444444", Correo = "ana@mail.com", CondicionIVA = "Consumidor Final" });
-            listaTemporalClientes.Add(new ClienteSimulado { Nombre = "Luis", Apellido = "Martínez", DNI = "55666777", Telefono = "3794555555", Correo = "luis@mail.com", CondicionIVA = "Exento" });
-            listaTemporalClientes.Add(new ClienteSimulado { Nombre = "Laura", Apellido = "Romero", DNI = "66777888", Telefono = "3794666666", Correo = "laura@mail.com", CondicionIVA = "Monotributo" });
+            FormClientes.InicializarClientesSiEsNecesario();
+            listaTemporalClientes = FormClientes.ListaClientes;
 
             CargarGrillaClientes();
 

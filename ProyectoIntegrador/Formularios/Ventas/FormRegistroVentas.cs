@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static ProyectoIntegrador.Formularios.Clientes.FormClientesABM;
 
 namespace ProyectoIntegrador.Formularios.Ventas
 {
@@ -36,6 +37,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             EstiloUI.AplicarEstiloPanelSeccion(panel1, 12);
             EstiloUI.AplicarEstiloBoton(BAgregarProducto);
             EstiloUI.AplicarEstiloBoton(BBuscarCliente);
+            EstiloUI.AplicarEstiloBoton(BNuevoCliente);
             EstiloUI.AplicarEstiloBoton(BCobrar);
             EstiloUI.AplicarEstiloBotonSecundario(BCancelar);
             EstiloUI.AplicarEstiloTextBox(TBNroVenta);
@@ -255,8 +257,38 @@ namespace ProyectoIntegrador.Formularios.Ventas
                 }
             }
         }
+
+        private void BNuevoCliente_Click(object sender, EventArgs e)
+        {
+            FormClientes.InicializarClientesSiEsNecesario();
+
+            using (FormClientesABM modalCliente = new FormClientesABM())
+            {
+                // Pasamos la lista de DNIs ya registrados en el sistema
+                modalCliente.DnisExistentes = FormClientes.ListaClientes.Select(c => c.DNI).ToList();
+
+                if (modalCliente.ShowDialog() == DialogResult.OK && modalCliente.ClienteCreado != null)
+                {
+                    // Validación preventiva de unicidad de DNI
+                    string dniNuevo = modalCliente.ClienteCreado.DNI?.Trim();
+                    if (!string.IsNullOrEmpty(dniNuevo) && FormClientes.ListaClientes.Any(c => c.DNI != null && c.DNI.Trim() == dniNuevo))
+                    {
+                        MessageBox.Show("Ese DNI ya se encuentra registrado en el sistema.", "DNI Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    // Se agrega a los datos estáticos compartidos de clientes
+                    FormClientes.ListaClientes.Add(modalCliente.ClienteCreado);
+
+                    // Se cargan automáticamente los datos en los TextBox correspondientes
+                    string nombreCompleto = $"{modalCliente.ClienteCreado.Nombre} {modalCliente.ClienteCreado.Apellido}".Trim();
+                    TBCliente.Text = nombreCompleto;
+                    TBCondicionIVA.Text = modalCliente.ClienteCreado.CondicionIVA;
+                }
+            }
+        }
     }
- }
+}
 
     
     
