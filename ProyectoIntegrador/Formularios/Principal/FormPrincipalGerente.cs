@@ -97,7 +97,22 @@ namespace ProyectoIntegrador.Formularios.Principal
 
         private void BDashboard_Click(object sender, EventArgs e)
         {
-            AbrirFormulario<FormDashboardGerente>(BDashboard);
+            ResaltarBotonActivo(BDashboard);
+
+            // Verificamos si ya está abierto para traerlo al frente
+            Form formAbierto = this.MdiChildren.FirstOrDefault(x => x is FormDashboardGerente);
+            if (formAbierto != null)
+            {
+                formAbierto.BringToFront();
+                return;
+            }
+
+            CerrarFormulariosHijos();
+
+            FormDashboardGerente nuevoForm = new FormDashboardGerente(nombreUsuarioLogueado);
+            nuevoForm.MdiParent = this;
+            nuevoForm.WindowState = FormWindowState.Maximized;
+            nuevoForm.Show();
         }
 
         private void BInformes_Click(object sender, EventArgs e)
@@ -128,7 +143,21 @@ namespace ProyectoIntegrador.Formularios.Principal
 
         private void BVentas_Click(object sender, EventArgs e)
         {
-            AbrirFormulario<FHistorialVentas>(BVentas);
+            // Verificamos si ya está abierto para traerlo al frente
+            Form formAbierto = this.MdiChildren.FirstOrDefault(x => x is FormRegistroVentas);
+
+            if (formAbierto != null)
+            {
+                formAbierto.BringToFront();
+                return;
+            }
+
+            CerrarFormulariosHijos();
+
+            FormRegistroVentas formVenta = new FormRegistroVentas(nombreUsuarioLogueado);
+            formVenta.MdiParent = this;
+            formVenta.WindowState = FormWindowState.Maximized;
+            formVenta.Show();
         }
 
         private void BCerrarSesion_Click(object sender, EventArgs e)
