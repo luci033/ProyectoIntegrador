@@ -52,3 +52,72 @@ VALUES
 ('vendedor', 'Usuario', 'Vendedor', '1234', '33333333', 3),
 ('logistica', 'Usuario', 'Logística', '1234', '44444444', 4);
 GO
+
+-- creamos la tabla genero
+CREATE TABLE Genero (
+    IdGenero INT IDENTITY(1,1), -- identity aumenta de 1 en 1
+    NombreGenero VARCHAR(50) NOT NULL,
+    -- restriccion de clave primaria para 
+    CONSTRAINT PK_IdGenero PRIMARY KEY (IdGenero)
+);
+GO
+
+INSERT INTO Genero (NombreGenero) VALUES 
+('Femenino'),
+('Masculino'),
+('Unisex');
+GO
+
+
+CREATE TABLE CondicionIVA (
+IdCondicionIVA INT IDENTITY (1,1),
+CondicionIVA VARCHAR(50) NOT NULL, 
+CONSTRAINT PK_IdCondicionIVA PRIMARY KEY (IdCondicionIVA)
+);
+GO
+
+INSERT INTO CondicionIVA (CondicionIVA) VALUES
+('Consumidor Final'),
+('IVA Exento'),
+('Monotributista'),
+('Responsable Inscripto');
+GO
+
+CREATE TABLE MedioPago (
+IdMedioPago INT IDENTITY (1,1),
+NombreMedioPago VARCHAR(50) NOT NULL, 
+CONSTRAINT PK_IdMedioPago PRIMARY KEY (IdMedioPago)
+);
+
+INSERT INTO MedioPago (NombreMedioPago) VALUES
+('Contado'),
+('Tarjeta'),
+('Otro');
+GO
+
+CREATE TABLE Proveedor (
+IdProveedor INT IDENTITY (1,1),
+RazonSocial VARCHAR (125) NOT NULL,
+CUIT VARCHAR(11) NOT NULL,
+Telefono VARCHAR(25) NOT NULL,
+CorreoElectronico VARCHAR(255), 
+CONSTRAINT PK_IdProveedor PRIMARY KEY (IdProveedor),
+CONSTRAINT UQ_CUIT UNIQUE (CUIT),
+CONSTRAINT CK_Telefono CHECK (Telefono NOT LIKE '%[^0-9]%')
+);
+GO
+
+CREATE TABLE EstadoCompra (
+IdEstadoCompra INT IDENTITY (1,1), 
+NombreEstadoCompra VARCHAR(50) NOT NULL,
+CONSTRAINT PK_IdEstadoCompra PRIMARY KEY (IdEstadoCompra)
+);
+GO
+
+
+
+
+
+
+
+
