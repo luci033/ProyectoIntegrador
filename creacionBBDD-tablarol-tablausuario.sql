@@ -23,6 +23,9 @@ CREATE TABLE Usuarios (
     Contrasena VARCHAR(100) NOT NULL,
     Foto_Perfil VARCHAR(255),
     DNI VARCHAR(10) NOT NULL, 
+    Telefono VARCHAR(30) NOT NULL,
+    Domicilio VARCHAR (255) NOT NULL,
+
     IdRol INT NOT NULL,
     Activo BIT DEFAULT 1, -- un booleano (1 = Activo, 0 = Desactivado)
     
@@ -114,10 +117,131 @@ CONSTRAINT PK_IdEstadoCompra PRIMARY KEY (IdEstadoCompra)
 );
 GO
 
+CREATE TABLE Categoria (
+IdCategoria INT IDENTITY (1,1),
+NombreCatalogo VARCHAR(50) NOT NULL,
+CONSTRAINT PK_IdCategoria PRIMARY KEY (IdCategoria)
+);
+GO
 
+CREATE TABLE TipoComprobante (
+IdTipoComprobante INT IDENTITY (1,1),
+TipoComprobante VARCHAR(50) NOT NULL,
+CONSTRAINT PK_IdTipoComprobante PRIMARY KEY (IdTipoComprobante),
+CONSTRAINT UQ_TipoComprobante UNIQUE (TipoComprobante),
+);
+GO
 
+INSERT INTO TipoComprobante (TipoComprobante) VALUES
+('Factura A'),
+('Factura B'),
+('Factura C');
+GO
 
+CREATE TABLE Producto (
+IdProducto INT IDENTITY (1, 1),
+NombreProducto VARCHAR(255),
+PrecioVenta DECIMAL (10, 2),
+PrecioCompra DECIMAL (10, 2),
+StockActual INT,
+StockMinimo INT, 
+Descripcion VARCHAR (255),
+Estado BIT NOT NULL DEFAULT 1,
+IdGenero INT,
+IdCategoria INT,
+CONSTRAINT PK_IdProducto PRIMARY KEY (IdProducto),
+CONSTRAINT FK_Genero FOREIGN KEY (IdGenero) REFERENCES Genero(IdGenero),
+CONSTRAINT FK_Categoria FOREIGN KEY (IdCategoria) REFERENCES Categoria(IdCategoria),
+CONSTRAINT CH_PrecioCompra CHECK (PrecioCompra > 0),
+CONSTRAINT CH_PrecioVenta CHECK (PrecioVenta > 0),
+CONSTRAINT CH_StockMinimo CHECK (StockMinimo > 0),
+CONSTRAINT CH_StockActual CHECK (StockActual > 0),
+);
+GO
 
+CREATE TABLE Compra (
+IdCompra INT IDENTITY(1,1),
+FechaCompra DATETIME NOT NULL,
+IdUsuario INT NOT NULL,
+IdProveedor INT NOT NULL,
+IdEstadoCompra INT NOT NULL,
+IdMedioPago INT NOT NULL,
+CONSTRAINT PK_Compra PRIMARY KEY (IdCompra),
+CONSTRAINT FK_Usuario FOREIGN KEY (IdUsuario) REFERENCES Usuarios (IdUsuario),
+CONSTRAINT FK_Proveedor FOREIGN KEY (IdProveedor) REFERENCES Proveedor(IdProveedor),
+CONSTRAINT FK_EstadoCompra FOREIGN KEY (IdEstadoCompra) REFERENCES EstadoCompra(IdEstadoCompra),
+CONSTRAINT FK_MedioPago FOREIGN KEY (IdMedioPago) REFERENCES MedioPago(IdMedioPago)
+);
+GO
 
+CREATE TABLE DetalleCompra (
+    IdDetalleCompra INT IDENTITY(1,1),
+    IdCompra INT NOT NULL,
+    Cantidad INT NOT NULL,
+    PrecioUnitario DECIMAL(12,2) NOT NULL,
+    IdProducto INT NOT NULL,
+    CONSTRAINT PK_DetalleCompra PRIMARY KEY (IdDetalleCompra),
+    CONSTRAINT FK_Compra FOREIGN KEY (IdCompra) REFERENCES Compra(IdCompra),
+    CONSTRAINT FK_Producto FOREIGN KEY (IdProducto) REFERENCES Producto(IdProducto)
+);
+GO
 
+INSERT INTO EstadoCompra (NombreEstadoCompra) VALUES 
+('Pendiente'),
+('Recibido Conforme'),
+('Recibido Inconforme');
+GO
+
+CREATE TABLE Recepcion (
+IdRecepcion INT IDENTITY (1,1),
+FechaRecepcion DATETIME NOT NULL,
+IdCompra INT NOT NULL,
+IdUsuario INT NOT NULL, 
+CONSTRAINT PK_IdRecepcion PRIMARY KEY (IdRecepcion),
+CONSTRAINT FK_Compra FOREIGN KEY (IdCompra) REFERENCES Compra(IdCompra),
+CONSTRAINT FK_Usuarios FOREIGN KEY (IdUsuario) REFERENCES Usuarios(IdUsuario),
+);
+GO
+
+CREATE TABLE DetalleRecepcion (
+IdDetalleRepecion INT IDENTITY (1,1),
+CantidadRecibida INT NOT NULL,
+IdRecepcion INT NOT NULL,
+IdDetalleCompra INT NOT NULL,
+IdCompra INT NOT NULL,
+CONSTRAINT PK_IdDetalleRecepcion PRIMARY KEY (IdDetalleRepecion);
+CONSTRAINT FK_Recepcion FOREIGN KEY (IdRecepcion) REFERENCES Recepcion(IdRecepcion);
+CONSTRAINT FK_DetalleCompra FOREIGN KEY (IdDetalleCompra, IdCompra) REFERENCES DetalleCompra(IdDetalleCompra, IdCompra),
+);
+
+CREATE TABLE Cliente (
+IdCliente INT IDENTITY (1,1),
+Nombre VARCHAR (50),
+Apellido VARCHAR(50),
+DNICUIT VARCHAR(11) NOT NULL,
+Telefono VARCHAR(30) NOT NULL,
+CorreoElectonico VARCHAR (50),
+IdCondicionIva INT NOT NULL,
+CONSTRAINT PK_IdCliente PRIMARY KEY (IdCliente),
+CONSTRAINT UQ_DNICUIT UNIQUE (DNICUIT),
+CONSTRAINT FK_CondicionIVA FOREIGN KEY (IdCondicionIVA) REFERENCES CondicionIVA(IdCondicionIVA),
+CONSTRAINT CK_DNICUIT_Numerico CHECK (DNICUIT NOT LIKE '%[^0-9]%' AND LEN(DNICUIT) <= 11),
+CONSTRAINT CK_ClienteTelefono CHECK (Telefono NOT LIKE '%[^0-9]%'),
+);
+GO 
+
+CREATE TABLE Comprobante (
+IdComprobante INT IDENTITY (1,1),
+FechaComprobante DATETIME NOT NULL,
+IdMedioPago INT NOT NULL,
+IdTipoComprobante INT NOT NULL,
+IdCliente INT NOT NULL,
+IdUsuario INT NOT NULL, 
+CONSTRAINT PK_IdComprobante PRIMARY KEY (IdComprobante),
+CONSTRAINT FK_ComprobanteMedioPago FOREIGN KEY (IdMedioPago) REFERENCES MedioPago(IdMedioPAgo),
+CONSTRAINT FK_ComprobanteTipoComprobante FOREIGN KEY (IdTipoComprobante) REFERENCES TipoComprobante(IdTipoComprobante),
+CONSTRAINT FK_ComprobanteCliente FOREIGN KEY (IdCliente) REFERENCES Cliente (IdCliente),
+CONSTRAINT FK_ComprobanteUsuario FOREIGN KEY (IdUsuario) REFERENCES Usuarios(IdUsuario),
+);
+GO
 
