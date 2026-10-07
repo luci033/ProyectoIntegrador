@@ -1,3 +1,4 @@
+using CapaEntidades;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -71,7 +72,12 @@ namespace ProyectoIntegrador.Formularios.Productos
 
         private void BGuardar_Click(object sender, EventArgs e)
         {
-            CategoriaNueva = TNuevaCategoria.Text;
+            Categoria NuevaCategoria  = new Categoria()
+            {
+                NombreCategoria = TNuevaCategoria.Text.Trim()
+            };
+
+
             this.DialogResult = DialogResult.OK; // si está todo Ok se cierra el formulario
         }
 

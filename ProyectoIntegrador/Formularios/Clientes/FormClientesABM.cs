@@ -1,4 +1,7 @@
 using System;
+using CapaDatos;
+using CapaEntidades;
+using CapaNegocio;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -93,18 +96,33 @@ namespace ProyectoIntegrador.Formularios.Clientes
                 return;
             }
 
-            ClienteCreado = new ClienteSimulado
+            Cliente NuevoCliente = new Cliente()
             {
                 Nombre = TBNombre.Text.Trim(),
                 Apellido = TBApellido.Text.Trim(),
-                DNI = TBDni.Text.Trim(),
+                DNICUIT = TBDni.Text.Trim(),
                 Telefono = TBTelefono.Text.Trim(),
-                Correo = TBCorreo.Text.Trim(),
-                CondicionIVA = cmbCondicionIVA.Text
+                CorreoElectronico = TBCorreo.Text.Trim(),
+                IdCondicionIva = Convert.ToInt32(cmbCondicionIVA.SelectedValue) //REVISAR QUE GUARDA EL ID
             };
 
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            string mensaje = string.Empty;
+
+            // 2. Llamamos a la Capa de Negocio (asegurate de tener tu clase CN_Cliente armada)
+            bool resultado = new CN_Cliente().Registrar(NuevoCliente, out mensaje);
+
+            // 3. Evaluamos si se guardó con éxito en SQL Server
+            if (resultado)
+            {
+                MessageBox.Show("¡Cliente registrado con éxito en la base de datos!", "Joyería ALBA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                // Si falló (por ejemplo, porque ya existía el DNI en la base), mostramos el mensaje amigable
+                MessageBox.Show(mensaje, "Error de Registro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void BCancelar_Click(object sender, EventArgs e)

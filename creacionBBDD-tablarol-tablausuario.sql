@@ -119,8 +119,9 @@ GO
 
 CREATE TABLE Categoria (
 IdCategoria INT IDENTITY (1,1),
-NombreCatalogo VARCHAR(50) NOT NULL,
-CONSTRAINT PK_IdCategoria PRIMARY KEY (IdCategoria)
+NombreCategoria VARCHAR(50) NOT NULL,
+CONSTRAINT PK_IdCategoria PRIMARY KEY (IdCategoria),
+CONSTRAINT UQ_NombreCategoria UNIQUE (NombreCategoria)
 );
 GO
 
@@ -220,7 +221,7 @@ Nombre VARCHAR (50),
 Apellido VARCHAR(50),
 DNICUIT VARCHAR(11) NOT NULL,
 Telefono VARCHAR(30) NOT NULL,
-CorreoElectonico VARCHAR (50),
+CorreoElectronico VARCHAR (255),
 IdCondicionIva INT NOT NULL,
 CONSTRAINT PK_IdCliente PRIMARY KEY (IdCliente),
 CONSTRAINT UQ_DNICUIT UNIQUE (DNICUIT),
@@ -238,10 +239,38 @@ IdTipoComprobante INT NOT NULL,
 IdCliente INT NOT NULL,
 IdUsuario INT NOT NULL, 
 CONSTRAINT PK_IdComprobante PRIMARY KEY (IdComprobante),
-CONSTRAINT FK_ComprobanteMedioPago FOREIGN KEY (IdMedioPago) REFERENCES MedioPago(IdMedioPAgo),
+CONSTRAINT FK_ComprobanteMedioPago FOREIGN KEY (IdMedioPago) REFERENCES MedioPago(IdMedioPago),
 CONSTRAINT FK_ComprobanteTipoComprobante FOREIGN KEY (IdTipoComprobante) REFERENCES TipoComprobante(IdTipoComprobante),
 CONSTRAINT FK_ComprobanteCliente FOREIGN KEY (IdCliente) REFERENCES Cliente (IdCliente),
 CONSTRAINT FK_ComprobanteUsuario FOREIGN KEY (IdUsuario) REFERENCES Usuarios(IdUsuario),
 );
 GO
 
+CREATE TABLE DetalleComprobante (
+IdDetalleComprobante INT IDENTITY(1,1),
+IdComprobante INT NOT NULL,
+Cantidad INT NOT NULL,
+PrecioUnitario DECIMAL(10,2) NOT NULL,
+IdProducto INT NOT NULL,
+CONSTRAINT PK_DetalleComprobanteIdComprobante PRIMARY KEY (IdDetalleComprobante, IdComprobante),
+CONSTRAINT CK_DetalleComprobanteCantidad CHECK (Cantidad > 0),
+CONSTRAINT CK_DetalleComprobantePrecio CHECK (PrecioUnitario >= 0),
+CONSTRAINT FK_DetalleComprobanteComprobante FOREIGN KEY (IdComprobante) REFERENCES Comprobante(IdComprobante),
+CONSTRAINT FK_DetalleComprobanteProducto FOREIGN KEY (IdProducto) REFERENCES Producto(IdProducto) 
+);
+GO
+
+CREATE TABLE AjusteStock (
+IdAjuste INT IDENTITY(1,1),
+FechaAjuste DATETIME NOT NULL DEFAULT GETDATE(),
+TipoAjuste VARCHAR(30) NOT NULL,
+CantidadAjuste INT NOT NULL,
+Observacion VARCHAR(250) NULL,
+IdUsuario INT NOT NULL,
+IdProducto INT NOT NULL,
+CONSTRAINT PK_AjusteStock PRIMARY KEY (IdAjuste),
+CONSTRAINT CK_AjusteStockCantidad CHECK (CantidadAjuste <> 0),
+CONSTRAINT FK_AjusteStockUsuario FOREIGN KEY (IdUsuario) REFERENCES Usuarios(IdUsuario),
+CONSTRAINT FK_AjusteStockProducto FOREIGN KEY (IdProducto) REFERENCES Producto(IdProducto) 
+);
+GO
