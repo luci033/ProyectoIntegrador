@@ -24,6 +24,7 @@ namespace ProyectoIntegrador.Formularios.Productos
             this.WindowState = FormWindowState.Maximized;
             EstiloUI.AplicarEstiloFormulario(this);
             EstiloUI.AplicarEstiloTitulo(LTitulo);
+            EstiloUI.AplicarEstiloBotonSecundario(BGestionarCategorias);
             EstiloUI.AplicarEstiloBoton(BNuevo);
             EstiloUI.AplicarEstiloPanelSeccion(panel1, 10);
             EstiloUI.AplicarEstiloGrilla(dataGridCatalogoProd);
@@ -141,6 +142,14 @@ namespace ProyectoIntegrador.Formularios.Productos
                     dataGridCatalogoProd.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "Desactivar";
                     StockSimulado.CambiarEstadoActivo(codigo, true);
                 }
+            }
+        }
+
+        private void BGestionarCategorias_Click(object sender, EventArgs e)
+        {
+            using (FormCategorias formCat = new FormCategorias())
+            {
+                formCat.ShowDialog();
             }
         }
 

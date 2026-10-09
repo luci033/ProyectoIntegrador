@@ -32,6 +32,7 @@ namespace ProyectoIntegrador.Formularios.Productos
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.BGestionarCategorias = new System.Windows.Forms.Button();
             this.BNuevo = new System.Windows.Forms.Button();
             this.LTitulo = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -58,6 +59,24 @@ namespace ProyectoIntegrador.Formularios.Productos
             ((System.ComponentModel.ISupportInitialize)(this.dataGridCatalogoProd)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // BGestionarCategorias
+            // 
+            this.BGestionarCategorias.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BGestionarCategorias.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(208)))), ((int)(((byte)(201)))));
+            this.BGestionarCategorias.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BGestionarCategorias.FlatAppearance.BorderSize = 0;
+            this.BGestionarCategorias.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BGestionarCategorias.Font = new System.Drawing.Font("Georgia", 10F, System.Drawing.FontStyle.Bold);
+            this.BGestionarCategorias.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.BGestionarCategorias.Location = new System.Drawing.Point(616, 22);
+            this.BGestionarCategorias.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.BGestionarCategorias.Name = "BGestionarCategorias";
+            this.BGestionarCategorias.Size = new System.Drawing.Size(184, 44);
+            this.BGestionarCategorias.TabIndex = 9;
+            this.BGestionarCategorias.Text = "Gestionar Categorías";
+            this.BGestionarCategorias.UseVisualStyleBackColor = false;
+            this.BGestionarCategorias.Click += new System.EventHandler(this.BGestionarCategorias_Click);
             // 
             // BNuevo
             // 
@@ -317,6 +336,7 @@ namespace ProyectoIntegrador.Formularios.Productos
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(232)))));
             this.ClientSize = new System.Drawing.Size(1016, 732);
+            this.Controls.Add(this.BGestionarCategorias);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.BNuevo);
             this.Controls.Add(this.panel2);
@@ -339,6 +359,7 @@ namespace ProyectoIntegrador.Formularios.Productos
         }
 
         #endregion
+        private System.Windows.Forms.Button BGestionarCategorias;
         private System.Windows.Forms.Button BNuevo;
         private System.Windows.Forms.Label LTitulo;
         private System.Windows.Forms.Panel panel1;

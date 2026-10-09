@@ -20,8 +20,8 @@ namespace ProyectoIntegrador
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            FormCategorias formCategorias = new FormCategorias();
-            Application.Run(formCategorias);
+            //FormCategorias formCategorias = new FormCategorias();
+            //Application.Run(formCategorias);
 
 
             //Application.Run(new FormPrincipalGerente("Leandrin"));
@@ -30,7 +30,7 @@ namespace ProyectoIntegrador
             //Application.Run(new FormPrincipalLogistica("Leandrin"));
 
             
-            /*using (FormLogin login = new FormLogin())
+            using (FormLogin login = new FormLogin())
             {
                 // si el login fue exitoso, el Login devuelve DialogResult.OK
                 if (login.ShowDialog() == DialogResult.OK)
@@ -54,7 +54,7 @@ namespace ProyectoIntegrador
                     }
                 }
             
-            }*/
+            }
             
             
         }

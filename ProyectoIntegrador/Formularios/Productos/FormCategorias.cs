@@ -19,7 +19,15 @@ namespace ProyectoIntegrador.Formularios.Productos
 
         private void FCategorias_Load(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Maximized;
+            if (this.MdiParent != null)
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Normal;
+                this.StartPosition = FormStartPosition.CenterParent;
+            }
             EstiloUI.AplicarEstiloFormulario(this);
             EstiloUI.AplicarEstiloTitulo(LTitulo);
             EstiloUI.AplicarEstiloBoton(BAgregarCategoria);
