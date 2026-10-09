@@ -1,4 +1,5 @@
 using ProyectoIntegrador.Formularios.Principal;
+using ProyectoIntegrador.Formularios.Productos;
 using ProyectoIntegrador.Formularios.Usuarios;
 using System;
 using System.Collections.Generic;
@@ -19,8 +20,8 @@ namespace ProyectoIntegrador
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            //FormLogin login = new FormLogin();
-            //Application.Run(new FormLogin());
+            FormCategorias formCategorias = new FormCategorias();
+            Application.Run(formCategorias);
 
 
             //Application.Run(new FormPrincipalGerente("Leandrin"));
@@ -29,7 +30,7 @@ namespace ProyectoIntegrador
             //Application.Run(new FormPrincipalLogistica("Leandrin"));
 
             
-            using (FormLogin login = new FormLogin())
+            /*using (FormLogin login = new FormLogin())
             {
                 // si el login fue exitoso, el Login devuelve DialogResult.OK
                 if (login.ShowDialog() == DialogResult.OK)
@@ -53,7 +54,7 @@ namespace ProyectoIntegrador
                     }
                 }
             
-            }
+            }*/
             
             
         }

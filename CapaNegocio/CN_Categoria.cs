@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CapaNegocio
 {
-    internal class CN_Categoria
+    public class CN_Categoria
     {
         // Instancia para comunicarse con la capa de datos de categoria
         private CD_Categoria objCapaDato = new CD_Categoria();

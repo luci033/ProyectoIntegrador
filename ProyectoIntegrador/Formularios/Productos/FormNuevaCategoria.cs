@@ -1,4 +1,5 @@
 using CapaEntidades;
+using CapaNegocio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -76,9 +77,18 @@ namespace ProyectoIntegrador.Formularios.Productos
             {
                 NombreCategoria = TNuevaCategoria.Text.Trim()
             };
+            CN_Categoria categoria = new CN_Categoria();
+            categoria.Registrar(NuevaCategoria, out string mensaje);
+            
+            if(mensaje == string.Empty)
+            {
+                this.DialogResult = DialogResult.OK;
+            }
+            else
+            {
+                MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
-
-            this.DialogResult = DialogResult.OK; // si está todo Ok se cierra el formulario
         }
 
         private void BCancelar_Click(object sender, EventArgs e)
