@@ -48,12 +48,12 @@ GO
 
 -- insertamos los usuarios genéricos para cada rol
 -- El IdRol corresponde al orden de inserción: 1=Admin, 2=Gerente, 3=Vendedor, 4=Logística
-INSERT INTO Usuarios (Usuario, NombreUsuario, ApellidoUsuario, Contrasena, DNI, IdRol)
+INSERT INTO Usuarios (Usuario, NombreUsuario, ApellidoUsuario, Contrasena, Foto_Perfil, DNI, Telefono, Domicilio, IdRol)
 VALUES 
-('admin', 'Usuario', 'Administrador', '1234', '11111111', 1),
-('gerente', 'Usuario', 'Gerente', '1234', '22222222', 2),
-('vendedor', 'Usuario', 'Vendedor', '1234', '33333333', 3),
-('logistica', 'Usuario', 'Logística', '1234', '44444444', 4);
+('admin', 'Usuario', 'Administrador', '1234', 'rutapfp', '11111111', '3794123456', 'Av. Magallanes 123', 1),
+('gerente', 'Usuario', 'Gerente', '1234', 'rutapfp', '22222222', '3794123456', 'Art Factory San Telmo',  2),
+('vendedor', 'Usuario', 'Vendedor', '1234', 'rutapfp', '33333333', '3794123456', 'Calle Inundada 123', 3),
+('logistica', 'Usuario', 'Logística', '1234', 'rutapfp', '44444444', '3794123456','Peatonal Junin 654', 4);
 GO
 
 -- creamos la tabla genero
@@ -181,7 +181,7 @@ CREATE TABLE DetalleCompra (
     Cantidad INT NOT NULL,
     PrecioUnitario DECIMAL(12,2) NOT NULL,
     IdProducto INT NOT NULL,
-    CONSTRAINT PK_DetalleCompra PRIMARY KEY (IdDetalleCompra),
+    CONSTRAINT PK_DetalleCompra_Compra PRIMARY KEY (IdDetalleCompra, IdCompra),
     CONSTRAINT FK_Compra FOREIGN KEY (IdCompra) REFERENCES Compra(IdCompra),
     CONSTRAINT FK_Producto FOREIGN KEY (IdProducto) REFERENCES Producto(IdProducto)
 );
@@ -190,7 +190,7 @@ GO
 INSERT INTO EstadoCompra (NombreEstadoCompra) VALUES 
 ('Pendiente'),
 ('Recibido Conforme'),
-('Recibido Inconforme');
+('Recibido Disconforme');
 GO
 
 CREATE TABLE Recepcion (
@@ -199,7 +199,7 @@ FechaRecepcion DATETIME NOT NULL,
 IdCompra INT NOT NULL,
 IdUsuario INT NOT NULL, 
 CONSTRAINT PK_IdRecepcion PRIMARY KEY (IdRecepcion),
-CONSTRAINT FK_Compra FOREIGN KEY (IdCompra) REFERENCES Compra(IdCompra),
+CONSTRAINT FK_CompraRecepcion FOREIGN KEY (IdCompra) REFERENCES Compra(IdCompra),
 CONSTRAINT FK_Usuarios FOREIGN KEY (IdUsuario) REFERENCES Usuarios(IdUsuario),
 );
 GO
@@ -210,10 +210,11 @@ CantidadRecibida INT NOT NULL,
 IdRecepcion INT NOT NULL,
 IdDetalleCompra INT NOT NULL,
 IdCompra INT NOT NULL,
-CONSTRAINT PK_IdDetalleRecepcion PRIMARY KEY (IdDetalleRepecion);
-CONSTRAINT FK_Recepcion FOREIGN KEY (IdRecepcion) REFERENCES Recepcion(IdRecepcion);
-CONSTRAINT FK_DetalleCompra FOREIGN KEY (IdDetalleCompra, IdCompra) REFERENCES DetalleCompra(IdDetalleCompra, IdCompra),
+CONSTRAINT PK_IdDetalleRecepcion PRIMARY KEY (IdDetalleRepecion),
+CONSTRAINT FK_Recepcion FOREIGN KEY (IdRecepcion) REFERENCES Recepcion(IdRecepcion),
+CONSTRAINT FK_DetalleCompra FOREIGN KEY (IdDetalleCompra, IdCompra) REFERENCES DetalleCompra(IdDetalleCompra, IdCompra)
 );
+GO
 
 CREATE TABLE Cliente (
 IdCliente INT IDENTITY (1,1),
