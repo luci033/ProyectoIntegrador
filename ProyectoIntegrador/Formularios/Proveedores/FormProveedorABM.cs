@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using CapaEntidades;
+using CapaNegocio;
 
 namespace ProyectoIntegrador.Formularios.Proveedores
 {
@@ -60,8 +62,24 @@ namespace ProyectoIntegrador.Formularios.Proveedores
             // Si todo es correcto, cerramos devolviendo "OK"
             if (valido)
             {
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                Proveedor NuevoProveedor = new Proveedor()
+                {
+                    RazonSocial = TBRazonSocial.Text,
+                    CUIT = TBCUIT.Text,
+                    Telefono = TBTelefono.Text,
+                    CorreElectronico = TBCorreo.Text
+                };
+                CN_Proveedor proveedor = new CN_Proveedor();
+                proveedor.RegistrarProveedor(NuevoProveedor, out string mensaje);
+                if (mensaje == string.Empty)
+                {
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
