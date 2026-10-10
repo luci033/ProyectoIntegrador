@@ -60,5 +60,22 @@ namespace CapaDatos
 
             return respuesta;
         }
+
+        /*public List<Proveedor> ListarProveedores()
+        {
+            //creo la lista
+            List<Proveedor> lista = new List<Proveedor>();
+            //creo la string q se llama query con la consulta sql
+            string query = "SELECT IdProveedor, RazonSocial, CUIT, Telefono, CorreoElectronico FROM Proveedor";
+            //arranco el try
+            try
+            {
+                //creo la conexion con la bd
+                using (SqlConnection conexion = Conexion.ObtenerConexion())
+                {
+
+                }
+            }
+        }*/
     }
 }
