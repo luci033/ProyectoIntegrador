@@ -30,8 +30,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
             EstiloUI.AplicarEstiloTextBox(TBBuscar);
             EstiloUI.AplicarEstiloBotonSecundario(BCancelar);
 
-            FormClientes.InicializarClientesSiEsNecesario();
-            listaTemporalClientes = FormClientes.ListaClientes;
+    
 
             CargarGrillaClientes();
 

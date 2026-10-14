@@ -89,15 +89,6 @@ namespace ProyectoIntegrador.Formularios.Usuarios
                 }
             }
 
-            /*
-            dataGridRegistroUsuario.Rows.Add(1, "12345678", "Juan", "Pérez", "jperez", "Administrador");
-            dataGridRegistroUsuario.Rows.Add(2, "23456789", "Ana", "Gómez", "agomez", "Vendedor");
-            dataGridRegistroUsuario.Rows.Add(3, "34567890", "Carlos", "Ruiz", "cruiz", "Logística");
-            dataGridRegistroUsuario.Rows.Add(4, "45678901", "María", "López", "mlopez", "Vendedor");
-            dataGridRegistroUsuario.Rows.Add(5, "56789012", "Luis", "Sosa", "lsosa", "Administrador");
-
-            */
-
             // Opciones para Rol
             CBRol.Items.AddRange(new string[] { "Todos", "Administrador", "Vendedor", "Logística" });
             CBRol.SelectedIndex = 0; // Deja "Todos" seleccionado por defecto
@@ -163,6 +154,7 @@ namespace ProyectoIntegrador.Formularios.Usuarios
 
         private void CBEstado_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (CBEstado.SelectedItem == null) return;
             string estadoSeleccionado = CBEstado.SelectedItem.ToString();
 
             foreach (DataGridViewRow fila in dataGridRegistroUsuario.Rows)
@@ -175,7 +167,19 @@ namespace ProyectoIntegrador.Formularios.Usuarios
                 }
                 else
                 {
-                    fila.Visible = fila.Cells["colEstado"].Value.ToString() == estadoSeleccionado;
+                    // Verificamos si la fila está inactiva por su color de fondo
+                    bool estaInactivo = fila.DefaultCellStyle.BackColor == Color.LightGray;
+
+                    if (estadoSeleccionado == "Activo")
+                    {
+                        // Si el filtro es "Activo", mostramos las que NO están inactivas
+                        fila.Visible = !estaInactivo;
+                    }
+                    else if (estadoSeleccionado == "Inactivo")
+                    {
+                        // Si el filtro es "Inactivo", mostramos las que SÍ están inactivas
+                        fila.Visible = estaInactivo;
+                    }
                 }
             }
         }

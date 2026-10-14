@@ -1,3 +1,4 @@
+using CapaNegocio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,6 +36,8 @@ namespace ProyectoIntegrador.Formularios.Clientes
             EstiloUI.AplicarEstiloBotonSecundario(BPDF);
             EstiloUI.AplicarEstiloBoton(BCerrar);
             EstiloUI.CentrarControl(panelCard, this);
+
+            CargarCondicionIVA();
         }
 
         private void DetalleClientes_Resize(object sender, EventArgs e)
@@ -53,6 +56,9 @@ namespace ProyectoIntegrador.Formularios.Clientes
             TBCorreo.Text = correo;
             cmbCondicionIVA.Text = condicionIva;
             TBDni.Text = dni;
+
+            //UNA VEZ CARGADO EL COMBO, SELECCIONAMOS EL TEXTO CORRESPONDIENTE
+            cmbCondicionIVA.Enabled = false;
         }
 
         private void BFiltrar_Click(object sender, EventArgs e)
@@ -70,6 +76,21 @@ namespace ProyectoIntegrador.Formularios.Clientes
 
             // si pasa las validaciones realiza la busqueda
             MessageBox.Show("Fechas correctas. Buscando historial...", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void CargarCondicionIVA()
+        {
+            try
+            {
+                CN_Cliente negocioCliente = new CN_Cliente();
+                cmbCondicionIVA.DataSource = negocioCliente.ObtenerCondicionIva();
+                cmbCondicionIVA.DisplayMember = "CondicionIVA";
+                cmbCondicionIVA.ValueMember = "IdCondicionIva";
+            }
+            catch (Exception ex)
+            {
+                // Manejo de error opcional
+            }
         }
     }
 }

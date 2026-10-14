@@ -271,15 +271,17 @@ namespace ProyectoIntegrador.Formularios.Ventas
 
         private void BNuevoCliente_Click(object sender, EventArgs e)
         {
-            FormClientes.InicializarClientesSiEsNecesario();
+            //FormClientes.InicializarClientesSiEsNecesario();
 
             using (FormClientesABM modalCliente = new FormClientesABM())
             {
+                
                 // Pasamos la lista de DNIs ya registrados en el sistema
-                modalCliente.DnisExistentes = FormClientes.ListaClientes.Select(c => c.DNI).ToList();
+               //modalCliente.DnisExistentes = FormClientes.ListaClientes.Select(c => c.DNI).ToList();
 
                 if (modalCliente.ShowDialog() == DialogResult.OK && modalCliente.ClienteCreado != null)
                 {
+                /*
                     // Validación preventiva de unicidad de DNI
                     string dniNuevo = modalCliente.ClienteCreado.DNI?.Trim();
                     if (!string.IsNullOrEmpty(dniNuevo) && FormClientes.ListaClientes.Any(c => c.DNI != null && c.DNI.Trim() == dniNuevo))
@@ -290,14 +292,16 @@ namespace ProyectoIntegrador.Formularios.Ventas
 
                     // Se agrega a los datos estáticos compartidos de clientes
                     FormClientes.ListaClientes.Add(modalCliente.ClienteCreado);
+                    */
 
-                    // Se cargan automáticamente los datos en los TextBox correspondientes
-                    string nombreCompleto = $"{modalCliente.ClienteCreado.Nombre} {modalCliente.ClienteCreado.Apellido}".Trim();
+                // Se cargan automáticamente los datos en los TextBox correspondientes
+                string nombreCompleto = $"{modalCliente.ClienteCreado.Nombre} {modalCliente.ClienteCreado.Apellido}".Trim();
                     TBCliente.Text = nombreCompleto;
                     TBCondicionIVA.Text = modalCliente.ClienteCreado.CondicionIVA;
                 }
             }
         }
+        
 
         private void TBVendedor_TextChanged(object sender, EventArgs e)
         {

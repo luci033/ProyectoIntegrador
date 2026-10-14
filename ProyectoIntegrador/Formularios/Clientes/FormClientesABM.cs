@@ -19,6 +19,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
         public ClienteSimulado ClienteCreado { get; private set; }
         public List<string> DnisExistentes = new List<string>();
         private string dniOriginal = "";
+        private int idClienteActual = 0; // Si es 0, es un alta nueva. Si tiene valor, es una modificación.
         public FormClientesABM()
         {
             InitializeComponent();
@@ -44,6 +45,9 @@ namespace ProyectoIntegrador.Formularios.Clientes
             EstiloUI.AplicarEstiloBoton(BRegistrarCliente);
             EstiloUI.AplicarEstiloBotonSecundario(BCancelar);
             EstiloUI.CentrarControl(panelCard, this);
+
+            CargarCondicionIVA(); // REVISAR SI ES NECESARIO 
+
         }
 
         private void FormClientesABM_Resize(object sender, EventArgs e)
@@ -98,30 +102,42 @@ namespace ProyectoIntegrador.Formularios.Clientes
 
             Cliente NuevoCliente = new Cliente()
             {
+                IdCliente = idClienteActual,
                 Nombre = TBNombre.Text.Trim(),
                 Apellido = TBApellido.Text.Trim(),
                 DNICUIT = TBDni.Text.Trim(),
                 Telefono = TBTelefono.Text.Trim(),
                 CorreoElectronico = TBCorreo.Text.Trim(),
                 IdCondicionIva = Convert.ToInt32(cmbCondicionIVA.SelectedValue) //REVISAR QUE GUARDA EL ID
-            };
+            }; 
 
             string mensaje = string.Empty;
 
             // 2. Llamamos a la Capa de Negocio (asegurate de tener tu clase CN_Cliente armada)
-            bool resultado = new CN_Cliente().Registrar(NuevoCliente, out mensaje);
+            bool resultado = false;
+            CN_Cliente negocioCliente = new CN_Cliente();
 
             // 3. Evaluamos si se guardó con éxito en SQL Server
+            if (idClienteActual == 0)
+            {
+               resultado = negocioCliente.Registrar(NuevoCliente, out mensaje);
+            }
+            else
+            {
+                resultado = negocioCliente.Editar(NuevoCliente, out mensaje);
+            }
+
+            // aca evaluamos si se guardo e la bd
             if (resultado)
             {
-                MessageBox.Show("¡Cliente registrado con éxito en la base de datos!", "Joyería ALBA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                string mensajeExito = (idClienteActual == 0) ? "¡Cliente registrado con éxito en la base de datos!" : "¡Cliente modificado con éxito!";
+                MessageBox.Show(mensajeExito, "Joyería ALBA", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             else
             {
-                // Si falló (por ejemplo, porque ya existía el DNI en la base), mostramos el mensaje amigable
-                MessageBox.Show(mensaje, "Error de Registro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(mensaje, "Error de Operación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -156,12 +172,13 @@ namespace ProyectoIntegrador.Formularios.Clientes
             }
         }
 
-        public void ConfigurarModoEdicion(string nombre, string apellido, string dni, string telefono, string correo, string condicionIVA)
+        public void ConfigurarModoEdicion(int IdCliente, string nombre, string apellido, string dni, string telefono, string correo, string condicionIVA)
         {
             this.Text = "Modificar Cliente";
             LTitulo.Text = "Modificar Cliente";
             BRegistrarCliente.Text = "Modificar";
 
+            idClienteActual = IdCliente; //guardamos el id para usarlo al hacer la modifiacion
             TBNombre.Text = nombre;
             TBApellido.Text = apellido;
             TBDni.Text = dni;
@@ -170,7 +187,12 @@ namespace ProyectoIntegrador.Formularios.Clientes
             cmbCondicionIVA.Text = condicionIVA;
             // Guardamos el DNI original para compararlo luego
             dniOriginal = dni;
+
+            // BLOQUEAMOS EL DNI PARA QUE NO SE PUEDA MODIFICAR
+            TBDni.ReadOnly = true;
+            TBDni.BackColor = Color.LightGray; // Opcional: un color sutil para que se note que está deshabilitado
         }
+        
 
         public void ConfigurarModoDetalle(string nombre, string apellido, string dni, string telefono, string correo, string condicionIVA)
         {
@@ -259,5 +281,16 @@ namespace ProyectoIntegrador.Formularios.Clientes
                 errorProvider1.SetError(TBCorreo, "El formato del correo no es válido (ej: nombre@dominio.com).");
             }
         }
+
+        private void CargarCondicionIVA()
+        {
+            CN_Cliente negocioCliente = new CN_Cliente();
+
+            cmbCondicionIVA.DataSource = negocioCliente.ObtenerCondicionIva();
+            cmbCondicionIVA.DisplayMember = "CondicionIVA"; // Lo que el usuario lee en la pantalla
+            cmbCondicionIVA.ValueMember = "IdCondicionIva";   // El número de ID real que viaja por detrás
+            cmbCondicionIVA.SelectedIndex = -1;             // Arranca sin nada seleccionado
+        }
+
     }
 }

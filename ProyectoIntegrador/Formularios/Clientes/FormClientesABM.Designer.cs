@@ -88,7 +88,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
             this.LTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
             this.LTitulo.Location = new System.Drawing.Point(30, 25);
             this.LTitulo.Name = "LTitulo";
-            this.LTitulo.Size = new System.Drawing.Size(248, 31);
+            this.LTitulo.Size = new System.Drawing.Size(251, 31);
             this.LTitulo.TabIndex = 0;
             this.LTitulo.Text = "Registrar Cliente";
             // 
@@ -99,7 +99,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
             this.LSubtitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(85)))), ((int)(((byte)(78)))));
             this.LSubtitulo.Location = new System.Drawing.Point(30, 62);
             this.LSubtitulo.Name = "LSubtitulo";
-            this.LSubtitulo.Size = new System.Drawing.Size(434, 17);
+            this.LSubtitulo.Size = new System.Drawing.Size(415, 17);
             this.LSubtitulo.TabIndex = 1;
             this.LSubtitulo.Text = "Complete la información personal, tributaria y de contacto del cliente.";
             // 
@@ -150,7 +150,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
             this.LDni.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
             this.LDni.Location = new System.Drawing.Point(30, 175);
             this.LDni.Name = "LDni";
-            this.LDni.Size = new System.Drawing.Size(65, 15);
+            this.LDni.Size = new System.Drawing.Size(70, 15);
             this.LDni.TabIndex = 6;
             this.LDni.Text = "DNI / CUIT:";
             // 
@@ -170,7 +170,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
             this.LCondicionIVA.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
             this.LCondicionIVA.Location = new System.Drawing.Point(325, 175);
             this.LCondicionIVA.Name = "LCondicionIVA";
-            this.LCondicionIVA.Size = new System.Drawing.Size(89, 15);
+            this.LCondicionIVA.Size = new System.Drawing.Size(86, 15);
             this.LCondicionIVA.TabIndex = 8;
             this.LCondicionIVA.Text = "Condición IVA:";
             this.LCondicionIVA.Click += new System.EventHandler(this.label5_Click);
@@ -197,7 +197,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
             this.LTelefono.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
             this.LTelefono.Location = new System.Drawing.Point(30, 245);
             this.LTelefono.Name = "LTelefono";
-            this.LTelefono.Size = new System.Drawing.Size(126, 15);
+            this.LTelefono.Size = new System.Drawing.Size(129, 15);
             this.LTelefono.TabIndex = 10;
             this.LTelefono.Text = "Teléfono de Contacto:";
             // 
