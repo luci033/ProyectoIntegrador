@@ -1,4 +1,4 @@
-﻿using CapaEntidades;
+using CapaEntidades;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -16,7 +16,8 @@ namespace CapaDatos
             
             bool respuesta = false;
 
-            string query = @"INSERT INTO Producto (NombreProducto, PrecioVenta, PrecioCompra, StockActual, StockMinimo, Descripcion, Estado, IdGenero, IdCategoria, IdProveedor)";
+            string query = @"INSERT INTO Producto (NombreProducto, PrecioVenta, PrecioCompra, StockActual, StockMinimo, Descripcion, Estado, IdGenero, IdCategoria, IdProveedor)
+                            VALUES (@NombreProducto, @PrecioVenta, @PrecioCompra, @StockActual, @StockMinimo, @Descripcion, @Estado, @IdGenero, @IdCategoria, @IdProveedor)";
 
             try
             {
@@ -28,7 +29,7 @@ namespace CapaDatos
 
                         cmd.Parameters.AddWithValue("@NombreProducto", string.IsNullOrWhiteSpace(obj.NombreProducto) ? (object)DBNull.Value : obj.NombreProducto);
                         cmd.Parameters.AddWithValue("@PrecioVenta", (object)obj.PrecioVenta ?? DBNull.Value);
-                        cmd.Parameters.AddWithValue("@PrecioCompra", (object)obj.PrecioVenta ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@PrecioCompra", (object)obj.PrecioCompra ?? DBNull.Value);
                         cmd.Parameters.AddWithValue("@StockActual", obj.StockActual);
                         cmd.Parameters.AddWithValue("@StockMinimo", obj.StockMinimo);
                         cmd.Parameters.AddWithValue("@Descripcion", string.IsNullOrWhiteSpace(obj.Descripcion) ? (object)DBNull.Value : obj.Descripcion);
@@ -44,8 +45,40 @@ namespace CapaDatos
             }
             catch (Exception ex)
             {
-                //aca las restricciones
-                //if
+                respuesta = false;
+
+                if (ex.Message.Contains("FK_Genero"))
+                {
+                    mensaje = "El género seleccionado no es válido o no existe en el sistema.";
+                }
+                else if (ex.Message.Contains("FK_Categoria"))
+                {
+                    mensaje = "La categoría seleccionada no es válida o no existe en el sistema.";
+                }
+                else if (ex.Message.Contains("FK_Proveedor"))
+                {
+                    mensaje = "El proveedor seleccionado no es válido o no existe en el sistema.";
+                }
+                else if (ex.Message.Contains("CK_PrecioCompra"))
+                {
+                    mensaje = "El precio de compra debe ser mayor a cero.";
+                }
+                else if (ex.Message.Contains("CK_PrecioVenta"))
+                {
+                    mensaje = "El precio de venta debe ser mayor a cero.";
+                }
+                else if (ex.Message.Contains("CK_StockMinimo"))
+                {
+                    mensaje = "El stock mínimo debe ser mayor a cero.";
+                }
+                else if (ex.Message.Contains("CK_StockActual"))
+                {
+                    mensaje = "El stock actual no puede ser un número negativo.";
+                }
+                else
+                {
+                    mensaje = "Error al registrar el producto: " + ex.Message;
+                }
             }
 
             return respuesta;
