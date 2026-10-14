@@ -1,3 +1,4 @@
+using CapaDatos;
 using CapaEntidades;
 using CapaNegocio;
 using System;
@@ -9,6 +10,7 @@ namespace ProyectoIntegrador
 {
     public partial class FormProductoABM : Form
     {
+        private int IdProductoSeleccionado;
         public string Nombre => textNombre.Text.Trim();
         public string Categoria => cmbCategoria.Text.Trim();
         public string Genero => combGenero.Text.Trim(); 
@@ -214,9 +216,10 @@ namespace ProyectoIntegrador
             this.Text = "Modificar Producto";
             LTitulo.Text = "Modificar Producto";
             BCrearProducto.Text = "Guardar Cambios";
+            //IdProductoSeleccionado = idProducto;
 
-            // 1. Campos HABILITADOS para modificar
-            textNombre.Text = nombre;
+        // 1. Campos HABILITADOS para modificar
+        textNombre.Text = nombre;
             textStockMinimo.Text = stockMinimo; // Asegurate de tener este TextBox creado
             textDescripcion.Text = descripcion; // Asegurate de tener este TextBox creado
             cmbProveedor.Text = proveedor;

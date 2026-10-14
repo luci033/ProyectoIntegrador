@@ -78,10 +78,15 @@ namespace CapaNegocio
             mensaje = String.Empty;
 
             // Validaciones de negocio
+            if (obj.IdProducto <= 0)
+            {
+                mensaje = "Debe especificar un producto válido para modificar";
+                return false;
+            }
             if (string.IsNullOrWhiteSpace(obj.NombreProducto))
             {
                 mensaje = "El nombre del producto no puede estar vacío.";
-                return false; // aca, corta la ejecucion
+                return false; 
             }
 
             if (obj.IdCategoria <= 0)
@@ -126,7 +131,7 @@ namespace CapaNegocio
 
 
             // Si pasa las validaciones, le pasa el objeto a la Capa de Datos
-            return objCapaDato.RegistrarProducto(obj, out mensaje);
+            return objCapaDato.EditarProducto(obj, out mensaje);
         }
     }
 }
