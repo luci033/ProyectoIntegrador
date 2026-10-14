@@ -129,7 +129,7 @@ CREATE TABLE TipoComprobante (
 IdTipoComprobante INT IDENTITY (1,1),
 TipoComprobante VARCHAR(50) NOT NULL,
 CONSTRAINT PK_IdTipoComprobante PRIMARY KEY (IdTipoComprobante),
-CONSTRAINT UQ_TipoComprobante UNIQUE (TipoComprobante),
+CONSTRAINT UQ_TipoComprobante UNIQUE (TipoComprobante)
 );
 GO
 
@@ -150,13 +150,15 @@ Descripcion VARCHAR (255),
 Estado BIT NOT NULL DEFAULT 1,
 IdGenero INT,
 IdCategoria INT,
+IdProveedor INT,
 CONSTRAINT PK_IdProducto PRIMARY KEY (IdProducto),
 CONSTRAINT FK_Genero FOREIGN KEY (IdGenero) REFERENCES Genero(IdGenero),
 CONSTRAINT FK_Categoria FOREIGN KEY (IdCategoria) REFERENCES Categoria(IdCategoria),
+CONSTRAINT FK_Proveedor FOREIGN KEY (IdProveedor) REFERENCES Proveedor (IdProveedor),
 CONSTRAINT CH_PrecioCompra CHECK (PrecioCompra > 0),
 CONSTRAINT CH_PrecioVenta CHECK (PrecioVenta > 0),
 CONSTRAINT CH_StockMinimo CHECK (StockMinimo > 0),
-CONSTRAINT CH_StockActual CHECK (StockActual > 0),
+CONSTRAINT CH_StockActual CHECK (StockActual >= 0)
 );
 GO
 
@@ -169,7 +171,7 @@ IdEstadoCompra INT NOT NULL,
 IdMedioPago INT NOT NULL,
 CONSTRAINT PK_Compra PRIMARY KEY (IdCompra),
 CONSTRAINT FK_Usuario FOREIGN KEY (IdUsuario) REFERENCES Usuarios (IdUsuario),
-CONSTRAINT FK_Proveedor FOREIGN KEY (IdProveedor) REFERENCES Proveedor(IdProveedor),
+CONSTRAINT FK_ProveedorCompra FOREIGN KEY (IdProveedor) REFERENCES Proveedor(IdProveedor),
 CONSTRAINT FK_EstadoCompra FOREIGN KEY (IdEstadoCompra) REFERENCES EstadoCompra(IdEstadoCompra),
 CONSTRAINT FK_MedioPago FOREIGN KEY (IdMedioPago) REFERENCES MedioPago(IdMedioPago)
 );
@@ -200,12 +202,12 @@ IdCompra INT NOT NULL,
 IdUsuario INT NOT NULL, 
 CONSTRAINT PK_IdRecepcion PRIMARY KEY (IdRecepcion),
 CONSTRAINT FK_CompraRecepcion FOREIGN KEY (IdCompra) REFERENCES Compra(IdCompra),
-CONSTRAINT FK_Usuarios FOREIGN KEY (IdUsuario) REFERENCES Usuarios(IdUsuario),
+CONSTRAINT FK_Usuarios FOREIGN KEY (IdUsuario) REFERENCES Usuarios(IdUsuario)
 );
 GO
 
 CREATE TABLE DetalleRecepcion (
-IdDetalleRepecion INT IDENTITY (1,1),
+IdDetalleRecepcion INT IDENTITY (1,1),
 CantidadRecibida INT NOT NULL,
 IdRecepcion INT NOT NULL,
 IdDetalleCompra INT NOT NULL,
@@ -228,7 +230,7 @@ CONSTRAINT PK_IdCliente PRIMARY KEY (IdCliente),
 CONSTRAINT UQ_DNICUIT UNIQUE (DNICUIT),
 CONSTRAINT FK_CondicionIVA FOREIGN KEY (IdCondicionIVA) REFERENCES CondicionIVA(IdCondicionIVA),
 CONSTRAINT CK_DNICUIT_Numerico CHECK (DNICUIT NOT LIKE '%[^0-9]%' AND LEN(DNICUIT) <= 11),
-CONSTRAINT CK_ClienteTelefono CHECK (Telefono NOT LIKE '%[^0-9]%'),
+CONSTRAINT CK_ClienteTelefono CHECK (Telefono NOT LIKE '%[^0-9]%')
 );
 GO 
 
@@ -243,7 +245,7 @@ CONSTRAINT PK_IdComprobante PRIMARY KEY (IdComprobante),
 CONSTRAINT FK_ComprobanteMedioPago FOREIGN KEY (IdMedioPago) REFERENCES MedioPago(IdMedioPago),
 CONSTRAINT FK_ComprobanteTipoComprobante FOREIGN KEY (IdTipoComprobante) REFERENCES TipoComprobante(IdTipoComprobante),
 CONSTRAINT FK_ComprobanteCliente FOREIGN KEY (IdCliente) REFERENCES Cliente (IdCliente),
-CONSTRAINT FK_ComprobanteUsuario FOREIGN KEY (IdUsuario) REFERENCES Usuarios(IdUsuario),
+CONSTRAINT FK_ComprobanteUsuario FOREIGN KEY (IdUsuario) REFERENCES Usuarios(IdUsuario)
 );
 GO
 
