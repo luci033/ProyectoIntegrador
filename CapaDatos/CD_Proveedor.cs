@@ -61,7 +61,7 @@ namespace CapaDatos
             return respuesta;
         }
 
-        /*public List<Proveedor> ListarProveedores()
+        public List<Proveedor> ListarProveedores()
         {
             //creo la lista
             List<Proveedor> lista = new List<Proveedor>();
@@ -73,9 +73,38 @@ namespace CapaDatos
                 //creo la conexion con la bd
                 using (SqlConnection conexion = Conexion.ObtenerConexion())
                 {
-
+                    //creo el comando con la query y la conexión
+                    using (SqlCommand cmd = new SqlCommand(query, conexion))
+                    {
+                        //ahora un elemento reader y le paso el comando
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            //mientras el lecto lea...
+                            while (reader.Read())
+                            {
+                                // agrego el elemento que lee a la lista tipo proveedor
+                                lista.Add(new Proveedor()
+                                {
+                                    IdProveedor = Convert.ToInt32(reader["IdProveedor"]),
+                                    RazonSocial = reader["RazonSocial"].ToString(),
+                                    CUIT = reader["CUIT"].ToString(),
+                                    Telefono = reader["Telefono"].ToString(),
+                                    CorreElectronico = reader["CorreoElectronico"].ToString()
+                                });
+                            }
+                        }
+                    }
                 }
             }
-        }*/
+            //si no anda el try lo catcheo con esta parte
+            catch (Exception ex)
+            {
+                //una lista vacia pa que no de error
+                lista = new List<Proveedor>();
+            }
+
+            //devolvemos la lsit
+            return lista;
+        }
     }
 }

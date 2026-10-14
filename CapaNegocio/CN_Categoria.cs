@@ -28,5 +28,10 @@ namespace CapaNegocio
             // Si pasa las validaciones, le pasa el objeto a la Capa de Datos
             return objCapaDato.RegistrarCategoria(obj, out mensaje);
         }
+
+        public List<Categoria> ListarCategorias()
+        {
+            return objCapaDato.ListarCategorias();
+        }
     }
 }

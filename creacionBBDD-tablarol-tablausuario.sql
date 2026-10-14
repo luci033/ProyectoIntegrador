@@ -142,8 +142,8 @@ GO
 CREATE TABLE Producto (
 IdProducto INT IDENTITY (1, 1),
 NombreProducto VARCHAR(255),
-PrecioVenta DECIMAL (10, 2),
-PrecioCompra DECIMAL (10, 2),
+PrecioVenta DECIMAL (10, 2) NULL,
+PrecioCompra DECIMAL (10, 2) NULL,
 StockActual INT,
 StockMinimo INT, 
 Descripcion VARCHAR (255),
@@ -155,10 +155,10 @@ CONSTRAINT PK_IdProducto PRIMARY KEY (IdProducto),
 CONSTRAINT FK_Genero FOREIGN KEY (IdGenero) REFERENCES Genero(IdGenero),
 CONSTRAINT FK_Categoria FOREIGN KEY (IdCategoria) REFERENCES Categoria(IdCategoria),
 CONSTRAINT FK_Proveedor FOREIGN KEY (IdProveedor) REFERENCES Proveedor (IdProveedor),
-CONSTRAINT CH_PrecioCompra CHECK (PrecioCompra > 0),
-CONSTRAINT CH_PrecioVenta CHECK (PrecioVenta > 0),
-CONSTRAINT CH_StockMinimo CHECK (StockMinimo > 0),
-CONSTRAINT CH_StockActual CHECK (StockActual >= 0)
+CONSTRAINT CK_PrecioCompra CHECK (PrecioCompra > 0),
+CONSTRAINT CK_PrecioVenta CHECK (PrecioVenta > 0),
+CONSTRAINT CK_StockMinimo CHECK (StockMinimo > 0),
+CONSTRAINT CK_StockActual CHECK (StockActual >= 0)
 );
 GO
 

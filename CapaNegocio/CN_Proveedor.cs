@@ -29,5 +29,11 @@ namespace CapaNegocio
             // Si pasa las validaciones, le pasa el objeto a la Capa de Datos
             return objProveedor.RegistrarProveedor(obj, out mensaje);
         }
+
+        //capa negocio que lista los proveedores
+        public List<Proveedor> ListarProveedores()
+        {
+            return objProveedor.ListarProveedores();
+        }
     }
 }
