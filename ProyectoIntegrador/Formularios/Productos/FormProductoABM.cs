@@ -1,3 +1,5 @@
+using CapaEntidades;
+using CapaNegocio;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -9,10 +11,10 @@ namespace ProyectoIntegrador
     {
         public string Nombre => textNombre.Text.Trim();
         public string Categoria => cmbCategoria.Text.Trim();
-        public string Genero => combGenero.Text.Trim(); // Revisá si le pusiste comGenero o combGenero
+        public string Genero => combGenero.Text.Trim(); 
         public string Precio => textPrecio.Text.Trim();
         public string Stock => textStockInicial.Text.Trim();
-        public string StockMinimo => textStockMinimo.Text.Trim(); // <- Agregá esta línea
+        public string StockMinimo => textStockMinimo.Text.Trim();
         public string Descripcion => textDescripcion.Text.Trim();
         private bool esModificacion = false;
         private bool esDetalle = false;
@@ -20,16 +22,6 @@ namespace ProyectoIntegrador
         public FormProductoABM()
         {
             InitializeComponent();
-
-            // 1. Cargamos las listas acá para que existan antes de recibir los datos
-            cmbCategoria.Items.Clear();
-            cmbCategoria.Items.AddRange(new string[] { "Anillos", "Collares", "Pulseras", "Aros", "Dijes", "Cadenas", "Relojes" });
-
-            cmbProveedor.Items.Clear();
-            cmbProveedor.Items.AddRange(new string[] { "Joyas del Norte", "Distribuidora Oro S.A.", "Gemas y Piedras", "Importadora Rubi", "Platería Central", "Proveedor A", "Proveedor B", "Proveedor C" });
-
-            combGenero.Items.Clear();
-            combGenero.Items.AddRange(new string[] { "Femenino", "Masculino", "Unisex" });
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -48,11 +40,34 @@ namespace ProyectoIntegrador
             EstiloUI.AplicarEstiloTextBox(textDescripcion);
             EstiloUI.CentrarControl(panelCard, this);
 
+
+     
+            //ComboBox Categoria
+            cmbCategoria.DataSource = new CN_Categoria().ListarCategorias();
+            cmbCategoria.DisplayMember = "NombreCategoria";
+            cmbCategoria.ValueMember = "IdCategoria";
+            cmbCategoria.SelectedIndex = -1;
+
+            //ComboBox Genero
+            combGenero.DataSource = new CN_Genero().ListarGeneros();
+            combGenero.DisplayMember = "NombreGenero";
+            combGenero.ValueMember = "IdGenero";
+            combGenero.SelectedIndex = -1;
+
+            //ComboBoxProveedor 
+            cmbProveedor.DataSource = new CN_Proveedor().ListarProveedores();
+            cmbProveedor.DisplayMember = "RazonSocial";
+            cmbProveedor.ValueMember = "IdProveedor";
+            cmbProveedor.SelectedIndex = -1;
+
+
             // 2. Solo reseteamos los campos si estamos creando un producto NUEVO
             if (!esModificacion && !esDetalle)
             {
-                textPrecio.Text = "0.01";
-                textStockInicial.Text = "1";
+                textPrecio.ReadOnly = true;
+                textPrecio.Text = "0.00";
+                textStockInicial .ReadOnly = true;
+                textStockInicial.Text = "0";
 
                 cmbProveedor.SelectedIndex = -1;
                 cmbCategoria.SelectedIndex = -1;
@@ -98,30 +113,6 @@ namespace ProyectoIntegrador
                 return false;
             }
 
-                // 5. valida precio uni
-                if (esModificacion == false)
-            {
-                if (!decimal.TryParse(textPrecio.Text, out decimal precio) || precio <= 0)
-                {
-                    MessageBox.Show("El precio unitario debe ser un número válido mayor a 0.", "Precio Inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    textPrecio.Focus();
-                    textPrecio.SelectAll();
-                    return false;
-                }
-            }
-
-            // 6. valida stock iniciañ
-            if (esModificacion == false)
-            {
-                if (!int.TryParse(textStockInicial.Text, out int stockIni) || stockIni < 0)
-                {
-                    MessageBox.Show("El stock inicial debe ser un número entero (0 o mayor).", "Stock Inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    textStockInicial.Focus();
-                    textStockInicial.SelectAll();
-                    return false;
-                }
-            }
-
             // 7. valida stock minimo
             if (esModificacion == false)
             {
@@ -144,6 +135,40 @@ namespace ProyectoIntegrador
                 return;
             }
 
+            Producto nuevoProducto = new Producto()
+            {
+                NombreProducto = textNombre.Text.Trim(),
+                Descripcion = textDescripcion.Text.Trim(),
+                StockMinimo = Convert.ToInt32(textStockMinimo.Text),
+                StockActual = 0,
+                PrecioCompra = null,
+                PrecioVenta = null,
+                IdCategoria = Convert.ToInt32(cmbCategoria.SelectedValue),
+                IdGenero = Convert.ToInt32(combGenero.SelectedValue),
+                IdProveedor = Convert.ToInt32(cmbProveedor.SelectedValue),
+                Estado = true
+            };
+
+            string mensaje = string.Empty;
+            CN_Producto negocioProducto = new CN_Producto();
+
+            //si es modifiacion o alta nueva (por ahora le pongo para registrar)
+            bool resultado = negocioProducto.Registrar(nuevoProducto, out mensaje);
+
+            if (resultado)
+            { 
+                MessageBox.Show("Éxito", "Joyaria ALBA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                //si la capa de engocio o la bd rechazan, mostramos el mensaje correcto
+                MessageBox.Show(mensaje, "Error de Registro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+
+            /*
             // 3 y 4. Definimos los textos dependiendo de si es modificación o nuevo registro
             string mensajePregunta = esModificacion ? "¿Confirma la modificación del producto: " : "Confirma el registro del producto: ";
             string tituloPregunta = esModificacion ? "¿Confirma modificación?" : "¿Confirma guardado?";
@@ -162,6 +187,7 @@ namespace ProyectoIntegrador
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
+            */
         }
 
         private void BCancelar_Click(object sender, EventArgs e)

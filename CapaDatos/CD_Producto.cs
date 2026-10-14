@@ -1,6 +1,7 @@
 using CapaEntidades;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -83,5 +84,39 @@ namespace CapaDatos
 
             return respuesta;
         }
+
+        public DataTable ListarProductos()
+        {
+            DataTable tabla = new DataTable();
+            using (SqlConnection conexion = Conexion.ObtenerConexion())
+            {
+                string query = @"SELECT 
+                            p.IdProducto, 
+                            p.NombreProducto, 
+                            p.PrecioVenta, 
+                            p.PrecioCompra, 
+                            p.StockActual, 
+                            p.StockMinimo, 
+                            p.Descripcion, 
+                            p.Estado,
+                            g.Genero AS NombreGenero,
+                            cat.Categoria AS NombreCategoria,
+                            pr.RazonSocial AS NombreProveedor
+                         FROM PRODUCTO p
+                         INNER JOIN Genero g ON p.IdGenero = g.IdGenero
+                         INNER JOIN Categoria cat ON p.IdCategoria = cat.IdCategoria
+                         INNER JOIN Proveedor pr ON p.IdProveedor = pr.IdProveedor";
+
+                using (SqlCommand comando = new SqlCommand(query, conexion))
+                {
+                    using (SqlDataAdapter adaptador = new SqlDataAdapter(comando))
+                    {
+                        adaptador.Fill(tabla);
+                    }
+                }
+            }
+            return tabla;
+        }
+
     }
 }

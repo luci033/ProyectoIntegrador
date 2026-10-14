@@ -32,7 +32,7 @@ namespace ProyectoIntegrador.Formularios.Proveedores
             errorProvider1.Clear(); // Limpia errores previos
 
             // Validar Razón Social
-            if (TBRazonSocial.Text.Length < 3 || TBRazonSocial.Text.Length > 25)
+            if (TBRazonSocial.Text.Length < 3)
             {
                 errorProvider1.SetError(TBRazonSocial, "Debe tener entre 3 y 25 caracteres.");
                 valido = false;

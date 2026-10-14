@@ -28,7 +28,6 @@ namespace ProyectoIntegrador
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormProductoABM));
             this.panelCard = new System.Windows.Forms.Panel();
             this.LTitulo = new System.Windows.Forms.Label();
@@ -60,7 +59,6 @@ namespace ProyectoIntegrador
             // panelCard
             // 
             this.panelCard.BackColor = System.Drawing.Color.White;
-            this.panelCard.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.panelCard.Controls.Add(this.LTitulo);
             this.panelCard.Controls.Add(this.LSubtitulo);
             this.panelCard.Controls.Add(this.LNombre);
@@ -106,7 +104,8 @@ namespace ProyectoIntegrador
             this.LSubtitulo.Name = "LSubtitulo";
             this.LSubtitulo.Size = new System.Drawing.Size(840, 20);
             this.LSubtitulo.TabIndex = 1;
-            this.LSubtitulo.Text = "Complete la ficha técnica, categoría, precios y parámetros de inventario del producto.";
+            this.LSubtitulo.Text = "Complete la ficha técnica, categoría, precios y parámetros de inventario del prod" +
+    "ucto.";
             this.LSubtitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // LNombre
@@ -177,7 +176,7 @@ namespace ProyectoIntegrador
             this.LProveedor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
             this.LProveedor.Location = new System.Drawing.Point(50, 268);
             this.LProveedor.Name = "LProveedor";
-            this.LProveedor.Size = new System.Drawing.Size(75, 17);
+            this.LProveedor.Size = new System.Drawing.Size(76, 17);
             this.LProveedor.TabIndex = 8;
             this.LProveedor.Text = "Proveedor:";
             // 
@@ -240,7 +239,7 @@ namespace ProyectoIntegrador
             this.LStockI.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
             this.LStockI.Location = new System.Drawing.Point(470, 148);
             this.LStockI.Name = "LStockI";
-            this.LStockI.Size = new System.Drawing.Size(89, 17);
+            this.LStockI.Size = new System.Drawing.Size(88, 17);
             this.LStockI.TabIndex = 14;
             this.LStockI.Text = "Stock Actual:";
             // 
@@ -260,7 +259,7 @@ namespace ProyectoIntegrador
             this.LStockM.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
             this.LStockM.Location = new System.Drawing.Point(470, 208);
             this.LStockM.Name = "LStockM";
-            this.LStockM.Size = new System.Drawing.Size(98, 17);
+            this.LStockM.Size = new System.Drawing.Size(97, 17);
             this.LStockM.TabIndex = 16;
             this.LStockM.Text = "Stock Mínimo:";
             // 
