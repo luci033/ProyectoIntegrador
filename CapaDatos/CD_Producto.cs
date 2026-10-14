@@ -128,7 +128,7 @@ namespace CapaDatos
                             NombreProducto = @NombreProducto,
                             StockMinimo = @StockMinimo,
                             Descripcion = @Descripcion,
-                            IdProveedro = @IdProveedor,
+                            IdProveedor = @IdProveedor,
                             IdCategoria = @IdCategoria,
                             IdGenero = @IdGenero
                             WHERE IdProducto = @IdProducto";
@@ -141,7 +141,7 @@ namespace CapaDatos
                     {
 
 
-                        cmd.Parameters.AddWithValue("@NombreProducto", string.IsNullOrWhiteSpace(obj.NombreProducto) ? (object)DBNull.Value : obj.NombreProducto);                        cmd.Parameters.AddWithValue("@PrecioCompra", (object)obj.PrecioCompra ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@NombreProducto", string.IsNullOrWhiteSpace(obj.NombreProducto) ? (object)DBNull.Value : obj.NombreProducto);
                         cmd.Parameters.AddWithValue("@StockMinimo", obj.StockMinimo);
                         cmd.Parameters.AddWithValue("@Descripcion", string.IsNullOrWhiteSpace(obj.Descripcion) ? (object)DBNull.Value : obj.Descripcion);
                         cmd.Parameters.AddWithValue("@IdGenero", obj.IdGenero);
