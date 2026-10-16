@@ -40,3 +40,5 @@ VALUES
     ('Pulsera Cadena Marina Maciza', NULL, NULL, 0, 4, 'Pulsera con eslabones tipo ancla / marina de 8mm en plata 925 maciza.', 1, 2, 2, 1),
     ('Pulsera Hilo Rojo Dije Infinito', NULL, NULL, 0, 12, 'Pulsera de protección con hilo rojo regulable y dije central de infinito en plata 925.', 1, 3, 2, 2);
 GO
+
+select * from Producto

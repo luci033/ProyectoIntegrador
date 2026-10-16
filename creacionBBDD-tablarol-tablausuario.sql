@@ -212,7 +212,7 @@ CantidadRecibida INT NOT NULL,
 IdRecepcion INT NOT NULL,
 IdDetalleCompra INT NOT NULL,
 IdCompra INT NOT NULL,
-CONSTRAINT PK_IdDetalleRecepcion PRIMARY KEY (IdDetalleRepecion),
+CONSTRAINT PK_IdDetalleRecepcion PRIMARY KEY (IdDetalleRecepcion),
 CONSTRAINT FK_Recepcion FOREIGN KEY (IdRecepcion) REFERENCES Recepcion(IdRecepcion),
 CONSTRAINT FK_DetalleCompra FOREIGN KEY (IdDetalleCompra, IdCompra) REFERENCES DetalleCompra(IdDetalleCompra, IdCompra)
 );
