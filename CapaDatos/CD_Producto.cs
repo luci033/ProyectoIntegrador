@@ -99,6 +99,7 @@ namespace CapaDatos
                             p.StockMinimo, 
                             p.Descripcion, 
                             p.Estado,
+                            p.IdProveedor,
                             g.NombreGenero AS NombreGenero,
                             cat.NombreCategoria AS NombreCategoria,
                             pr.RazonSocial AS NombreProveedor

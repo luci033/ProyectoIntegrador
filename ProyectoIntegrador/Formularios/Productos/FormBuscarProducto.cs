@@ -15,9 +15,12 @@ namespace ProyectoIntegrador.Formularios.Productos
 {
     public partial class FormBuscarProducto : Form
     {
-        public FormBuscarProducto()
+        private int idProveedorFiltro = 0;
+
+        public FormBuscarProducto(int idProveedor = 0)
         {
             InitializeComponent();
+            this.idProveedorFiltro = idProveedor;
             this.WindowState = FormWindowState.Maximized;
         }
 
@@ -85,6 +88,13 @@ namespace ProyectoIntegrador.Formularios.Productos
                 {
                     bool activo = row["Estado"] != DBNull.Value ? Convert.ToBoolean(row["Estado"]) : true;
                     if (!activo) continue;
+
+                    // Si se especificó un proveedor, mostramos solo sus productos
+                    if (idProveedorFiltro > 0)
+                    {
+                        int idProv = (row.Table.Columns.Contains("IdProveedor") && row["IdProveedor"] != DBNull.Value) ? Convert.ToInt32(row["IdProveedor"]) : 0;
+                        if (idProv != idProveedorFiltro) continue;
+                    }
 
                     int id = Convert.ToInt32(row["IdProducto"]);
                     string nombre = row["NombreProducto"] != DBNull.Value ? row["NombreProducto"].ToString() : "";

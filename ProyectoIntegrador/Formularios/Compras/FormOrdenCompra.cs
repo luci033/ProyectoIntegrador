@@ -106,6 +106,18 @@ namespace ProyectoIntegrador.Formularios.Compras
             {
                 if (formBuscar.ShowDialog() == DialogResult.OK)
                 {
+                    if (DGDetalleOrden.Rows.Count > 0 && idProveedorSeleccionado > 0 && idProveedorSeleccionado != formBuscar.IdProveedor)
+                    {
+                        DialogResult confirm = MessageBox.Show(
+                            "Al cambiar de proveedor se vaciarán los productos agregados a la orden. ¿Desea continuar?",
+                            "Cambiar Proveedor", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                        if (confirm != DialogResult.Yes) return;
+
+                        DGDetalleOrden.Rows.Clear();
+                        CalcularTotal();
+                    }
+
                     idProveedorSeleccionado = formBuscar.IdProveedor;
                     TBRazonSocial.Text = formBuscar.RazonSocial;
                     TBCUIT.Text = formBuscar.CUIT;
@@ -117,13 +129,13 @@ namespace ProyectoIntegrador.Formularios.Compras
 
         private void BAgregarProducto_Click(object sender, EventArgs e)
         {
-
-            if (string.IsNullOrWhiteSpace(TBRazonSocial.Text))
+            if (string.IsNullOrWhiteSpace(TBRazonSocial.Text) || idProveedorSeleccionado <= 0)
             {
                 MessageBox.Show("Primero debés seleccionar un proveedor.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            using (FormBuscarProducto formProducto = new FormBuscarProducto())
+
+            using (FormBuscarProducto formProducto = new FormBuscarProducto(idProveedorSeleccionado))
             {
                 if (formProducto.ShowDialog() == DialogResult.OK)
                 {
