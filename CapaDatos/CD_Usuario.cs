@@ -13,8 +13,8 @@ namespace CapaDatos
             mensaje = string.Empty;
             bool respuesta = false;
 
-            string query = @"INSERT INTO Usuarios (Usuario, NombreUsuario, ApellidoUsuario, Contrasena, Foto_Perfil, IdRol, DNI, Activo) 
-                             VALUES (@Usuario, @Nombre, @Apellido, @Contrasena, @Foto, @IdRol, @DNI, 1)";
+            string query = @"INSERT INTO Usuarios (Usuario, NombreUsuario, ApellidoUsuario, Contrasena, Foto_Perfil, IdRol, DNI, Activo, Telefono, Domicilio) 
+                             VALUES (@Usuario, @Nombre, @Apellido, @Contrasena, @Foto, @IdRol, @DNI, 1, @Telefono, @Domicilio)";
 
             try
             {
@@ -31,6 +31,8 @@ namespace CapaDatos
                         cmd.Parameters.AddWithValue("@Foto", string.IsNullOrWhiteSpace(obj.Foto_Perfil) ? (object)DBNull.Value : obj.Foto_Perfil);
                         cmd.Parameters.AddWithValue("@IdRol", obj.IdRol);
                         cmd.Parameters.AddWithValue("@DNI", string.IsNullOrWhiteSpace(obj.Dni) ? (object)DBNull.Value : obj.Dni);
+                        cmd.Parameters.AddWithValue("@Telefono", string.IsNullOrWhiteSpace(obj.Telefono) ? (object)DBNull.Value : obj.Telefono);
+                        cmd.Parameters.AddWithValue("@Domicilio", string.IsNullOrWhiteSpace(obj.Domicilio) ? (object)DBNull.Value : obj.Domicilio);
 
                         int filasAfectadas = cmd.ExecuteNonQuery();
                         respuesta = filasAfectadas > 0;

@@ -54,6 +54,10 @@ namespace ProyectoIntegrador
             this.BCancelar = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.LTelefono = new System.Windows.Forms.Label();
+            this.TBTelefono = new System.Windows.Forms.TextBox();
+            this.LDomicilio = new System.Windows.Forms.Label();
+            this.TBDomicilio = new System.Windows.Forms.TextBox();
             this.panelCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUsuario)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -63,6 +67,10 @@ namespace ProyectoIntegrador
             // 
             this.panelCard.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panelCard.BackColor = System.Drawing.Color.White;
+            this.panelCard.Controls.Add(this.LTelefono);
+            this.panelCard.Controls.Add(this.TBTelefono);
+            this.panelCard.Controls.Add(this.LDomicilio);
+            this.panelCard.Controls.Add(this.TBDomicilio);
             this.panelCard.Controls.Add(this.LTitulo);
             this.panelCard.Controls.Add(this.LSubtitulo);
             this.panelCard.Controls.Add(this.LNombre);
@@ -96,7 +104,7 @@ namespace ProyectoIntegrador
             this.LTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
             this.LTitulo.Location = new System.Drawing.Point(25, 20);
             this.LTitulo.Name = "LTitulo";
-            this.LTitulo.Size = new System.Drawing.Size(221, 25);
+            this.LTitulo.Size = new System.Drawing.Size(218, 25);
             this.LTitulo.TabIndex = 0;
             this.LTitulo.Text = "Gestión de Usuario";
             // 
@@ -107,7 +115,7 @@ namespace ProyectoIntegrador
             this.LSubtitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(128)))), ((int)(((byte)(150)))));
             this.LSubtitulo.Location = new System.Drawing.Point(26, 48);
             this.LSubtitulo.Name = "LSubtitulo";
-            this.LSubtitulo.Size = new System.Drawing.Size(325, 15);
+            this.LSubtitulo.Size = new System.Drawing.Size(364, 15);
             this.LSubtitulo.TabIndex = 1;
             this.LSubtitulo.Text = "Complete los datos personales y credenciales de acceso del usuario.";
             // 
@@ -138,7 +146,7 @@ namespace ProyectoIntegrador
             this.LApellido.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
             this.LApellido.Location = new System.Drawing.Point(198, 80);
             this.LApellido.Name = "LApellido";
-            this.LApellido.Size = new System.Drawing.Size(52, 13);
+            this.LApellido.Size = new System.Drawing.Size(51, 13);
             this.LApellido.TabIndex = 4;
             this.LApellido.Text = "Apellido";
             // 
@@ -178,7 +186,7 @@ namespace ProyectoIntegrador
             this.L.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
             this.L.Location = new System.Drawing.Point(198, 135);
             this.L.Name = "L";
-            this.L.Size = new System.Drawing.Size(89, 13);
+            this.L.Size = new System.Drawing.Size(86, 13);
             this.L.TabIndex = 8;
             this.L.Text = "Rol del Usuario";
             // 
@@ -203,7 +211,7 @@ namespace ProyectoIntegrador
             this.LUsuario.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
             this.LUsuario.Location = new System.Drawing.Point(26, 192);
             this.LUsuario.Name = "LUsuario";
-            this.LUsuario.Size = new System.Drawing.Size(110, 13);
+            this.LUsuario.Size = new System.Drawing.Size(109, 13);
             this.LUsuario.TabIndex = 10;
             this.LUsuario.Text = "Nombre de Usuario";
             // 
@@ -244,7 +252,7 @@ namespace ProyectoIntegrador
             this.LRepetirContraseña.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
             this.LRepetirContraseña.Location = new System.Drawing.Point(198, 248);
             this.LRepetirContraseña.Name = "LRepetirContraseña";
-            this.LRepetirContraseña.Size = new System.Drawing.Size(107, 13);
+            this.LRepetirContraseña.Size = new System.Drawing.Size(106, 13);
             this.LRepetirContraseña.TabIndex = 14;
             this.LRepetirContraseña.Text = "Repetir Contraseña";
             // 
@@ -265,7 +273,7 @@ namespace ProyectoIntegrador
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
             this.label1.Location = new System.Drawing.Point(400, 80);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(81, 13);
+            this.label1.Size = new System.Drawing.Size(77, 13);
             this.label1.TabIndex = 16;
             this.label1.Text = "Foto de Perfil";
             // 
@@ -330,6 +338,46 @@ namespace ProyectoIntegrador
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // LTelefono
+            // 
+            this.LTelefono.AutoSize = true;
+            this.LTelefono.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LTelefono.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LTelefono.Location = new System.Drawing.Point(23, 305);
+            this.LTelefono.Name = "LTelefono";
+            this.LTelefono.Size = new System.Drawing.Size(129, 15);
+            this.LTelefono.TabIndex = 21;
+            this.LTelefono.Text = "Teléfono de Contacto:";
+            // 
+            // TBTelefono
+            // 
+            this.TBTelefono.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.TBTelefono.Location = new System.Drawing.Point(23, 327);
+            this.TBTelefono.Name = "TBTelefono";
+            this.TBTelefono.Size = new System.Drawing.Size(163, 25);
+            this.TBTelefono.TabIndex = 22;
+            this.TBTelefono.Validating += new System.ComponentModel.CancelEventHandler(this.TBTelefono_Validating);
+            // 
+            // LDomicilio
+            // 
+            this.LDomicilio.AutoSize = true;
+            this.LDomicilio.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LDomicilio.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LDomicilio.Location = new System.Drawing.Point(198, 305);
+            this.LDomicilio.Name = "LDomicilio";
+            this.LDomicilio.Size = new System.Drawing.Size(59, 15);
+            this.LDomicilio.TabIndex = 23;
+            this.LDomicilio.Text = "Domicilio";
+            // 
+            // TBDomicilio
+            // 
+            this.TBDomicilio.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.TBDomicilio.Location = new System.Drawing.Point(201, 327);
+            this.TBDomicilio.Name = "TBDomicilio";
+            this.TBDomicilio.Size = new System.Drawing.Size(169, 25);
+            this.TBDomicilio.TabIndex = 24;
+            this.TBDomicilio.Validating += new System.ComponentModel.CancelEventHandler(this.TBDomicilio_Validating);
+            // 
             // FormUsuarioABM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -378,5 +426,9 @@ namespace ProyectoIntegrador
         private System.Windows.Forms.Button BBuscarArchivo;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Label LTelefono;
+        private System.Windows.Forms.TextBox TBTelefono;
+        private System.Windows.Forms.Label LDomicilio;
+        private System.Windows.Forms.TextBox TBDomicilio;
     }
 }

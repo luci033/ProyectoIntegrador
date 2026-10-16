@@ -25,5 +25,8 @@ namespace CapaEntidades
         public Rol ObjRol { get; set; }
         public string Dni { get; set; }
         public string Foto_Perfil { get; set; }
+        public string Telefono { get; set; }
+        public string Domicilio { get; set; }
+
     }
 }

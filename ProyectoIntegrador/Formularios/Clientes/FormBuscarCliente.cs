@@ -1,3 +1,4 @@
+using CapaNegocio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,8 +14,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
 {
     public partial class FormBuscarCliente : Form
     {
-
-        private List<ClienteSimulado> listaTemporalClientes = new List<ClienteSimulado>();
+        private CN_Cliente cnCliente = new CN_Cliente();
         public FormBuscarCliente()
         {
             InitializeComponent();
@@ -42,21 +42,22 @@ namespace ProyectoIntegrador.Formularios.Clientes
         private void CargarGrillaClientes()
         {
             DGClientes.Rows.Clear(); // Limpiamos para no duplicar datos
-            int numeroFila = 1;
+            DataTable dtClientes = cnCliente.Listar();
 
-            foreach (var cliente in listaTemporalClientes)
+            int numeroFila = 1;
+            foreach (DataRow row in dtClientes.Rows)
             {
                 DGClientes.Rows.Add(
-                    "",                   // [0] ID Oculto 
-                    numeroFila,           // [1] Nro
-                    cliente.Nombre,       // [2] Nombre
-                    cliente.Apellido,     // [3] Apellido
-                    cliente.DNI,          // [4] DNI
-                    cliente.Telefono,       // [5] Telefono
-                    cliente.Correo,         // [6] Correo
-                    cliente.CondicionIVA,       // [7] Condición IVA
-                    "Ver..",                 // [8] Botón Historial
-                    "Modificar"             // [9] Botón Modificar
+                    row["IdCliente"].ToString(),          // [0] ID Oculto 
+                    numeroFila,                           // [1] Nro
+                    row["Nombre"].ToString(),             // [2] Nombre
+                    row["Apellido"].ToString(),           // [3] Apellido
+                    row["DNICUIT"].ToString(),            // [4] DNI / CUIT
+                    row["Telefono"].ToString(),           // [5] Teléfono
+                    row["CorreoElectronico"].ToString(),  // [6] Correo
+                    row["CondicionIVA"].ToString(),       // [7] Condición IVA (Real de la BD)
+                    "Ver..",                              // [8] Botón Historial
+                    "Modificar"            // [9] Botón Modificar
                 );
                 numeroFila++;
             }

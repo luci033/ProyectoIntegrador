@@ -292,5 +292,24 @@ namespace ProyectoIntegrador.Formularios.Clientes
             cmbCondicionIVA.SelectedIndex = -1;             // Arranca sin nada seleccionado
         }
 
+        private void TBTelefono_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LTelefono_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LCorreo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TBCorreo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

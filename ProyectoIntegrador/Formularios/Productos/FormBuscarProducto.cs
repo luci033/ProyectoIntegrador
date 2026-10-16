@@ -17,6 +17,11 @@ namespace ProyectoIntegrador.Formularios.Productos
     {
         private int idProveedorFiltro = 0;
 
+        public FormBuscarProducto()
+        {
+            InitializeComponent();
+        }
+
         public FormBuscarProducto(int idProveedor = 0)
         {
             InitializeComponent();

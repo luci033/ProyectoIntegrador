@@ -200,6 +200,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
             this.LTelefono.Size = new System.Drawing.Size(129, 15);
             this.LTelefono.TabIndex = 10;
             this.LTelefono.Text = "Teléfono de Contacto:";
+            this.LTelefono.Click += new System.EventHandler(this.LTelefono_Click);
             // 
             // TBTelefono
             // 
@@ -208,6 +209,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
             this.TBTelefono.Name = "TBTelefono";
             this.TBTelefono.Size = new System.Drawing.Size(265, 25);
             this.TBTelefono.TabIndex = 11;
+            this.TBTelefono.TextChanged += new System.EventHandler(this.TBTelefono_TextChanged);
             // 
             // LCorreo
             // 
@@ -219,6 +221,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
             this.LCorreo.Size = new System.Drawing.Size(113, 15);
             this.LCorreo.TabIndex = 12;
             this.LCorreo.Text = "Correo Electrónico:";
+            this.LCorreo.Click += new System.EventHandler(this.LCorreo_Click);
             // 
             // TBCorreo
             // 
@@ -227,6 +230,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
             this.TBCorreo.Name = "TBCorreo";
             this.TBCorreo.Size = new System.Drawing.Size(265, 25);
             this.TBCorreo.TabIndex = 13;
+            this.TBCorreo.TextChanged += new System.EventHandler(this.TBCorreo_TextChanged);
             this.TBCorreo.Validating += new System.ComponentModel.CancelEventHandler(this.TBCorreo_Validating);
             // 
             // panelAvatar

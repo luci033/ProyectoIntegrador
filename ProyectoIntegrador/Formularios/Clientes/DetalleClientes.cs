@@ -37,7 +37,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
             EstiloUI.AplicarEstiloBoton(BCerrar);
             EstiloUI.CentrarControl(panelCard, this);
 
-            CargarCondicionIVA();
+           // CargarCondicionIVA();
         }
 
         private void DetalleClientes_Resize(object sender, EventArgs e)
@@ -50,7 +50,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
             this.Close();
         }
 
-        public void CargarDatosCliente(string nombre, string correo, string condicionIva, string dni)
+        public void CargarDatosCliente()
         {
             TBNombre.Text = nombre;
             TBCorreo.Text = correo;
@@ -58,6 +58,12 @@ namespace ProyectoIntegrador.Formularios.Clientes
             TBDni.Text = dni;
 
             //UNA VEZ CARGADO EL COMBO, SELECCIONAMOS EL TEXTO CORRESPONDIENTE
+            //cmbCondicionIVA.Enabled = false;
+
+            cmbCondicionIVA.DataSource = null; // Desvinculamos la lista general
+            cmbCondicionIVA.Items.Clear();
+            cmbCondicionIVA.Items.Add(condicionIva); // Agregamos únicamente el IVA real del cliente
+            cmbCondicionIVA.SelectedIndex = 0;       // Lo seleccionamos para que se vea
             cmbCondicionIVA.Enabled = false;
         }
 

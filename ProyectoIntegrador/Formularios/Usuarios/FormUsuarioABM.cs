@@ -27,7 +27,9 @@ namespace ProyectoIntegrador
         public string Dni => TBDni.Text.Trim();
         public string Usuario => TBUsuario.Text.Trim();
         public string Rol => CBRol.Text;
-      
+        public string Telefono => TBTelefono .Text.Trim();
+        public string Domicilio => TBDomicilio .Text.Trim();
+
 
         public FormUsuarioABM()
         {
@@ -47,6 +49,8 @@ namespace ProyectoIntegrador
             EstiloUI.AplicarEstiloTextBox(TBUsuario);
             EstiloUI.AplicarEstiloTextBox(TBContraseña);
             EstiloUI.AplicarEstiloTextBox(TBContraseñaRepetir);
+            EstiloUI.AplicarEstiloTextBox(TBTelefono);
+            EstiloUI.AplicarEstiloTextBox(TBDomicilio);
 
             // Pedimos los roles a la base de datos
             CD_Rol datosRol = new CD_Rol();
@@ -165,11 +169,6 @@ namespace ProyectoIntegrador
             errorProvider1.SetError(TBApellido, "");
         }
 
-        private void LCorreo_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void TBUsuario_Validating(object sender, CancelEventArgs e)
         {
             // Obtenemos el texto ingresado sin espacios al inicio ni al final
@@ -192,6 +191,7 @@ namespace ProyectoIntegrador
             // Si pasó todas las validaciones, limpiamos el ícono de error
             errorProvider1.SetError(TBUsuario, "");
         }
+
 
         private void BCrearUsuario_Click(object sender, EventArgs e)
         {
@@ -235,6 +235,8 @@ namespace ProyectoIntegrador
                 !string.IsNullOrEmpty(errorProvider1.GetError(TBDni)) ||
                 !string.IsNullOrEmpty(errorProvider1.GetError(TBUsuario)) ||
                 !string.IsNullOrEmpty(errorProvider1.GetError(TBContraseña)) ||
+                !string.IsNullOrEmpty(errorProvider1.GetError(TBTelefono)) ||
+                !string.IsNullOrEmpty(errorProvider1.GetError(TBDomicilio)) ||
                 !string.IsNullOrEmpty(errorProvider1.GetError(TBContraseñaRepetir)))
             {
                 MessageBox.Show("Por favor corrija los campos marcados con error.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -253,7 +255,9 @@ namespace ProyectoIntegrador
                 Dni = TBDni.Text.Trim(),
                 Contrasena = TBContraseña.Text.Trim(),
                 Foto_Perfil = "",
-                IdRol = idRolSeleccionado
+                IdRol = idRolSeleccionado,
+                Telefono = TBTelefono.Text.Trim(),
+                Domicilio = TBDomicilio.Text.Trim()
             };
 
             // 8. Llamar directo a Capa de Negocio
@@ -299,7 +303,24 @@ namespace ProyectoIntegrador
             TBApellido.Text = apellido;
             TBUsuario.Text = nombreUsuario; 
             CBRol.Text = rol;
+            TBTelefono.Text = Telefono;
+            TBDomicilio.Text = Domicilio;
+        }
+        
+        private void TBTelefono_Validating(object sender, CancelEventArgs e)
+        {
+            string telefono = TBTelefono.Text.Trim();
+            if (!string.IsNullOrEmpty(telefono) && !Regex.IsMatch(telefono, @"^[0-9\-\s\+\(\)]+$"))
+            {
+                errorProvider1.SetError(TBTelefono, "Ingrese un número de teléfono válido.");
+                return;
+            }
+            errorProvider1.SetError(TBTelefono, "");
         }
 
+        private void TBDomicilio_Validating(object sender, CancelEventArgs e)
+        {
+            errorProvider1.SetError(TBDomicilio, "");
+        }
     }
 }

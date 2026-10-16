@@ -28,6 +28,18 @@ namespace CapaNegocio
                 return false;
             }
 
+            if (string.IsNullOrWhiteSpace(obj.Telefono))
+            {
+                mensaje = "El teléfono de contacto no puede estar vacío.";
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(obj.Domicilio))
+            {
+                mensaje = "El domicilio no puede estar vacío.";
+                return false;
+            }
+
             // Si pasa las validaciones, le pasa el objeto a la Capa de Datos
             return objCapaDato.RegistrarUsuario(obj, out mensaje);
         }
