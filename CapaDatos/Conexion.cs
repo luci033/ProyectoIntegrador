@@ -1,12 +1,14 @@
-﻿using System.Data;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace CapaDatos
 {
     public static class Conexion
     {
-        public static string Cadena = @"Data Source=DESKTOP-596J6HI\SQLEXPRESS;Initial Catalog=JoyeriaALBADB;Integrated Security=True;TrustServerCertificate=True;Encrypt=False;"; public static SqlConnection ObtenerConexion()
-        //public static string Cadena = @"Data Source=MARTINAGUILAR;Initial Catalog=JoyeriaALBADB;Integrated Security=True;TrustServerCertificate=True;Encrypt=False;"; public static SqlConnection ObtenerConexion()
+        //public static string Cadena = @"Data Source=DESKTOP-596J6HI\SQLEXPRESS;Initial Catalog=JoyeriaALBADB;Integrated Security=True;TrustServerCertificate=True;Encrypt=False;"; 
+        public static string Cadena = @"Data Source=MARTINAGUILAR;Initial Catalog=JoyeriaALBADB;Integrated Security=True;TrustServerCertificate=True;Encrypt=False;"; 
+        
+        public static SqlConnection ObtenerConexion()
         {
             SqlConnection conexion = new SqlConnection(Cadena);
             if (conexion.State == ConnectionState.Closed)

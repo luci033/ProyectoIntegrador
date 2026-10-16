@@ -11,6 +11,10 @@ namespace ProyectoIntegrador
     public partial class FormProductoABM : Form
     {
         private int IdProductoSeleccionado;
+        private string categoriaSeleccionada;
+        private string generoSeleccionado;
+        private string proveedorSeleccionado;
+
         public string Nombre => textNombre.Text.Trim();
         public string Categoria => cmbCategoria.Text.Trim();
         public string Genero => combGenero.Text.Trim(); 
@@ -42,33 +46,50 @@ namespace ProyectoIntegrador
             EstiloUI.AplicarEstiloTextBox(textDescripcion);
             EstiloUI.CentrarControl(panelCard, this);
 
-
-     
-            //ComboBox Categoria
+            // ComboBox Categoria
             cmbCategoria.DataSource = new CN_Categoria().ListarCategorias();
             cmbCategoria.DisplayMember = "NombreCategoria";
             cmbCategoria.ValueMember = "IdCategoria";
-            cmbCategoria.SelectedIndex = -1;
 
-            //ComboBox Genero
+            // ComboBox Genero
             combGenero.DataSource = new CN_Genero().ListarGeneros();
             combGenero.DisplayMember = "NombreGenero";
             combGenero.ValueMember = "IdGenero";
-            combGenero.SelectedIndex = -1;
 
-            //ComboBoxProveedor 
+            // ComboBox Proveedor 
             cmbProveedor.DataSource = new CN_Proveedor().ListarProveedores();
             cmbProveedor.DisplayMember = "RazonSocial";
             cmbProveedor.ValueMember = "IdProveedor";
-            cmbProveedor.SelectedIndex = -1;
 
-
-            // 2. Solo reseteamos los campos si estamos creando un producto NUEVO
-            if (!esModificacion && !esDetalle)
+            if (esModificacion || esDetalle)
+            {
+                if (!string.IsNullOrEmpty(categoriaSeleccionada))
+                {
+                    int index = cmbCategoria.FindStringExact(categoriaSeleccionada);
+                    if (index < 0) index = cmbCategoria.FindString(categoriaSeleccionada);
+                    if (index >= 0) cmbCategoria.SelectedIndex = index;
+                    else cmbCategoria.Text = categoriaSeleccionada;
+                }
+                if (!string.IsNullOrEmpty(generoSeleccionado))
+                {
+                    int index = combGenero.FindStringExact(generoSeleccionado);
+                    if (index < 0) index = combGenero.FindString(generoSeleccionado);
+                    if (index >= 0) combGenero.SelectedIndex = index;
+                    else combGenero.Text = generoSeleccionado;
+                }
+                if (!string.IsNullOrEmpty(proveedorSeleccionado))
+                {
+                    int index = cmbProveedor.FindStringExact(proveedorSeleccionado);
+                    if (index < 0) index = cmbProveedor.FindString(proveedorSeleccionado);
+                    if (index >= 0) cmbProveedor.SelectedIndex = index;
+                    else cmbProveedor.Text = proveedorSeleccionado;
+                }
+            }
+            else
             {
                 textPrecio.ReadOnly = true;
                 textPrecio.Text = "0.00";
-                textStockInicial .ReadOnly = true;
+                textStockInicial.ReadOnly = true;
                 textStockInicial.Text = "0";
 
                 cmbProveedor.SelectedIndex = -1;
@@ -93,41 +114,39 @@ namespace ProyectoIntegrador
             }
 
             // 2. valida la categoria
-            if (string.IsNullOrWhiteSpace(cmbCategoria.Text))
+            if (string.IsNullOrWhiteSpace(cmbCategoria.Text) || cmbCategoria.SelectedIndex == -1)
             {
                 MessageBox.Show("Seleccione una categoría para el producto.", "Dato Requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cmbCategoria.Focus();
                 return false;
             }
 
-            // 4. valida el genero
-            if (string.IsNullOrWhiteSpace(combGenero.Text))
+            // 3. valida el genero
+            if (string.IsNullOrWhiteSpace(combGenero.Text) || combGenero.SelectedIndex == -1)
             {
                 MessageBox.Show("Seleccione el género correspondiente.", "Dato Requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 combGenero.Focus();
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(cmbProveedor.Text))
+            // 4. valida proveedor
+            if (string.IsNullOrWhiteSpace(cmbProveedor.Text) || cmbProveedor.SelectedIndex == -1)
             {
                 MessageBox.Show("Seleccione un proveedor para el producto.", "Dato Requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cmbProveedor.Focus();
                 return false;
             }
 
-            // 7. valida stock minimo
-            if (esModificacion == false)
+            // 5. valida stock minimo
+            if (!int.TryParse(textStockMinimo.Text.Trim(), out int stockMin) || stockMin < 1)
             {
-                if (!int.TryParse(textStockMinimo.Text, out int stockMin) || stockMin < 1)
-                {
-                    MessageBox.Show("El stock mínimo debe ser un número entero (1 o mayor).", "Stock Inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    textStockMinimo.Focus();
-                    textStockMinimo.SelectAll();
-                    return false;
-                }
+                MessageBox.Show("El stock mínimo debe ser un número entero (1 o mayor).", "Stock Inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                textStockMinimo.Focus();
+                textStockMinimo.SelectAll();
+                return false;
             }
 
-            return true; // s todo es correcto, retorna verdadero
+            return true;
         }
 
         private void BCrearProducto_Click(object sender, EventArgs e)
@@ -137,59 +156,57 @@ namespace ProyectoIntegrador
                 return;
             }
 
-            Producto nuevoProducto = new Producto()
+            int idCategoria = 0;
+            if (cmbCategoria.SelectedValue != null)
+                int.TryParse(cmbCategoria.SelectedValue.ToString(), out idCategoria);
+
+            int idGenero = 0;
+            if (combGenero.SelectedValue != null)
+                int.TryParse(combGenero.SelectedValue.ToString(), out idGenero);
+
+            int idProveedor = 0;
+            if (cmbProveedor.SelectedValue != null)
+                int.TryParse(cmbProveedor.SelectedValue.ToString(), out idProveedor);
+
+            Producto producto = new Producto()
             {
+                IdProducto = this.IdProductoSeleccionado,
                 NombreProducto = textNombre.Text.Trim(),
                 Descripcion = textDescripcion.Text.Trim(),
-                StockMinimo = Convert.ToInt32(textStockMinimo.Text),
+                StockMinimo = Convert.ToInt32(textStockMinimo.Text.Trim()),
                 StockActual = 0,
                 PrecioCompra = null,
                 PrecioVenta = null,
-                IdCategoria = Convert.ToInt32(cmbCategoria.SelectedValue),
-                IdGenero = Convert.ToInt32(combGenero.SelectedValue),
-                IdProveedor = Convert.ToInt32(cmbProveedor.SelectedValue),
+                IdCategoria = idCategoria,
+                IdGenero = idGenero,
+                IdProveedor = idProveedor,
                 Estado = true
             };
 
             string mensaje = string.Empty;
             CN_Producto negocioProducto = new CN_Producto();
+            bool resultado = false;
 
-            //si es modifiacion o alta nueva (por ahora le pongo para registrar)
-            bool resultado = negocioProducto.Registrar(nuevoProducto, out mensaje);
+            if (esModificacion)
+            {
+                resultado = negocioProducto.Editar(producto, out mensaje);
+            }
+            else
+            {
+                resultado = negocioProducto.Registrar(producto, out mensaje);
+            }
 
             if (resultado)
             { 
-                MessageBox.Show("Éxito", "Joyaria ALBA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                string mensajeExito = esModificacion ? "Producto modificado exitosamente." : "Producto registrado exitosamente.";
+                MessageBox.Show(mensajeExito, "Joyería ALBA", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             else
             {
-                //si la capa de engocio o la bd rechazan, mostramos el mensaje correcto
-                MessageBox.Show(mensaje, "Error de Registro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(mensaje, "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-
-
-            /*
-            // 3 y 4. Definimos los textos dependiendo de si es modificación o nuevo registro
-            string mensajePregunta = esModificacion ? "¿Confirma la modificación del producto: " : "Confirma el registro del producto: ";
-            string tituloPregunta = esModificacion ? "¿Confirma modificación?" : "¿Confirma guardado?";
-            string mensajeExito = esModificacion ? "Producto modificado correctamente." : "Producto registrado correctamente.";
-
-            // 5. Usamos las variables en los MessageBox
-            DialogResult confirmacion = MessageBox.Show(
-                mensajePregunta + textNombre.Text + "?",
-                tituloPregunta,
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (confirmacion == DialogResult.Yes)
-            {
-                MessageBox.Show(mensajeExito, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-            }
-            */
         }
 
         private void BCancelar_Click(object sender, EventArgs e)
@@ -197,33 +214,36 @@ namespace ProyectoIntegrador
             if (esDetalle)
             {
                 this.Close();
-                return; // Corta la ejecución para que no salga el MessageBox
+                return;
             }
 
             DialogResult Respuesta = MessageBox.Show(
                 "¿Está seguro de que desea cancelar?, Se perderan los datos no guardados.",
                 "Cancelar Registro", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
 
-                if(Respuesta == DialogResult.Yes)
+            if(Respuesta == DialogResult.Yes)
             {
                 this.Close();
             }
         }
 
-        public void ConfigurarModoEdicion(string codigo, string nombre, string categoria, string genero, string precio, string stock, string stockMinimo, string descripcion, string proveedor)
+        public void ConfigurarModoEdicion(int idProducto, string nombre, string categoria, string genero, string precio, string stock, string stockMinimo, string descripcion, string proveedor)
         {
             this.esModificacion = true;
+            this.IdProductoSeleccionado = idProducto;
             this.Text = "Modificar Producto";
             LTitulo.Text = "Modificar Producto";
             BCrearProducto.Text = "Guardar Cambios";
-            //IdProductoSeleccionado = idProducto;
 
-        // 1. Campos HABILITADOS para modificar
-        textNombre.Text = nombre;
-            textStockMinimo.Text = stockMinimo; // Asegurate de tener este TextBox creado
-            textDescripcion.Text = descripcion; // Asegurate de tener este TextBox creado
+            textNombre.Text = nombre;
+            textStockMinimo.Text = stockMinimo;
+            textDescripcion.Text = descripcion;
             cmbProveedor.Text = proveedor;
-            // 2. Campos BLOQUEADOS (se ven pero no se editan)
+
+            categoriaSeleccionada = categoria;
+            generoSeleccionado = genero;
+            proveedorSeleccionado = proveedor;
+
             cmbCategoria.Text = categoria;
             cmbCategoria.Enabled = false;
 
@@ -235,6 +255,12 @@ namespace ProyectoIntegrador
 
             textStockInicial.Text = stock;
             textStockInicial.Enabled = false;
+        }
+
+        public void ConfigurarModoEdicion(string codigo, string nombre, string categoria, string genero, string precio, string stock, string stockMinimo, string descripcion, string proveedor)
+        {
+            int.TryParse(codigo, out int id);
+            ConfigurarModoEdicion(id, nombre, categoria, genero, precio, stock, stockMinimo, descripcion, proveedor);
         }
 
         public void ConfigurarModoDetalle(string codigo, string nombre, string categoria, string genero, string precio, string stock, string stockMinimo, string descripcion, string proveedor)
@@ -242,27 +268,35 @@ namespace ProyectoIntegrador
             esDetalle = true;
             this.Text = "Detalle Producto";
             LTitulo.Text = "Detalle Producto";
-            BCrearProducto.Visible = false; // Ocultamos el botón de guardar
-            BCancelar.Text = "Cerrar"; // Cambiamos el texto del botón
+            BCrearProducto.Visible = false;
+            BCancelar.Text = "Cerrar";
 
-            // Cargamos los datos
             textNombre.Text = nombre;
-            cmbCategoria.Text = categoria;
-            combGenero.Text = genero;
-            textPrecio.Text = precio;
-            textStockInicial.Text = stock;
-            textStockMinimo.Text = stockMinimo;
-            textDescripcion.Text = descripcion;
-            cmbProveedor.Text = proveedor;
-
-            // Bloqueamos todos los controles
             textNombre.Enabled = false;
+
+            categoriaSeleccionada = categoria;
+            generoSeleccionado = genero;
+            proveedorSeleccionado = proveedor;
+
+            cmbCategoria.Text = categoria;
             cmbCategoria.Enabled = false;
+
+            combGenero.Text = genero;
             combGenero.Enabled = false;
+
+            textPrecio.Text = precio;
             textPrecio.Enabled = false;
+
+            textStockInicial.Text = stock;
             textStockInicial.Enabled = false;
+
+            textStockMinimo.Text = stockMinimo;
             textStockMinimo.Enabled = false;
+
+            textDescripcion.Text = descripcion;
             textDescripcion.Enabled = false;
+
+            cmbProveedor.Text = proveedor;
             cmbProveedor.Enabled = false;
         }
 

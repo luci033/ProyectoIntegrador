@@ -1,3 +1,5 @@
+using CapaEntidades;
+using CapaNegocio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,23 +34,30 @@ namespace ProyectoIntegrador.Formularios.Productos
             EstiloUI.AplicarEstiloTitulo(LTitulo);
             EstiloUI.AplicarEstiloBoton(BAgregarCategoria);
             EstiloUI.AplicarEstiloGrilla(DGCategoria);
+
+            CargarCategorias();
         }
+
+        private void CargarCategorias()
+        {
+            DGCategoria.Rows.Clear();
+            try
+            {
+                List<Categoria> lista = new CN_Categoria().ListarCategorias();
+                foreach (var cat in lista)
+                {
+                    DGCategoria.Rows.Add(cat.IdCategoria, cat.NombreCategoria, "Modificar", "Desactivar");
+                }
+            }
+            catch { }
+        }
+
         private void BAgregarCategoria_Click(object sender, EventArgs e)
         {
-
-            // se instancia un nuevo formulario de la clase FormNuevaCategoría
             FormNuevaCategoria frmNuevaCategoria = new FormNuevaCategoria(); 
-
-
-            // Si el formulario de nueva categoría viene con un Ok se agrega la propiedad creada al datagrid
             if (frmNuevaCategoria.ShowDialog() == DialogResult.OK)
             {
-
-                //creamos un id que va contando de 1 en 1
-                int nuevoId = DGCategoria.Rows.Count + 1;
-
-                // Agrega el id contador y el nombre de la categoría
-                DGCategoria.Rows.Add(nuevoId, frmNuevaCategoria.CategoriaNueva, "Modificar", "Desactivar");
+                CargarCategorias();
             }
         }
 

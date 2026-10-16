@@ -102,10 +102,10 @@ namespace CapaDatos
                             g.NombreGenero AS NombreGenero,
                             cat.NombreCategoria AS NombreCategoria,
                             pr.RazonSocial AS NombreProveedor
-                         FROM PRODUCTO p
-                         INNER JOIN Genero g ON p.IdGenero = g.IdGenero
-                         INNER JOIN Categoria cat ON p.IdCategoria = cat.IdCategoria
-                         INNER JOIN Proveedor pr ON p.IdProveedor = pr.IdProveedor";
+                         FROM Producto p
+                         LEFT JOIN Genero g ON p.IdGenero = g.IdGenero
+                         LEFT JOIN Categoria cat ON p.IdCategoria = cat.IdCategoria
+                         LEFT JOIN Proveedor pr ON p.IdProveedor = pr.IdProveedor";
 
                 using (SqlCommand comando = new SqlCommand(query, conexion))
                 {
@@ -188,8 +188,39 @@ namespace CapaDatos
                 }
                 else
                 {
-                    mensaje = "Error al registrar el producto: " + ex.Message;
+                    mensaje = "Error al modificar el producto: " + ex.Message;
                 }
+            }
+
+            return respuesta;
+        }
+
+        public bool CambiarEstado(int idProducto, bool nuevoEstado, out string mensaje)
+        {
+            mensaje = string.Empty;
+            bool respuesta = false;
+
+            string query = "UPDATE Producto SET Estado = @Estado WHERE IdProducto = @IdProducto";
+
+            try
+            {
+                using (SqlConnection conexion = Conexion.ObtenerConexion())
+                {
+                    using (SqlCommand cmd = new SqlCommand(query, conexion))
+                    {
+                        cmd.CommandType = System.Data.CommandType.Text;
+                        cmd.Parameters.AddWithValue("@Estado", nuevoEstado);
+                        cmd.Parameters.AddWithValue("@IdProducto", idProducto);
+
+                        int filasAfectadas = cmd.ExecuteNonQuery();
+                        respuesta = filasAfectadas > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                respuesta = false;
+                mensaje = "Error al cambiar el estado del producto: " + ex.Message;
             }
 
             return respuesta;

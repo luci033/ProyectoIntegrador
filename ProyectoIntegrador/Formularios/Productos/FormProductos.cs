@@ -1,3 +1,5 @@
+using CapaEntidades;
+using CapaNegocio;
 using ProyectoIntegrador.ModelosSimulados;
 using System;
 using System.Collections.Generic;
@@ -30,37 +32,72 @@ namespace ProyectoIntegrador.Formularios.Productos
             EstiloUI.AplicarEstiloGrilla(dataGridCatalogoProd);
             EstiloUI.AplicarEstiloTextBox(TBBuscarProducto);
 
-            CBCategoria.Items.AddRange(new string[] { "Todos", "Collares", "Aros", "Anillos", "Pulseras", "Dijes", "Cadenas" });
+            CargarFiltros();
+            CargarCatalogo();
+        }
+
+        private void CargarFiltros()
+        {
+            CBCategoria.Items.Clear();
+            CBCategoria.Items.Add("Todos");
+            try
+            {
+                foreach (var cat in new CN_Categoria().ListarCategorias())
+                {
+                    if (!string.IsNullOrWhiteSpace(cat.NombreCategoria))
+                        CBCategoria.Items.Add(cat.NombreCategoria);
+                }
+            }
+            catch { }
             CBCategoria.SelectedIndex = 0;
 
-            CBGenero.Items.AddRange(new string[] { "Todos", "Femenino", "Masculino", "Unisex" });
+            CBGenero.Items.Clear();
+            CBGenero.Items.Add("Todos");
+            try
+            {
+                foreach (var gen in new CN_Genero().ListarGeneros())
+                {
+                    if (!string.IsNullOrWhiteSpace(gen.NombreGenero))
+                        CBGenero.Items.Add(gen.NombreGenero);
+                }
+            }
+            catch { }
             CBGenero.SelectedIndex = 0;
-
-            CargarCatalogo();
-            this.Activated += (s, ev) => CargarCatalogo();
         }
 
         public void CargarCatalogo()
         {
             dataGridCatalogoProd.Rows.Clear();
-            var catalogo = StockSimulado.ObtenerCatalogoCompleto();
-            foreach (var p in catalogo)
+            DataTable tabla = new CN_Producto().Listar();
+
+            foreach (DataRow row in tabla.Rows)
             {
+                int idProducto = Convert.ToInt32(row["IdProducto"]);
+                string nombre = row["NombreProducto"] != DBNull.Value ? row["NombreProducto"].ToString() : "";
+                string categoria = row["NombreCategoria"] != DBNull.Value ? row["NombreCategoria"].ToString() : "";
+                string genero = row["NombreGenero"] != DBNull.Value ? row["NombreGenero"].ToString() : "";
+                decimal precioVenta = (row["PrecioVenta"] != DBNull.Value) ? Convert.ToDecimal(row["PrecioVenta"]) : 0.00m;
+                int stockActual = row["StockActual"] != DBNull.Value ? Convert.ToInt32(row["StockActual"]) : 0;
+                int stockMinimo = row["StockMinimo"] != DBNull.Value ? Convert.ToInt32(row["StockMinimo"]) : 0;
+                string descripcion = row["Descripcion"] != DBNull.Value ? row["Descripcion"].ToString() : "";
+                string proveedor = row["NombreProveedor"] != DBNull.Value ? row["NombreProveedor"].ToString() : "";
+                bool activo = row["Estado"] != DBNull.Value ? Convert.ToBoolean(row["Estado"]) : true;
+
                 int index = dataGridCatalogoProd.Rows.Add(
-                    p.Codigo,
-                    p.Nombre,
-                    p.Categoria,
-                    p.Genero,
-                    p.PrecioVenta,
-                    p.StockActual,
-                    p.StockMinimo,
-                    p.Descripcion,
-                    p.Proveedor,
+                    idProducto,
+                    nombre,
+                    categoria,
+                    genero,
+                    precioVenta,
+                    stockActual,
+                    stockMinimo,
+                    descripcion,
+                    proveedor,
                     "Modificar",
-                    p.Activo ? "Desactivar" : "Activar"
+                    activo ? "Desactivar" : "Activar"
                 );
 
-                if (!p.Activo)
+                if (!activo)
                 {
                     dataGridCatalogoProd.Rows[index].DefaultCellStyle.BackColor = EstiloUI.ColorInactivo;
                 }
@@ -79,13 +116,18 @@ namespace ProyectoIntegrador.Formularios.Productos
             string codigo = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[0].Value);
 
             // Escudo anti-filas vacías
-            if (string.IsNullOrWhiteSpace(codigo)) return;
+            if (string.IsNullOrWhiteSpace(codigo) || !int.TryParse(codigo, out int idProducto)) return;
 
             // --- ACCIÓN: BOTÓN MODIFICAR ---
             if (nombreColumna == "colModificar")
             {
                 // Si el botón de la columna eliminar dice "Activar", la fila está inactiva y cortamos el evento
-                if (Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells["colEliminar"].Value) == "Activar") return;
+                if (Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells["colEliminar"].Value) == "Activar")
+                {
+                    MessageBox.Show("No se puede modificar un producto inactivo. Debe activarlo primero.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 string nombre = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[1].Value);
                 string categoria = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[2].Value);
                 string genero = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[3].Value);
@@ -96,29 +138,15 @@ namespace ProyectoIntegrador.Formularios.Productos
                 string proveedor = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[8].Value);
 
                 FormProductoABM modalABM = new FormProductoABM();
-                modalABM.ConfigurarModoEdicion(codigo, nombre, categoria, genero, precio, stock, stockMinimo, descripcion, proveedor);
+                modalABM.ConfigurarModoEdicion(idProducto, nombre, categoria, genero, precio, stock, stockMinimo, descripcion, proveedor);
 
                 if (modalABM.ShowDialog() == DialogResult.OK)
                 {
-                    // Reemplazás el valor de las celdas con lo que devolvió el ABM
-                    dataGridCatalogoProd.Rows[e.RowIndex].Cells[1].Value = modalABM.Nombre;
-                    dataGridCatalogoProd.Rows[e.RowIndex].Cells[6].Value = modalABM.StockMinimo;
-                    dataGridCatalogoProd.Rows[e.RowIndex].Cells[7].Value = modalABM.Descripcion;
-
-                    var prod = StockSimulado.BuscarCualquieraPorCodigo(codigo);
-                    if (prod != null)
-                    {
-                        prod.Nombre = modalABM.Nombre;
-                        if (int.TryParse(modalABM.StockMinimo, out int sMin))
-                            prod.StockMinimo = sMin;
-                        prod.Descripcion = modalABM.Descripcion;
-                    }
-
-                    MessageBox.Show("Producto modificado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CargarCatalogo();
                 }
             }
 
-            // --- ACCIÓN: BOTÓN ELIMINAR ---
+            // --- ACCIÓN: BOTÓN ELIMINAR / DESACTIVAR ---
             else if (nombreColumna == "colEliminar")
             {
                 string nombre = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[1].Value);
@@ -126,21 +154,53 @@ namespace ProyectoIntegrador.Formularios.Productos
 
                 if (accionActual == "Desactivar")
                 {
-                    DialogResult respuesta = MessageBox.Show($"¿Seguro que deseas desactivar el producto {nombre}?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    DialogResult respuesta = MessageBox.Show(
+                        $"¿Seguro que deseas desactivar el producto \"{nombre}\"?", 
+                        "Confirmar desactivación", 
+                        MessageBoxButtons.YesNo, 
+                        MessageBoxIcon.Warning
+                    );
+
                     if (respuesta == DialogResult.Yes)
                     {
-                        dataGridCatalogoProd.Rows[e.RowIndex].DefaultCellStyle.BackColor = EstiloUI.ColorInactivo;
-                        dataGridCatalogoProd.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "Activar";
-                        StockSimulado.CambiarEstadoActivo(codigo, false);
-                        MessageBox.Show("Desactivado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        string msg;
+                        bool ok = new CN_Producto().CambiarEstado(idProducto, false, out msg);
+                        if (ok)
+                        {
+                            dataGridCatalogoProd.Rows[e.RowIndex].DefaultCellStyle.BackColor = EstiloUI.ColorInactivo;
+                            dataGridCatalogoProd.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "Activar";
+                            MessageBox.Show("Producto desactivado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show(msg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
                 else // Si el botón dice "Activar"
                 {
-                    // Vuelve la fila a su color normal y el texto a "Desactivar"
-                    dataGridCatalogoProd.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
-                    dataGridCatalogoProd.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "Desactivar";
-                    StockSimulado.CambiarEstadoActivo(codigo, true);
+                    DialogResult respuesta = MessageBox.Show(
+                        $"¿Deseas activar nuevamente el producto \"{nombre}\"?", 
+                        "Confirmar activación", 
+                        MessageBoxButtons.YesNo, 
+                        MessageBoxIcon.Question
+                    );
+
+                    if (respuesta == DialogResult.Yes)
+                    {
+                        string msg;
+                        bool ok = new CN_Producto().CambiarEstado(idProducto, true, out msg);
+                        if (ok)
+                        {
+                            dataGridCatalogoProd.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+                            dataGridCatalogoProd.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "Desactivar";
+                            MessageBox.Show("Producto activado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show(msg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
                 }
             }
         }
@@ -151,80 +211,25 @@ namespace ProyectoIntegrador.Formularios.Productos
             {
                 formCat.ShowDialog();
             }
+            CargarFiltros();
+            CargarCatalogo();
         }
 
         private void BNuevo_Click(object sender, EventArgs e)
         {
-            // 1. Instanciamos la ventana del ABM
             FormProductoABM modalProducto = new FormProductoABM();
-
-            // 2. Si el usuario le dio a "Crear" y el ABM devolvió el sello de "OK"...
             if (modalProducto.ShowDialog() == DialogResult.OK)
             {
-                int.TryParse(modalProducto.Stock, out int sAct);
-                int.TryParse(modalProducto.StockMinimo, out int sMin);
-                decimal.TryParse(modalProducto.Precio, out decimal precio);
-
-                string nuevoCodigo = "PROD" + (StockSimulado.ObtenerCatalogoCompleto().Count + 1).ToString("D4");
-
-                StockSimulado.AgregarProducto(new ProductoSimulado
-                {
-                    Codigo = nuevoCodigo,
-                    Nombre = modalProducto.Nombre,
-                    Categoria = modalProducto.Categoria,
-                    Genero = modalProducto.Genero,
-                    PrecioVenta = precio,
-                    StockActual = sAct,
-                    StockMinimo = sMin,
-                    Descripcion = modalProducto.Descripcion,
-                    Proveedor = modalProducto.Proveedor,
-                    Activo = true
-                });
-
                 CargarCatalogo();
             }
         }
 
         private void BEliminar_Click(object sender, EventArgs e)
         {
-            if (dataGridCatalogoProd.CurrentRow == null || dataGridCatalogoProd.CurrentRow.Index < 0)
-            {
-                MessageBox.Show("Seleccione el producto que desea eliminar.",
-                    "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            //RESTRICCIoN: Confirmar accion destructiva (Por ahora solo es diseño hasta hacer la coneccion)
-            DialogResult respuesta = MessageBox.Show("¿Está seguro de que desea eliminar este producto?",
-                                                     "Confirmar baja", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (respuesta == DialogResult.Yes)
-            {
-                dataGridCatalogoProd.Rows.Remove(dataGridCatalogoProd.CurrentRow);
-            }
         }
 
         private void BModificar_Click(object sender, EventArgs e)
         {
-            //RESTRICCION: verifica que se haya seleccionado una fila
-            if (dataGridCatalogoProd.CurrentRow == null || dataGridCatalogoProd.CurrentRow.Index < 0)
-            {
-                MessageBox.Show("Por favor, seleccione un producto de la tabla para modificar.",
-                                "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            DataGridViewRow filaSeleccionada = dataGridCatalogoProd.CurrentRow;
-
-            using (FormProductoABM ventanaABM = new FormProductoABM())
-            {
-                {
-                    //se pasa los valores de la fila seleccionada a modificar
-                    /*ventanaABM.CargarDatosParaModificar(
-                        filaSeleccionada.Cells
-                        );*/
-                }
-
-            }
         }
 
         private void BBuscarProducto_Click(object sender, EventArgs e)
@@ -237,26 +242,24 @@ namespace ProyectoIntegrador.Formularios.Productos
         {
             string categoriaSeleccionada = CBCategoria.SelectedItem?.ToString() ?? "Todos";
             string generoSeleccionado = CBGenero.SelectedItem?.ToString() ?? "Todos";
-
-            // Obtenemos el texto del buscador y lo pasamos a minúsculas
             string textoBusqueda = TBBuscarProducto.Text.Trim().ToLower();
 
             foreach (DataGridViewRow fila in dataGridCatalogoProd.Rows)
             {
                 if (fila.IsNewRow) continue;
 
-                // Índice 1 es Nombre, 2 es Categoría, 3 es Género
+                string codigoFila = Convert.ToString(fila.Cells[0].Value).ToLower();
                 string nombreFila = Convert.ToString(fila.Cells[1].Value).ToLower();
                 string categoriaFila = Convert.ToString(fila.Cells[2].Value);
                 string generoFila = Convert.ToString(fila.Cells[3].Value);
 
-                // Verificamos si cumple cada filtro
-                bool coincideNombre = string.IsNullOrEmpty(textoBusqueda) || nombreFila.Contains(textoBusqueda);
-                bool coincideCategoria = (categoriaSeleccionada == "Todos" || categoriaFila == categoriaSeleccionada);
-                bool coincideGenero = (generoSeleccionado == "Todos" || generoFila == generoSeleccionado);
+                bool coincideBusqueda = string.IsNullOrEmpty(textoBusqueda) || 
+                                        nombreFila.Contains(textoBusqueda) || 
+                                        codigoFila.Contains(textoBusqueda);
+                bool coincideCategoria = (categoriaSeleccionada == "Todos" || categoriaFila.Equals(categoriaSeleccionada, StringComparison.OrdinalIgnoreCase));
+                bool coincideGenero = (generoSeleccionado == "Todos" || generoFila.Equals(generoSeleccionado, StringComparison.OrdinalIgnoreCase));
 
-                // La fila se muestra solo si cumple las TRES condiciones al mismo tiempo
-                fila.Visible = coincideNombre && coincideCategoria && coincideGenero;
+                fila.Visible = coincideBusqueda && coincideCategoria && coincideGenero;
             }
         }
 

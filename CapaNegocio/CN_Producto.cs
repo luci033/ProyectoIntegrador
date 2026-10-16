@@ -1,4 +1,4 @@
-﻿using CapaDatos; 
+using CapaDatos; 
 using CapaEntidades;
 using System;
 using System.Collections.Generic;
@@ -132,6 +132,17 @@ namespace CapaNegocio
 
             // Si pasa las validaciones, le pasa el objeto a la Capa de Datos
             return objCapaDato.EditarProducto(obj, out mensaje);
+        }
+
+        public bool CambiarEstado(int idProducto, bool nuevoEstado, out string mensaje)
+        {
+            mensaje = string.Empty;
+            if (idProducto <= 0)
+            {
+                mensaje = "El identificador del producto es inválido.";
+                return false;
+            }
+            return objCapaDato.CambiarEstado(idProducto, nuevoEstado, out mensaje);
         }
     }
 }

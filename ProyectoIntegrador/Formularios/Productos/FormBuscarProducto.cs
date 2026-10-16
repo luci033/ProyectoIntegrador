@@ -1,3 +1,5 @@
+using CapaEntidades;
+using CapaNegocio;
 using ProyectoIntegrador.ModelosSimulados;
 using System;
 using System.Collections.Generic;
@@ -39,13 +41,33 @@ namespace ProyectoIntegrador.Formularios.Productos
             EstiloUI.AplicarEstiloGrilla(DGProductos);
             EstiloUI.AplicarEstiloTextBox(TBBuscar);
 
-            CBCategoria.Items.AddRange(new string[] { "Todos", "Collares", "Aros", "Anillos", "Pulseras", "Dijes", "Cadenas" });
+            CBCategoria.Items.Clear();
+            CBCategoria.Items.Add("Todos");
+            try
+            {
+                foreach (var cat in new CN_Categoria().ListarCategorias())
+                {
+                    if (!string.IsNullOrWhiteSpace(cat.NombreCategoria))
+                        CBCategoria.Items.Add(cat.NombreCategoria);
+                }
+            }
+            catch { }
             CBCategoria.SelectedIndex = 0;
 
-            CBGenero.Items.AddRange(new string[] { "Todos", "Femenino", "Masculino", "Unisex" });
+            CBGenero.Items.Clear();
+            CBGenero.Items.Add("Todos");
+            try
+            {
+                foreach (var gen in new CN_Genero().ListarGeneros())
+                {
+                    if (!string.IsNullOrWhiteSpace(gen.NombreGenero))
+                        CBGenero.Items.Add(gen.NombreGenero);
+                }
+            }
+            catch { }
             CBGenero.SelectedIndex = 0;
 
-            // Cargar productos desde el repositorio compartido en memoria
+            // Cargar productos desde la base de datos
             CargarProductosDesdeRepositorio();
 
             DGProductos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -56,11 +78,26 @@ namespace ProyectoIntegrador.Formularios.Productos
         private void CargarProductosDesdeRepositorio()
         {
             DGProductos.Rows.Clear();
-            var lista = StockSimulado.ObtenerTodos();
-            foreach (var p in lista)
+            try
             {
-                DGProductos.Rows.Add(p.IdProducto, p.Codigo, p.Nombre, p.Categoria, p.Genero, p.StockActual, p.PrecioVenta, p.PrecioCompra);
+                DataTable dt = new CN_Producto().Listar();
+                foreach (DataRow row in dt.Rows)
+                {
+                    bool activo = row["Estado"] != DBNull.Value ? Convert.ToBoolean(row["Estado"]) : true;
+                    if (!activo) continue;
+
+                    int id = Convert.ToInt32(row["IdProducto"]);
+                    string nombre = row["NombreProducto"] != DBNull.Value ? row["NombreProducto"].ToString() : "";
+                    string categoria = row["NombreCategoria"] != DBNull.Value ? row["NombreCategoria"].ToString() : "";
+                    string genero = row["NombreGenero"] != DBNull.Value ? row["NombreGenero"].ToString() : "";
+                    int stock = row["StockActual"] != DBNull.Value ? Convert.ToInt32(row["StockActual"]) : 0;
+                    decimal pVenta = (row["PrecioVenta"] != DBNull.Value) ? Convert.ToDecimal(row["PrecioVenta"]) : 0.00m;
+                    decimal pCompra = (row["PrecioCompra"] != DBNull.Value) ? Convert.ToDecimal(row["PrecioCompra"]) : 0.00m;
+
+                    DGProductos.Rows.Add(id, id.ToString(), nombre, categoria, genero, stock, pVenta, pCompra);
+                }
             }
+            catch { }
         }
 
         private void BCancelar_Click(object sender, EventArgs e)
