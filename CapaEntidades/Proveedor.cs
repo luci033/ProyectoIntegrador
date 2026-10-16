@@ -13,6 +13,6 @@ namespace CapaEntidades
         public string RazonSocial { get; set; }
         public string CUIT { get; set; }
         public string Telefono { get; set; }
-        public string CorreElectronico { get; set; }
+        public string CorreoElectronico { get; set; }
     }
 }

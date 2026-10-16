@@ -37,7 +37,7 @@ namespace ProyectoIntegrador.Formularios.Compras
         public string RazonSocial { get; private set; }
         public string CUIT { get; private set; }
         public string Telefono { get; private set; }
-        public string Correo{ get; private set; }
+        public string CorreoElectronico { get; private set; }
 
 
         private void FormBuscarProveedor_Load(object sender, EventArgs e)
@@ -71,7 +71,7 @@ namespace ProyectoIntegrador.Formularios.Compras
                 RazonSocial = fila.Cells[0].Value?.ToString();
                 CUIT = fila.Cells[1].Value?.ToString();
                 Telefono = fila.Cells[2].Value?.ToString();
-                Correo = fila.Cells[3].Value?.ToString();
+                CorreoElectronico = fila.Cells[3].Value?.ToString();
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();

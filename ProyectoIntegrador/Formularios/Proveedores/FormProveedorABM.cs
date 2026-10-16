@@ -67,7 +67,7 @@ namespace ProyectoIntegrador.Formularios.Proveedores
                     RazonSocial = TBRazonSocial.Text,
                     CUIT = TBCUIT.Text,
                     Telefono = TBTelefono.Text,
-                    CorreElectronico = TBCorreo.Text
+                    CorreoElectronico = TBCorreo.Text
                 };
                 CN_Proveedor proveedor = new CN_Proveedor();
                 proveedor.RegistrarProveedor(NuevoProveedor, out string mensaje);

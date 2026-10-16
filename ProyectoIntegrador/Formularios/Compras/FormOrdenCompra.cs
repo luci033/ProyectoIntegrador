@@ -110,7 +110,7 @@ namespace ProyectoIntegrador.Formularios.Compras
                     TBRazonSocial.Text = formBuscar.RazonSocial;
                     TBCUIT.Text = formBuscar.CUIT;
                     TBContacto.Text = formBuscar.Telefono; // Puede ser el teléfono o correo
-                    TBCorreo.Text = formBuscar.Correo;
+                    TBCorreo.Text = formBuscar.CorreoElectronico;
                 }
             }
         }

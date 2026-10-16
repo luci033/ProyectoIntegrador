@@ -18,7 +18,7 @@ namespace CapaDatos
             bool respuesta = false;
 
             string query = @"INSERT INTO Proveedor (RazonSocial, CUIT, Telefono, CorreoElectronico)
-                            VALUES (@RazonSocial, @CUIT, @Telefono, @CorreElectronico)";
+                            VALUES (@RazonSocial, @CUIT, @Telefono, @CorreoElectronico)";
 
             try
             {
@@ -31,7 +31,7 @@ namespace CapaDatos
                         cmd.Parameters.AddWithValue("@RazonSocial", string.IsNullOrWhiteSpace(obj.RazonSocial) ? (object)DBNull.Value : obj.RazonSocial);
                         cmd.Parameters.AddWithValue("@CUIT", string.IsNullOrWhiteSpace(obj.CUIT) ? (object)DBNull.Value : obj.CUIT);
                         cmd.Parameters.AddWithValue("@Telefono", string.IsNullOrWhiteSpace(obj.Telefono) ? (object)DBNull.Value : obj.Telefono);
-                        cmd.Parameters.AddWithValue("@CorreElectronico", string.IsNullOrWhiteSpace(obj.CorreElectronico) ? (object)DBNull.Value : obj.CorreElectronico);
+                        cmd.Parameters.AddWithValue("@CorreoElectronico", string.IsNullOrWhiteSpace(obj.CorreoElectronico) ? (object)DBNull.Value : obj.CorreoElectronico);
 
                         int filasAfectadas = cmd.ExecuteNonQuery();
                         respuesta = filasAfectadas > 0;
@@ -89,7 +89,7 @@ namespace CapaDatos
                                     RazonSocial = reader["RazonSocial"].ToString(),
                                     CUIT = reader["CUIT"].ToString(),
                                     Telefono = reader["Telefono"].ToString(),
-                                    CorreElectronico = reader["CorreoElectronico"].ToString()
+                                    CorreoElectronico = reader["CorreoElectronico"].ToString()
                                 });
                             }
                         }
