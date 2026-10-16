@@ -9,6 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using CapaEntidades;
+using CapaNegocio;
+
 namespace ProyectoIntegrador.Formularios.Compras
 {
     public partial class FormBuscarProveedor : Form
@@ -30,6 +33,7 @@ namespace ProyectoIntegrador.Formularios.Compras
         }
 
         // Propiedades públicas para enviar los datos
+        public int IdProveedor { get; private set; }
         public string RazonSocial { get; private set; }
         public string CUIT { get; private set; }
         public string Telefono { get; private set; }
@@ -44,12 +48,17 @@ namespace ProyectoIntegrador.Formularios.Compras
             EstiloUI.AplicarEstiloBotonSecundario(BCancelar);
             EstiloUI.AplicarEstiloGrilla(DGProveedores);
 
-            //datos de prueba
-            DGProveedores.Rows.Add("Joyas del Sur S.A.", "30556667778", "3794223344", "ventas@joyasdelsur.com");
-            DGProveedores.Rows.Add("Insumos Metálicos", "33445558889", "3794556677", "contacto@insumosmetalicos.com");
-            DGProveedores.Rows.Add("Platería El Rey", "30998887776", "3794889900", "info@plateriaelrey.com");
-            DGProveedores.Rows.Add("Gemas y Cristales SRL", "30123456789", "3794123456", "pedidos@gemasycristales.com.ar");
-            DGProveedores.Rows.Add("Distribuidora Oro Fino", "33987654321", "3794654321", "ventas@orofino.com");
+            DGProveedores.Rows.Clear();
+            try
+            {
+                var lista = new CN_Proveedor().ListarProveedores();
+                foreach (var prov in lista)
+                {
+                    int idx = DGProveedores.Rows.Add(prov.RazonSocial, prov.CUIT, prov.Telefono, prov.CorreoElectronico);
+                    DGProveedores.Rows[idx].Tag = prov.IdProveedor;
+                }
+            }
+            catch { }
         }
 
         private void DGProveedores_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -58,6 +67,7 @@ namespace ProyectoIntegrador.Formularios.Compras
             {
                 DataGridViewRow fila = DGProveedores.Rows[e.RowIndex];
 
+                IdProveedor = fila.Tag != null ? Convert.ToInt32(fila.Tag) : 0;
                 RazonSocial = fila.Cells[0].Value?.ToString();
                 CUIT = fila.Cells[1].Value?.ToString();
                 Telefono = fila.Cells[2].Value?.ToString();

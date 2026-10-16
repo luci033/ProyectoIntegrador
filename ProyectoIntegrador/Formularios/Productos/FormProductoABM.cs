@@ -24,6 +24,7 @@ namespace ProyectoIntegrador
         public string Descripcion => textDescripcion.Text.Trim();
         private bool esModificacion = false;
         private bool esDetalle = false;
+        private bool esAdmin = false;
         public string Proveedor => cmbProveedor.Text.Trim();
         public FormProductoABM()
         {
@@ -146,6 +147,20 @@ namespace ProyectoIntegrador
                 return false;
             }
 
+            // 6. valida precio si está en modificación y el usuario es admin
+            if (esModificacion && esAdmin && !string.IsNullOrWhiteSpace(textPrecio.Text))
+            {
+                string rawP = textPrecio.Text.Replace("$", "").Replace("€", "").Trim();
+                if ((!decimal.TryParse(rawP, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.CurrentCulture, out decimal p) &&
+                     !decimal.TryParse(rawP, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out p)) || p < 0)
+                {
+                    MessageBox.Show("El precio de venta debe ser un número válido mayor o igual a cero.", "Precio Inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    textPrecio.Focus();
+                    textPrecio.SelectAll();
+                    return false;
+                }
+            }
+
             return true;
         }
 
@@ -168,6 +183,20 @@ namespace ProyectoIntegrador
             if (cmbProveedor.SelectedValue != null)
                 int.TryParse(cmbProveedor.SelectedValue.ToString(), out idProveedor);
 
+            decimal? precioVenta = null;
+            if (!string.IsNullOrWhiteSpace(textPrecio.Text))
+            {
+                string rawPrecio = textPrecio.Text.Replace("$", "").Replace("€", "").Trim();
+                if (decimal.TryParse(rawPrecio, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.CurrentCulture, out decimal pVenta) ||
+                    decimal.TryParse(rawPrecio, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out pVenta))
+                {
+                    if (pVenta > 0)
+                    {
+                        precioVenta = pVenta;
+                    }
+                }
+            }
+
             Producto producto = new Producto()
             {
                 IdProducto = this.IdProductoSeleccionado,
@@ -176,7 +205,7 @@ namespace ProyectoIntegrador
                 StockMinimo = Convert.ToInt32(textStockMinimo.Text.Trim()),
                 StockActual = 0,
                 PrecioCompra = null,
-                PrecioVenta = null,
+                PrecioVenta = precioVenta,
                 IdCategoria = idCategoria,
                 IdGenero = idGenero,
                 IdProveedor = idProveedor,
@@ -227,9 +256,10 @@ namespace ProyectoIntegrador
             }
         }
 
-        public void ConfigurarModoEdicion(int idProducto, string nombre, string categoria, string genero, string precio, string stock, string stockMinimo, string descripcion, string proveedor)
+        public void ConfigurarModoEdicion(int idProducto, string nombre, string categoria, string genero, string precio, string stock, string stockMinimo, string descripcion, string proveedor, bool esAdmin = false)
         {
             this.esModificacion = true;
+            this.esAdmin = esAdmin;
             this.IdProductoSeleccionado = idProducto;
             this.Text = "Modificar Producto";
             LTitulo.Text = "Modificar Producto";
@@ -251,16 +281,18 @@ namespace ProyectoIntegrador
             combGenero.Enabled = false;
 
             textPrecio.Text = precio;
-            textPrecio.Enabled = false;
+            textPrecio.ReadOnly = !esAdmin;
+            textPrecio.Enabled = esAdmin;
 
             textStockInicial.Text = stock;
+            textStockInicial.ReadOnly = true;
             textStockInicial.Enabled = false;
         }
 
-        public void ConfigurarModoEdicion(string codigo, string nombre, string categoria, string genero, string precio, string stock, string stockMinimo, string descripcion, string proveedor)
+        public void ConfigurarModoEdicion(string codigo, string nombre, string categoria, string genero, string precio, string stock, string stockMinimo, string descripcion, string proveedor, bool esAdmin = false)
         {
             int.TryParse(codigo, out int id);
-            ConfigurarModoEdicion(id, nombre, categoria, genero, precio, stock, stockMinimo, descripcion, proveedor);
+            ConfigurarModoEdicion(id, nombre, categoria, genero, precio, stock, stockMinimo, descripcion, proveedor, esAdmin);
         }
 
         public void ConfigurarModoDetalle(string codigo, string nombre, string categoria, string genero, string precio, string stock, string stockMinimo, string descripcion, string proveedor)

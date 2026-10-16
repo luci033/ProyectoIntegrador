@@ -130,7 +130,8 @@ namespace CapaDatos
                             Descripcion = @Descripcion,
                             IdProveedor = @IdProveedor,
                             IdCategoria = @IdCategoria,
-                            IdGenero = @IdGenero
+                            IdGenero = @IdGenero,
+                            PrecioVenta = @PrecioVenta
                             WHERE IdProducto = @IdProducto";
 
             try
@@ -147,6 +148,7 @@ namespace CapaDatos
                         cmd.Parameters.AddWithValue("@IdGenero", obj.IdGenero);
                         cmd.Parameters.AddWithValue("@IdCategoria", obj.IdCategoria);
                         cmd.Parameters.AddWithValue("@IdProveedor", obj.IdProveedor);
+                        cmd.Parameters.AddWithValue("@PrecioVenta", (object)obj.PrecioVenta ?? DBNull.Value);
                         cmd.Parameters.AddWithValue("@IdProducto", obj.IdProducto);
 
                         int filasAfectadas = cmd.ExecuteNonQuery();

@@ -1,3 +1,5 @@
+using CapaEntidades;
+using CapaNegocio;
 using ProyectoIntegrador.Formularios.Productos;
 using System;
 using System.Collections.Generic;
@@ -14,6 +16,10 @@ namespace ProyectoIntegrador.Formularios.Compras
     public partial class FormOrdenCompra : Form
     {
         private string usuarioLogueado;
+        private int idUsuarioLogueado = 1;
+        private int idProveedorSeleccionado = 0;
+        public int IdCompraGenerada { get; private set; } = 0;
+
         public FormOrdenCompra(string nombreUsuario)
         {
             InitializeComponent();
@@ -42,6 +48,23 @@ namespace ProyectoIntegrador.Formularios.Compras
 
             // cargo fecha del sistema
             TBFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
+
+            try
+            {
+                var usuarioObj = new CN_Usuario().Listar().FirstOrDefault(u => u.User != null && u.User.Equals(usuarioLogueado, StringComparison.OrdinalIgnoreCase));
+                if (usuarioObj != null)
+                {
+                    idUsuarioLogueado = usuarioObj.IdUsuario;
+                }
+                else
+                {
+                    idUsuarioLogueado = 1;
+                }
+            }
+            catch
+            {
+                idUsuarioLogueado = 1;
+            }
 
             DGDetalleOrden.ReadOnly = false;
             // Bloqueamos todas las columnas por defecto para que no se puedan escribir datos fijos
@@ -79,11 +102,11 @@ namespace ProyectoIntegrador.Formularios.Compras
 
         private void BSeleccionarProveedor_Click(object sender, EventArgs e)
         {
-            // Asumiendo que tenés un formulario llamado FormBuscarProveedor
             using (FormBuscarProveedor formBuscar = new FormBuscarProveedor())
             {
                 if (formBuscar.ShowDialog() == DialogResult.OK)
                 {
+                    idProveedorSeleccionado = formBuscar.IdProveedor;
                     TBRazonSocial.Text = formBuscar.RazonSocial;
                     TBCUIT.Text = formBuscar.CUIT;
                     TBContacto.Text = formBuscar.Telefono; // Puede ser el teléfono o correo
@@ -169,6 +192,9 @@ namespace ProyectoIntegrador.Formularios.Compras
 
         private void BGenerarOrden_Click(object sender, EventArgs e)
         {
+            DGDetalleOrden.EndEdit();
+            CalcularTotal();
+
             // Validación de Total > 0
             decimal totalOrden = 0;
             decimal.TryParse(TBTotal.Text.Replace("$", "").Replace("€", "").Trim(), out totalOrden);
@@ -179,11 +205,25 @@ namespace ProyectoIntegrador.Formularios.Compras
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(Proveedor) || DGDetalleOrden.Rows.Count == 0)
+            if (string.IsNullOrWhiteSpace(Proveedor) || idProveedorSeleccionado <= 0)
             {
-                MessageBox.Show("Faltan datos o productos.");
+                MessageBox.Show("Por favor, seleccione un proveedor válido.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            if (DGDetalleOrden.Rows.Count == 0)
+            {
+                MessageBox.Show("Debe agregar al menos un producto a la orden.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Compra orden = new Compra
+            {
+                FechaCompra = DateTime.Now,
+                IdUsuario = idUsuarioLogueado,
+                IdProveedor = idProveedorSeleccionado,
+                IdEstadoCompra = 1
+            };
 
             foreach (DataGridViewRow fila in DGDetalleOrden.Rows)
             {
@@ -193,29 +233,34 @@ namespace ProyectoIntegrador.Formularios.Compras
                     return;
                 }
 
-                // NUEVA VALIDACIÓN: Verifica que el subtotal (índice 7) sea mayor a cero
                 if (Convert.ToDecimal(fila.Cells[7].Value ?? 0) <= 0)
                 {
                     MessageBox.Show("Todos los productos deben tener un costo unitario y subtotal mayor a cero.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                // Agregamos un noveno elemento al final ("") para la cantidad recibida
-                DetallesProductos.Add(new object[] {
-            fila.Cells[0].Value, // [0] ID
-            fila.Cells[1].Value, // [1] Código
-            fila.Cells[2].Value, // [2] Nombre
-            fila.Cells[3].Value, // [3] Categoría
-            fila.Cells[4].Value, // [4] Género
-            fila.Cells[5].Value, // [5] Cantidad Pedida
-            fila.Cells[6].Value, // [6] Costo
-            fila.Cells[7].Value, // [7] Subtotal
-            ""                   // [8] Cantidad Recibida (Inicia vacía)
-        });
+                orden.Detalles.Add(new DetalleCompra
+                {
+                    IdProducto = Convert.ToInt32(fila.Cells[0].Value),
+                    CodigoProducto = fila.Cells[1].Value?.ToString(),
+                    NombreProducto = fila.Cells[2].Value?.ToString(),
+                    Cantidad = Convert.ToInt32(fila.Cells[5].Value),
+                    PrecioUnitario = Convert.ToDecimal(fila.Cells[6].Value)
+                });
             }
 
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            CN_Compra negocio = new CN_Compra();
+            if (negocio.RegistrarOrden(orden, out int idGenerada, out string mensaje))
+            {
+                IdCompraGenerada = idGenerada;
+                MessageBox.Show($"Orden de compra N° {idGenerada} registrada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show(mensaje, "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void label1_Click_2(object sender, EventArgs e)

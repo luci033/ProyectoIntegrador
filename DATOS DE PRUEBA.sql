@@ -1,3 +1,7 @@
+USE [JoyeriaALBADB];
+GO
+
+
 INSERT INTO Proveedor (RazonSocial, CUIT, Telefono, CorreoElectronico) VALUES
 ('Oro Blanco Joyerías SRL', '30714791067', '3794159864', 'oroblanco@joyas.com.ar'),
 ('Joias Joyas & Piercings', '30717801365', '3794976415', 'joyas@mail.com'),
@@ -11,8 +15,6 @@ INSERT INTO Categoria (NombreCategoria) VALUES
 ('Collares');
 
 
-USE [JoyeriaALBADB];
-GO
 
 
 INSERT INTO [dbo].[Producto] 
@@ -40,5 +42,3 @@ VALUES
     ('Pulsera Cadena Marina Maciza', NULL, NULL, 0, 4, 'Pulsera con eslabones tipo ancla / marina de 8mm en plata 925 maciza.', 1, 2, 2, 1),
     ('Pulsera Hilo Rojo Dije Infinito', NULL, NULL, 0, 12, 'Pulsera de protección con hilo rojo regulable y dije central de infinito en plata 925.', 1, 3, 2, 2);
 GO
-
-select * from Producto

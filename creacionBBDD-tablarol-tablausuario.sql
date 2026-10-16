@@ -168,12 +168,10 @@ FechaCompra DATETIME NOT NULL,
 IdUsuario INT NOT NULL,
 IdProveedor INT NOT NULL,
 IdEstadoCompra INT NOT NULL,
-IdMedioPago INT NOT NULL,
 CONSTRAINT PK_Compra PRIMARY KEY (IdCompra),
 CONSTRAINT FK_Usuario FOREIGN KEY (IdUsuario) REFERENCES Usuarios (IdUsuario),
 CONSTRAINT FK_ProveedorCompra FOREIGN KEY (IdProveedor) REFERENCES Proveedor(IdProveedor),
-CONSTRAINT FK_EstadoCompra FOREIGN KEY (IdEstadoCompra) REFERENCES EstadoCompra(IdEstadoCompra),
-CONSTRAINT FK_MedioPago FOREIGN KEY (IdMedioPago) REFERENCES MedioPago(IdMedioPago)
+CONSTRAINT FK_EstadoCompra FOREIGN KEY (IdEstadoCompra) REFERENCES EstadoCompra(IdEstadoCompra)
 );
 GO
 
@@ -199,7 +197,8 @@ CREATE TABLE Recepcion (
 IdRecepcion INT IDENTITY (1,1),
 FechaRecepcion DATETIME NOT NULL,
 IdCompra INT NOT NULL,
-IdUsuario INT NOT NULL, 
+IdUsuario INT NOT NULL,
+Observacion VARCHAR(255) NULL,
 CONSTRAINT PK_IdRecepcion PRIMARY KEY (IdRecepcion),
 CONSTRAINT FK_CompraRecepcion FOREIGN KEY (IdCompra) REFERENCES Compra(IdCompra),
 CONSTRAINT FK_Usuarios FOREIGN KEY (IdUsuario) REFERENCES Usuarios(IdUsuario)

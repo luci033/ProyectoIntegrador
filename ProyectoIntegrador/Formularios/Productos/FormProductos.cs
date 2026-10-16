@@ -1,5 +1,6 @@
 using CapaEntidades;
 using CapaNegocio;
+using ProyectoIntegrador.Formularios.Principal;
 using ProyectoIntegrador.ModelosSimulados;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace ProyectoIntegrador.Formularios.Productos
 {
     public partial class FormProductos : Form
     {
+        public bool EsAdministrador { get; set; } = false;
 
         public FormProductos()
         {
@@ -138,7 +140,8 @@ namespace ProyectoIntegrador.Formularios.Productos
                 string proveedor = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[8].Value);
 
                 FormProductoABM modalABM = new FormProductoABM();
-                modalABM.ConfigurarModoEdicion(idProducto, nombre, categoria, genero, precio, stock, stockMinimo, descripcion, proveedor);
+                bool esAdmin = EsAdministrador || (this.MdiParent is FormPrincipalAdministrador);
+                modalABM.ConfigurarModoEdicion(idProducto, nombre, categoria, genero, precio, stock, stockMinimo, descripcion, proveedor, esAdmin);
 
                 if (modalABM.ShowDialog() == DialogResult.OK)
                 {

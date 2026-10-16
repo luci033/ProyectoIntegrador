@@ -1,3 +1,4 @@
+using CapaNegocio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,29 +13,32 @@ namespace ProyectoIntegrador.Formularios.Compras
 {
     public partial class FormVerDetalle : Form
     {
-        private List<object[]> listaProductos; // Variable global
+        private int idCompra;
+        private string nroOrden;
+        private string proveedor;
+        private string fechaEmision;
+        private string fechaRecepcion;
+        private string observacion;
+        private string totalGeneral;
+        private List<object[]> listaProductosFallback;
 
-        // Actualizar constructor
-        public FormVerDetalle(string nro, string prov, string fecha, string recep, string obs, string total, List<object[]> detalles)
+        public FormVerDetalle(int idCompra, string nro, string prov, string fecha, string recep, string obs, string total)
         {
             InitializeComponent();
-            TBNroOrden.Text = nro;
-            TBProveedor.Text = prov;
-            TBFechaEmision.Text = fecha;
-            TBFechaRecepcion.Text = recep;
-            TBObservacion.Text = obs;
-            TBTotalGeneral.Text = total;
-            listaProductos = detalles; // Asignar
+            this.idCompra = idCompra;
+            this.nroOrden = nro;
+            this.proveedor = prov;
+            this.fechaEmision = fecha;
+            this.fechaRecepcion = recep;
+            this.observacion = obs;
+            this.totalGeneral = total;
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        // Constructor de compatibilidad previa
+        public FormVerDetalle(string nro, string prov, string fecha, string recep, string obs, string total, List<object[]> detalles = null)
+            : this(int.TryParse(nro, out int id) ? id : 0, nro, prov, fecha, recep, obs, total)
         {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
+            this.listaProductosFallback = detalles;
         }
 
         private void FormVerDetalle_Load(object sender, EventArgs e)
@@ -49,21 +53,71 @@ namespace ProyectoIntegrador.Formularios.Compras
             EstiloUI.AplicarEstiloBoton(BCerrar);
             EstiloUI.CentrarControl(panelCard, this);
 
-            // Llenar grilla dinámicamente
-            if (listaProductos != null)
+            TBNroOrden.Text = nroOrden;
+            TBProveedor.Text = proveedor;
+            TBFechaEmision.Text = fechaEmision;
+            TBFechaRecepcion.Text = string.IsNullOrWhiteSpace(fechaRecepcion) || fechaRecepcion == "Registrar Recepción" ? "Pendiente" : fechaRecepcion;
+            TBObservacion.Text = observacion;
+            TBTotalGeneral.Text = totalGeneral;
+
+            CargarDetalles();
+        }
+
+        private void CargarDetalles()
+        {
+            DGDetalleOrden.Rows.Clear();
+
+            if (idCompra > 0)
             {
-                foreach (var item in listaProductos)
+                try
+                {
+                    CN_Compra negocio = new CN_Compra();
+                    DataTable dt = negocio.ObtenerDetalle(idCompra);
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        int idProducto = Convert.ToInt32(row["IdProducto"]);
+                        string codigo = idProducto.ToString();
+                        string nombre = row["NombreProducto"] != DBNull.Value ? row["NombreProducto"].ToString() : "";
+                        string categoria = row["Categoria"] != DBNull.Value ? row["Categoria"].ToString() : "";
+                        string genero = row["Genero"] != DBNull.Value ? row["Genero"].ToString() : "";
+                        int cantPedida = Convert.ToInt32(row["CantidadPedida"]);
+                        int cantRecibida = Convert.ToInt32(row["CantidadRecibida"]);
+                        decimal costo = Convert.ToDecimal(row["PrecioUnitario"]);
+                        decimal subtotal = Convert.ToDecimal(row["Subtotal"]);
+
+                        DGDetalleOrden.Rows.Add(
+                            idProducto,
+                            codigo,
+                            nombre,
+                            categoria,
+                            genero,
+                            cantPedida,
+                            cantRecibida,
+                            costo,
+                            subtotal
+                        );
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al cargar los detalles de la orden: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else if (listaProductosFallback != null)
+            {
+                foreach (var item in listaProductosFallback)
                 {
                     DGDetalleOrden.Rows.Add(
-                        item[0], // ID
-                        item[1], // Código
-                        item[2], // Nombre
-                        item[3], // Categoría
-                        item[4], // Género
-                        item[5], // Cantidad Pedida
-                        item[8], // Cantidad Recibida (Índice 8 que acabamos de crear)
-                        item[6], // Costo
-                        item[7]  // Subtotal
+                        item[0],
+                        item[1],
+                        item[2],
+                        item[3],
+                        item[4],
+                        item[5],
+                        item[8],
+                        item[6],
+                        item[7]
                     );
                 }
             }
@@ -74,30 +128,17 @@ namespace ProyectoIntegrador.Formularios.Compras
             EstiloUI.CentrarControl(panelCard, this);
         }
 
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void BCerrar_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void DGDetalleOrden_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+        private void label2_Click(object sender, EventArgs e) { }
+        private void label6_Click(object sender, EventArgs e) { }
+        private void label5_Click(object sender, EventArgs e) { }
+        private void panel2_Paint(object sender, PaintEventArgs e) { }
+        private void label1_Click(object sender, EventArgs e) { }
+        private void DGDetalleOrden_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
     }
 }
