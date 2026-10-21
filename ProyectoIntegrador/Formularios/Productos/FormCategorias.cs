@@ -46,7 +46,7 @@ namespace ProyectoIntegrador.Formularios.Productos
                 List<Categoria> lista = new CN_Categoria().ListarCategorias();
                 foreach (var cat in lista)
                 {
-                    DGCategoria.Rows.Add(cat.IdCategoria, cat.NombreCategoria, "Modificar", "Desactivar");
+                    DGCategoria.Rows.Add(cat.IdCategoria, cat.NombreCategoria, "Modificar");
                 }
             }
             catch { }
@@ -67,37 +67,15 @@ namespace ProyectoIntegrador.Formularios.Productos
 
             string NombreColumna = DGCategoria.Columns[e.ColumnIndex].Name;
 
-            if (NombreColumna == "colDesactivar")
+            if (NombreColumna == "colModificar")
             {
-                string accionActual = Convert.ToString(DGCategoria.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
-
-                if (accionActual == "Desactivar")
-                {
-                    DialogResult respuesta = MessageBox.Show("¿Está seguro que desea desactivar esta categoría?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                    if (respuesta == DialogResult.Yes)
-                    {
-                        DGCategoria.Rows[e.RowIndex].DefaultCellStyle.BackColor = EstiloUI.ColorInactivo;
-                        DGCategoria.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "Activar";
-                    }
-                }
-                else
-                {
-                    DGCategoria.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
-                    DGCategoria.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "Desactivar";
-                }
-            }
-            else if (NombreColumna == "colModificar")
-            {
-                // Validación para bloquear el botón si la fila está desactivada
-                if (Convert.ToString(DGCategoria.Rows[e.RowIndex].Cells["colDesactivar"].Value) == "Activar") return;
-
-                string categoriaActual = DGCategoria.Rows[e.RowIndex].Cells[1].Value.ToString();
-                FormNuevaCategoria frm = new FormNuevaCategoria(categoriaActual);
+                int idCategoria = Convert.ToInt32(DGCategoria.Rows[e.RowIndex].Cells[0].Value ?? 0);
+                string categoriaActual = DGCategoria.Rows[e.RowIndex].Cells[1].Value?.ToString() ?? "";
+                FormNuevaCategoria frm = new FormNuevaCategoria(idCategoria, categoriaActual);
 
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
-                    DGCategoria.Rows[e.RowIndex].Cells[1].Value = frm.CategoriaNueva;
+                    CargarCategorias();
                 }
             }
         }
@@ -106,7 +84,5 @@ namespace ProyectoIntegrador.Formularios.Productos
         {
 
         }
-
-
     }
 }

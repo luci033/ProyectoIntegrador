@@ -14,17 +14,27 @@ namespace ProyectoIntegrador.Formularios.Productos
 {
     public partial class FormNuevaCategoria : Form
     {
+        private int idCategoria = 0;
+        private bool esModificacion = false;
+
         public FormNuevaCategoria()
         {
             InitializeComponent();
         }
 
-        public FormNuevaCategoria(string categoriaActual)
+        public FormNuevaCategoria(int idCategoria, string categoriaActual)
         {
             InitializeComponent();
-            TNuevaCategoria.Text = categoriaActual; // carga el string de la categoria actual 
-            this.Text = "Modificar Categoría"; // cambia el título de la ventana
-            this.LTitulo.Text = "Modificar Categoria";
+            this.idCategoria = idCategoria;
+            this.esModificacion = true;
+            TNuevaCategoria.Text = categoriaActual;
+            this.Text = "Modificar Categoría";
+            this.LTitulo.Text = "Modificar Categoría";
+            this.BGuardar.Text = "Guardar Cambios";
+        }
+
+        public FormNuevaCategoria(string categoriaActual) : this(0, categoriaActual)
+        {
         }
 
         private void FormNuevaCategoria_Load(object sender, EventArgs e)
@@ -56,8 +66,8 @@ namespace ProyectoIntegrador.Formularios.Productos
 
         private void TCategoria_Validating(object sender, CancelEventArgs e)
         {
-            // Verifica si cada caracter es distinto a letra o espacio en blanco
-            if (string.IsNullOrWhiteSpace(TNuevaCategoria.Text) || !TNuevaCategoria.Text.All(c => char.IsLetter(c)))
+            // Verifica que contenga solo letras y espacios en blanco
+            if (string.IsNullOrWhiteSpace(TNuevaCategoria.Text) || !TNuevaCategoria.Text.All(c => char.IsLetter(c) || char.IsWhiteSpace(c)))
             {
                 e.Cancel = true;
                 errorProvider1.SetError(TNuevaCategoria, "El campo solo debe contener letras.");
@@ -68,34 +78,56 @@ namespace ProyectoIntegrador.Formularios.Productos
             }
         }
 
-        // creo una propiedad publica de lectura pero solo el formulario nueva categoría lo puede modificar
         public string CategoriaNueva { get; private set; }
 
         private void BGuardar_Click(object sender, EventArgs e)
         {
-            Categoria NuevaCategoria  = new Categoria()
+            string nombreIngresado = TNuevaCategoria.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(nombreIngresado) || !nombreIngresado.All(c => char.IsLetter(c) || char.IsWhiteSpace(c)))
             {
-                NombreCategoria = TNuevaCategoria.Text.Trim()
+                MessageBox.Show("Por favor, ingrese un nombre de categoría válido (solo letras).", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Categoria categoriaObj = new Categoria()
+            {
+                IdCategoria = this.idCategoria,
+                NombreCategoria = nombreIngresado
             };
-            CN_Categoria categoria = new CN_Categoria();
-            categoria.Registrar(NuevaCategoria, out string mensaje);
-            
-            if(mensaje == string.Empty)
+
+            CN_Categoria negocio = new CN_Categoria();
+            bool resultado = false;
+            string mensaje = string.Empty;
+
+            if (esModificacion)
             {
+                resultado = negocio.Editar(categoriaObj, out mensaje);
+            }
+            else
+            {
+                resultado = negocio.Registrar(categoriaObj, out mensaje);
+            }
+
+            if (resultado)
+            {
+                CategoriaNueva = nombreIngresado;
+                string mensajeExito = esModificacion ? "Categoría modificada exitosamente." : "Categoría registrada exitosamente.";
+                MessageBox.Show(mensajeExito, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
+                this.Close();
             }
             else
             {
                 MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
         private void BCancelar_Click(object sender, EventArgs e)
         {
-            TNuevaCategoria.Clear(); //limpiamos el textbox donde se carga la categoría
-            this.DialogResult = DialogResult.Cancel; // se cancela todo, eso devolvemos
-            this.Close(); // cerramos el formulario
+            TNuevaCategoria.Clear();
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }

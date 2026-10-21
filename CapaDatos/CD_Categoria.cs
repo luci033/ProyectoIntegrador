@@ -1,4 +1,4 @@
-﻿using CapaEntidades;
+using CapaEntidades;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -27,14 +27,13 @@ namespace CapaDatos
                     {
                         cmd.CommandType = CommandType.Text;
 
-                        cmd.Parameters.AddWithValue("@NombreCategoria", string.IsNullOrWhiteSpace(obj.NombreCategoria) ? (object)DBNull.Value : obj.NombreCategoria);
+                        cmd.Parameters.AddWithValue("@NombreCategoria", string.IsNullOrWhiteSpace(obj.NombreCategoria) ? (object)DBNull.Value : obj.NombreCategoria.Trim());
 
                         int filasAfectadas = cmd.ExecuteNonQuery();
                         respuesta = filasAfectadas > 0;
                     }
                 }
             }
-
             catch (Exception ex)
             {
                 respuesta = false;
@@ -53,37 +52,65 @@ namespace CapaDatos
             return respuesta;
         }
 
-
-        //gran procedimiento para listar las categorías
-        //1ro creamos el metodo listar categorias de tipo List<Categoria> (lista de objetos de tipo Categoria)
-        public List<Categoria> ListarCategorias()
+        public bool EditarCategoria(Categoria obj, out string mensaje)
         {
-            //2do creamos la lista que va a devolver el método, por ahora vacia y de tipo lista de categorias
-            List<Categoria> lista = new List<Categoria>();
-            //3ro definimos como string la consulta que se llama query y es la que vamos a mandar a la base de datos
-            string query = "SELECT IdCategoria, NombreCategoria FROM Categoria";
-            //4to aca arranca el metodo que funciona
+            mensaje = string.Empty;
+            bool respuesta = false;
+
+            string query = @"UPDATE Categoria SET NombreCategoria = @NombreCategoria 
+                             WHERE IdCategoria = @IdCategoria";
+
             try
             {
-                //"usando" un objeto SqlConnection que se llama conexión va ser igual al metodo obtener conexión de la clase Conexion
                 using (SqlConnection conexion = Conexion.ObtenerConexion())
                 {
-                    //"usando" un objeto SqlCommand que se llama cmd va ser igual un objeto SqlComman al que le enviamos la query y la conexión que tiene el "obtener conexión"
                     using (SqlCommand cmd = new SqlCommand(query, conexion))
                     {
-                        //"usando" un objeto SqlDataReader que se llama reader va ser igual al cmd que definimos antes y que ejecute el método ExecuteReader
-                        //que lee los datos de la base de datos.
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Parameters.AddWithValue("@NombreCategoria", string.IsNullOrWhiteSpace(obj.NombreCategoria) ? (object)DBNull.Value : obj.NombreCategoria.Trim());
+                        cmd.Parameters.AddWithValue("@IdCategoria", obj.IdCategoria);
+
+                        int filasAfectadas = cmd.ExecuteNonQuery();
+                        respuesta = filasAfectadas > 0;
+                        if (!respuesta)
+                        {
+                            mensaje = "No se encontró la categoría para modificar.";
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                respuesta = false;
+                if (ex.Message.Contains("UQ_NombreCategoria"))
+                {
+                    mensaje = "Ya existe una categoría con ese nombre registrada en el sistema.";
+                }
+                else
+                {
+                    mensaje = "Error al modificar la categoría: " + ex.Message;
+                }
+            }
+
+            return respuesta;
+        }
+
+        public List<Categoria> ListarCategorias()
+        {
+            List<Categoria> lista = new List<Categoria>();
+            string query = "SELECT IdCategoria, NombreCategoria FROM Categoria";
+            try
+            {
+                using (SqlConnection conexion = Conexion.ObtenerConexion())
+                {
+                    using (SqlCommand cmd = new SqlCommand(query, conexion))
+                    {
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            //mientras el objeto que se llama reader ejecute el metodo leer propio de su clase
                             while (reader.Read())
                             {
-                                //le agrega un nuevo objeto de tipo categoria a la lista donde iguala el id y el nombre de la categoria que trae 
-                                //de la base de datos a los atributos de ese nuevo objeto clase categoria que estamos agregando (Add = Agregar)
                                 lista.Add(new Categoria()
                                 {
-                                    //iguala el id y el nombre de la categoria que trae de la base de datos a
-                                    //los atributos de ese nuevo objeto clase categoria que estamos agregando (Add = Agregar)
                                     IdCategoria = Convert.ToInt32(reader["IdCategoria"]),
                                     NombreCategoria = reader["NombreCategoria"].ToString()
                                 });
@@ -91,16 +118,12 @@ namespace CapaDatos
                         }
                     }
                 }
-                
             }
-            //este es el metodo si no funciona
-            //si aaalgo falló la lista va ser igual a una nueva lista de tipo categoria pero vaciaa
             catch (Exception ex)
             {
                 lista = new List<Categoria>();
             }
 
-            //por último devuelve la lista que se generó (en el try o en el catch)
             return lista;
         }
     }

@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CapaDatos;
+using CapaEntidades;
+using CapaNegocio;
 
 namespace ProyectoIntegrador.Formularios.Proveedores
 {
@@ -19,14 +19,43 @@ namespace ProyectoIntegrador.Formularios.Proveedores
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void FormProveedores_Load(object sender, EventArgs e)
         {
+            this.WindowState = FormWindowState.Maximized;
+            EstiloUI.AplicarEstiloFormulario(this);
+            EstiloUI.AplicarEstiloTitulo(LTitulo);
+            EstiloUI.AplicarEstiloBoton(BAgregarProveedor);
+            EstiloUI.AplicarEstiloGrilla(DGProveedores);
 
+            CargarProveedores();
         }
 
-        private void label1_Click_1(object sender, EventArgs e)
+        private void CargarProveedores()
         {
+            DGProveedores.Rows.Clear();
+            try
+            {
+                List<Proveedor> lista = new CN_Proveedor().ListarProveedores();
+                foreach (var prov in lista)
+                {
+                    int indice = DGProveedores.Rows.Add(
+                        prov.IdProveedor,
+                        prov.RazonSocial,
+                        prov.CUIT,
+                        prov.Telefono,
+                        prov.CorreoElectronico,
+                        "Editar",
+                        "Desactivar"
+                    );
 
+                    DGProveedores.Rows[indice].Cells[5].Style.BackColor = Color.LightGoldenrodYellow;
+                    DGProveedores.Rows[indice].Cells[6].Style.BackColor = Color.LightCoral;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar los proveedores desde la base de datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void BAgregarProveedor_Click(object sender, EventArgs e)
@@ -35,37 +64,9 @@ namespace ProyectoIntegrador.Formularios.Proveedores
             {
                 if (formABM.ShowDialog() == DialogResult.OK)
                 {
-                    // 1. Recorrer las filas actuales para validar el CUIT (Índice 2)
-                    foreach (DataGridViewRow fila in DGProveedores.Rows)
-                    {
-                        if (fila.Cells[2].Value != null && fila.Cells[2].Value.ToString() == formABM.CUIT)
-                        {
-                            MessageBox.Show("Ese CUIT ya se encuentra registrado.", "Registro duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return; // Corta la ejecución acá para no agregarlo
-                        }
-                    }
-
-                    // 2. Se agrega un string vacío "" para la columna idProveedor (Índice 0)
-                    int indice = DGProveedores.Rows.Add(
-                        "",                  // [0] idProveedor
-                        formABM.RazonSocial, // [1] Razón Social
-                        formABM.CUIT,        // [2] CUIT
-                        formABM.Telefono,    // [3] Teléfono
-                        formABM.Correo,      // [4] Correo
-                        "Editar",            // [5] Modificar
-                        "Desactivar"         // [6] Desactivar
-                    );
-
-                    // 3. Aplicar colores a los botones recién creados (Índices 5 y 6)
-                    DGProveedores.Rows[indice].Cells[5].Style.BackColor = Color.LightGoldenrodYellow;
-                    DGProveedores.Rows[indice].Cells[6].Style.BackColor = Color.LightCoral;
+                    CargarProveedores();
                 }
             }
-        }
-
-        private void LProveedores_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void DGProveedores_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -85,8 +86,10 @@ namespace ProyectoIntegrador.Formularios.Proveedores
 
                 using (FormProveedorABM formABM = new FormProveedorABM())
                 {
-                    // Mandamos los datos con los índices actualizados +1
+                    int idProveedor = Convert.ToInt32(fila.Cells[0].Value ?? 0);
+
                     formABM.ConfigurarModoEdicion(
+                        idProveedor,
                         fila.Cells[1].Value?.ToString(), // Razón Social
                         fila.Cells[2].Value?.ToString(), // CUIT
                         fila.Cells[3].Value?.ToString(), // Teléfono
@@ -95,9 +98,7 @@ namespace ProyectoIntegrador.Formularios.Proveedores
 
                     if (formABM.ShowDialog() == DialogResult.OK)
                     {
-                        // Actualizamos las celdas con los índices correctos
-                        fila.Cells[3].Value = formABM.Telefono;
-                        fila.Cells[4].Value = formABM.Correo;
+                        CargarProveedores();
                     }
                 }
             }
@@ -135,30 +136,19 @@ namespace ProyectoIntegrador.Formularios.Proveedores
             }
         }
 
-        private void FormProveedores_Load(object sender, EventArgs e)
+        private void label1_Click(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Maximized;
-            EstiloUI.AplicarEstiloFormulario(this);
-            EstiloUI.AplicarEstiloTitulo(LTitulo);
-            EstiloUI.AplicarEstiloBoton(BAgregarProveedor);
-            EstiloUI.AplicarEstiloGrilla(DGProveedores);
 
-            // Hardcodeo de 5 proveedores coincidiendo con las 7 columnas
-            DGProveedores.Rows.Add("1", "Joyas del Norte", "30111111111", "3794111111", "ventas@joyasdelnorte.com", "Editar", "Desactivar");
-            DGProveedores.Rows.Add("2", "Distribuidora Oro S.A.", "30222222222", "3794222222", "contacto@orosa.com", "Editar", "Desactivar");
-            DGProveedores.Rows.Add("3", "Gemas y Piedras", "30333333333", "3794333333", "info@gemas.com", "Editar", "Desactivar");
-            DGProveedores.Rows.Add("4", "Importadora Rubi", "30444444444", "3794444444", "importaciones@rubi.com", "Editar", "Desactivar");
-            DGProveedores.Rows.Add("5", "Platería Central", "30555555555", "3794555555", "central@plateria.com", "Editar", "Desactivar");
+        }
 
-            // Pintar los botones de las filas agregadas
-            foreach (DataGridViewRow fila in DGProveedores.Rows)
-            {
-                if (!fila.IsNewRow)
-                {
-                    fila.Cells[5].Style.BackColor = Color.LightGoldenrodYellow;
-                    fila.Cells[6].Style.BackColor = Color.LightCoral;
-                }
-            }
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LProveedores_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

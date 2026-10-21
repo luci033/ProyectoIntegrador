@@ -15,6 +15,9 @@ namespace ProyectoIntegrador.Formularios.Proveedores
 {
     public partial class FormProveedorABM : Form
     {
+        private int idProveedorSeleccionado = 0;
+        private bool esModificacion = false;
+
         public FormProveedorABM()
         {
             InitializeComponent();
@@ -32,47 +35,62 @@ namespace ProyectoIntegrador.Formularios.Proveedores
             errorProvider1.Clear(); // Limpia errores previos
 
             // Validar Razón Social
-            if (TBRazonSocial.Text.Length < 3)
+            if (TBRazonSocial.Text.Trim().Length < 3)
             {
-                errorProvider1.SetError(TBRazonSocial, "Debe tener entre 3 y 25 caracteres.");
+                errorProvider1.SetError(TBRazonSocial, "Debe tener entre 3 y 125 caracteres.");
                 valido = false;
             }
 
             // Validar CUIT (Solo 11 números)
-            if (!Regex.IsMatch(TBCUIT.Text, @"^\d{11}$"))
+            if (!Regex.IsMatch(TBCUIT.Text.Trim(), @"^\d{11}$"))
             {
                 errorProvider1.SetError(TBCUIT, "Debe contener exactamente 11 números.");
                 valido = false;
             }
 
-            // Validar Teléfono (Solo 10 números)
-            if (!Regex.IsMatch(TBTelefono.Text, @"^\d{10}$"))
+            // Validar Teléfono (Solo números, entre 7 y 25 caracteres según la BD)
+            if (!Regex.IsMatch(TBTelefono.Text.Trim(), @"^\d{7,25}$"))
             {
-                errorProvider1.SetError(TBTelefono, "Debe contener exactamente 10 números.");
+                errorProvider1.SetError(TBTelefono, "Debe contener solo números (mínimo 7 dígitos).");
                 valido = false;
             }
 
-            // Validar Correo
-            if (!Regex.IsMatch(TBCorreo.Text, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+            // Validar Correo (opcional o con formato válido si no está vacío)
+            if (!string.IsNullOrWhiteSpace(TBCorreo.Text) && !Regex.IsMatch(TBCorreo.Text.Trim(), @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
             {
                 errorProvider1.SetError(TBCorreo, "Formato de correo inválido.");
                 valido = false;
             }
 
-            // Si todo es correcto, cerramos devolviendo "OK"
+            // Si todo es correcto, guardamos
             if (valido)
             {
-                Proveedor NuevoProveedor = new Proveedor()
+                Proveedor prov = new Proveedor()
                 {
-                    RazonSocial = TBRazonSocial.Text,
-                    CUIT = TBCUIT.Text,
-                    Telefono = TBTelefono.Text,
-                    CorreoElectronico = TBCorreo.Text
+                    IdProveedor = this.idProveedorSeleccionado,
+                    RazonSocial = TBRazonSocial.Text.Trim(),
+                    CUIT = TBCUIT.Text.Trim(),
+                    Telefono = TBTelefono.Text.Trim(),
+                    CorreoElectronico = TBCorreo.Text.Trim()
                 };
-                CN_Proveedor proveedor = new CN_Proveedor();
-                proveedor.RegistrarProveedor(NuevoProveedor, out string mensaje);
-                if (mensaje == string.Empty)
+
+                CN_Proveedor negocio = new CN_Proveedor();
+                bool resultado = false;
+                string mensaje = string.Empty;
+
+                if (esModificacion)
                 {
+                    resultado = negocio.EditarProveedor(prov, out mensaje);
+                }
+                else
+                {
+                    resultado = negocio.RegistrarProveedor(prov, out mensaje);
+                }
+
+                if (resultado)
+                {
+                    string mensajeExito = esModificacion ? "Proveedor modificado exitosamente." : "Proveedor registrado exitosamente.";
+                    MessageBox.Show(mensajeExito, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
@@ -120,20 +138,28 @@ namespace ProyectoIntegrador.Formularios.Proveedores
             EstiloUI.CentrarControl(panelCard, this);
         }
 
-        public void ConfigurarModoEdicion(string razon, string cuit, string tel, string correo)
+        public void ConfigurarModoEdicion(int idProveedor, string razon, string cuit, string tel, string correo)
         {
-            this.Text = "Modificar Proveedor"; // Título de la ventana
+            this.esModificacion = true;
+            this.idProveedorSeleccionado = idProveedor;
 
-            LTitulo.Text = "Modificar Proveedor"; 
+            this.Text = "Modificar Proveedor";
+            LTitulo.Text = "Modificar Proveedor";
+            BGuardar.Text = "Guardar Cambios";
 
             TBRazonSocial.Text = razon;
-            TBRazonSocial.Enabled = false; // Impide modificar
+            TBRazonSocial.Enabled = false;
 
             TBCUIT.Text = cuit;
-            TBCUIT.Enabled = false; // Impide modificar
+            TBCUIT.Enabled = false;
 
             TBTelefono.Text = tel;
             TBCorreo.Text = correo;
+        }
+
+        public void ConfigurarModoEdicion(string razon, string cuit, string tel, string correo)
+        {
+            ConfigurarModoEdicion(0, razon, cuit, tel, correo);
         }
     }
 }

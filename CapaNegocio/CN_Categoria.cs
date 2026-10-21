@@ -1,4 +1,4 @@
-﻿using CapaDatos;
+using CapaDatos;
 using CapaEntidades;
 using System;
 using System.Collections.Generic;
@@ -19,7 +19,7 @@ namespace CapaNegocio
             mensaje = string.Empty;
 
             // Validaciones de negocio antes de ir a la base de datos
-            if (string.IsNullOrWhiteSpace(obj.NombreCategoria))
+            if (obj == null || string.IsNullOrWhiteSpace(obj.NombreCategoria))
             {
                 mensaje = "El nombre de la categoria no puede estar vacío.";
                 return false;
@@ -27,6 +27,26 @@ namespace CapaNegocio
 
             // Si pasa las validaciones, le pasa el objeto a la Capa de Datos
             return objCapaDato.RegistrarCategoria(obj, out mensaje);
+        }
+
+        // Método para editar una categoria existente
+        public bool Editar(Categoria obj, out string mensaje)
+        {
+            mensaje = string.Empty;
+
+            if (obj == null || obj.IdCategoria <= 0)
+            {
+                mensaje = "La categoría a modificar no es válida.";
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(obj.NombreCategoria))
+            {
+                mensaje = "El nombre de la categoría no puede estar vacío.";
+                return false;
+            }
+
+            return objCapaDato.EditarCategoria(obj, out mensaje);
         }
 
         public List<Categoria> ListarCategorias()

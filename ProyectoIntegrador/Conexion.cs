@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 using System.Data;
-using Microsoft.Data.SqlClient; // O System.Data.SqlClient según el paquete que tengas instalado
+using System.Data.SqlClient;
 
 namespace ProyectoIntegrador
 {
