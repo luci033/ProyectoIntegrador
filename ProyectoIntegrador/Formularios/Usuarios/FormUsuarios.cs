@@ -60,9 +60,9 @@ namespace ProyectoIntegrador.Formularios.Usuarios
                 // Como SQL nos devuelve el Rol en números (1, 2), lo traducimos a palabras para que se vea lindo
                 string nombreRol = "Desconocido";
                 if (item.IdRol == 1) nombreRol = "Administrador";
-                else if (item.IdRol == 2) nombreRol = "Vendedor";
-                else if (item.IdRol == 3) nombreRol = "Logística";
-                else if (item.IdRol == 4) nombreRol = "Gerente";
+                else if (item.IdRol == 2) nombreRol = "Gerente";
+                else if (item.IdRol == 3) nombreRol = "Vendedor";
+                else if (item.IdRol == 4) nombreRol = "Logística";
 
                 // Agregamo la fila a tu DataGridView
                 int indiceFila = dataGridRegistroUsuario.Rows.Add(
