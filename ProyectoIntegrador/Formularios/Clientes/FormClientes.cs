@@ -168,7 +168,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
                     string nombreCompleto = nombre + " " + apellido;
 
 
-                    formDetalle.CargarDatosCliente(nombreCompleto, correo, "Consumidor Final", dni);
+                    formDetalle.CargarDatosCliente(nombre, correo, condicionIVA, dni);
 
                     // 5. Mostramos la pantalla
                     formDetalle.ShowDialog();

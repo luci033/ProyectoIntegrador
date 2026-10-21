@@ -50,11 +50,11 @@ namespace ProyectoIntegrador.Formularios.Clientes
             this.Close();
         }
 
-        public void CargarDatosCliente()
+        public void CargarDatosCliente(string nombre, string correo, string condicionIVA, string dni)
         {
             TBNombre.Text = nombre;
             TBCorreo.Text = correo;
-            cmbCondicionIVA.Text = condicionIva;
+            cmbCondicionIVA.Text = condicionIVA;
             TBDni.Text = dni;
 
             //UNA VEZ CARGADO EL COMBO, SELECCIONAMOS EL TEXTO CORRESPONDIENTE
@@ -62,7 +62,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
 
             cmbCondicionIVA.DataSource = null; // Desvinculamos la lista general
             cmbCondicionIVA.Items.Clear();
-            cmbCondicionIVA.Items.Add(condicionIva); // Agregamos únicamente el IVA real del cliente
+            cmbCondicionIVA.Items.Add(condicionIVA); // Agregamos únicamente el IVA real del cliente
             cmbCondicionIVA.SelectedIndex = 0;       // Lo seleccionamos para que se vea
             cmbCondicionIVA.Enabled = false;
         }
