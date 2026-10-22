@@ -230,7 +230,7 @@ namespace ProyectoIntegrador.Formularios.Productos
             this.dataGridCatalogoProd.ReadOnly = true;
             this.dataGridCatalogoProd.RowHeadersVisible = false;
             this.dataGridCatalogoProd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridCatalogoProd.Size = new System.Drawing.Size(960, 259);
+            this.dataGridCatalogoProd.Size = new System.Drawing.Size(960, 504);
             this.dataGridCatalogoProd.TabIndex = 8;
             this.dataGridCatalogoProd.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridCatalogoProd.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridCatalogoProd_CellDoubleClick);
