@@ -314,6 +314,11 @@ namespace ProyectoIntegrador.Formularios.Productos
             modalABM.ConfigurarModoDetalle(codigo, nombre, categoria, genero, precio, stock, stockMinimo, descripcion, proveedor);
             modalABM.ShowDialog();
         }
+
+        private void LCategoria_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
     

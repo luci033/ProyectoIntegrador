@@ -1,4 +1,6 @@
 using CapaEntidades;
+using CapaNegocio;
+using CapaDatos;
 using ProyectoIntegrador.Formularios.Productos;
 using ProyectoIntegrador.ModelosSimulados;
 using System;
@@ -16,22 +18,16 @@ namespace ProyectoIntegrador.Formularios.Inventario
     public partial class FormAjusteStock : Form
     {
         private string usuarioLogueado;
+        private int IdProductoSeleccionado = 0;
+        private int IdUsuarioLogueado = 1;
+        private CN_Producto cnProducto = new CN_Producto();
+        private CN_AjusteStock cnAjusteStock = new CN_AjusteStock();
         public FormAjusteStock(string nombreUsuario)
         {
             InitializeComponent();
             usuarioLogueado = nombreUsuario;
         }
         
-
-        private void LCodigoProducto_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void FormAjusteStock_Load(object sender, EventArgs e)
         {
@@ -97,6 +93,31 @@ namespace ProyectoIntegrador.Formularios.Inventario
                 return;
             }
 
+            //se busca en la BD a traves de la CN
+            DataTable dt = cnProducto.Listar();
+            DataRow[] filas = dt.Select($"IdProducto = '{codigoIngresado}'"); //REVISAR
+
+            if(filas.Length > 0)
+            {
+                DataRow row = filas[0];
+                IdProductoSeleccionado = Convert.ToInt32(row["IdProducto"]);
+                TBCodigoProducto.Text = row["IdProducto"].ToString();
+                TBNombreProducto.Text = row["NombreProducto"].ToString();
+                TBStockActual.Text = row["StockActual"].ToString();
+                TBCantidadAjustar.Focus();
+            }
+            else
+            {
+                MessageBox.Show(
+                    $"No se encontró ningún producto con el código '{codigoIngresado}'.",
+                    "Producto no encontrado",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+                LimpiarCamposProducto();
+            }
+
+            /*
             // Buscar en el catálogo estático en memoria
             var producto = StockSimulado.BuscarPorCodigo(codigoIngresado);
 
@@ -128,6 +149,16 @@ namespace ProyectoIntegrador.Formularios.Inventario
                     TBCodigoProducto.SelectAll();
                 }
             }
+            */
+        }
+
+        private void LimpiarCamposProducto()
+        {
+            IdProductoSeleccionado = 0;
+            TBNombreProducto.Clear();
+            TBStockActual.Clear();
+            TBCodigoProducto.Focus();
+            TBCodigoProducto.SelectAll();
         }
 
         private void AbrirSelectorProductoModal()
@@ -148,24 +179,24 @@ namespace ProyectoIntegrador.Formularios.Inventario
 
         private void BConfirmar_Click(object sender, EventArgs e)
         {
-            // 1. Validación de producto seleccionado
-            if (string.IsNullOrWhiteSpace(TBCodigoProducto.Text) || string.IsNullOrWhiteSpace(TBNombreProducto.Text))
+
+            //Validamos el producto seleccionado
+            if (IdProductoSeleccionado <= 0)
             {
                 MessageBox.Show("Debe buscar y seleccionar un producto válido antes de registrar el ajuste.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 TBCodigoProducto.Focus();
                 return;
             }
 
-            // 2. Validación de tipo de ajuste
-            if (CBTipoAjuste.SelectedItem == null || string.IsNullOrWhiteSpace(CBTipoAjuste.SelectedItem.ToString()))
+            // Validamos el tipo de ajuste
+            if (CBTipoAjuste.SelectedItem == null)
             {
                 MessageBox.Show("Por favor, seleccione el tipo de ajuste ('Ingreso' o 'Egreso').", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                CBTipoAjuste.Focus();
                 return;
             }
             string tipoAjuste = CBTipoAjuste.SelectedItem.ToString();
 
-            // 3. Validación de cantidad numérica mayor a 0
+            // Validamos la cantidad numérica: mayor a 0
             if (!int.TryParse(TBCantidadAjustar.Text.Trim(), out int cantidad) || cantidad <= 0)
             {
                 MessageBox.Show("La cantidad a ajustar debe ser un número entero mayor a cero.", "Cantidad Inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -174,53 +205,44 @@ namespace ProyectoIntegrador.Formularios.Inventario
                 return;
             }
 
-            // 4. Validación de observaciones mínimas
+            // validacion de observaciones mínimas
             string observaciones = TBObservaciones.Text.Trim();
             if (observaciones.Length < 5)
             {
-                MessageBox.Show("Debe ingresar un motivo u observación descriptiva de al menos 5 caracteres justificando el ajuste.", "Observaciones Requeridas", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Debe ingresar un motivo u observación descriptiva de al menos 5 caracteres.", "Observaciones Requeridas", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 TBObservaciones.Focus();
                 return;
             }
 
-            string codigo = TBCodigoProducto.Text.Trim();
-            string operador = string.IsNullOrWhiteSpace(TBUsuarioActivo.Text) ? "Operador Logística" : TBUsuarioActivo.Text.Trim();
+            // Stock actual en pantalla para validar egresos
+            int stockActual = Convert.ToInt32(TBStockActual.Text);
 
-            // 5. Aplicación del ajuste en el repositorio en memoria
-            bool ok = StockSimulado.AplicarAjuste(codigo, tipoAjuste, cantidad, operador, observaciones, out int stockAnterior, out int stockNuevo, out string mensajeError);
+            // Se llama a la Capa de Negocio real para impactar en SQL Server
+            bool resultado = cnAjusteStock.RegistrarAjuste(
+                IdProductoSeleccionado,
+                IdUsuarioLogueado,
+                tipoAjuste,
+                cantidad,
+                observaciones,
+                stockActual,
+                out string mensajeError
+            );
 
-            if (!ok)
+            if (!resultado)
             {
                 MessageBox.Show(mensajeError, "Ajuste Rechazado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Actualización visual inmediata en pantalla
-            TBStockActual.Text = stockNuevo.ToString();
-
-            string signo = tipoAjuste.Equals("Ingreso", StringComparison.OrdinalIgnoreCase) ? "+" : "-";
-
-            MessageBox.Show(
-                /*$"Ajuste de stock registrado exitosamente.\n\n" +
-                $"• Joya: {TBNombreProducto.Text} (Cód: {codigo})\n" +
-                $"• Operación: {tipoAjuste} ({signo}{cantidad} unidades)\n" +
-                $"• Stock Anterior: {stockAnterior} unidades\n" +
-                $"• Nuevo Stock Disponible: {stockNuevo} unidades\n" +
-                $"• Operador: {operador}\n\n" +
-                $"El stock se ha actualizado en todo el sistema."*/
-                "Ajuste realizado con éxito.",
-                "Ajuste Confirmado",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            );
-
-            // Volver al panel principal cerrando la ventana
+            MessageBox.Show("Ajuste de stock registrado y aplicado en la base de datos con éxito.", "Ajuste Confirmado", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
         }
-
         private void BCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
+        private void LCodigoProducto_Click(object sender, EventArgs e) { }
+        private void panel2_Paint(object sender, PaintEventArgs e) { }
     }
 }

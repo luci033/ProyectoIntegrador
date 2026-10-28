@@ -64,7 +64,7 @@ namespace ProyectoIntegrador.Formularios.Usuarios
                 else if (item.IdRol == 3) nombreRol = "Vendedor";
                 else if (item.IdRol == 4) nombreRol = "Logística";
 
-                // Agregamo la fila a tu DataGridView
+                // Agregamo la fila al DataGridView
                 int indiceFila = dataGridRegistroUsuario.Rows.Add(
                     item.IdUsuario,
                     item.Dni,
@@ -202,14 +202,26 @@ namespace ProyectoIntegrador.Formularios.Usuarios
             // --- ACCIÓN: BOTÓN MODIFICAR ---
             if (nombreColumna == "colModificar")
             {
+                int idUsuario = Convert.ToInt32(dataGridRegistroUsuario.Rows[e.RowIndex].Cells[0].Value);
+
+                /*
                 // Leemos los datos exactos según el orden de tu código
+                 dni = Convert.ToString(dataGridRegistroUsuario.Rows[e.RowIndex].Cells[1].Value);
                 string nombre = Convert.ToString(dataGridRegistroUsuario.Rows[e.RowIndex].Cells[2].Value);
                 string apellido = Convert.ToString(dataGridRegistroUsuario.Rows[e.RowIndex].Cells[3].Value);
                 string nombreUsuario = Convert.ToString(dataGridRegistroUsuario.Rows[e.RowIndex].Cells[4].Value);
                 string rol = Convert.ToString(dataGridRegistroUsuario.Rows[e.RowIndex].Cells[5].Value);
+                
+                string telefono = Convert.ToString(dataGridRegistroUsuario.Rows[e.RowIndex].Cells[6].Value);
+                string domicilio = Convert.ToString(dataGridRegistroUsuario.Rows[e.RowIndex].Cells[7].Value);
+                */
+
 
                 FormUsuarioABM modalABM = new FormUsuarioABM();
-                modalABM.ConfigurarModoEdicion(dni, nombre, apellido, nombreUsuario, rol);
+                modalABM.ConfigurarModoEdicionPorId(idUsuario);
+                /*
+                modalABM.ConfigurarModoEdicion(dni, nombre, apellido, nombreUsuario, rol telefono, domicilio);
+                */
 
                 if (modalABM.ShowDialog() == DialogResult.OK)
                 {
@@ -224,7 +236,15 @@ namespace ProyectoIntegrador.Formularios.Usuarios
             {
                 int idUsuario = Convert.ToInt32(dataGridRegistroUsuario.Rows[e.RowIndex].Cells[0].Value);
                 string nombreUsuario = Convert.ToString(dataGridRegistroUsuario.Rows[e.RowIndex].Cells[4].Value);
+                string rolUsuario = Convert.ToString(dataGridRegistroUsuario.Rows[e.RowIndex].Cells[5].Value); // Rol de esta fila específica
                 DataGridViewRow fila = dataGridRegistroUsuario.Rows[e.RowIndex];
+
+                // 🔒 RESTRICCIÓN: Si es Administrador, prohibimos la desactivación
+                if (rolUsuario.Equals("Administrador", StringComparison.OrdinalIgnoreCase))
+                {
+                    MessageBox.Show("Por motivos de seguridad, no se puede desactivar a un usuario con el rol de Administrador.", "Acción denegada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
                 // Detectamos el estado actual mirando el color de la fila
                 bool estaInactivo = fila.DefaultCellStyle.BackColor == Color.LightGray;
@@ -239,7 +259,7 @@ namespace ProyectoIntegrador.Formularios.Usuarios
                 {
                     CN_Usuario negocioUsuario = new CN_Usuario();
                     string mensaje = "";
-                    bool resultado = negocioUsuario.CambiarEstado(idUsuario, nuevoEstadoBD, out mensaje);
+                    bool resultado = negocioUsuario.CambiarEstado(idUsuario, nuevoEstadoBD, out mensaje); // o out mensaje
 
                     if (resultado == true)
                     {
@@ -266,7 +286,7 @@ namespace ProyectoIntegrador.Formularios.Usuarios
                     }
                 }
             }
-            
+
         }
 
         private void CargarDatosGrilla()
@@ -310,4 +330,5 @@ namespace ProyectoIntegrador.Formularios.Usuarios
     }
 }
     
+
 

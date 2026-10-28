@@ -19,5 +19,6 @@ namespace CapaEntidades
         public int IdGenero { get; set; }
         public int IdCategoria { get; set; }
         public int IdProveedor { get; set; }
+        public decimal MargenGanancia { get; set; }
     }
 }

@@ -115,7 +115,7 @@ namespace CapaDatos
                 using (SqlConnection conexion = Conexion.ObtenerConexion())
                 {
                     // Escribimos la consulta SQL. Traemos los campos que necesitas para la grilla.
-                    string query = "SELECT IdUsuario, DNI, NombreUsuario, ApellidoUsuario, Usuario, IdRol, Activo FROM Usuarios";
+                    string query = "SELECT IdUsuario, DNI, NombreUsuario, ApellidoUsuario, Usuario, IdRol, Activo, Telefono, Domicilio FROM Usuarios";
 
                     using (SqlCommand cmd = new SqlCommand(query, conexion))
                     {
@@ -135,7 +135,10 @@ namespace CapaDatos
                                     User = reader["Usuario"].ToString(),
                                     IdRol = Convert.ToInt32(reader["IdRol"]),
                                     Contrasena = "",
-                                    Activo = Convert.ToBoolean(reader["Activo"])
+                                    Activo = Convert.ToBoolean(reader["Activo"]),
+                                    // Mapeamos los campos que faltaban:
+                                    Telefono = reader["Telefono"] != DBNull.Value ? reader["Telefono"].ToString() : string.Empty,
+                                    Domicilio = reader["Domicilio"] != DBNull.Value ? reader["Domicilio"].ToString() : string.Empty
                                 });
                             }
                         }
@@ -193,7 +196,7 @@ namespace CapaDatos
                 {
                     // Hacemos el UPDATE buscando específicamente por DNI
                     string query = @"UPDATE Usuarios 
-                             SET Usuario = @Usuario, NombreUsuario = @Nombre, ApellidoUsuario = @Apellido, IdRol = @IdRol 
+                             SET Usuario = @Usuario, NombreUsuario = @Nombre, ApellidoUsuario = @Apellido, IdRol = @IdRol, Telefono = @Telefono, Domicilio = @Domicilio
                              WHERE DNI = @DNI";
 
                     using (SqlCommand cmd = new SqlCommand(query, conexion))
@@ -203,6 +206,8 @@ namespace CapaDatos
                         cmd.Parameters.AddWithValue("@Apellido", string.IsNullOrWhiteSpace(obj.ApellidoUsuario) ? (object)DBNull.Value : obj.ApellidoUsuario);
                         cmd.Parameters.AddWithValue("@IdRol", obj.IdRol);
                         cmd.Parameters.AddWithValue("@DNI", obj.Dni);
+                        cmd.Parameters.AddWithValue("@Telefono", string.IsNullOrWhiteSpace(obj.Telefono) ? (object)DBNull.Value : obj.Telefono);
+                        cmd.Parameters.AddWithValue("@Domicilio", string.IsNullOrWhiteSpace(obj.Domicilio) ? (object)DBNull.Value : obj.Domicilio);
 
                         int filasAfectadas = cmd.ExecuteNonQuery();
                         respuesta = filasAfectadas > 0;

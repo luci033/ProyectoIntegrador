@@ -37,6 +37,7 @@ namespace ProyectoIntegrador.Formularios.Productos
         public string Genero { get; private set; }
         public int Stock { get; private set;  }
         public decimal PrecioVenta { get; private set; }
+        public int MargenGanancia { get; private set; }
 
         private void FormBuscarProducto_Load(object sender, EventArgs e)
         {
@@ -108,6 +109,7 @@ namespace ProyectoIntegrador.Formularios.Productos
                     int stock = row["StockActual"] != DBNull.Value ? Convert.ToInt32(row["StockActual"]) : 0;
                     decimal pVenta = (row["PrecioVenta"] != DBNull.Value) ? Convert.ToDecimal(row["PrecioVenta"]) : 0.00m;
                     decimal pCompra = (row["PrecioCompra"] != DBNull.Value) ? Convert.ToDecimal(row["PrecioCompra"]) : 0.00m;
+                    decimal margen = (row.Table.Columns.Contains("MargenGanancia") && row["MargenGanancia"] != DBNull.Value) ? Convert.ToDecimal(row["MargenGanancia"]) : 0.00m;
 
                     DGProductos.Rows.Add(id, id.ToString(), nombre, categoria, genero, stock, pVenta, pCompra);
                 }
@@ -134,6 +136,8 @@ namespace ProyectoIntegrador.Formularios.Productos
                 Genero = fila.Cells[4].Value?.ToString();
                 Stock = Convert.ToInt32(fila.Cells[5].Value ?? 0);
                 PrecioVenta = Convert.ToDecimal(fila.Cells[6].Value ?? 0);
+                CostoCompra = Convert.ToDecimal(fila.Cells[7].Value ?? 0);
+                MargenGanancia = Convert.ToInt32(fila.Cells[8].Value ?? 0); // <-- Capturamos el margen de la celda
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();

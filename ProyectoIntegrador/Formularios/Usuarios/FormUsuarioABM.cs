@@ -29,6 +29,7 @@ namespace ProyectoIntegrador
         public string Rol => CBRol.Text;
         public string Telefono => TBTelefono .Text.Trim();
         public string Domicilio => TBDomicilio .Text.Trim();
+        private int? rolIdEdicion = null;
 
 
         public FormUsuarioABM()
@@ -65,8 +66,16 @@ namespace ProyectoIntegrador
             // Le decimos qué propiedad va a GUARDAR ocultamente (el ID)
             CBRol.ValueMember = "IdRol";
 
-            // Lo dejamos en blanco para que el usuario tenga que elegir uno sí o sí
-            CBRol.SelectedIndex = -1;
+            // Si estamos editando y tenemos un rol guardado, lo seleccionamos. 
+            // Si es un alta nueva, lo dejamos en -1 en blanco.
+            if (rolIdEdicion.HasValue)
+            {
+                CBRol.SelectedValue = rolIdEdicion.Value;
+            }
+            else
+            {
+                CBRol.SelectedIndex = -1;
+            }
         }
 
 
@@ -129,6 +138,14 @@ namespace ProyectoIntegrador
 
         private void TBContraseña_Validating(object sender, CancelEventArgs e)
         {
+            // Si estamos editando (DNI deshabilitado) y el usuario dejó la contraseña vacía, 
+            // permitimos que quede vacía (no es obligatoria al modificar).
+            if (TBDni.Enabled == false && string.IsNullOrEmpty(TBContraseña.Text))
+            {
+                errorProvider1.SetError(TBContraseña, "");
+                return;
+            }
+
             if (TBContraseña.Text.Length < 4)
             {
                 errorProvider1.SetError(TBContraseña, "La contraseña debe tener al menos 4 caracteres.");
@@ -140,6 +157,13 @@ namespace ProyectoIntegrador
 
         private void TBContraseñaRepetir_Validating(object sender, CancelEventArgs e)
         {
+            // Si estamos editando y ambas están vacías, pasa sin error.
+            if (TBDni.Enabled == false && string.IsNullOrEmpty(TBContraseña.Text) && string.IsNullOrEmpty(TBContraseñaRepetir.Text))
+            {
+                errorProvider1.SetError(TBContraseñaRepetir, "");
+                return;
+            }
+
             if (TBContraseñaRepetir.Text != TBContraseña.Text)
             {
                 errorProvider1.SetError(TBContraseñaRepetir, "Las contraseñas no coinciden.");
@@ -293,8 +317,40 @@ namespace ProyectoIntegrador
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
+        public void ConfigurarModoEdicionPorId(int idUsuario)
+        {
+            TBDni.Enabled = false; // Bloqueamos el DNI
 
-        public void ConfigurarModoEdicion(string dni, string nombre, string apellido, string nombreUsuario, string rol)
+            // 1. Cargamos los roles
+            CD_Rol datosRol = new CD_Rol();
+            List<Rol> listaRoles = datosRol.ListarRoles();
+            CBRol.DataSource = listaRoles;
+            CBRol.DisplayMember = "NombreRol";
+            CBRol.ValueMember = "IdRol";
+
+            // 2. Buscamos el usuario
+            CN_Usuario negocio = new CN_Usuario();
+            List<Usuario> listaUsuarios = negocio.Listar();
+            Usuario user = listaUsuarios.FirstOrDefault(u => u.IdUsuario == idUsuario);
+
+            if (user != null)
+            {
+                TBDni.Text = user.Dni;
+                TBNombre.Text = user.NombreUsuario;
+                TBApellido.Text = user.ApellidoUsuario;
+                TBUsuario.Text = user.User;
+
+                // 3. Como ya tiene los datos cargados arriba, esto selecciona el rol al toque
+                rolIdEdicion = user.IdRol;
+
+                TBTelefono.Text = user.Telefono ?? string.Empty;
+                TBDomicilio.Text = user.Domicilio ?? string.Empty;
+            }
+        }
+        
+
+        /*
+        public void ConfigurarModoEdicion(string dni, string nombre, string apellido, string nombreUsuario, string rol, string telefono, string domicilio)
         {
             TBDni.Text = dni;
             TBDni.Enabled = false; // bloquemos el dni para que no se pueda cmabiar 
@@ -303,10 +359,10 @@ namespace ProyectoIntegrador
             TBApellido.Text = apellido;
             TBUsuario.Text = nombreUsuario; 
             CBRol.Text = rol;
-            TBTelefono.Text = Telefono;
-            TBDomicilio.Text = Domicilio;
-        }
-        
+            TBTelefono.Text = telefono;
+            TBDomicilio.Text = domicilio;
+        }*/
+
         private void TBTelefono_Validating(object sender, CancelEventArgs e)
         {
             string telefono = TBTelefono.Text.Trim();

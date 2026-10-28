@@ -39,6 +39,8 @@ namespace ProyectoIntegrador.Formularios.Compras
         public string Telefono { get; private set; }
         public string CorreoElectronico { get; private set; }
 
+        private List<Proveedor> listaProveedores;
+
 
         private void FormBuscarProveedor_Load(object sender, EventArgs e)
         {
@@ -48,7 +50,7 @@ namespace ProyectoIntegrador.Formularios.Compras
             EstiloUI.AplicarEstiloBotonSecundario(BCancelar);
             EstiloUI.AplicarEstiloGrilla(DGProveedores);
 
-            DGProveedores.Rows.Clear();
+            /*DGProveedores.Rows.Clear();
             try
             {
                 var lista = new CN_Proveedor().ListarProveedores();
@@ -57,9 +59,26 @@ namespace ProyectoIntegrador.Formularios.Compras
                     int idx = DGProveedores.Rows.Add(prov.RazonSocial, prov.CUIT, prov.Telefono, prov.CorreoElectronico);
                     DGProveedores.Rows[idx].Tag = prov.IdProveedor;
                 }
+            }*/
+            try
+            {
+                // 1. Guardamos la lista completa en la variable global
+                listaProveedores = new CN_Proveedor().ListarProveedores();
+                CargarGrilla(listaProveedores);
             }
             catch { }
         }
+
+        // Método auxiliar para pintar la grilla ordenadamente
+        private void CargarGrilla(List<Proveedor> lista)
+        {
+            DGProveedores.Rows.Clear();
+            foreach (var prov in lista)
+            {
+                int idx = DGProveedores.Rows.Add(prov.RazonSocial, prov.CUIT, prov.Telefono, prov.CorreoElectronico);
+                DGProveedores.Rows[idx].Tag = prov.IdProveedor;
+            }
+        } 
 
         private void DGProveedores_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -78,9 +97,26 @@ namespace ProyectoIntegrador.Formularios.Compras
             }
         }
 
-        private void DGProveedores_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void TBBuscarProducto_TextChanged(object sender, EventArgs e)
         {
+            if (listaProveedores == null) return;
 
+            string filtro = TBBuscarProveedor.Text.Trim().ToLower();
+
+            if (string.IsNullOrEmpty(filtro))
+            {
+                CargarGrilla(listaProveedores);
+            }
+            else
+            {
+                // Filtramos por Razón Social o CUIT usando LINQ
+                var listaFiltrada = listaProveedores.Where(p =>
+                    (p.RazonSocial != null && p.RazonSocial.ToLower().Contains(filtro)) ||
+                    (p.CUIT != null && p.CUIT.ToLower().Contains(filtro))
+                ).ToList();
+
+                CargarGrilla(listaFiltrada);
+            }
         }
     }
 }

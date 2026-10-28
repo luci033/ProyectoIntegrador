@@ -162,6 +162,7 @@ namespace ProyectoIntegrador.Formularios.Productos
             this.LCategoria.Size = new System.Drawing.Size(71, 17);
             this.LCategoria.TabIndex = 21;
             this.LCategoria.Text = "Categoría:";
+            this.LCategoria.Click += new System.EventHandler(this.LCategoria_Click);
             // 
             // TBBuscarProducto
             // 

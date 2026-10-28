@@ -74,8 +74,10 @@ namespace ProyectoIntegrador.Formularios.Compras
             }
 
             // Desbloqueamos únicamente la Cantidad (columna 5) y el Costo Unitario (columna 6) para que puedas editarlos libremente
+            DGDetalleOrden.Columns[4].ReadOnly = false;
             DGDetalleOrden.Columns[5].ReadOnly = false;
             DGDetalleOrden.Columns[6].ReadOnly = false;
+
 
             DGDetalleOrden.DataError += new DataGridViewDataErrorEventHandler(DGDetalleOrden_DataError);
         }
@@ -154,6 +156,7 @@ namespace ProyectoIntegrador.Formularios.Compras
                     }
 
                     // 2. Si no existe, lo agregamos normalmente por primera vez
+                    int margenInicial = formProducto.MargenGanancia;
                     int cantidad = 1;
                     decimal CostoCompra = 0;
                     decimal subtotal = CostoCompra * cantidad;
@@ -166,7 +169,8 @@ namespace ProyectoIntegrador.Formularios.Compras
                         formProducto.Genero,
                         cantidad,
                         CostoCompra,
-                        subtotal
+                        subtotal,
+                        margenInicial
                     );
 
                     CalcularTotal();

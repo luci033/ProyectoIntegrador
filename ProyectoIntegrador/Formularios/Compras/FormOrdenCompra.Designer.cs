@@ -50,18 +50,19 @@ namespace ProyectoIntegrador.Formularios.Compras
             this.panel2 = new System.Windows.Forms.Panel();
             this.BAgregarProducto = new System.Windows.Forms.Button();
             this.DGDetalleOrden = new System.Windows.Forms.DataGridView();
+            this.LTotal = new System.Windows.Forms.Label();
+            this.TBTotal = new System.Windows.Forms.TextBox();
+            this.BCancelar = new System.Windows.Forms.Button();
+            this.BGenerarOrden = new System.Windows.Forms.Button();
             this.colIdProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colGenero = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CMargenGanancia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CostoUnitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LTotal = new System.Windows.Forms.Label();
-            this.TBTotal = new System.Windows.Forms.TextBox();
-            this.BCancelar = new System.Windows.Forms.Button();
-            this.BGenerarOrden = new System.Windows.Forms.Button();
             this.panelCard.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -303,6 +304,7 @@ namespace ProyectoIntegrador.Formularios.Compras
             this.colCategoria,
             this.colGenero,
             this.cantidad,
+            this.CMargenGanancia,
             this.CostoUnitario,
             this.Subtotal});
             this.DGDetalleOrden.GridColor = System.Drawing.Color.Silver;
@@ -317,62 +319,6 @@ namespace ProyectoIntegrador.Formularios.Compras
             this.DGDetalleOrden.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGDetalleOrden_CellValueChanged);
             this.DGDetalleOrden.CurrentCellDirtyStateChanged += new System.EventHandler(this.DGDetalleOrden_CurrentCellDirtyStateChanged);
             this.DGDetalleOrden.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DGDetalleOrden_DataError);
-            // 
-            // colIdProducto
-            // 
-            this.colIdProducto.HeaderText = "Id Producto";
-            this.colIdProducto.Name = "colIdProducto";
-            this.colIdProducto.Visible = false;
-            // 
-            // colCodigo
-            // 
-            this.colCodigo.FillWeight = 25F;
-            this.colCodigo.HeaderText = "Cod.";
-            this.colCodigo.Name = "colCodigo";
-            this.colCodigo.ReadOnly = true;
-            // 
-            // nombre
-            // 
-            this.nombre.FillWeight = 70F;
-            this.nombre.HeaderText = "Nombre";
-            this.nombre.Name = "nombre";
-            this.nombre.ReadOnly = true;
-            // 
-            // colCategoria
-            // 
-            this.colCategoria.FillWeight = 50F;
-            this.colCategoria.HeaderText = "Categoría";
-            this.colCategoria.Name = "colCategoria";
-            this.colCategoria.ReadOnly = true;
-            // 
-            // colGenero
-            // 
-            this.colGenero.FillWeight = 45F;
-            this.colGenero.HeaderText = "Género";
-            this.colGenero.Name = "colGenero";
-            // 
-            // cantidad
-            // 
-            this.cantidad.FillWeight = 35F;
-            this.cantidad.HeaderText = "Cantidad";
-            this.cantidad.Name = "cantidad";
-            // 
-            // CostoUnitario
-            // 
-            dataGridViewCellStyle1.Format = "C2";
-            this.CostoUnitario.DefaultCellStyle = dataGridViewCellStyle1;
-            this.CostoUnitario.FillWeight = 50F;
-            this.CostoUnitario.HeaderText = "Costo Unitario";
-            this.CostoUnitario.Name = "CostoUnitario";
-            // 
-            // Subtotal
-            // 
-            dataGridViewCellStyle2.Format = "C2";
-            this.Subtotal.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Subtotal.FillWeight = 50F;
-            this.Subtotal.HeaderText = "Subtotal";
-            this.Subtotal.Name = "Subtotal";
-            this.Subtotal.ReadOnly = true;
             // 
             // LTotal
             // 
@@ -421,6 +367,67 @@ namespace ProyectoIntegrador.Formularios.Compras
             this.BGenerarOrden.Text = "Generar Orden";
             this.BGenerarOrden.UseVisualStyleBackColor = true;
             this.BGenerarOrden.Click += new System.EventHandler(this.BGenerarOrden_Click);
+            // 
+            // colIdProducto
+            // 
+            this.colIdProducto.HeaderText = "Id Producto";
+            this.colIdProducto.Name = "colIdProducto";
+            this.colIdProducto.Visible = false;
+            // 
+            // colCodigo
+            // 
+            this.colCodigo.FillWeight = 25F;
+            this.colCodigo.HeaderText = "Cod.";
+            this.colCodigo.Name = "colCodigo";
+            this.colCodigo.ReadOnly = true;
+            // 
+            // nombre
+            // 
+            this.nombre.FillWeight = 70F;
+            this.nombre.HeaderText = "Nombre";
+            this.nombre.Name = "nombre";
+            this.nombre.ReadOnly = true;
+            // 
+            // colCategoria
+            // 
+            this.colCategoria.FillWeight = 50F;
+            this.colCategoria.HeaderText = "Categoría";
+            this.colCategoria.Name = "colCategoria";
+            this.colCategoria.ReadOnly = true;
+            // 
+            // colGenero
+            // 
+            this.colGenero.FillWeight = 45F;
+            this.colGenero.HeaderText = "Género";
+            this.colGenero.Name = "colGenero";
+            // 
+            // cantidad
+            // 
+            this.cantidad.FillWeight = 35F;
+            this.cantidad.HeaderText = "Cantidad";
+            this.cantidad.Name = "cantidad";
+            // 
+            // CMargenGanancia
+            // 
+            this.CMargenGanancia.HeaderText = "Margen (%)";
+            this.CMargenGanancia.Name = "CMargenGanancia";
+            // 
+            // CostoUnitario
+            // 
+            dataGridViewCellStyle1.Format = "C2";
+            this.CostoUnitario.DefaultCellStyle = dataGridViewCellStyle1;
+            this.CostoUnitario.FillWeight = 50F;
+            this.CostoUnitario.HeaderText = "Costo Unitario";
+            this.CostoUnitario.Name = "CostoUnitario";
+            // 
+            // Subtotal
+            // 
+            dataGridViewCellStyle2.Format = "C2";
+            this.Subtotal.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Subtotal.FillWeight = 50F;
+            this.Subtotal.HeaderText = "Subtotal";
+            this.Subtotal.Name = "Subtotal";
+            this.Subtotal.ReadOnly = true;
             // 
             // FormOrdenCompra
             // 
@@ -471,15 +478,16 @@ namespace ProyectoIntegrador.Formularios.Compras
         private System.Windows.Forms.TextBox TBCorreo;
         private System.Windows.Forms.Label LCorreo;
         private System.Windows.Forms.TextBox TBTotal;
+        private System.Windows.Forms.TextBox TBUsuario;
+        private System.Windows.Forms.Label LUsuario;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIdProducto;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCodigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategoria;
         private System.Windows.Forms.DataGridViewTextBoxColumn colGenero;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CMargenGanancia;
         private System.Windows.Forms.DataGridViewTextBoxColumn CostoUnitario;
         private System.Windows.Forms.DataGridViewTextBoxColumn Subtotal;
-        private System.Windows.Forms.TextBox TBUsuario;
-        private System.Windows.Forms.Label LUsuario;
     }
 }

@@ -17,8 +17,8 @@ namespace CapaDatos
             
             bool respuesta = false;
 
-            string query = @"INSERT INTO Producto (NombreProducto, PrecioVenta, PrecioCompra, StockActual, StockMinimo, Descripcion, Estado, IdGenero, IdCategoria, IdProveedor)
-                            VALUES (@NombreProducto, @PrecioVenta, @PrecioCompra, @StockActual, @StockMinimo, @Descripcion, @Estado, @IdGenero, @IdCategoria, @IdProveedor)";
+            string query = @"INSERT INTO Producto (NombreProducto, PrecioVenta, PrecioCompra, StockActual, StockMinimo, Descripcion, Estado, IdGenero, IdCategoria, IdProveedor, MargenGanancia)
+                            VALUES (@NombreProducto, @PrecioVenta, @PrecioCompra, @StockActual, @StockMinimo, @Descripcion, @Estado, @IdGenero, @IdCategoria, @IdProveedor, @MargenGanacia)";
 
             try
             {
@@ -38,6 +38,7 @@ namespace CapaDatos
                         cmd.Parameters.AddWithValue("@IdGenero", obj.IdGenero);
                         cmd.Parameters.AddWithValue("@IdCategoria", obj.IdCategoria);
                         cmd.Parameters.AddWithValue("@IdProveedor", obj.IdProveedor);
+                        cmd.Parameters.AddWithValue("@MargenGanancia", obj.MargenGanancia);
 
                         int filasAfectadas = cmd.ExecuteNonQuery();
                         respuesta = filasAfectadas > 0;
@@ -100,6 +101,7 @@ namespace CapaDatos
                             p.Descripcion, 
                             p.Estado,
                             p.IdProveedor,
+                            p.MargenGanancia,
                             g.NombreGenero AS NombreGenero,
                             cat.NombreCategoria AS NombreCategoria,
                             pr.RazonSocial AS NombreProveedor
@@ -132,7 +134,8 @@ namespace CapaDatos
                             IdProveedor = @IdProveedor,
                             IdCategoria = @IdCategoria,
                             IdGenero = @IdGenero,
-                            PrecioVenta = @PrecioVenta
+                            PrecioVenta = @PrecioVenta,
+                            MargenGanancia = @MargenGanancia
                             WHERE IdProducto = @IdProducto";
 
             try
@@ -150,6 +153,7 @@ namespace CapaDatos
                         cmd.Parameters.AddWithValue("@IdCategoria", obj.IdCategoria);
                         cmd.Parameters.AddWithValue("@IdProveedor", obj.IdProveedor);
                         cmd.Parameters.AddWithValue("@PrecioVenta", (object)obj.PrecioVenta ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@MargenGanancia", obj.MargenGanancia);
                         cmd.Parameters.AddWithValue("@IdProducto", obj.IdProducto);
 
                         int filasAfectadas = cmd.ExecuteNonQuery();
