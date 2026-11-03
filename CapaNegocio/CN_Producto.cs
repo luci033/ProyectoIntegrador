@@ -62,7 +62,11 @@ namespace CapaNegocio
                 mensaje = "El precio de venta no puede ser igual a cero";
                 return false;
             }
-
+            if (obj.MargenGanancia.HasValue && obj.MargenGanancia.Value < 1)
+            {
+                mensaje = "El margen de ganancia debe ser un número entero mayor o igual a 1.";
+                return false;
+            }
 
             // Si pasa las validaciones, le pasa el objeto a la Capa de Datos
             return objCapaDato.RegistrarProducto(obj, out mensaje);
@@ -128,7 +132,11 @@ namespace CapaNegocio
                 mensaje = "El precio de venta no puede ser igual a cero";
                 return false;
             }
-
+            if (obj.MargenGanancia.HasValue && obj.MargenGanancia.Value < 1)
+            {
+                mensaje = "El margen de ganancia debe ser un número entero mayor o igual a 1.";
+                return false;
+            }
 
             // Si pasa las validaciones, le pasa el objeto a la Capa de Datos
             return objCapaDato.EditarProducto(obj, out mensaje);

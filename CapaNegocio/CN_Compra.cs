@@ -27,6 +27,15 @@ namespace CapaNegocio
             return objCapaDato.ObtenerDetalleCompra(idCompra);
         }
 
+        public DataTable ObtenerCabecera(int idCompra)
+        {
+            if (idCompra <= 0)
+            {
+                return new DataTable();
+            }
+            return objCapaDato.ObtenerCabeceraCompra(idCompra);
+        }
+
         public bool RegistrarOrden(Compra obj, out int idCompraGenerada, out string mensaje)
         {
             idCompraGenerada = 0;

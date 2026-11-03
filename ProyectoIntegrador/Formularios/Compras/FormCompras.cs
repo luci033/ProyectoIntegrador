@@ -84,8 +84,11 @@ namespace ProyectoIntegrador.Formularios.Compras
                     decimal total = row["Total"] != DBNull.Value ? Convert.ToDecimal(row["Total"]) : 0.00m;
                     string totalStr = total.ToString("C2");
 
+                    string usuarioEmisor = (row.Table.Columns.Contains("UsuarioEmisor") && row["UsuarioEmisor"] != DBNull.Value) ? row["UsuarioEmisor"].ToString() : "";
+                    string usuarioReceptor = (row.Table.Columns.Contains("UsuarioReceptor") && row["UsuarioReceptor"] != DBNull.Value) ? row["UsuarioReceptor"].ToString() : "Pendiente";
+
                     int idx = DGCompras.Rows.Add(idCompra, fechaStr, proveedor, textoRecepcion, observacion, totalStr, "Ver...");
-                    DGCompras.Rows[idx].Tag = idCompra;
+                    DGCompras.Rows[idx].Tag = new Tuple<int, string, string>(idCompra, usuarioEmisor, usuarioReceptor);
                 }
             }
             catch (Exception ex)
@@ -111,7 +114,16 @@ namespace ProyectoIntegrador.Formularios.Compras
 
             DataGridViewRow fila = DGCompras.Rows[e.RowIndex];
             int idCompra = 0;
-            if (fila.Tag != null && int.TryParse(fila.Tag.ToString(), out int idTag))
+            string usuarioEmisor = "";
+            string usuarioReceptor = "";
+
+            if (fila.Tag is Tuple<int, string, string> tagInfo)
+            {
+                idCompra = tagInfo.Item1;
+                usuarioEmisor = tagInfo.Item2;
+                usuarioReceptor = tagInfo.Item3;
+            }
+            else if (fila.Tag != null && int.TryParse(fila.Tag.ToString(), out int idTag))
             {
                 idCompra = idTag;
             }
@@ -143,7 +155,7 @@ namespace ProyectoIntegrador.Formularios.Compras
             // Columna 6: Ver Detalle
             else if (e.ColumnIndex == 6)
             {
-                using (FormVerDetalle formDetalle = new FormVerDetalle(idCompra, nro, prov, fecha, recepVal, obs, total))
+                using (FormVerDetalle formDetalle = new FormVerDetalle(idCompra, nro, prov, fecha, recepVal, obs, total, usuarioEmisor, usuarioReceptor))
                 {
                     formDetalle.ShowDialog();
                 }

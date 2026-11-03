@@ -42,6 +42,8 @@ namespace ProyectoIntegrador.Formularios.Compras
             this.TBFechaRecepcion = new System.Windows.Forms.TextBox();
             this.LObservacion = new System.Windows.Forms.Label();
             this.TBObservacion = new System.Windows.Forms.TextBox();
+            this.LUsuario = new System.Windows.Forms.Label();
+            this.TBUsuario = new System.Windows.Forms.TextBox();
             this.DGDetalleRecepcion = new System.Windows.Forms.DataGridView();
             this.colIdProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -104,6 +106,8 @@ namespace ProyectoIntegrador.Formularios.Compras
             this.panel1.Controls.Add(this.TBFechaRecepcion);
             this.panel1.Controls.Add(this.LFechaRecepcion);
             this.panel1.Controls.Add(this.LObservacion);
+            this.panel1.Controls.Add(this.LUsuario);
+            this.panel1.Controls.Add(this.TBUsuario);
             this.panel1.Location = new System.Drawing.Point(25, 85);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(910, 130);
@@ -216,9 +220,30 @@ namespace ProyectoIntegrador.Formularios.Compras
             this.TBObservacion.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             this.TBObservacion.Location = new System.Drawing.Point(20, 88);
             this.TBObservacion.Name = "TBObservacion";
-            this.TBObservacion.Size = new System.Drawing.Size(865, 24);
+            this.TBObservacion.Size = new System.Drawing.Size(650, 24);
             this.TBObservacion.TabIndex = 9;
             this.TBObservacion.TextChanged += new System.EventHandler(this.TBObservacion_TextChanged);
+            // 
+            // LUsuario
+            // 
+            this.LUsuario.AutoSize = true;
+            this.LUsuario.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LUsuario.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LUsuario.Location = new System.Drawing.Point(690, 68);
+            this.LUsuario.Name = "LUsuario";
+            this.LUsuario.Size = new System.Drawing.Size(91, 15);
+            this.LUsuario.TabIndex = 10;
+            this.LUsuario.Text = "Registrado por:";
+            // 
+            // TBUsuario
+            // 
+            this.TBUsuario.BackColor = System.Drawing.Color.White;
+            this.TBUsuario.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.TBUsuario.Location = new System.Drawing.Point(690, 88);
+            this.TBUsuario.Name = "TBUsuario";
+            this.TBUsuario.ReadOnly = true;
+            this.TBUsuario.Size = new System.Drawing.Size(195, 24);
+            this.TBUsuario.TabIndex = 11;
             // 
             // DGDetalleRecepcion
             // 
@@ -326,6 +351,8 @@ namespace ProyectoIntegrador.Formularios.Compras
         private System.Windows.Forms.TextBox TBFechaRecepcion;
         private System.Windows.Forms.TextBox TBObservacion;
         private System.Windows.Forms.Label LObservacion;
+        private System.Windows.Forms.Label LUsuario;
+        private System.Windows.Forms.TextBox TBUsuario;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button BAceptar;
         private System.Windows.Forms.Button BCancelar;

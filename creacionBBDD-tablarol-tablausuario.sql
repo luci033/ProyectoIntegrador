@@ -159,7 +159,8 @@ CONSTRAINT FK_Proveedor FOREIGN KEY (IdProveedor) REFERENCES Proveedor (IdProvee
 CONSTRAINT CK_PrecioCompra CHECK (PrecioCompra > 0),
 CONSTRAINT CK_PrecioVenta CHECK (PrecioVenta > 0),
 CONSTRAINT CK_StockMinimo CHECK (StockMinimo > 0),
-CONSTRAINT CK_StockActual CHECK (StockActual >= 0)
+CONSTRAINT CK_StockActual CHECK (StockActual >= 0),
+CONSTRAINT CK_MargenGanancia CHECK (MargenGanancia IS NULL OR MargenGanancia >= 1)
 );
 GO
 
@@ -181,6 +182,7 @@ CREATE TABLE DetalleCompra (
     IdCompra INT NOT NULL,
     Cantidad INT NOT NULL,
     PrecioUnitario DECIMAL(12,2) NOT NULL,
+    MargenGanancia INT NULL,
     IdProducto INT NOT NULL,
     CONSTRAINT PK_DetalleCompra_Compra PRIMARY KEY (IdDetalleCompra, IdCompra),
     CONSTRAINT FK_Compra FOREIGN KEY (IdCompra) REFERENCES Compra(IdCompra),

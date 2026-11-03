@@ -1,10 +1,15 @@
-using CapaDatos;
 using CapaEntidades;
 using CapaNegocio;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ProyectoIntegrador
 {
@@ -14,6 +19,8 @@ namespace ProyectoIntegrador
         private string categoriaSeleccionada;
         private string generoSeleccionado;
         private string proveedorSeleccionado;
+        private decimal precioCompraActual = 0m;
+        private bool actualizandoCalculo = false;
 
         public string Nombre => textNombre.Text.Trim();
         public string Categoria => cmbCategoria.Text.Trim();
@@ -22,10 +29,12 @@ namespace ProyectoIntegrador
         public string Stock => textStockInicial.Text.Trim();
         public string StockMinimo => textStockMinimo.Text.Trim();
         public string Descripcion => textDescripcion.Text.Trim();
+        public string MargenGanancia => textMargenGanancia.Text.Trim();
         private bool esModificacion = false;
         private bool esDetalle = false;
         private bool esAdmin = false;
         public string Proveedor => cmbProveedor.Text.Trim();
+
         public FormProductoABM()
         {
             InitializeComponent();
@@ -45,7 +54,11 @@ namespace ProyectoIntegrador
             EstiloUI.AplicarEstiloTextBox(textStockInicial);
             EstiloUI.AplicarEstiloTextBox(textStockMinimo);
             EstiloUI.AplicarEstiloTextBox(textDescripcion);
+            EstiloUI.AplicarEstiloTextBox(textMargenGanancia);
             EstiloUI.CentrarControl(panelCard, this);
+
+            // Vinculamos el evento de cálculo en vivo para el margen de ganancia
+            textMargenGanancia.TextChanged += textMargenGanancia_TextChanged;
 
             // ComboBox Categoria
             cmbCategoria.DataSource = new CN_Categoria().ListarCategorias();
@@ -85,6 +98,19 @@ namespace ProyectoIntegrador
                     if (index >= 0) cmbProveedor.SelectedIndex = index;
                     else cmbProveedor.Text = proveedorSeleccionado;
                 }
+
+                if (esModificacion)
+                {
+                    textMargenGanancia.ReadOnly = !esAdmin;
+                    textMargenGanancia.Enabled = esAdmin;
+                    textPrecio.ReadOnly = !esAdmin;
+                    textPrecio.Enabled = esAdmin;
+                }
+                else if (esDetalle)
+                {
+                    LMargenGanancia.Visible = esAdmin;
+                    textMargenGanancia.Visible = esAdmin;
+                }
             }
             else
             {
@@ -92,6 +118,10 @@ namespace ProyectoIntegrador
                 textPrecio.Text = "0.00";
                 textStockInicial.ReadOnly = true;
                 textStockInicial.Text = "0";
+
+                textMargenGanancia.ReadOnly = true;
+                textMargenGanancia.Enabled = false;
+                textMargenGanancia.Text = "";
 
                 cmbProveedor.SelectedIndex = -1;
                 cmbCategoria.SelectedIndex = -1;
@@ -106,49 +136,49 @@ namespace ProyectoIntegrador
 
         private bool ValidarCampos()
         {
-            // 1. valida el nombre
+            // 1. Validar Nombre
             if (string.IsNullOrWhiteSpace(textNombre.Text))
             {
-                MessageBox.Show("Por favor, ingrese el nombre del producto.", "Dato Requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("El nombre del producto no puede estar vacío.", "Campo Obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 textNombre.Focus();
                 return false;
             }
 
-            // 2. valida la categoria
-            if (string.IsNullOrWhiteSpace(cmbCategoria.Text) || cmbCategoria.SelectedIndex == -1)
+            // 2. Validar Categoría
+            if (cmbCategoria.SelectedIndex == -1 || cmbCategoria.SelectedValue == null)
             {
-                MessageBox.Show("Seleccione una categoría para el producto.", "Dato Requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Debe seleccionar una categoría.", "Campo Obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cmbCategoria.Focus();
                 return false;
             }
 
-            // 3. valida el genero
-            if (string.IsNullOrWhiteSpace(combGenero.Text) || combGenero.SelectedIndex == -1)
+            // 3. Validar Género
+            if (combGenero.SelectedIndex == -1 || combGenero.SelectedValue == null)
             {
-                MessageBox.Show("Seleccione el género correspondiente.", "Dato Requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Debe seleccionar un género.", "Campo Obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 combGenero.Focus();
                 return false;
             }
 
-            // 4. valida proveedor
-            if (string.IsNullOrWhiteSpace(cmbProveedor.Text) || cmbProveedor.SelectedIndex == -1)
+            // 4. Validar Proveedor
+            if (cmbProveedor.SelectedIndex == -1 || cmbProveedor.SelectedValue == null)
             {
-                MessageBox.Show("Seleccione un proveedor para el producto.", "Dato Requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Debe seleccionar un proveedor.", "Campo Obligatorio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cmbProveedor.Focus();
                 return false;
             }
 
-            // 5. valida stock minimo
-            if (!int.TryParse(textStockMinimo.Text.Trim(), out int stockMin) || stockMin < 1)
+            // 5. Validar Stock Mínimo
+            if (!int.TryParse(textStockMinimo.Text.Trim(), out int stockMinimo) || stockMinimo <= 0)
             {
-                MessageBox.Show("El stock mínimo debe ser un número entero (1 o mayor).", "Stock Inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("El stock mínimo debe ser un número entero mayor a cero.", "Stock Mínimo Inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 textStockMinimo.Focus();
                 textStockMinimo.SelectAll();
                 return false;
             }
 
-            // 6. valida precio si está en modificación y el usuario es admin
-            if (esModificacion && esAdmin && !string.IsNullOrWhiteSpace(textPrecio.Text))
+            // 6. Validar Precio de Venta (sólo si no está vacío)
+            if (!string.IsNullOrWhiteSpace(textPrecio.Text))
             {
                 string rawP = textPrecio.Text.Replace("$", "").Replace("€", "").Trim();
                 if ((!decimal.TryParse(rawP, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.CurrentCulture, out decimal p) &&
@@ -157,6 +187,18 @@ namespace ProyectoIntegrador
                     MessageBox.Show("El precio de venta debe ser un número válido mayor o igual a cero.", "Precio Inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     textPrecio.Focus();
                     textPrecio.SelectAll();
+                    return false;
+                }
+            }
+
+            // 7. Validar Margen de Ganancia (sólo si se ingresó texto)
+            if (!string.IsNullOrWhiteSpace(textMargenGanancia.Text))
+            {
+                if (!int.TryParse(textMargenGanancia.Text.Trim(), out int margen) || margen < 1)
+                {
+                    MessageBox.Show("El margen de ganancia debe ser un número entero mayor o igual a 1.", "Margen Inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    textMargenGanancia.Focus();
+                    textMargenGanancia.SelectAll();
                     return false;
                 }
             }
@@ -197,6 +239,12 @@ namespace ProyectoIntegrador
                 }
             }
 
+            int? margenNullable = null;
+            if (int.TryParse(textMargenGanancia.Text.Trim(), out int mg) && mg >= 1)
+            {
+                margenNullable = mg;
+            }
+
             Producto producto = new Producto()
             {
                 IdProducto = this.IdProductoSeleccionado,
@@ -206,6 +254,7 @@ namespace ProyectoIntegrador
                 StockActual = 0,
                 PrecioCompra = null,
                 PrecioVenta = precioVenta,
+                MargenGanancia = margenNullable,
                 IdCategoria = idCategoria,
                 IdGenero = idGenero,
                 IdProveedor = idProveedor,
@@ -256,10 +305,11 @@ namespace ProyectoIntegrador
             }
         }
 
-        public void ConfigurarModoEdicion(int idProducto, string nombre, string categoria, string genero, string precio, string stock, string stockMinimo, string descripcion, string proveedor, bool esAdmin = false)
+        public void ConfigurarModoEdicion(int idProducto, string nombre, string categoria, string genero, string precio, string stock, string stockMinimo, string descripcion, string proveedor, string margenGanancia, decimal precioCompra = 0m, bool esAdmin = false)
         {
             this.esModificacion = true;
             this.esAdmin = esAdmin;
+            this.precioCompraActual = precioCompra;
             this.IdProductoSeleccionado = idProducto;
             this.Text = "Modificar Producto";
             LTitulo.Text = "Modificar Producto";
@@ -287,17 +337,32 @@ namespace ProyectoIntegrador
             textStockInicial.Text = stock;
             textStockInicial.ReadOnly = true;
             textStockInicial.Enabled = false;
+
+            textMargenGanancia.Text = margenGanancia;
+            textMargenGanancia.ReadOnly = !esAdmin;
+            textMargenGanancia.Enabled = esAdmin;
+
+            if (precioCompraActual > 0)
+            {
+                LMargenGanancia.Text = $"Margen de Ganancia (%) - Costo: ${precioCompraActual:N2}";
+            }
+            else
+            {
+                LMargenGanancia.Text = "Margen de Ganancia (%):";
+            }
         }
 
-        public void ConfigurarModoEdicion(string codigo, string nombre, string categoria, string genero, string precio, string stock, string stockMinimo, string descripcion, string proveedor, bool esAdmin = false)
+        public void ConfigurarModoEdicion(string codigo, string nombre, string categoria, string genero, string precio, string stock, string stockMinimo, string descripcion, string proveedor, string margenGanancia, decimal precioCompra = 0m, bool esAdmin = false)
         {
             int.TryParse(codigo, out int id);
-            ConfigurarModoEdicion(id, nombre, categoria, genero, precio, stock, stockMinimo, descripcion, proveedor, esAdmin);
+            ConfigurarModoEdicion(id, nombre, categoria, genero, precio, stock, stockMinimo, descripcion, proveedor, margenGanancia, precioCompra, esAdmin);
         }
 
-        public void ConfigurarModoDetalle(string codigo, string nombre, string categoria, string genero, string precio, string stock, string stockMinimo, string descripcion, string proveedor)
+        public void ConfigurarModoDetalle(string codigo, string nombre, string categoria, string genero, string precio, string stock, string stockMinimo, string descripcion, string proveedor, string margenGanancia = "", decimal precioCompra = 0m, bool esAdmin = true)
         {
             esDetalle = true;
+            this.esAdmin = esAdmin;
+            this.precioCompraActual = precioCompra;
             this.Text = "Detalle Producto";
             LTitulo.Text = "Detalle Producto";
             BCrearProducto.Visible = false;
@@ -330,12 +395,81 @@ namespace ProyectoIntegrador
 
             cmbProveedor.Text = proveedor;
             cmbProveedor.Enabled = false;
+
+            textMargenGanancia.Text = margenGanancia;
+            textMargenGanancia.Enabled = false;
+
+            if (esAdmin)
+            {
+                LMargenGanancia.Visible = true;
+                textMargenGanancia.Visible = true;
+                if (precioCompraActual > 0)
+                {
+                    LMargenGanancia.Text = $"Margen de Ganancia (%) - Costo: ${precioCompraActual:N2}";
+                }
+                else
+                {
+                    LMargenGanancia.Text = "Margen de Ganancia (%):";
+                }
+            }
+            else
+            {
+                LMargenGanancia.Visible = false;
+                textMargenGanancia.Visible = false;
+            }
+        }
+
+        private void textMargenGanancia_TextChanged(object sender, EventArgs e)
+        {
+            if (actualizandoCalculo) return;
+            if (!esModificacion || !esAdmin) return;
+            if (precioCompraActual <= 0) return;
+
+            string rawMargen = textMargenGanancia.Text.Trim();
+            if (decimal.TryParse(rawMargen, out decimal margen) && margen >= 0)
+            {
+                actualizandoCalculo = true;
+                try
+                {
+                    decimal nuevoPrecio = Math.Round(precioCompraActual * (1.0m + (margen / 100.0m)), 2);
+                    textPrecio.Text = nuevoPrecio.ToString("0.00");
+                }
+                finally
+                {
+                    actualizandoCalculo = false;
+                }
+            }
         }
 
         private void textPrecio_TextChanged(object sender, EventArgs e)
+        {
+            if (actualizandoCalculo) return;
+            if (!esModificacion || !esAdmin) return;
+            if (precioCompraActual <= 0) return;
+
+            string rawPrecio = textPrecio.Text.Replace("$", "").Replace("€", "").Trim();
+            if (decimal.TryParse(rawPrecio, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.CurrentCulture, out decimal precio) ||
+                decimal.TryParse(rawPrecio, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out precio))
+            {
+                if (precio >= precioCompraActual)
+                {
+                    actualizandoCalculo = true;
+                    try
+                    {
+                        decimal nuevoMargen = Math.Round(((precio - precioCompraActual) / precioCompraActual) * 100.0m, 0);
+                        textMargenGanancia.Text = ((int)nuevoMargen).ToString();
+                    }
+                    finally
+                    {
+                        actualizandoCalculo = false;
+                    }
+                }
+            }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }
     }
 }
-

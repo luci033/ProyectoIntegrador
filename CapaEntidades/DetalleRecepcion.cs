@@ -13,5 +13,6 @@ namespace CapaEntidades
         // Propiedad auxiliar para actualizar stock/costo del producto correspondiente
         public int IdProducto { get; set; }
         public decimal PrecioUnitario { get; set; }
+        public int? MargenGanancia { get; set; }
     }
 }

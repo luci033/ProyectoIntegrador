@@ -34,6 +34,17 @@ namespace ProyectoIntegrador.Formularios.Productos
             EstiloUI.AplicarEstiloGrilla(dataGridCatalogoProd);
             EstiloUI.AplicarEstiloTextBox(TBBuscarProducto);
 
+            bool esVendedor = this.MdiParent is FormPrincipalVendedor;
+            if (esVendedor)
+            {
+                BNuevo.Visible = false;
+                BGestionarCategorias.Visible = false;
+                if (dataGridCatalogoProd.Columns.Contains("colModificar"))
+                    dataGridCatalogoProd.Columns["colModificar"].Visible = false;
+                if (dataGridCatalogoProd.Columns.Contains("colEliminar"))
+                    dataGridCatalogoProd.Columns["colEliminar"].Visible = false;
+            }
+
             CargarFiltros();
             CargarCatalogo();
         }
@@ -83,6 +94,8 @@ namespace ProyectoIntegrador.Formularios.Productos
                 int stockMinimo = row["StockMinimo"] != DBNull.Value ? Convert.ToInt32(row["StockMinimo"]) : 0;
                 string descripcion = row["Descripcion"] != DBNull.Value ? row["Descripcion"].ToString() : "";
                 string proveedor = row["NombreProveedor"] != DBNull.Value ? row["NombreProveedor"].ToString() : "";
+                string margen = (row.Table.Columns.Contains("MargenGanancia") && row["MargenGanancia"] != DBNull.Value) ? row["MargenGanancia"].ToString() : "";
+                decimal precioCompra = (row.Table.Columns.Contains("PrecioCompra") && row["PrecioCompra"] != DBNull.Value) ? Convert.ToDecimal(row["PrecioCompra"]) : 0.00m;
                 bool activo = row["Estado"] != DBNull.Value ? Convert.ToBoolean(row["Estado"]) : true;
 
                 int index = dataGridCatalogoProd.Rows.Add(
@@ -99,6 +112,8 @@ namespace ProyectoIntegrador.Formularios.Productos
                     activo ? "Desactivar" : "Activar"
                 );
 
+                dataGridCatalogoProd.Rows[index].Tag = new Tuple<string, decimal>(margen, precioCompra);
+
                 if (!activo)
                 {
                     dataGridCatalogoProd.Rows[index].DefaultCellStyle.BackColor = EstiloUI.ColorInactivo;
@@ -111,6 +126,7 @@ namespace ProyectoIntegrador.Formularios.Productos
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
+            if (this.MdiParent is FormPrincipalVendedor) return;
 
             string nombreColumna = dataGridCatalogoProd.Columns[e.ColumnIndex].Name;
 
@@ -138,10 +154,13 @@ namespace ProyectoIntegrador.Formularios.Productos
                 string stockMinimo = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[6].Value);
                 string descripcion = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[7].Value);
                 string proveedor = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[8].Value);
+                var infoTag = dataGridCatalogoProd.Rows[e.RowIndex].Tag as Tuple<string, decimal>;
+                string margenGanancia = infoTag != null ? infoTag.Item1 : "";
+                decimal precioCompra = infoTag != null ? infoTag.Item2 : 0m;
 
                 FormProductoABM modalABM = new FormProductoABM();
                 bool esAdmin = EsAdministrador || (this.MdiParent is FormPrincipalAdministrador);
-                modalABM.ConfigurarModoEdicion(idProducto, nombre, categoria, genero, precio, stock, stockMinimo, descripcion, proveedor, esAdmin);
+                modalABM.ConfigurarModoEdicion(idProducto, nombre, categoria, genero, precio, stock, stockMinimo, descripcion, proveedor, margenGanancia, precioCompra, esAdmin);
 
                 if (modalABM.ShowDialog() == DialogResult.OK)
                 {
@@ -309,9 +328,14 @@ namespace ProyectoIntegrador.Formularios.Productos
             string stockMinimo = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[6].Value);
             string descripcion = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[7].Value);
             string proveedor = Convert.ToString(dataGridCatalogoProd.Rows[e.RowIndex].Cells[8].Value);
+            var infoTag = dataGridCatalogoProd.Rows[e.RowIndex].Tag as Tuple<string, decimal>;
+            string margenGanancia = infoTag != null ? infoTag.Item1 : "";
+            decimal precioCompra = infoTag != null ? infoTag.Item2 : 0m;
+
+            bool esAdmin = EsAdministrador || (this.MdiParent is FormPrincipalAdministrador);
 
             FormProductoABM modalABM = new FormProductoABM();
-            modalABM.ConfigurarModoDetalle(codigo, nombre, categoria, genero, precio, stock, stockMinimo, descripcion, proveedor);
+            modalABM.ConfigurarModoDetalle(codigo, nombre, categoria, genero, precio, stock, stockMinimo, descripcion, proveedor, margenGanancia, precioCompra, esAdmin);
             modalABM.ShowDialog();
         }
 
@@ -321,4 +345,3 @@ namespace ProyectoIntegrador.Formularios.Productos
         }
     }
 }
-    

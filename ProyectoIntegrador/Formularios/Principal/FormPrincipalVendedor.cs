@@ -62,7 +62,7 @@ namespace ProyectoIntegrador.Formularios.Principal
 
         private void BProductos_Click(object sender, EventArgs e)
         {
-            AbrirFormulario<FormBuscarProducto>();
+            AbrirFormulario<FormProductos>();
         }
 
         private void BDevoluciones_Click(object sender, EventArgs e)

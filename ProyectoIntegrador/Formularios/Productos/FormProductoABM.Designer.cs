@@ -52,6 +52,8 @@ namespace ProyectoIntegrador
             this.BCancelar = new System.Windows.Forms.Button();
             this.BCrearProducto = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.LMargenGanancia = new System.Windows.Forms.Label();
+            this.textMargenGanancia = new System.Windows.Forms.TextBox();
             this.panelCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -59,6 +61,8 @@ namespace ProyectoIntegrador
             // panelCard
             // 
             this.panelCard.BackColor = System.Drawing.Color.White;
+            this.panelCard.Controls.Add(this.textMargenGanancia);
+            this.panelCard.Controls.Add(this.LMargenGanancia);
             this.panelCard.Controls.Add(this.LTitulo);
             this.panelCard.Controls.Add(this.LSubtitulo);
             this.panelCard.Controls.Add(this.LNombre);
@@ -276,7 +280,7 @@ namespace ProyectoIntegrador
             this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(249)))), ((int)(((byte)(247)))));
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(575, 290);
+            this.pictureBox1.Location = new System.Drawing.Point(583, 340);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(170, 170);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -311,6 +315,26 @@ namespace ProyectoIntegrador
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // LMargenGanancia
+            // 
+            this.LMargenGanancia.AutoSize = true;
+            this.LMargenGanancia.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
+            this.LMargenGanancia.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.LMargenGanancia.Location = new System.Drawing.Point(470, 268);
+            this.LMargenGanancia.Name = "LMargenGanancia";
+            this.LMargenGanancia.Size = new System.Drawing.Size(163, 17);
+            this.LMargenGanancia.TabIndex = 21;
+            this.LMargenGanancia.Text = "Margen de Ganancia (%):";
+            this.LMargenGanancia.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // textMargenGanancia
+            // 
+            this.textMargenGanancia.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.textMargenGanancia.Location = new System.Drawing.Point(473, 290);
+            this.textMargenGanancia.Name = "textMargenGanancia";
+            this.textMargenGanancia.Size = new System.Drawing.Size(380, 26);
+            this.textMargenGanancia.TabIndex = 22;
             // 
             // FormProductoABM
             // 
@@ -358,5 +382,7 @@ namespace ProyectoIntegrador
         private System.Windows.Forms.Button BCancelar;
         private System.Windows.Forms.Button BCrearProducto;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.TextBox textMargenGanancia;
+        private System.Windows.Forms.Label LMargenGanancia;
     }
 }

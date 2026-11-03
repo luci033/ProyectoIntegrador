@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +19,6 @@ namespace CapaEntidades
         public int IdGenero { get; set; }
         public int IdCategoria { get; set; }
         public int IdProveedor { get; set; }
-        public decimal MargenGanancia { get; set; }
+        public int? MargenGanancia { get; set; }
     }
 }

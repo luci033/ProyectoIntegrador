@@ -111,7 +111,8 @@ namespace ProyectoIntegrador.Formularios.Productos
                     decimal pCompra = (row["PrecioCompra"] != DBNull.Value) ? Convert.ToDecimal(row["PrecioCompra"]) : 0.00m;
                     decimal margen = (row.Table.Columns.Contains("MargenGanancia") && row["MargenGanancia"] != DBNull.Value) ? Convert.ToDecimal(row["MargenGanancia"]) : 0.00m;
 
-                    DGProductos.Rows.Add(id, id.ToString(), nombre, categoria, genero, stock, pVenta, pCompra);
+                    int idx = DGProductos.Rows.Add(id, id.ToString(), nombre, categoria, genero, stock, pVenta, pCompra);
+                    DGProductos.Rows[idx].Tag = Convert.ToInt32(margen);
                 }
             }
             catch { }
@@ -137,7 +138,7 @@ namespace ProyectoIntegrador.Formularios.Productos
                 Stock = Convert.ToInt32(fila.Cells[5].Value ?? 0);
                 PrecioVenta = Convert.ToDecimal(fila.Cells[6].Value ?? 0);
                 CostoCompra = Convert.ToDecimal(fila.Cells[7].Value ?? 0);
-                MargenGanancia = Convert.ToInt32(fila.Cells[8].Value ?? 0); // <-- Capturamos el margen de la celda
+                MargenGanancia = (fila.Tag != null) ? Convert.ToInt32(fila.Tag) : 0;
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();

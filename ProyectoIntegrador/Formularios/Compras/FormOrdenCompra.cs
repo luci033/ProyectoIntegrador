@@ -73,11 +73,13 @@ namespace ProyectoIntegrador.Formularios.Compras
                 col.ReadOnly = true;
             }
 
-            // Desbloqueamos únicamente la Cantidad (columna 5) y el Costo Unitario (columna 6) para que puedas editarlos libremente
-            DGDetalleOrden.Columns[4].ReadOnly = false;
-            DGDetalleOrden.Columns[5].ReadOnly = false;
-            DGDetalleOrden.Columns[6].ReadOnly = false;
-
+            // Desbloqueamos la Cantidad, Margen (%) y Costo Unitario para que puedan editarse libremente
+            if (DGDetalleOrden.Columns.Contains("cantidad"))
+                DGDetalleOrden.Columns["cantidad"].ReadOnly = false;
+            if (DGDetalleOrden.Columns.Contains("CMargenGanancia"))
+                DGDetalleOrden.Columns["CMargenGanancia"].ReadOnly = false;
+            if (DGDetalleOrden.Columns.Contains("CostoUnitario"))
+                DGDetalleOrden.Columns["CostoUnitario"].ReadOnly = false;
 
             DGDetalleOrden.DataError += new DataGridViewDataErrorEventHandler(DGDetalleOrden_DataError);
         }
@@ -141,14 +143,14 @@ namespace ProyectoIntegrador.Formularios.Compras
             {
                 if (formProducto.ShowDialog() == DialogResult.OK)
                 {
-                    // 1. Verificamos si el producto ya fue agregado a la grilla (buscando por su IdProducto en la columna 0)
+                    // 1. Verificamos si el producto ya fue agregado a la grilla (buscando por su IdProducto en la columna colIdProducto)
                     foreach (DataGridViewRow filaExistente in DGDetalleOrden.Rows)
                     {
-                        if (filaExistente.Cells[0].Value != null && Convert.ToInt32(filaExistente.Cells[0].Value) == formProducto.IdProducto)
+                        if (filaExistente.Cells["colIdProducto"].Value != null && Convert.ToInt32(filaExistente.Cells["colIdProducto"].Value) == formProducto.IdProducto)
                         {
-                            // Si ya existe, sumamos 1 a la cantidad actual (columna 5)
-                            decimal cantidadActual = Convert.ToDecimal(filaExistente.Cells[5].Value ?? 0);
-                            filaExistente.Cells[5].Value = cantidadActual + 1;
+                            // Si ya existe, sumamos 1 a la cantidad actual
+                            decimal cantidadActual = Convert.ToDecimal(filaExistente.Cells["cantidad"].Value ?? 0);
+                            filaExistente.Cells["cantidad"].Value = cantidadActual + 1;
 
                             // Al cambiar la celda, el sistema recalculará el subtotal y el total solo
                             return; // Salimos para no agregar una fila nueva
@@ -161,17 +163,17 @@ namespace ProyectoIntegrador.Formularios.Compras
                     decimal CostoCompra = 0;
                     decimal subtotal = CostoCompra * cantidad;
 
-                    DGDetalleOrden.Rows.Add(
-                        formProducto.IdProducto,
-                        formProducto.Codigo,
-                        formProducto.Nombre,
-                        formProducto.Categoria,
-                        formProducto.Genero,
-                        cantidad,
-                        CostoCompra,
-                        subtotal,
-                        margenInicial
-                    );
+                    int idx = DGDetalleOrden.Rows.Add();
+                    DataGridViewRow row = DGDetalleOrden.Rows[idx];
+                    row.Cells["colIdProducto"].Value = formProducto.IdProducto;
+                    row.Cells["colCodigo"].Value = formProducto.Codigo;
+                    row.Cells["nombre"].Value = formProducto.Nombre;
+                    row.Cells["colCategoria"].Value = formProducto.Categoria;
+                    row.Cells["colGenero"].Value = formProducto.Genero;
+                    row.Cells["cantidad"].Value = cantidad;
+                    row.Cells["CMargenGanancia"].Value = margenInicial > 0 ? (object)margenInicial : "";
+                    row.Cells["CostoUnitario"].Value = CostoCompra;
+                    row.Cells["Subtotal"].Value = subtotal;
 
                     CalcularTotal();
                 }
@@ -183,10 +185,9 @@ namespace ProyectoIntegrador.Formularios.Compras
             decimal total = 0;
             foreach (DataGridViewRow fila in DGDetalleOrden.Rows)
             {
-                // El subtotal corresponde a la columna índice 7
-                if (fila.Cells[7].Value != null)
+                if (fila.Cells["Subtotal"].Value != null)
                 {
-                    total += Convert.ToDecimal(fila.Cells[7].Value);
+                    total += Convert.ToDecimal(fila.Cells["Subtotal"].Value);
                 }
             }
 
@@ -204,20 +205,14 @@ namespace ProyectoIntegrador.Formularios.Compras
         public string Fecha => TBFecha.Text;
         public string Total => TBTotal.Text;
 
-        public List<object[]> DetallesProductos { get; private set; } = new List<object[]>();
-
         private void BGenerarOrden_Click(object sender, EventArgs e)
         {
+            // Forzar finalización de edición para capturar el último valor tipeado
             DGDetalleOrden.EndEdit();
-            CalcularTotal();
 
-            // Validación de Total > 0
-            decimal totalOrden = 0;
-            decimal.TryParse(TBTotal.Text.Replace("$", "").Replace("€", "").Trim(), out totalOrden);
-
-            if (totalOrden <= 0)
+            // Validar que no se esté editando nada
+            if (this.ValidateChildren(ValidationConstraints.Enabled) == false)
             {
-                MessageBox.Show("El total de la orden debe ser mayor a cero.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -243,25 +238,38 @@ namespace ProyectoIntegrador.Formularios.Compras
 
             foreach (DataGridViewRow fila in DGDetalleOrden.Rows)
             {
-                if (Convert.ToDecimal(fila.Cells[5].Value ?? 0) <= 0)
+                decimal cantidad = Convert.ToDecimal(fila.Cells["cantidad"].Value ?? 0);
+                decimal costo = Convert.ToDecimal(fila.Cells["CostoUnitario"].Value ?? 0);
+                decimal subtotal = Convert.ToDecimal(fila.Cells["Subtotal"].Value ?? 0);
+
+                if (cantidad <= 0)
                 {
                     MessageBox.Show("No podés generar una orden con productos en cantidad 0.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                if (Convert.ToDecimal(fila.Cells[7].Value ?? 0) <= 0)
+                if (costo <= 0 || subtotal <= 0)
                 {
                     MessageBox.Show("Todos los productos deben tener un costo unitario y subtotal mayor a cero.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
+                int? margenFila = null;
+                if (fila.Cells["CMargenGanancia"].Value != null &&
+                    int.TryParse(fila.Cells["CMargenGanancia"].Value.ToString().Trim(), out int mVal) &&
+                    mVal >= 1)
+                {
+                    margenFila = mVal;
+                }
+
                 orden.Detalles.Add(new DetalleCompra
                 {
-                    IdProducto = Convert.ToInt32(fila.Cells[0].Value),
-                    CodigoProducto = fila.Cells[1].Value?.ToString(),
-                    NombreProducto = fila.Cells[2].Value?.ToString(),
-                    Cantidad = Convert.ToInt32(fila.Cells[5].Value),
-                    PrecioUnitario = Convert.ToDecimal(fila.Cells[6].Value)
+                    IdProducto = Convert.ToInt32(fila.Cells["colIdProducto"].Value),
+                    CodigoProducto = fila.Cells["colCodigo"].Value?.ToString(),
+                    NombreProducto = fila.Cells["nombre"].Value?.ToString(),
+                    Cantidad = (int)cantidad,
+                    PrecioUnitario = costo,
+                    MargenGanancia = margenFila
                 });
             }
 
@@ -289,7 +297,6 @@ namespace ProyectoIntegrador.Formularios.Compras
 
         }
 
-
         private void DGDetalleOrden_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
             if (DGDetalleOrden.IsCurrentCellDirty)
@@ -300,59 +307,63 @@ namespace ProyectoIntegrador.Formularios.Compras
 
         private void DGDetalleOrden_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-    
-            int colCantidad = 5;
-            int colCosto = 6;
-            int colSubtotal = 7;
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
 
-            // Si se modificó una fila válida y la columna tocada es "Cantidad"
-            if (e.RowIndex >= 0 && (e.ColumnIndex == colCantidad || e.ColumnIndex == colCosto))
+            string colName = DGDetalleOrden.Columns[e.ColumnIndex].Name;
+
+            // Si se modificó "cantidad" o "CostoUnitario", recalculamos subtotal y total
+            if (colName == "cantidad" || colName == "CostoUnitario")
             {
                 DataGridViewRow fila = DGDetalleOrden.Rows[e.RowIndex];
 
-                // Usamos TryParse para evaluar de forma segura sin que explote si hay letras
-                bool esCantidadValida = decimal.TryParse(fila.Cells[colCantidad].Value?.ToString(), out decimal cantidad);
-                bool esCostoValido = decimal.TryParse(fila.Cells[colCosto].Value?.ToString(), out decimal costo);
+                bool esCantidadValida = decimal.TryParse(fila.Cells["cantidad"].Value?.ToString(), out decimal cantidad);
+                bool esCostoValido = decimal.TryParse(fila.Cells["CostoUnitario"].Value?.ToString(), out decimal costo);
 
-                // Si ambos valores son números válidos, calculamos; si no, dejamos en 0 
                 if (esCantidadValida && esCostoValido)
                 {
-                    fila.Cells[colSubtotal].Value = cantidad * costo;
+                    fila.Cells["Subtotal"].Value = cantidad * costo;
                     CalcularTotal();
                 }
                 else
                 {
-                    fila.Cells[colSubtotal].Value = 0;
+                    fila.Cells["Subtotal"].Value = 0;
                     CalcularTotal();
                 }
             }
-
-
         }
 
         private void DGDetalleOrden_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            // Solo evitamos que la aplicación se rompa por errores internos de formato.
-            // Ya eliminamos el MessageBox de acá para que no se superponga con el de CellValidating y trabe la pantalla.
             e.ThrowException = false;
         }
 
         private void DGDetalleOrden_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-            // Verificamos si estamos editando la Cantidad (5) o el Costo Unitario (6)
-            if (e.ColumnIndex == 5 || e.ColumnIndex == 6)
-            {
-                string valorIngresado = e.FormattedValue.ToString();
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
 
-                // Si borran todo y dejan vacío, lo dejamos pasar temporalmente
+            string colName = DGDetalleOrden.Columns[e.ColumnIndex].Name;
+
+            if (colName == "cantidad" || colName == "CostoUnitario")
+            {
+                string valorIngresado = e.FormattedValue?.ToString();
+
                 if (string.IsNullOrWhiteSpace(valorIngresado)) return;
 
-                // Cambiamos a <= 0 para obligar a que sea estrictamente mayor a cero
                 if (!decimal.TryParse(valorIngresado, out decimal numero) || numero <= 0)
                 {
                     MessageBox.Show("Por favor, ingresá un número válido que sea mayor a cero.", "Valor incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    DGDetalleOrden.CancelEdit();
+                }
+            }
+            else if (colName == "CMargenGanancia")
+            {
+                string valorIngresado = e.FormattedValue?.ToString();
 
-                    // Deshace el cambio y libera la celda
+                if (string.IsNullOrWhiteSpace(valorIngresado)) return;
+
+                if (!int.TryParse(valorIngresado, out int margen) || margen < 1)
+                {
+                    MessageBox.Show("El margen de ganancia debe ser un número entero mayor o igual a 1.", "Valor incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     DGDetalleOrden.CancelEdit();
                 }
             }

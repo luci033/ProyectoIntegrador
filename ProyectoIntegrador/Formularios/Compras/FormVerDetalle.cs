@@ -20,9 +20,11 @@ namespace ProyectoIntegrador.Formularios.Compras
         private string fechaRecepcion;
         private string observacion;
         private string totalGeneral;
+        private string usuarioEmisor;
+        private string usuarioReceptor;
         private List<object[]> listaProductosFallback;
 
-        public FormVerDetalle(int idCompra, string nro, string prov, string fecha, string recep, string obs, string total)
+        public FormVerDetalle(int idCompra, string nro, string prov, string fecha, string recep, string obs, string total, string emisor = "", string receptor = "")
         {
             InitializeComponent();
             this.idCompra = idCompra;
@@ -32,6 +34,8 @@ namespace ProyectoIntegrador.Formularios.Compras
             this.fechaRecepcion = recep;
             this.observacion = obs;
             this.totalGeneral = total;
+            this.usuarioEmisor = emisor;
+            this.usuarioReceptor = receptor;
         }
 
         // Constructor de compatibilidad previa
@@ -53,10 +57,38 @@ namespace ProyectoIntegrador.Formularios.Compras
             EstiloUI.AplicarEstiloBoton(BCerrar);
             EstiloUI.CentrarControl(panelCard, this);
 
+            if (idCompra > 0 && (string.IsNullOrWhiteSpace(usuarioEmisor) || string.IsNullOrWhiteSpace(usuarioReceptor)))
+            {
+                try
+                {
+                    DataTable dtCab = new CN_Compra().ObtenerCabecera(idCompra);
+                    if (dtCab.Rows.Count > 0)
+                    {
+                        DataRow rowCab = dtCab.Rows[0];
+                        if (string.IsNullOrWhiteSpace(usuarioEmisor))
+                            usuarioEmisor = rowCab["UsuarioEmisor"] != DBNull.Value ? rowCab["UsuarioEmisor"].ToString() : "";
+                        if (string.IsNullOrWhiteSpace(usuarioReceptor))
+                            usuarioReceptor = rowCab["UsuarioReceptor"] != DBNull.Value ? rowCab["UsuarioReceptor"].ToString() : "Pendiente";
+                    }
+                }
+                catch { }
+            }
+
+            EstiloUI.AplicarEstiloTextBox(TBNroOrden);
+            EstiloUI.AplicarEstiloTextBox(TBProveedor);
+            EstiloUI.AplicarEstiloTextBox(TBFechaEmision);
+            EstiloUI.AplicarEstiloTextBox(TBFechaRecepcion);
+            EstiloUI.AplicarEstiloTextBox(TBUsuarioEmisor);
+            EstiloUI.AplicarEstiloTextBox(TBUsuarioReceptor);
+            EstiloUI.AplicarEstiloTextBox(TBObservacion);
+            EstiloUI.AplicarEstiloTextBox(TBTotalGeneral);
+
             TBNroOrden.Text = nroOrden;
             TBProveedor.Text = proveedor;
             TBFechaEmision.Text = fechaEmision;
             TBFechaRecepcion.Text = string.IsNullOrWhiteSpace(fechaRecepcion) || fechaRecepcion == "Registrar Recepción" ? "Pendiente" : fechaRecepcion;
+            TBUsuarioEmisor.Text = string.IsNullOrWhiteSpace(usuarioEmisor) ? "No especificado" : usuarioEmisor;
+            TBUsuarioReceptor.Text = string.IsNullOrWhiteSpace(usuarioReceptor) || usuarioReceptor == "Registrar Recepción" ? "Pendiente" : usuarioReceptor;
             TBObservacion.Text = observacion;
             TBTotalGeneral.Text = totalGeneral;
 

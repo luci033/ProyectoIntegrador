@@ -17,13 +17,16 @@ namespace CapaDatos
                     c.FechaCompra,
                     c.IdUsuario,
                     u.Usuario AS NombreUsuario,
+                    ISNULL(NULLIF(LTRIM(RTRIM(CONCAT(u.NombreUsuario, ' ', u.ApellidoUsuario))), ''), u.Usuario) AS UsuarioEmisor,
                     c.IdProveedor,
                     p.RazonSocial AS Proveedor,
                     c.IdEstadoCompra,
                     ec.NombreEstadoCompra AS Estado,
                     ISNULL(tot.Total, 0) AS Total,
                     r.FechaRecepcion,
-                    r.Observacion
+                    r.Observacion,
+                    r.IdUsuarioReceptor,
+                    ISNULL(NULLIF(LTRIM(RTRIM(CONCAT(ur.NombreUsuario, ' ', ur.ApellidoUsuario))), ''), ur.Usuario) AS UsuarioReceptor
                 FROM Compra c
                 LEFT JOIN Proveedor p ON c.IdProveedor = p.IdProveedor
                 LEFT JOIN Usuarios u ON c.IdUsuario = u.IdUsuario
@@ -34,16 +37,76 @@ namespace CapaDatos
                     GROUP BY IdCompra
                 ) tot ON c.IdCompra = tot.IdCompra
                 LEFT JOIN (
-                    SELECT IdCompra, MAX(FechaRecepcion) AS FechaRecepcion, MAX(Observacion) AS Observacion
-                    FROM Recepcion
-                    GROUP BY IdCompra
+                    SELECT r1.IdCompra, r1.FechaRecepcion, r1.Observacion, r1.IdUsuario AS IdUsuarioReceptor
+                    FROM Recepcion r1
+                    INNER JOIN (
+                        SELECT IdCompra, MAX(IdRecepcion) AS MaxIdRecepcion
+                        FROM Recepcion
+                        GROUP BY IdCompra
+                    ) r2 ON r1.IdRecepcion = r2.MaxIdRecepcion
                 ) r ON c.IdCompra = r.IdCompra
+                LEFT JOIN Usuarios ur ON r.IdUsuarioReceptor = ur.IdUsuario
                 ORDER BY c.IdCompra DESC;";
 
             using (SqlConnection conexion = Conexion.ObtenerConexion())
             {
                 using (SqlCommand cmd = new SqlCommand(query, conexion))
                 {
+                    using (SqlDataAdapter adaptador = new SqlDataAdapter(cmd))
+                    {
+                        adaptador.Fill(tabla);
+                    }
+                }
+            }
+
+            return tabla;
+        }
+
+        public DataTable ObtenerCabeceraCompra(int idCompra)
+        {
+            DataTable tabla = new DataTable();
+            string query = @"
+                SELECT 
+                    c.IdCompra,
+                    c.FechaCompra,
+                    c.IdUsuario,
+                    u.Usuario AS NombreUsuario,
+                    ISNULL(NULLIF(LTRIM(RTRIM(CONCAT(u.NombreUsuario, ' ', u.ApellidoUsuario))), ''), u.Usuario) AS UsuarioEmisor,
+                    c.IdProveedor,
+                    p.RazonSocial AS Proveedor,
+                    c.IdEstadoCompra,
+                    ec.NombreEstadoCompra AS Estado,
+                    ISNULL(tot.Total, 0) AS Total,
+                    r.FechaRecepcion,
+                    r.Observacion,
+                    r.IdUsuarioReceptor,
+                    ISNULL(NULLIF(LTRIM(RTRIM(CONCAT(ur.NombreUsuario, ' ', ur.ApellidoUsuario))), ''), ur.Usuario) AS UsuarioReceptor
+                FROM Compra c
+                LEFT JOIN Proveedor p ON c.IdProveedor = p.IdProveedor
+                LEFT JOIN Usuarios u ON c.IdUsuario = u.IdUsuario
+                LEFT JOIN EstadoCompra ec ON c.IdEstadoCompra = ec.IdEstadoCompra
+                LEFT JOIN (
+                    SELECT IdCompra, SUM(Cantidad * PrecioUnitario) AS Total
+                    FROM DetalleCompra
+                    GROUP BY IdCompra
+                ) tot ON c.IdCompra = tot.IdCompra
+                LEFT JOIN (
+                    SELECT r1.IdCompra, r1.FechaRecepcion, r1.Observacion, r1.IdUsuario AS IdUsuarioReceptor
+                    FROM Recepcion r1
+                    INNER JOIN (
+                        SELECT IdCompra, MAX(IdRecepcion) AS MaxIdRecepcion
+                        FROM Recepcion
+                        GROUP BY IdCompra
+                    ) r2 ON r1.IdRecepcion = r2.MaxIdRecepcion
+                ) r ON c.IdCompra = r.IdCompra
+                LEFT JOIN Usuarios ur ON r.IdUsuarioReceptor = ur.IdUsuario
+                WHERE c.IdCompra = @IdCompra;";
+
+            using (SqlConnection conexion = Conexion.ObtenerConexion())
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conexion))
+                {
+                    cmd.Parameters.AddWithValue("@IdCompra", idCompra);
                     using (SqlDataAdapter adaptador = new SqlDataAdapter(cmd))
                     {
                         adaptador.Fill(tabla);
@@ -69,6 +132,7 @@ namespace CapaDatos
                     dc.Cantidad AS CantidadPedida,
                     ISNULL(dr.CantidadRecibida, 0) AS CantidadRecibida,
                     dc.PrecioUnitario,
+                    prod.MargenGanancia,
                     (dc.Cantidad * dc.PrecioUnitario) AS Subtotal
                 FROM DetalleCompra dc
                 INNER JOIN Producto prod ON dc.IdProducto = prod.IdProducto
@@ -123,7 +187,17 @@ namespace CapaDatos
                             idCompraGenerada = (int)cmdCompra.ExecuteScalar();
                         }
 
-                        string queryDetalle = @"
+                        bool tieneColMargen = false;
+                        using (SqlCommand cmdCheck = new SqlCommand("SELECT COL_LENGTH('DetalleCompra', 'MargenGanancia')", conexion, trans))
+                        {
+                            object colLen = cmdCheck.ExecuteScalar();
+                            tieneColMargen = (colLen != null && colLen != DBNull.Value);
+                        }
+
+                        string queryDetalle = tieneColMargen ? @"
+                            INSERT INTO DetalleCompra (IdCompra, Cantidad, PrecioUnitario, IdProducto, MargenGanancia)
+                            VALUES (@IdCompra, @Cantidad, @PrecioUnitario, @IdProducto, @MargenGanancia);"
+                            : @"
                             INSERT INTO DetalleCompra (IdCompra, Cantidad, PrecioUnitario, IdProducto)
                             VALUES (@IdCompra, @Cantidad, @PrecioUnitario, @IdProducto);";
 
@@ -135,7 +209,21 @@ namespace CapaDatos
                                 cmdDetalle.Parameters.AddWithValue("@Cantidad", item.Cantidad);
                                 cmdDetalle.Parameters.AddWithValue("@PrecioUnitario", item.PrecioUnitario);
                                 cmdDetalle.Parameters.AddWithValue("@IdProducto", item.IdProducto);
+                                if (tieneColMargen)
+                                {
+                                    cmdDetalle.Parameters.AddWithValue("@MargenGanancia", (object)item.MargenGanancia ?? DBNull.Value);
+                                }
                                 cmdDetalle.ExecuteNonQuery();
+                            }
+
+                            if (item.MargenGanancia.HasValue && item.MargenGanancia.Value >= 1)
+                            {
+                                using (SqlCommand cmdProdMargen = new SqlCommand("UPDATE Producto SET MargenGanancia = @Margen WHERE IdProducto = @IdProducto", conexion, trans))
+                                {
+                                    cmdProdMargen.Parameters.AddWithValue("@Margen", item.MargenGanancia.Value);
+                                    cmdProdMargen.Parameters.AddWithValue("@IdProducto", item.IdProducto);
+                                    cmdProdMargen.ExecuteNonQuery();
+                                }
                             }
                         }
 
@@ -188,7 +276,12 @@ namespace CapaDatos
                             UPDATE Producto SET
                                 StockActual = ISNULL(StockActual, 0) + @CantidadRecibida,
                                 PrecioCompra = @PrecioCompra,
-                                PrecioVenta = ROUND(@PrecioCompra * (1.0 + @Margen), 2)
+                                MargenGanancia = ISNULL(@Margen, MargenGanancia),
+                                PrecioVenta = CASE 
+                                    WHEN @Margen IS NOT NULL THEN ROUND(@PrecioCompra * (1.0 + (@Margen / 100.0)), 2)
+                                    WHEN MargenGanancia IS NOT NULL THEN ROUND(@PrecioCompra * (1.0 + (MargenGanancia / 100.0)), 2)
+                                    ELSE ROUND(@PrecioCompra * (1.0 + @MargenDefault), 2)
+                                END
                             WHERE IdProducto = @IdProducto;";
 
                         foreach (var item in detalles)
@@ -210,7 +303,8 @@ namespace CapaDatos
                                 {
                                     cmdProd.Parameters.AddWithValue("@CantidadRecibida", item.CantidadRecibida);
                                     cmdProd.Parameters.AddWithValue("@PrecioCompra", item.PrecioUnitario);
-                                    cmdProd.Parameters.AddWithValue("@Margen", margenGanancia);
+                                    cmdProd.Parameters.AddWithValue("@Margen", (object)item.MargenGanancia ?? DBNull.Value);
+                                    cmdProd.Parameters.AddWithValue("@MargenDefault", margenGanancia);
                                     cmdProd.Parameters.AddWithValue("@IdProducto", item.IdProducto);
                                     cmdProd.ExecuteNonQuery();
                                 }

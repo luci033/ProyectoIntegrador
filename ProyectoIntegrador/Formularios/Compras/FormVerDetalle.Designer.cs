@@ -44,6 +44,10 @@ namespace ProyectoIntegrador.Formularios.Compras
             this.TBFechaRecepcion = new System.Windows.Forms.TextBox();
             this.LObservacion = new System.Windows.Forms.Label();
             this.TBObservacion = new System.Windows.Forms.TextBox();
+            this.LUsuarioEmisor = new System.Windows.Forms.Label();
+            this.TBUsuarioEmisor = new System.Windows.Forms.TextBox();
+            this.LUsuarioReceptor = new System.Windows.Forms.Label();
+            this.TBUsuarioReceptor = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.DGDetalleOrden = new System.Windows.Forms.DataGridView();
             this.colIdProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -110,10 +114,14 @@ namespace ProyectoIntegrador.Formularios.Compras
             this.panel1.Controls.Add(this.TBProveedor);
             this.panel1.Controls.Add(this.LFechaEmision);
             this.panel1.Controls.Add(this.TBFechaEmision);
+            this.panel1.Controls.Add(this.LUsuarioEmisor);
+            this.panel1.Controls.Add(this.TBUsuarioEmisor);
             this.panel1.Controls.Add(this.LFechaRecepcion);
             this.panel1.Controls.Add(this.TBFechaRecepcion);
             this.panel1.Controls.Add(this.LObservacion);
             this.panel1.Controls.Add(this.TBObservacion);
+            this.panel1.Controls.Add(this.LUsuarioReceptor);
+            this.panel1.Controls.Add(this.TBUsuarioReceptor);
             this.panel1.Location = new System.Drawing.Point(25, 85);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(930, 130);
@@ -138,7 +146,7 @@ namespace ProyectoIntegrador.Formularios.Compras
             this.TBNroOrden.Location = new System.Drawing.Point(20, 35);
             this.TBNroOrden.Name = "TBNroOrden";
             this.TBNroOrden.ReadOnly = true;
-            this.TBNroOrden.Size = new System.Drawing.Size(100, 24);
+            this.TBNroOrden.Size = new System.Drawing.Size(85, 24);
             this.TBNroOrden.TabIndex = 1;
             // 
             // LProveedor
@@ -146,7 +154,7 @@ namespace ProyectoIntegrador.Formularios.Compras
             this.LProveedor.AutoSize = true;
             this.LProveedor.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LProveedor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.LProveedor.Location = new System.Drawing.Point(140, 15);
+            this.LProveedor.Location = new System.Drawing.Point(120, 15);
             this.LProveedor.Name = "LProveedor";
             this.LProveedor.Size = new System.Drawing.Size(69, 15);
             this.LProveedor.TabIndex = 2;
@@ -156,10 +164,10 @@ namespace ProyectoIntegrador.Formularios.Compras
             // 
             this.TBProveedor.BackColor = System.Drawing.Color.White;
             this.TBProveedor.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.TBProveedor.Location = new System.Drawing.Point(140, 35);
+            this.TBProveedor.Location = new System.Drawing.Point(120, 35);
             this.TBProveedor.Name = "TBProveedor";
             this.TBProveedor.ReadOnly = true;
-            this.TBProveedor.Size = new System.Drawing.Size(320, 24);
+            this.TBProveedor.Size = new System.Drawing.Size(240, 24);
             this.TBProveedor.TabIndex = 3;
             // 
             // LFechaEmision
@@ -167,7 +175,7 @@ namespace ProyectoIntegrador.Formularios.Compras
             this.LFechaEmision.AutoSize = true;
             this.LFechaEmision.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LFechaEmision.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.LFechaEmision.Location = new System.Drawing.Point(480, 15);
+            this.LFechaEmision.Location = new System.Drawing.Point(375, 15);
             this.LFechaEmision.Name = "LFechaEmision";
             this.LFechaEmision.Size = new System.Drawing.Size(89, 15);
             this.LFechaEmision.TabIndex = 4;
@@ -177,18 +185,39 @@ namespace ProyectoIntegrador.Formularios.Compras
             // 
             this.TBFechaEmision.BackColor = System.Drawing.Color.White;
             this.TBFechaEmision.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.TBFechaEmision.Location = new System.Drawing.Point(480, 35);
+            this.TBFechaEmision.Location = new System.Drawing.Point(375, 35);
             this.TBFechaEmision.Name = "TBFechaEmision";
             this.TBFechaEmision.ReadOnly = true;
-            this.TBFechaEmision.Size = new System.Drawing.Size(200, 24);
+            this.TBFechaEmision.Size = new System.Drawing.Size(130, 24);
             this.TBFechaEmision.TabIndex = 5;
+            // 
+            // LUsuarioEmisor
+            // 
+            this.LUsuarioEmisor.AutoSize = true;
+            this.LUsuarioEmisor.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LUsuarioEmisor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LUsuarioEmisor.Location = new System.Drawing.Point(520, 15);
+            this.LUsuarioEmisor.Name = "LUsuarioEmisor";
+            this.LUsuarioEmisor.Size = new System.Drawing.Size(88, 15);
+            this.LUsuarioEmisor.TabIndex = 6;
+            this.LUsuarioEmisor.Text = "Generado por:";
+            // 
+            // TBUsuarioEmisor
+            // 
+            this.TBUsuarioEmisor.BackColor = System.Drawing.Color.White;
+            this.TBUsuarioEmisor.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.TBUsuarioEmisor.Location = new System.Drawing.Point(520, 35);
+            this.TBUsuarioEmisor.Name = "TBUsuarioEmisor";
+            this.TBUsuarioEmisor.ReadOnly = true;
+            this.TBUsuarioEmisor.Size = new System.Drawing.Size(185, 24);
+            this.TBUsuarioEmisor.TabIndex = 7;
             // 
             // LFechaRecepcion
             // 
             this.LFechaRecepcion.AutoSize = true;
             this.LFechaRecepcion.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LFechaRecepcion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.LFechaRecepcion.Location = new System.Drawing.Point(700, 15);
+            this.LFechaRecepcion.Location = new System.Drawing.Point(720, 15);
             this.LFechaRecepcion.Name = "LFechaRecepcion";
             this.LFechaRecepcion.Size = new System.Drawing.Size(107, 15);
             this.LFechaRecepcion.TabIndex = 6;
@@ -198,10 +227,10 @@ namespace ProyectoIntegrador.Formularios.Compras
             // 
             this.TBFechaRecepcion.BackColor = System.Drawing.Color.White;
             this.TBFechaRecepcion.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.TBFechaRecepcion.Location = new System.Drawing.Point(700, 35);
+            this.TBFechaRecepcion.Location = new System.Drawing.Point(720, 35);
             this.TBFechaRecepcion.Name = "TBFechaRecepcion";
             this.TBFechaRecepcion.ReadOnly = true;
-            this.TBFechaRecepcion.Size = new System.Drawing.Size(210, 24);
+            this.TBFechaRecepcion.Size = new System.Drawing.Size(190, 24);
             this.TBFechaRecepcion.TabIndex = 7;
             // 
             // LObservacion
@@ -223,8 +252,29 @@ namespace ProyectoIntegrador.Formularios.Compras
             this.TBObservacion.Location = new System.Drawing.Point(20, 88);
             this.TBObservacion.Name = "TBObservacion";
             this.TBObservacion.ReadOnly = true;
-            this.TBObservacion.Size = new System.Drawing.Size(890, 24);
-            this.TBObservacion.TabIndex = 9;
+            this.TBObservacion.Size = new System.Drawing.Size(685, 24);
+            this.TBObservacion.TabIndex = 11;
+            // 
+            // LUsuarioReceptor
+            // 
+            this.LUsuarioReceptor.AutoSize = true;
+            this.LUsuarioReceptor.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LUsuarioReceptor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LUsuarioReceptor.Location = new System.Drawing.Point(720, 68);
+            this.LUsuarioReceptor.Name = "LUsuarioReceptor";
+            this.LUsuarioReceptor.Size = new System.Drawing.Size(81, 15);
+            this.LUsuarioReceptor.TabIndex = 12;
+            this.LUsuarioReceptor.Text = "Recibido por:";
+            // 
+            // TBUsuarioReceptor
+            // 
+            this.TBUsuarioReceptor.BackColor = System.Drawing.Color.White;
+            this.TBUsuarioReceptor.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.TBUsuarioReceptor.Location = new System.Drawing.Point(720, 88);
+            this.TBUsuarioReceptor.Name = "TBUsuarioReceptor";
+            this.TBUsuarioReceptor.ReadOnly = true;
+            this.TBUsuarioReceptor.Size = new System.Drawing.Size(190, 24);
+            this.TBUsuarioReceptor.TabIndex = 13;
             // 
             // panel2
             // 
@@ -412,6 +462,10 @@ namespace ProyectoIntegrador.Formularios.Compras
         private System.Windows.Forms.TextBox TBObservacion;
         private System.Windows.Forms.TextBox TBFechaRecepcion;
         private System.Windows.Forms.TextBox TBFechaEmision;
+        private System.Windows.Forms.Label LUsuarioEmisor;
+        private System.Windows.Forms.TextBox TBUsuarioEmisor;
+        private System.Windows.Forms.Label LUsuarioReceptor;
+        private System.Windows.Forms.TextBox TBUsuarioReceptor;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label LTotalGeneral;
         private System.Windows.Forms.DataGridView DGDetalleOrden;

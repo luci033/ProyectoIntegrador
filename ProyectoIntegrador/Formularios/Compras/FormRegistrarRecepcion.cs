@@ -16,6 +16,7 @@ namespace ProyectoIntegrador.Formularios.Compras
     {
         private int idCompra;
         private int idUsuarioLogueado = 1;
+        private string nombreUsuarioLogueado = "";
         private List<object[]> listaProductos; // Para compatibilidad hacia atrás si fuera necesario
 
         public string FechaSeleccionada { get; private set; }
@@ -26,9 +27,11 @@ namespace ProyectoIntegrador.Formularios.Compras
             InitializeComponent();
             this.idCompra = idCompra;
             this.idUsuarioLogueado = idUsuario;
+            this.nombreUsuarioLogueado = nombreUsuario;
             TBNroOrden.Text = nroOrden;
             TBProveedor.Text = proveedor;
             TBFechaOrden.Text = fechaOrden;
+            TBUsuario.Text = string.IsNullOrWhiteSpace(nombreUsuario) ? "Sistema" : nombreUsuario;
 
             if (this.idUsuarioLogueado <= 0)
             {
@@ -36,14 +39,34 @@ namespace ProyectoIntegrador.Formularios.Compras
                 {
                     var u = new CN_Usuario().Listar().FirstOrDefault(x => x.User != null && x.User.Equals(nombreUsuario, StringComparison.OrdinalIgnoreCase));
                     if (u != null)
+                    {
                         this.idUsuarioLogueado = u.IdUsuario;
+                        if (!string.IsNullOrWhiteSpace(u.NombreUsuario) || !string.IsNullOrWhiteSpace(u.ApellidoUsuario))
+                        {
+                            TBUsuario.Text = $"{u.NombreUsuario} {u.ApellidoUsuario}".Trim();
+                        }
+                    }
                     else
+                    {
                         this.idUsuarioLogueado = 1;
+                    }
                 }
                 catch
                 {
                     this.idUsuarioLogueado = 1;
                 }
+            }
+            else
+            {
+                try
+                {
+                    var u = new CN_Usuario().Listar().FirstOrDefault(x => x.IdUsuario == this.idUsuarioLogueado);
+                    if (u != null && (!string.IsNullOrWhiteSpace(u.NombreUsuario) || !string.IsNullOrWhiteSpace(u.ApellidoUsuario)))
+                    {
+                        TBUsuario.Text = $"{u.NombreUsuario} {u.ApellidoUsuario}".Trim();
+                    }
+                }
+                catch { }
             }
         }
 
@@ -53,9 +76,11 @@ namespace ProyectoIntegrador.Formularios.Compras
             InitializeComponent();
             int.TryParse(nroOrden, out this.idCompra);
             this.idUsuarioLogueado = 1;
+            this.nombreUsuarioLogueado = "Usuario";
             TBNroOrden.Text = nroOrden;
             TBProveedor.Text = proveedor;
             TBFechaOrden.Text = fechaOrden;
+            TBUsuario.Text = "Usuario";
             this.listaProductos = detalles;
         }
 
@@ -70,6 +95,13 @@ namespace ProyectoIntegrador.Formularios.Compras
             EstiloUI.AplicarEstiloBoton(BAceptar);
             EstiloUI.AplicarEstiloBotonSecundario(BCancelar);
             EstiloUI.CentrarControl(panelCard, this);
+
+            EstiloUI.AplicarEstiloTextBox(TBNroOrden);
+            EstiloUI.AplicarEstiloTextBox(TBProveedor);
+            EstiloUI.AplicarEstiloTextBox(TBFechaOrden);
+            EstiloUI.AplicarEstiloTextBox(TBFechaRecepcion);
+            EstiloUI.AplicarEstiloTextBox(TBUsuario);
+            EstiloUI.AplicarEstiloTextBox(TBObservacion);
 
             TBFechaRecepcion.Text = DateTime.Now.ToString("dd/MM/yyyy");
             DGDetalleRecepcion.CellValidating += new DataGridViewCellValidatingEventHandler(DGDetalleRecepcion_CellValidating);
@@ -93,10 +125,11 @@ namespace ProyectoIntegrador.Formularios.Compras
                         string nombre = row["NombreProducto"] != DBNull.Value ? row["NombreProducto"].ToString() : "";
                         int cantPedida = Convert.ToInt32(row["CantidadPedida"]);
                         decimal precioUnit = Convert.ToDecimal(row["PrecioUnitario"]);
+                        int? margenVal = (row.Table.Columns.Contains("MargenGanancia") && row["MargenGanancia"] != DBNull.Value) ? Convert.ToInt32(row["MargenGanancia"]) : (int?)null;
 
                         // Por defecto se sugiere recibir la totalidad de lo pedido
                         int idx = DGDetalleRecepcion.Rows.Add(idProd, codigo, nombre, cantPedida, cantPedida);
-                        DGDetalleRecepcion.Rows[idx].Tag = new Tuple<int, int, decimal>(idDetalle, idProd, precioUnit);
+                        DGDetalleRecepcion.Rows[idx].Tag = new Tuple<int, int, decimal, int?>(idDetalle, idProd, precioUnit, margenVal);
                     }
                 }
                 catch (Exception ex)
@@ -170,10 +203,11 @@ namespace ProyectoIntegrador.Formularios.Compras
                     return;
                 }
 
-                var info = fila.Tag as Tuple<int, int, decimal>;
+                var info = fila.Tag as Tuple<int, int, decimal, int?>;
                 int idDetalleCompra = info != null ? info.Item1 : 0;
                 int idProducto = info != null ? info.Item2 : Convert.ToInt32(fila.Cells[0].Value ?? 0);
                 decimal precioUnitario = info != null ? info.Item3 : 0m;
+                int? margenProducto = info != null ? info.Item4 : null;
 
                 detalles.Add(new DetalleRecepcion
                 {
@@ -181,7 +215,8 @@ namespace ProyectoIntegrador.Formularios.Compras
                     IdDetalleCompra = idDetalleCompra,
                     IdProducto = idProducto,
                     CantidadRecibida = cantRecibida,
-                    PrecioUnitario = precioUnitario
+                    PrecioUnitario = precioUnitario,
+                    MargenGanancia = margenProducto
                 });
 
                 totalUnidadesRecibidas += cantRecibida;
@@ -205,7 +240,7 @@ namespace ProyectoIntegrador.Formularios.Compras
                 Observacion = recepcion.Observacion;
 
                 MessageBox.Show(
-                    "Recepción de mercadería registrada con éxito.\nEl stock de los productos y sus precios de venta (+55%) han sido actualizados en el sistema.",
+                    "Recepción de mercadería registrada con éxito.\nEl stock de los productos y sus precios de venta calculados con su margen de ganancia han sido actualizados en el sistema.",
                     "Recepción Registrada",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information
