@@ -26,12 +26,13 @@ namespace ProyectoIntegrador.Formularios.Compras
         {
             InitializeComponent();
             this.idCompra = idCompra;
-            this.idUsuarioLogueado = idUsuario;
-            this.nombreUsuarioLogueado = nombreUsuario;
+            this.idUsuarioLogueado = idUsuario > 0 ? idUsuario : (SesionActual.IdUsuario > 0 ? SesionActual.IdUsuario : 1);
+            this.nombreUsuarioLogueado = !string.IsNullOrWhiteSpace(nombreUsuario) ? nombreUsuario : SesionActual.LoginUsuario;
             TBNroOrden.Text = nroOrden;
             TBProveedor.Text = proveedor;
             TBFechaOrden.Text = fechaOrden;
-            TBUsuario.Text = string.IsNullOrWhiteSpace(nombreUsuario) ? "Sistema" : nombreUsuario;
+            TBUsuario.Text = !string.IsNullOrWhiteSpace(SesionActual.NombreCompleto) ? SesionActual.NombreCompleto : this.nombreUsuarioLogueado;
+            TBUsuario.ReadOnly = true;
 
             if (this.idUsuarioLogueado <= 0)
             {
@@ -177,7 +178,7 @@ namespace ProyectoIntegrador.Formularios.Compras
             Recepcion recepcion = new Recepcion
             {
                 IdCompra = this.idCompra,
-                IdUsuario = this.idUsuarioLogueado,
+                IdUsuario = this.idUsuarioLogueado > 0 ? this.idUsuarioLogueado : (SesionActual.IdUsuario > 0 ? SesionActual.IdUsuario : 1),
                 FechaRecepcion = DateTime.Now,
                 Observacion = TBObservacion.Text.Trim()
             };

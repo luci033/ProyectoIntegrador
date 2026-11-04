@@ -101,7 +101,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
             FiltrarGrilla();
         }
 
-        //public int IdCliente { get; private set; }
+        public int IdClienteSeleccionado { get; private set; }
         public string NombreCompleto { get; private set; }
         public string CondicionIVA { get; private set; }
 
@@ -112,7 +112,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
                 DataGridViewRow fila = DGClientes.Rows[e.RowIndex];
 
                 // Ajustá los índices (0, 2, 3, 7) según las columnas reales de tu grilla
-                //IdCliente = Convert.ToInt32(fila.Cells[0].Value ?? 0);
+                IdClienteSeleccionado = Convert.ToInt32(fila.Cells[0].Value ?? 0);
 
                 string nombre = fila.Cells[2].Value?.ToString() ?? "";
                 string apellido = fila.Cells[3].Value?.ToString() ?? "";

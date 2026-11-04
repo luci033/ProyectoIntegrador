@@ -32,6 +32,13 @@ namespace CapaNegocio
                 return false;
             }
 
+            // Validación de unicidad de DNI/CUIT en capa de negocio
+            if (objCapaDato.ExisteDni(obj.DNICUIT, obj.IdCliente))
+            {
+                mensaje = "No se pueden registrar dos clientes con el mismo DNI/CUIT.";
+                return false;
+            }
+
             // Si pasa las validaciones, le pasa el objeto a la Capa de Datos
             return objCapaDato.RegistrarCliente(obj, out mensaje);
         }
@@ -48,6 +55,11 @@ namespace CapaNegocio
             return objCapaDato.ListarClientes();
         }
 
+        public bool ExisteDni(string dnicuit, int idClienteExcluir = 0)
+        {
+            return objCapaDato.ExisteDni(dnicuit, idClienteExcluir);
+        }
+
         public bool Editar(Cliente obj, out string mensaje)
         {
             mensaje = string.Empty;
@@ -61,6 +73,13 @@ namespace CapaNegocio
             if (string.IsNullOrWhiteSpace(obj.DNICUIT))
             {
                 mensaje = "El DNI o CUIT del cliente es obligatorio.";
+                return false;
+            }
+
+            // Validación de unicidad de DNI/CUIT en capa de negocio
+            if (objCapaDato.ExisteDni(obj.DNICUIT, obj.IdCliente))
+            {
+                mensaje = "No se pueden registrar dos clientes con el mismo DNI/CUIT.";
                 return false;
             }
 

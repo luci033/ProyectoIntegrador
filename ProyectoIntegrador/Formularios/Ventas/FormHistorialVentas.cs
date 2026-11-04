@@ -1,3 +1,5 @@
+using CapaEntidades;
+using CapaNegocio;
 using ProyectoIntegrador.ModelosSimulados;
 using System;
 using System.Collections.Generic;
@@ -103,8 +105,41 @@ namespace ProyectoIntegrador.Formularios.Ventas
 
         private void CargarDatosDesdeMemoria()
         {
-            // Sincroniza y trae todas las ventas de EstadisticasSimuladas y FormVentas.HistorialVentas
-            listaVentasCompleta = EstadisticasSimuladas.ObtenerHistorialVentas();
+            listaVentasCompleta = new List<VentaHistorica>();
+            try
+            {
+                DataTable dtVentas = new CN_Venta().ListarVentas();
+                if (dtVentas != null)
+                {
+                    foreach (DataRow r in dtVentas.Rows)
+                    {
+                        listaVentasCompleta.Add(new VentaHistorica
+                        {
+                            NroVenta = Convert.ToInt32(r["IdComprobante"]),
+                            Fecha = Convert.ToDateTime(r["FechaComprobante"]),
+                            Cliente = r["Cliente"]?.ToString() ?? "",
+                            Vendedor = r["UsuarioVendedor"]?.ToString() ?? r["NombreUsuario"]?.ToString() ?? "Vendedor",
+                            Total = Convert.ToDecimal(r["Total"] ?? 0),
+                            CantidadArticulos = Convert.ToInt32(r["CantidadArticulos"] ?? 0),
+                            CategoriaPrincipal = "General"
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar historial desde la base de datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            // Si aún no hay ventas registradas en la base de datos, mostramos las de prueba
+            if (listaVentasCompleta.Count == 0)
+            {
+                var simuladas = EstadisticasSimuladas.ObtenerHistorialVentas();
+                if (simuladas != null && simuladas.Count > 0)
+                {
+                    listaVentasCompleta.AddRange(simuladas);
+                }
+            }
         }
 
         private void AplicarPresetPeriodo(string preset)
@@ -279,6 +314,20 @@ namespace ProyectoIntegrador.Formularios.Ventas
             {
                 int nroVenta = Convert.ToInt32(DataGridHistorialVenta.Rows[e.RowIndex].Cells[0].Value);
 
+                try
+                {
+                    var ventaBD = new CN_Venta().ObtenerVentaPorId(nroVenta);
+                    if (ventaBD != null)
+                    {
+                        using (FDetalleVenta modalDetalle = new FDetalleVenta(nroVenta))
+                        {
+                            modalDetalle.ShowDialog();
+                        }
+                        return;
+                    }
+                }
+                catch { }
+
                 // Verificamos si existe en el diccionario estático de comprobantes
                 if (FormVentas.HistorialVentas != null && FormVentas.HistorialVentas.ContainsKey(nroVenta))
                 {
@@ -440,6 +489,24 @@ namespace ProyectoIntegrador.Formularios.Ventas
         private void TBTotalFiltrado_TextChanged(object sender, EventArgs e)
         {
 
+        }
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            base.OnFormClosed(e);
+
+            if (this.MdiParent != null && !this.MdiParent.IsDisposed)
+            {
+                Form formPadre = this.MdiParent;
+                bool yaExisteOpciones = formPadre.MdiChildren.Any(h => h is FormOpcionesVenta && h.Visible);
+                if (!yaExisteOpciones)
+                {
+                    string user = !string.IsNullOrWhiteSpace(SesionActual.LoginUsuario) ? SesionActual.LoginUsuario : "Operador";
+                    FormOpcionesVenta opciones = new FormOpcionesVenta(user);
+                    opciones.MdiParent = formPadre;
+                    opciones.WindowState = FormWindowState.Maximized;
+                    opciones.Show();
+                }
+            }
         }
     }
 }

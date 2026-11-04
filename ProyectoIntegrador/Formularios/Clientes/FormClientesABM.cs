@@ -17,8 +17,12 @@ namespace ProyectoIntegrador.Formularios.Clientes
     public partial class FormClientesABM : Form
     {
         public ClienteSimulado ClienteCreado { get; private set; }
+        public int IdClienteGenerado { get; private set; }
+        public CapaEntidades.Cliente ClienteRegistrado { get; private set; }
         public List<string> DnisExistentes = new List<string>();
         private string dniOriginal = "";
+        private string condicionIvaPendiente = null;
+        private int idCondicionIvaPendiente = 0;
         private int idClienteActual = 0; // Si es 0, es un alta nueva. Si tiene valor, es una modificación.
         public FormClientesABM()
         {
@@ -46,7 +50,18 @@ namespace ProyectoIntegrador.Formularios.Clientes
             EstiloUI.AplicarEstiloBotonSecundario(BCancelar);
             EstiloUI.CentrarControl(panelCard, this);
 
-            CargarCondicionIVA(); // REVISAR SI ES NECESARIO 
+            CargarCondicionIVA();
+
+            CargarDnisExistentes();
+
+            if (!string.IsNullOrWhiteSpace(condicionIvaPendiente) || idCondicionIvaPendiente > 0)
+            {
+                SeleccionarCondicionIVA(condicionIvaPendiente, idCondicionIvaPendiente);
+            }
+            else if (idClienteActual == 0)
+            {
+                cmbCondicionIVA.SelectedIndex = -1;
+            } 
 
         }
 
@@ -60,6 +75,38 @@ namespace ProyectoIntegrador.Formularios.Clientes
 
         }
 
+        public void CargarDnisExistentes()
+        {
+            if (DnisExistentes == null)
+            {
+                DnisExistentes = new List<string>();
+            }
+
+            if (DnisExistentes.Count == 0)
+            {
+                try
+                {
+                    CN_Cliente negocio = new CN_Cliente();
+                    DataTable dt = negocio.Listar();
+                    if (dt != null)
+                    {
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            if (row.Table.Columns.Contains("DNICUIT") && row["DNICUIT"] != DBNull.Value)
+                            {
+                                string d = row["DNICUIT"].ToString().Trim();
+                                if (!string.IsNullOrEmpty(d) && !DnisExistentes.Contains(d))
+                                {
+                                    DnisExistentes.Add(d);
+                                }
+                            }
+                        }
+                    }
+                }
+                catch { }
+            }
+        }
+
         private void BRegistrarCliente_Click(object sender, EventArgs e)
         {
             errorProvider1.Clear();
@@ -71,8 +118,8 @@ namespace ProyectoIntegrador.Formularios.Clientes
             if (string.IsNullOrWhiteSpace(TBApellido.Text) || !TBApellido.Text.All(c => char.IsLetter(c) || char.IsWhiteSpace(c)))
             { errorProvider1.SetError(TBApellido, "Inválido"); esValido = false; }
 
-            if (string.IsNullOrWhiteSpace(TBDni.Text) || !TBDni.Text.All(char.IsDigit) || TBDni.Text.Length < 7)
-            { errorProvider1.SetError(TBDni, "Inválido"); esValido = false; }
+            if (string.IsNullOrWhiteSpace(TBDni.Text) || !TBDni.Text.All(char.IsDigit) || TBDni.Text.Length < 7 || TBDni.Text.Length > 11)
+            { errorProvider1.SetError(TBDni, "Inválido (entre 7 y 11 dígitos)"); esValido = false; }
 
             // 2. Validación de Teléfono (solo números)
             if (string.IsNullOrWhiteSpace(TBTelefono.Text) || !TBTelefono.Text.All(char.IsDigit))
@@ -93,10 +140,15 @@ namespace ProyectoIntegrador.Formularios.Clientes
                 return;
             }
 
-            // Validación de DNI duplicado
-            if (DnisExistentes != null && DnisExistentes.Contains(TBDni.Text) && TBDni.Text != dniOriginal)
+            // Aseguramos que los DNIs cargados estén listos para el análisis
+            CargarDnisExistentes();
+
+            // Validación de DNI duplicado sobre los clientes cargados
+            string dniIngresado = TBDni.Text.Trim();
+            if (DnisExistentes != null && DnisExistentes.Any(d => string.Equals(d.Trim(), dniIngresado, StringComparison.OrdinalIgnoreCase)) && !string.Equals(dniIngresado, dniOriginal.Trim(), StringComparison.OrdinalIgnoreCase))
             {
-                MessageBox.Show("Ese DNI ya se encuentra registrado en el sistema.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errorProvider1.SetError(TBDni, "No se pueden registrar dos clientes con el mismo DNI/CUIT.");
+                MessageBox.Show("No se pueden registrar dos clientes con el mismo DNI/CUIT.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -130,6 +182,16 @@ namespace ProyectoIntegrador.Formularios.Clientes
             // aca evaluamos si se guardo e la bd
             if (resultado)
             {
+                IdClienteGenerado = NuevoCliente.IdCliente;
+                ClienteRegistrado = NuevoCliente;
+                ClienteCreado = new ClienteSimulado
+                {
+                    Nombre = NuevoCliente.Nombre,
+                    Apellido = NuevoCliente.Apellido,
+                    DNI = NuevoCliente.DNICUIT,
+                    CondicionIVA = cmbCondicionIVA.Text
+                };
+
                 string mensajeExito = (idClienteActual == 0) ? "¡Cliente registrado con éxito en la base de datos!" : "¡Cliente modificado con éxito!";
                 MessageBox.Show(mensajeExito, "Joyería ALBA", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
@@ -137,7 +199,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
             }
             else
             {
-                MessageBox.Show(mensaje, "Error de Operación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(mensaje, "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -172,7 +234,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
             }
         }
 
-        public void ConfigurarModoEdicion(int IdCliente, string nombre, string apellido, string dni, string telefono, string correo, string condicionIVA)
+        public void ConfigurarModoEdicion(int IdCliente, string nombre, string apellido, string dni, string telefono, string correo, string condicionIVA, int idCondicionIVA = 0)
         {
             this.Text = "Modificar Cliente";
             LTitulo.Text = "Modificar Cliente";
@@ -184,17 +246,18 @@ namespace ProyectoIntegrador.Formularios.Clientes
             TBDni.Text = dni;
             TBTelefono.Text = telefono;
             TBCorreo.Text = correo;
-            cmbCondicionIVA.Text = condicionIVA;
+            SeleccionarCondicionIVA(condicionIVA, idCondicionIVA);
             // Guardamos el DNI original para compararlo luego
             dniOriginal = dni;
 
-            // BLOQUEAMOS EL DNI PARA QUE NO SE PUEDA MODIFICAR
-            TBDni.ReadOnly = true;
-            TBDni.BackColor = Color.LightGray; // Opcional: un color sutil para que se note que está deshabilitado
+            // Permitimos la modificación del DNI/CUIT
+            TBDni.ReadOnly = false;
+            TBDni.Enabled = true;
+            TBDni.BackColor = Color.White;
         }
         
 
-        public void ConfigurarModoDetalle(string nombre, string apellido, string dni, string telefono, string correo, string condicionIVA)
+        public void ConfigurarModoDetalle(string nombre, string apellido, string dni, string telefono, string correo, string condicionIVA, int idCondicionIVA = 0)
         {
             this.Text = "Detalle Cliente";
             LTitulo.Text = "Detalle Cliente";
@@ -204,7 +267,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
             TBDni.Text = dni;
             TBTelefono.Text = telefono;
             TBCorreo.Text = correo;
-            cmbCondicionIVA.Text = condicionIVA;
+            SeleccionarCondicionIVA(condicionIVA, idCondicionIVA);
 
             // Bloquear controles
             TBNombre.ReadOnly = true;
@@ -243,17 +306,22 @@ namespace ProyectoIntegrador.Formularios.Clientes
         private void TBDni_Validating(object sender, CancelEventArgs e)
         {
             string dni = TBDni.Text.Trim();
-            // se verifica que no este vacio, que solo contenga numeros de menos de 7 dijistos
-            if (string.IsNullOrWhiteSpace(dni) || !int.TryParse(dni, out _) || dni.Length < 7)
+            // se verifica que no este vacio, que solo contenga numeros entre 7 y 11 digitos
+            if (string.IsNullOrWhiteSpace(dni) || !dni.All(char.IsDigit) || dni.Length < 7 || dni.Length > 11)
             {
                 e.Cancel = true;
-                errorProvider1.SetError(TBDni, "Ingrese un DNI válido (solo números, mínimo 7 dígitos).");
+                errorProvider1.SetError(TBDni, "Ingrese un DNI o CUIT válido (solo números, entre 7 y 11 dígitos).");
+                return;
             }
-            else
+
+            if (DnisExistentes != null && DnisExistentes.Any(d => string.Equals(d.Trim(), dni, StringComparison.OrdinalIgnoreCase)) && !string.Equals(dni, dniOriginal.Trim(), StringComparison.OrdinalIgnoreCase))
             {
-                e.Cancel = false;
-                errorProvider1.SetError(TBDni, "");
+                errorProvider1.SetError(TBDni, "No se pueden registrar dos clientes con el mismo DNI/CUIT.");
+                return;
             }
+
+            e.Cancel = false;
+            errorProvider1.SetError(TBDni, "");
         }
 
         private void TBCorreo_Validating(object sender, CancelEventArgs e)
@@ -284,12 +352,107 @@ namespace ProyectoIntegrador.Formularios.Clientes
 
         private void CargarCondicionIVA()
         {
-            CN_Cliente negocioCliente = new CN_Cliente();
+            if (cmbCondicionIVA.DataSource == null)
+            {
+                try
+                {
+                    CN_Cliente negocioCliente = new CN_Cliente();
+                    DataTable dt = negocioCliente.ObtenerCondicionIva();
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
+                        cmbCondicionIVA.DataSource = dt;
+                        cmbCondicionIVA.DisplayMember = "CondicionIVA";
+                        cmbCondicionIVA.ValueMember = "IdCondicionIva";
+                    }
+                }
+                catch { }
+            }
+        }
 
-            cmbCondicionIVA.DataSource = negocioCliente.ObtenerCondicionIva();
-            cmbCondicionIVA.DisplayMember = "CondicionIVA"; // Lo que el usuario lee en la pantalla
-            cmbCondicionIVA.ValueMember = "IdCondicionIva";   // El número de ID real que viaja por detrás
-            cmbCondicionIVA.SelectedIndex = -1;             // Arranca sin nada seleccionado
+        public void SeleccionarCondicionIVA(string condicion, int idCondicion = 0)
+        {
+            condicionIvaPendiente = condicion;
+            idCondicionIvaPendiente = idCondicion;
+
+            CargarCondicionIVA();
+
+            CargarDnisExistentes();
+
+            // 1. Si tenemos el ID numérico
+            if (idCondicion > 0 && cmbCondicionIVA.DataSource != null)
+            {
+                try
+                {
+                    cmbCondicionIVA.SelectedValue = idCondicion;
+                    if (cmbCondicionIVA.SelectedIndex >= 0) return;
+                }
+                catch { }
+            }
+
+            if (string.IsNullOrWhiteSpace(condicion)) return;
+            string condTrim = condicion.Trim();
+
+            // 2. Si el combo está enlazado a un DataTable
+            if (cmbCondicionIVA.DataSource is DataTable dt)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    string textoFila = dt.Rows[i]["CondicionIVA"]?.ToString()?.Trim() ?? "";
+                    if (string.Equals(textoFila, condTrim, StringComparison.OrdinalIgnoreCase))
+                    {
+                        cmbCondicionIVA.SelectedIndex = i;
+                        return;
+                    }
+                }
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    string textoFila = dt.Rows[i]["CondicionIVA"]?.ToString()?.Trim() ?? "";
+                    if (textoFila.IndexOf(condTrim, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                        condTrim.IndexOf(textoFila, StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        cmbCondicionIVA.SelectedIndex = i;
+                        return;
+                    }
+                }
+            }
+
+            // 3. Búsqueda en los Items del combo
+            for (int i = 0; i < cmbCondicionIVA.Items.Count; i++)
+            {
+                string textoItem = cmbCondicionIVA.GetItemText(cmbCondicionIVA.Items[i])?.Trim() ?? "";
+                if (string.Equals(textoItem, condTrim, StringComparison.OrdinalIgnoreCase))
+                {
+                    cmbCondicionIVA.SelectedIndex = i;
+                    return;
+                }
+            }
+
+            for (int i = 0; i < cmbCondicionIVA.Items.Count; i++)
+            {
+                string textoItem = cmbCondicionIVA.GetItemText(cmbCondicionIVA.Items[i])?.Trim() ?? "";
+                if (textoItem.IndexOf(condTrim, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    condTrim.IndexOf(textoItem, StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    cmbCondicionIVA.SelectedIndex = i;
+                    return;
+                }
+            }
+
+            // 4. Si no se encontró y el combo no tiene items asignados
+            try
+            {
+                if (cmbCondicionIVA.SelectedIndex < 0 && cmbCondicionIVA.DataSource == null)
+                {
+                    cmbCondicionIVA.Items.Add(condTrim);
+                    cmbCondicionIVA.SelectedIndex = cmbCondicionIVA.Items.Count - 1;
+                }
+                else
+                {
+                    cmbCondicionIVA.Text = condTrim;
+                }
+            }
+            catch { }
         }
 
         private void TBTelefono_TextChanged(object sender, EventArgs e)

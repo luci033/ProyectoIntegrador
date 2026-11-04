@@ -1,5 +1,4 @@
 using ProyectoIntegrador.Formularios.Devoluciones;
-using ProyectoIntegrador.Formularios.Inventario;
 using ProyectoIntegrador.Formularios.Ventas;
 using ProyectoIntegrador.ModelosSimulados;
 using System;
@@ -51,10 +50,10 @@ namespace ProyectoIntegrador.Formularios.Gerente
             EstiloUI.AplicarEstiloGrilla(DGProductosCriticos);
 
             // Botones de acciones rápidas
-            EstiloUI.AplicarEstiloBoton(BNuevaVenta);
-            EstiloUI.AplicarEstiloBoton(BIngresoStock);
+            // Botones de acciones de consulta
+            EstiloUI.AplicarEstiloBoton(BVerInformes);
             EstiloUI.AplicarEstiloBoton(BDevoluciones);
-            EstiloUI.AplicarEstiloBotonSecundario(BVerInformes);
+            EstiloUI.AplicarEstiloBoton(BVerHistorial);
 
             ConfigurarGrillas();
             ConfigurarGraficos();
@@ -257,26 +256,6 @@ namespace ProyectoIntegrador.Formularios.Gerente
             MessageBox.Show("Métricas del Dashboard actualizadas con éxito.", "Dashboard ALBA", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void BNuevaVenta_Click(object sender, EventArgs e)
-        {
-            using (FormRegistroVentas formVenta = new FormRegistroVentas(nombreUsuarioLogueado))
-            {
-                if (formVenta.ShowDialog() == DialogResult.OK)
-                {
-                    CargarDatosDashboard();
-                }
-            }
-        }
-
-        private void BIngresoStock_Click(object sender, EventArgs e)
-        {
-            using (FormAjusteStock formAjuste = new FormAjusteStock(nombreUsuarioLogueado))
-            {
-                formAjuste.ShowDialog();
-                CargarDatosDashboard();
-            }
-        }
-
         private void BDevoluciones_Click(object sender, EventArgs e)
         {
             using (Devoluciones.FormRegistrarDevolucion formDev = new Devoluciones.FormRegistrarDevolucion())
@@ -285,6 +264,24 @@ namespace ProyectoIntegrador.Formularios.Gerente
                 {
                     CargarDatosDashboard();
                 }
+            }
+        }
+
+                private void BVerHistorial_Click(object sender, EventArgs e)
+        {
+            if (this.MdiParent != null)
+            {
+                Form formAbierto = this.MdiParent.MdiChildren.FirstOrDefault(x => x is FHistorialVentas);
+                if (formAbierto != null)
+                {
+                    formAbierto.BringToFront();
+                    return;
+                }
+
+                FHistorialVentas formHistorial = new FHistorialVentas();
+                formHistorial.MdiParent = this.MdiParent;
+                formHistorial.WindowState = FormWindowState.Maximized;
+                formHistorial.Show();
             }
         }
 

@@ -32,7 +32,6 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.panelContenedorBotones = new System.Windows.Forms.Panel();
             this.BDashboard = new System.Windows.Forms.Button();
             this.BInformes = new System.Windows.Forms.Button();
-            this.BAjusteStock = new System.Windows.Forms.Button();
             this.BHistorialVentas = new System.Windows.Forms.Button();
             this.BCerrarSesion = new System.Windows.Forms.Button();
             this.panelFooter = new System.Windows.Forms.Panel();
@@ -68,7 +67,6 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.panelContenedorBotones.BackColor = System.Drawing.Color.Transparent;
             this.panelContenedorBotones.Controls.Add(this.BDashboard);
             this.panelContenedorBotones.Controls.Add(this.BInformes);
-            this.panelContenedorBotones.Controls.Add(this.BAjusteStock);
             this.panelContenedorBotones.Controls.Add(this.BHistorialVentas);
             this.panelContenedorBotones.Controls.Add(this.BCerrarSesion);
             this.panelContenedorBotones.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -113,24 +111,6 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.BInformes.UseVisualStyleBackColor = false;
             this.BInformes.Click += new System.EventHandler(this.BInformes_Click);
             // 
-            // BAjusteStock
-            // 
-            this.BAjusteStock.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.BAjusteStock.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BAjusteStock.FlatAppearance.BorderSize = 0;
-            this.BAjusteStock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BAjusteStock.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BAjusteStock.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(215)))), ((int)(((byte)(210)))));
-            this.BAjusteStock.Location = new System.Drawing.Point(18, 128);
-            this.BAjusteStock.Name = "BAjusteStock";
-            this.BAjusteStock.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.BAjusteStock.Size = new System.Drawing.Size(214, 46);
-            this.BAjusteStock.TabIndex = 2;
-            this.BAjusteStock.Text = "📦  Ajuste de Stock";
-            this.BAjusteStock.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BAjusteStock.UseVisualStyleBackColor = false;
-            this.BAjusteStock.Click += new System.EventHandler(this.BAjusteStock_Click);
-            // 
             // BHistorialVentas
             // 
             this.BHistorialVentas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
@@ -139,11 +119,11 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.BHistorialVentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BHistorialVentas.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BHistorialVentas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(215)))), ((int)(((byte)(210)))));
-            this.BHistorialVentas.Location = new System.Drawing.Point(18, 184);
+            this.BHistorialVentas.Location = new System.Drawing.Point(18, 128);
             this.BHistorialVentas.Name = "BHistorialVentas";
             this.BHistorialVentas.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.BHistorialVentas.Size = new System.Drawing.Size(214, 46);
-            this.BHistorialVentas.TabIndex = 3;
+            this.BHistorialVentas.TabIndex = 2;
             this.BHistorialVentas.Text = "💳  Historial de Ventas";
             this.BHistorialVentas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BHistorialVentas.UseVisualStyleBackColor = false;
@@ -157,10 +137,10 @@ namespace ProyectoIntegrador.Formularios.Principal
             this.BCerrarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BCerrarSesion.Font = new System.Drawing.Font("Segoe UI", 9.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BCerrarSesion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(210)))), ((int)(((byte)(210)))));
-            this.BCerrarSesion.Location = new System.Drawing.Point(18, 260);
+            this.BCerrarSesion.Location = new System.Drawing.Point(18, 194);
             this.BCerrarSesion.Name = "BCerrarSesion";
             this.BCerrarSesion.Size = new System.Drawing.Size(214, 40);
-            this.BCerrarSesion.TabIndex = 4;
+            this.BCerrarSesion.TabIndex = 3;
             this.BCerrarSesion.Text = "🚪  Cerrar Sesión";
             this.BCerrarSesion.UseVisualStyleBackColor = false;
             this.BCerrarSesion.Click += new System.EventHandler(this.BCerrarSesion_Click);
@@ -293,7 +273,6 @@ namespace ProyectoIntegrador.Formularios.Principal
         private System.Windows.Forms.Panel panelContenedorBotones;
         private System.Windows.Forms.Button BDashboard;
         private System.Windows.Forms.Button BInformes;
-        private System.Windows.Forms.Button BAjusteStock;
         private System.Windows.Forms.Button BHistorialVentas;
         private System.Windows.Forms.Button BCerrarSesion;
         private System.Windows.Forms.Panel panelFooter;

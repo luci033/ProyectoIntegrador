@@ -37,7 +37,8 @@ namespace ProyectoIntegrador.Formularios.Productos
         public string Genero { get; private set; }
         public int Stock { get; private set;  }
         public decimal PrecioVenta { get; private set; }
-        public int MargenGanancia { get; private set; }
+        public int MargenGanancia { get; private set; }
+        public bool SoloConStock { get; set; } = false;
 
         private void FormBuscarProducto_Load(object sender, EventArgs e)
         {
@@ -107,6 +108,7 @@ namespace ProyectoIntegrador.Formularios.Productos
                     string categoria = row["NombreCategoria"] != DBNull.Value ? row["NombreCategoria"].ToString() : "";
                     string genero = row["NombreGenero"] != DBNull.Value ? row["NombreGenero"].ToString() : "";
                     int stock = row["StockActual"] != DBNull.Value ? Convert.ToInt32(row["StockActual"]) : 0;
+                    if (SoloConStock && stock <= 0) continue;
                     decimal pVenta = (row["PrecioVenta"] != DBNull.Value) ? Convert.ToDecimal(row["PrecioVenta"]) : 0.00m;
                     decimal pCompra = (row["PrecioCompra"] != DBNull.Value) ? Convert.ToDecimal(row["PrecioCompra"]) : 0.00m;
                     decimal margen = (row.Table.Columns.Contains("MargenGanancia") && row["MargenGanancia"] != DBNull.Value) ? Convert.ToDecimal(row["MargenGanancia"]) : 0.00m;
@@ -129,6 +131,13 @@ namespace ProyectoIntegrador.Formularios.Productos
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow fila = DGProductos.Rows[e.RowIndex];
+
+                int stockActual = Convert.ToInt32(fila.Cells[5].Value ?? 0);
+                if (SoloConStock && stockActual <= 0)
+                {
+                    MessageBox.Show("Esta joya no cuenta con stock disponible actualmente.", "Sin Stock", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
                 IdProducto = Convert.ToInt32(fila.Cells[0].Value);
                 Codigo = fila.Cells[1].Value?.ToString();
@@ -169,14 +178,32 @@ namespace ProyectoIntegrador.Formularios.Productos
                     bool pasaCat = filtroCat == "Todos" || categoria == filtroCat;
                     bool pasaGen = filtroGen == "Todos" || genero == filtroGen;
 
-                    fila.Visible = pasaNombre && pasaCat && pasaGen;
+                    int stockFila = Convert.ToInt32(fila.Cells[5].Value ?? 0);
+                    bool pasaStock = !SoloConStock || stockFila > 0;
+
+                    fila.Visible = pasaNombre && pasaCat && pasaGen && pasaStock;
                 }
             }
         }
 
         public void ConfigurarParaVentas()
         {
-            DGProductos.Columns[6].Visible = true; // Hace visible la columna Precio Venta
+            SoloConStock = true;
+            if (DGProductos.Columns.Count > 6)
+                DGProductos.Columns[6].Visible = true; // Hace visible la columna Precio Venta
+
+            // Si los datos ya estaban cargados en la grilla, removemos los que no tienen stock
+            if (DGProductos.Rows.Count > 0)
+            {
+                for (int i = DGProductos.Rows.Count - 1; i >= 0; i--)
+                {
+                    int stock = Convert.ToInt32(DGProductos.Rows[i].Cells[5].Value ?? 0);
+                    if (stock <= 0)
+                    {
+                        DGProductos.Rows.RemoveAt(i);
+                    }
+                }
+            }
         }
     }
 }

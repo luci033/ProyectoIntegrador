@@ -20,14 +20,19 @@ namespace ProyectoIntegrador.Formularios.Compras
         private int idProveedorSeleccionado = 0;
         public int IdCompraGenerada { get; private set; } = 0;
 
-        public FormOrdenCompra(string nombreUsuario)
+        public FormOrdenCompra(string nombreUsuario, int idUsuario = 0)
         {
             InitializeComponent();
 
-            usuarioLogueado = nombreUsuario;
+            usuarioLogueado = !string.IsNullOrWhiteSpace(nombreUsuario) ? nombreUsuario : SesionActual.LoginUsuario;
+            idUsuarioLogueado = idUsuario > 0 ? idUsuario : (SesionActual.IdUsuario > 0 ? SesionActual.IdUsuario : 1);
 
-            TBUsuario.Text = usuarioLogueado;
-            TBUsuario.ReadOnly = true; // Opcional: para que no lo puedan modificar a mano
+            TBUsuario.Text = !string.IsNullOrWhiteSpace(SesionActual.NombreCompleto) ? SesionActual.NombreCompleto : usuarioLogueado;
+            TBUsuario.ReadOnly = true;
+        }
+
+        public FormOrdenCompra(string nombreUsuario) : this(nombreUsuario, 0)
+        {
         }
 
         private void FormOrdenCompra_Load(object sender, EventArgs e)
@@ -49,21 +54,27 @@ namespace ProyectoIntegrador.Formularios.Compras
             // cargo fecha del sistema
             TBFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
 
-            try
+            if (idUsuarioLogueado <= 0)
             {
-                var usuarioObj = new CN_Usuario().Listar().FirstOrDefault(u => u.User != null && u.User.Equals(usuarioLogueado, StringComparison.OrdinalIgnoreCase));
-                if (usuarioObj != null)
+                try
                 {
-                    idUsuarioLogueado = usuarioObj.IdUsuario;
+                    var usuarioObj = new CN_Usuario().Listar().FirstOrDefault(u =>
+                        (u.User != null && u.User.Equals(usuarioLogueado, StringComparison.OrdinalIgnoreCase)) ||
+                        ($"{u.NombreUsuario} {u.ApellidoUsuario}".Trim().Equals(usuarioLogueado, StringComparison.OrdinalIgnoreCase)) ||
+                        (u.NombreUsuario != null && u.NombreUsuario.Equals(usuarioLogueado, StringComparison.OrdinalIgnoreCase)));
+                    if (usuarioObj != null)
+                    {
+                        idUsuarioLogueado = usuarioObj.IdUsuario;
+                    }
+                    else
+                    {
+                        idUsuarioLogueado = SesionActual.IdUsuario > 0 ? SesionActual.IdUsuario : 1;
+                    }
                 }
-                else
+                catch
                 {
-                    idUsuarioLogueado = 1;
+                    idUsuarioLogueado = SesionActual.IdUsuario > 0 ? SesionActual.IdUsuario : 1;
                 }
-            }
-            catch
-            {
-                idUsuarioLogueado = 1;
             }
 
             DGDetalleOrden.ReadOnly = false;

@@ -25,7 +25,20 @@ namespace ProyectoIntegrador.Formularios.Inventario
         public FormAjusteStock(string nombreUsuario)
         {
             InitializeComponent();
-            usuarioLogueado = nombreUsuario;
+            usuarioLogueado = !string.IsNullOrWhiteSpace(nombreUsuario) ? nombreUsuario : SesionActual.LoginUsuario;
+            if (SesionActual.IdUsuario > 0)
+            {
+                IdUsuarioLogueado = SesionActual.IdUsuario;
+            }
+            else
+            {
+                try
+                {
+                    var u = new CN_Usuario().Listar().FirstOrDefault(x => x.User != null && x.User.Equals(usuarioLogueado, StringComparison.OrdinalIgnoreCase));
+                    if (u != null) IdUsuarioLogueado = u.IdUsuario;
+                }
+                catch { }
+            }
         }
         
 

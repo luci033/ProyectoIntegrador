@@ -180,9 +180,9 @@ namespace ProyectoIntegrador.Formularios.Usuarios
                     RolUsuario = "Logistica"; 
                 }
 
-                // Guardamos el nombre que vino de la base de datos 
-                // (Fijate si en tu entidad se llama .Nombre o .NombreUsuario)
-                NombreUsuarioLogueado = usuarioLogueado.NombreUsuario;
+                // Guardamos el usuario y sesión activa en SesionActual
+                SesionActual.IniciarSesion(usuarioLogueado, RolUsuario);
+                NombreUsuarioLogueado = usuarioLogueado.User;
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();

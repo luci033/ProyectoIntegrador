@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -11,13 +11,44 @@ namespace CapaDatos
 {
     public class CD_Cliente
     {
+        public bool ExisteDni(string dnicuit, int idClienteExcluir = 0)
+        {
+            bool existe = false;
+            string query = @"SELECT COUNT(1) FROM CLIENTE 
+                             WHERE DNICUIT = @DNICUIT 
+                             AND (@IdClienteExcluir = 0 OR IdCliente <> @IdClienteExcluir)";
+
+            try
+            {
+                using (SqlConnection conexion = Conexion.ObtenerConexion())
+                {
+                    using (SqlCommand cmd = new SqlCommand(query, conexion))
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Parameters.AddWithValue("@DNICUIT", dnicuit.Trim());
+                        cmd.Parameters.AddWithValue("@IdClienteExcluir", idClienteExcluir);
+
+                        int count = Convert.ToInt32(cmd.ExecuteScalar());
+                        existe = count > 0;
+                    }
+                }
+            }
+            catch
+            {
+                existe = false;
+            }
+
+            return existe;
+        }
+
         public bool RegistrarCliente(Cliente obj, out string mensaje)
         {
             mensaje = string.Empty;
             bool respuesta = false;
 
             string query = @"INSERT INTO CLIENTE (Nombre, Apellido, DNICUIT, IdCondicionIva, Telefono, CorreoElectronico)
-                       VALUES (@Nombre, @Apellido, @DNICUIT, @IdCondicionIva, @Telefono, @CorreoElectronico)";
+                       VALUES (@Nombre, @Apellido, @DNICUIT, @IdCondicionIva, @Telefono, @CorreoElectronico);
+                       SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
             try
             {
@@ -34,20 +65,41 @@ namespace CapaDatos
                         cmd.Parameters.AddWithValue("@CorreoElectronico", string.IsNullOrWhiteSpace(obj.CorreoElectronico) ? (object)DBNull.Value : obj.CorreoElectronico);
                         cmd.Parameters.AddWithValue("@IdCondicionIva", obj.IdCondicionIva);
 
-                        int filasAfectadas = cmd.ExecuteNonQuery();
-                        respuesta = filasAfectadas > 0;
+                        object idResult = cmd.ExecuteScalar();
+                        if (idResult != null && int.TryParse(idResult.ToString(), out int idGen) && idGen > 0)
+                        {
+                            obj.IdCliente = idGen;
+                            respuesta = true;
+                        }
+                        else
+                        {
+                            respuesta = false;
+                        }
                     }
                 }
             }
 
+            catch (SqlException ex)
+            {
+                respuesta = false;
+                if (ex.Number == 2627 || ex.Number == 2601 ||
+                    ex.Message.Contains("UQ_DNICUIT") || ex.Message.Contains("UQ_Cliente_DNICUIT") ||
+                    ex.Message.Contains("UNIQUE KEY") || ex.Message.Contains("duplicate key"))
+                {
+                    mensaje = "No se pueden registrar dos clientes con el mismo DNI/CUIT.";
+                }
+                else
+                {
+                    mensaje = "Error al guardar el cliente: " + ex.Message;
+                }
+            }
             catch (Exception ex)
             {
                 respuesta = false;
-
-                // Si salta la restricción UNIQUE del DNI/CUIT que creamos antes en la tabla Cliente
-                if (ex.Message.Contains("UQ_Cliente_DNICUIT"))
+                if (ex.Message.Contains("UQ_DNICUIT") || ex.Message.Contains("UQ_Cliente_DNICUIT") ||
+                    ex.Message.Contains("UNIQUE KEY") || ex.Message.Contains("duplicate key"))
                 {
-                    mensaje = "Ya existe un cliente registrado con este DNI o CUIT en el sistema.";
+                    mensaje = "No se pueden registrar dos clientes con el mismo DNI/CUIT.";
                 }
                 else
                 {
@@ -72,6 +124,7 @@ namespace CapaDatos
                             c.DNICUIT, 
                             c.Telefono, 
                             c.CorreoElectronico, 
+                            c.IdCondicionIva,
                             iv.CondicionIVA AS CondicionIVA 
                          FROM CLIENTE c
                          INNER JOIN CondicionIva iv ON c.IdCondicionIva = iv.IdCondicionIva";
@@ -124,12 +177,27 @@ namespace CapaDatos
                     }
                 }
             }
+            catch (SqlException ex)
+            {
+                respuesta = false;
+                if (ex.Number == 2627 || ex.Number == 2601 ||
+                    ex.Message.Contains("UQ_DNICUIT") || ex.Message.Contains("UQ_Cliente_DNICUIT") ||
+                    ex.Message.Contains("UNIQUE KEY") || ex.Message.Contains("duplicate key"))
+                {
+                    mensaje = "No se pueden registrar dos clientes con el mismo DNI/CUIT.";
+                }
+                else
+                {
+                    mensaje = "Error al modificar el cliente: " + ex.Message;
+                }
+            }
             catch (Exception ex)
             {
                 respuesta = false;
-                if (ex.Message.Contains("UQ_DNICUIT"))
+                if (ex.Message.Contains("UQ_DNICUIT") || ex.Message.Contains("UQ_Cliente_DNICUIT") ||
+                    ex.Message.Contains("UNIQUE KEY") || ex.Message.Contains("duplicate key"))
                 {
-                    mensaje = "Ya existe otro cliente registrado con este DNI o CUIT.";
+                    mensaje = "No se pueden registrar dos clientes con el mismo DNI/CUIT.";
                 }
                 else
                 {

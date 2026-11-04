@@ -20,18 +20,35 @@ namespace ProyectoIntegrador.Formularios.Compras
         public FormCompras(string nombreUsuario)
         {
             InitializeComponent();
-            nombreUsuarioLogueado = nombreUsuario;
-            try
+            nombreUsuarioLogueado = !string.IsNullOrWhiteSpace(nombreUsuario) ? nombreUsuario : SesionActual.LoginUsuario;
+            if (SesionActual.IdUsuario > 0 && !string.IsNullOrWhiteSpace(SesionActual.LoginUsuario) &&
+                (string.Equals(nombreUsuarioLogueado, SesionActual.LoginUsuario, StringComparison.OrdinalIgnoreCase) ||
+                 string.Equals(nombreUsuarioLogueado, SesionActual.NombreCompleto, StringComparison.OrdinalIgnoreCase)))
             {
-                var u = new CN_Usuario().Listar().FirstOrDefault(x => x.User != null && x.User.Equals(nombreUsuarioLogueado, StringComparison.OrdinalIgnoreCase));
-                if (u != null)
-                {
-                    idUsuarioLogueado = u.IdUsuario;
-                }
+                idUsuarioLogueado = SesionActual.IdUsuario;
             }
-            catch
+            else
             {
-                idUsuarioLogueado = 1;
+                try
+                {
+                    var u = new CN_Usuario().Listar().FirstOrDefault(x =>
+                        (x.User != null && x.User.Equals(nombreUsuarioLogueado, StringComparison.OrdinalIgnoreCase)) ||
+                        ($"{x.NombreUsuario} {x.ApellidoUsuario}".Trim().Equals(nombreUsuarioLogueado, StringComparison.OrdinalIgnoreCase)) ||
+                        (x.NombreUsuario != null && x.NombreUsuario.Equals(nombreUsuarioLogueado, StringComparison.OrdinalIgnoreCase))
+                    );
+                    if (u != null)
+                    {
+                        idUsuarioLogueado = u.IdUsuario;
+                    }
+                    else
+                    {
+                        idUsuarioLogueado = SesionActual.IdUsuario > 0 ? SesionActual.IdUsuario : 1;
+                    }
+                }
+                catch
+                {
+                    idUsuarioLogueado = SesionActual.IdUsuario > 0 ? SesionActual.IdUsuario : 1;
+                }
             }
         }
 
@@ -99,7 +116,7 @@ namespace ProyectoIntegrador.Formularios.Compras
 
         private void BAgregarOrden_Click(object sender, EventArgs e)
         {
-            using (FormOrdenCompra formNueva = new FormOrdenCompra(nombreUsuarioLogueado))
+            using (FormOrdenCompra formNueva = new FormOrdenCompra(nombreUsuarioLogueado, idUsuarioLogueado))
             {
                 if (formNueva.ShowDialog() == DialogResult.OK)
                 {

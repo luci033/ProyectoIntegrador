@@ -10,7 +10,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
         public FormOpcionesVenta(string nombreUsuario)
         {
             InitializeComponent();
-            usuarioLogueado = nombreUsuario;
+            usuarioLogueado = !string.IsNullOrWhiteSpace(nombreUsuario) ? nombreUsuario : CapaEntidades.SesionActual.LoginUsuario;
         }
 
         // Constructor vacío de respaldo por las dudas

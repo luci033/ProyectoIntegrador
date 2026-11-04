@@ -50,7 +50,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
 
                 foreach (DataRow row in dtClientes.Rows)
                 {
-                    DGClientes.Rows.Add(
+                    int idxFila = DGClientes.Rows.Add(
                         row["IdCliente"].ToString(),
                         numeroFila,
                         row["Nombre"].ToString(),
@@ -62,6 +62,11 @@ namespace ProyectoIntegrador.Formularios.Clientes
                         "Ver..",
                         "Modificar"
                         );
+
+                    if (row.Table.Columns.Contains("IdCondicionIva") && row["IdCondicionIva"] != DBNull.Value)
+                    {
+                        DGClientes.Rows[idxFila].Tag = Convert.ToInt32(row["IdCondicionIva"]);
+                    }
                     numeroFila++;
                 }
             }
@@ -99,9 +104,25 @@ namespace ProyectoIntegrador.Formularios.Clientes
             }
         }
 
+        private List<string> ObtenerDnisCargados()
+        {
+            List<string> lista = new List<string>();
+            foreach (DataGridViewRow fila in DGClientes.Rows)
+            {
+                if (fila.IsNewRow) continue;
+                string dni = fila.Cells[4].Value?.ToString()?.Trim();
+                if (!string.IsNullOrEmpty(dni) && !lista.Contains(dni))
+                {
+                    lista.Add(dni);
+                }
+            }
+            return lista;
+        }
+
         private void BNuevoCliente_Click(object sender, EventArgs e)
         {
             FormClientesABM modalCliente = new FormClientesABM();
+            modalCliente.DnisExistentes = ObtenerDnisCargados();
 
             if (modalCliente.ShowDialog() == DialogResult.OK)
             {
@@ -135,9 +156,11 @@ namespace ProyectoIntegrador.Formularios.Clientes
                 if (string.IsNullOrWhiteSpace(dni)) return;
 
                 FormClientesABM modalABM = new FormClientesABM();
+                modalABM.DnisExistentes = ObtenerDnisCargados();
 
+                int idCond = (DGClientes.Rows[e.RowIndex].Tag != null) ? Convert.ToInt32(DGClientes.Rows[e.RowIndex].Tag) : 0;
                 // se le pasa el ID y los datos al formulario en modo edición
-                modalABM.ConfigurarModoEdicion(idClienteSeleccionado, nombre, apellido, dni, telefono, correo, condicionIVA);
+                modalABM.ConfigurarModoEdicion(idClienteSeleccionado, nombre, apellido, dni, telefono, correo, condicionIVA, idCond);
 
                 if (modalABM.ShowDialog() == DialogResult.OK)
                 {
@@ -168,7 +191,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
                     string nombreCompleto = nombre + " " + apellido;
 
 
-                    formDetalle.CargarDatosCliente(nombre, correo, condicionIVA, dni);
+                    formDetalle.CargarDatosCliente(nombreCompleto, correo, condicionIVA, dni);
 
                     // 5. Mostramos la pantalla
                     formDetalle.ShowDialog();
@@ -205,8 +228,9 @@ namespace ProyectoIntegrador.Formularios.Clientes
             string correo = Convert.ToString(DGClientes.Rows[e.RowIndex].Cells[6].Value);
             string condicionIVA = Convert.ToString(DGClientes.Rows[e.RowIndex].Cells[7].Value);
 
+            int idCond = (DGClientes.Rows[e.RowIndex].Tag != null) ? Convert.ToInt32(DGClientes.Rows[e.RowIndex].Tag) : 0;
             FormClientesABM modalDetalle = new FormClientesABM();
-            modalDetalle.ConfigurarModoDetalle(nombre, apellido, dni, telefono, correo, condicionIVA);
+            modalDetalle.ConfigurarModoDetalle(nombre, apellido, dni, telefono, correo, condicionIVA, idCond);
             modalDetalle.ShowDialog();
         }
 

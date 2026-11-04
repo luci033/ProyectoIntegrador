@@ -1,3 +1,5 @@
+using CapaEntidades;
+using CapaNegocio;
 using ProyectoIntegrador.Formularios.Clientes;
 using ProyectoIntegrador.Formularios.Productos;
 using System;
@@ -22,8 +24,17 @@ namespace ProyectoIntegrador.Formularios.Ventas
         public DataGridViewRowCollection ProductosVendidos => dataGridProducto.Rows; // Para leer las cantidades y descontar stock
         public string MetodoPago { get; private set; }
         public string CondicionIVAVenta => TBCondicionIVA.Text;
+        public int IdComprobanteRegistrado { get; private set; } = 0;
 
         private string usuarioLogueado;
+        private int idUsuarioLogueado = 1;
+        private int idClienteSeleccionado = 0;
+
+        private class ItemVentaTag
+        {
+            public int IdProducto { get; set; }
+            public int StockDisponible { get; set; }
+        }
 
         public FormRegistroVentas(string nombreUsuario)
         {
@@ -36,7 +47,6 @@ namespace ProyectoIntegrador.Formularios.Ventas
             TBVendedor.ReadOnly = true;
         }
 
-        
         // Constructor vacío para que el método genérico no rompa
         public FormRegistroVentas() : this("Operador Venta")
         {
@@ -62,7 +72,54 @@ namespace ProyectoIntegrador.Formularios.Ventas
             EstiloUI.AplicarEstiloTextBox(TBTotal);
             EstiloUI.AplicarEstiloGrilla(dataGridProducto);
 
-            TBNroVenta.Text = (FormVentas.HistorialVentas.Count + 1).ToString("D5");
+            // Obtener ID del usuario logueado en la BD
+            if (SesionActual.IdUsuario > 0)
+            {
+                idUsuarioLogueado = SesionActual.IdUsuario;
+            }
+            else
+            {
+                try
+                {
+                    var usuarioObj = new CN_Usuario().Listar().FirstOrDefault(u =>
+                        (u.User != null && u.User.Equals(usuarioLogueado, StringComparison.OrdinalIgnoreCase)) ||
+                        ($"{u.NombreUsuario} {u.ApellidoUsuario}".Trim().Equals(usuarioLogueado, StringComparison.OrdinalIgnoreCase)));
+                    if (usuarioObj != null)
+                    {
+                        idUsuarioLogueado = usuarioObj.IdUsuario;
+                    }
+                    else
+                    {
+                        idUsuarioLogueado = 1;
+                    }
+                }
+                catch
+                {
+                    idUsuarioLogueado = 1;
+                }
+            }
+
+            // Calcular próximo Nro de Comprobante
+            try
+            {
+                var dtVentas = new CN_Venta().ListarVentas();
+                int proximoId = 1;
+                if (dtVentas != null && dtVentas.Rows.Count > 0)
+                {
+                    int maxId = 0;
+                    foreach (DataRow r in dtVentas.Rows)
+                    {
+                        if (int.TryParse(r["IdComprobante"]?.ToString(), out int idC) && idC > maxId)
+                            maxId = idC;
+                    }
+                    proximoId = maxId + 1;
+                }
+                TBNroVenta.Text = proximoId.ToString("D5");
+            }
+            catch
+            {
+                TBNroVenta.Text = (FormVentas.HistorialVentas.Count + 1).ToString("D5");
+            }
 
             TBFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
 
@@ -84,13 +141,20 @@ namespace ProyectoIntegrador.Formularios.Ventas
         {
             if (e.ColumnIndex == 5) // Columna Cantidad
             {
-                string valor = e.FormattedValue.ToString();
+                string valor = e.FormattedValue?.ToString();
                 if (string.IsNullOrWhiteSpace(valor)) return;
 
-                // Recuperamos el stock que escondimos en el Tag
-                int stockDisponible = Convert.ToInt32(dataGridProducto.Rows[e.RowIndex].Tag ?? 0);
+                int stockDisponible = 0;
+                if (dataGridProducto.Rows[e.RowIndex].Tag is ItemVentaTag tag)
+                {
+                    stockDisponible = tag.StockDisponible;
+                }
+                else
+                {
+                    stockDisponible = Convert.ToInt32(dataGridProducto.Rows[e.RowIndex].Tag ?? 0);
+                }
 
-                if (!int.TryParse(valor, out int cantidad) || cantidad <= 0 || cantidad > stockDisponible)
+                if (!int.TryParse(valor, out int cantidad) || cantidad <= 0 || (stockDisponible > 0 && cantidad > stockDisponible))
                 {
                     MessageBox.Show($"La cantidad debe ser mayor a cero y no superar el stock disponible ({stockDisponible}).", "Cantidad Inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     dataGridProducto.CancelEdit(); // Deshace el cambio sin trabar la pantalla
@@ -129,14 +193,27 @@ namespace ProyectoIntegrador.Formularios.Ventas
 
         private void label1_Click(object sender, EventArgs e)
         {
-
         }
+
         private void BCobrar_Click(object sender, EventArgs e)
         {
             // Validar que haya cliente y productos
             if (string.IsNullOrWhiteSpace(TBCliente.Text) || dataGridProducto.Rows.Count == 0)
             {
-                MessageBox.Show("Faltan datos del cliente o agregar productos.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Faltan datos del cliente o agregar productos a la venta.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (idClienteSeleccionado <= 0)
+            {
+                MessageBox.Show("Por favor, seleccione un cliente de la base de datos o registre uno nuevo.", "Cliente Requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var filasValidas = dataGridProducto.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).ToList();
+            if (filasValidas.Count == 0)
+            {
+                MessageBox.Show("Debe ingresar al menos un producto a la venta.", "Sin Productos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -146,10 +223,71 @@ namespace ProyectoIntegrador.Formularios.Ventas
 
                 if (resultado == DialogResult.OK)
                 {
-                    this.MetodoPago = formCobro.MetodoPagoSeleccionado; // Captura el método de pago
-                    MessageBox.Show("Venta registrada con éxito. acá se actualiza el stock", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
+                    this.MetodoPago = formCobro.MetodoPagoSeleccionado;
+
+                    CN_Venta negocioVenta = new CN_Venta();
+                    int idMedioPago = negocioVenta.DeterminarMedioPago(formCobro.MetodoPagoSeleccionado);
+                    int idTipoComprobante = negocioVenta.DeterminarTipoComprobante(TBCondicionIVA.Text);
+
+                    Comprobante venta = new Comprobante
+                    {
+                        FechaComprobante = DateTime.Now,
+                        IdMedioPago = idMedioPago,
+                        IdTipoComprobante = idTipoComprobante,
+                        IdCliente = idClienteSeleccionado,
+                        IdUsuario = idUsuarioLogueado,
+                        DescripcionMedioPago = formCobro.MetodoPagoSeleccionado,
+                        NombreCliente = TBCliente.Text,
+                        CondicionIvaCliente = TBCondicionIVA.Text
+                    };
+
+                    foreach (DataGridViewRow fila in filasValidas)
+                    {
+                        int idProd = 0;
+                        if (fila.Tag is ItemVentaTag tag)
+                        {
+                            idProd = tag.IdProducto;
+                        }
+                        else if (int.TryParse(fila.Cells[0].Value?.ToString(), out int parsedId))
+                        {
+                            idProd = parsedId;
+                        }
+
+                        int cantidad = Convert.ToInt32(fila.Cells[5].Value ?? 1);
+                        decimal precio = Convert.ToDecimal(fila.Cells[4].Value ?? 0);
+
+                        venta.Detalles.Add(new DetalleComprobante
+                        {
+                            IdProducto = idProd,
+                            NombreProducto = fila.Cells[1].Value?.ToString() ?? "",
+                            Cantidad = cantidad,
+                            PrecioUnitario = precio
+                        });
+                    }
+
+                    if (negocioVenta.RegistrarVenta(venta, out int idComprobanteGenerado, out string mensaje))
+                    {
+                        IdComprobanteRegistrado = idComprobanteGenerado;
+                        TBNroVenta.Text = idComprobanteGenerado.ToString("D5");
+
+                        MessageBox.Show($"¡Venta registrada con éxito en el sistema!\nComprobante N°: #{idComprobanteGenerado:D5}\nEl stock fue actualizado correctamente.", "Venta Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        try
+                        {
+                            using (FDetalleVenta comprobante = new FDetalleVenta(idComprobanteGenerado))
+                            {
+                                comprobante.ShowDialog();
+                            }
+                        }
+                        catch { }
+
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show(mensaje, "Error al registrar la venta", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else if (resultado == DialogResult.Abort)
                 {
@@ -157,11 +295,8 @@ namespace ProyectoIntegrador.Formularios.Ventas
                     this.DialogResult = DialogResult.Cancel;
                     this.Close();
                 }
-                // Si el resultado es Cancel (Botón Volver), no hace nada y vuelve a la grilla
             }
         }
-
-
 
         private void ActualizarTotalGeneral()
         {
@@ -181,12 +316,10 @@ namespace ProyectoIntegrador.Formularios.Ventas
 
         private void AgregarOActualizarProducto(int idProducto, string nombreJoya, decimal precioUnitario, int cantidadAAgregar)
         {
-
         }
 
         private void BAgregarProducto_Click(object sender, EventArgs e)
         {
-            
         }
 
         private void BCancelar_Click(object sender, EventArgs e)
@@ -202,12 +335,10 @@ namespace ProyectoIntegrador.Formularios.Ventas
 
         private void label1_Click_1(object sender, EventArgs e)
         {
-
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void BBuscarCliente_Click(object sender, EventArgs e)
@@ -216,7 +347,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             {
                 if (formBuscar.ShowDialog() == DialogResult.OK)
                 {
-                    // int idClienteBD = formBuscar.IdCliente; // RESERVADO para la BD
+                    idClienteSeleccionado = formBuscar.IdClienteSeleccionado;
                     TBCliente.Text = formBuscar.NombreCompleto;
                     TBCondicionIVA.Text = formBuscar.CondicionIVA;
                 }
@@ -227,14 +358,26 @@ namespace ProyectoIntegrador.Formularios.Ventas
         {
             using (FormBuscarProducto formProducto = new FormBuscarProducto())
             {
+                formProducto.SoloConStock = true;
                 formProducto.ConfigurarParaVentas();
 
                 if (formProducto.ShowDialog() == DialogResult.OK)
                 {
-                    // 1. Verificamos si el producto ya existe en la grilla buscando por su Código
+                    if (formProducto.Stock <= 0)
+                    {
+                        MessageBox.Show($"El producto '{formProducto.Nombre}' no cuenta con stock disponible actualmente.", "Sin Stock", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    // 1. Verificamos si el producto ya existe en la grilla buscando por su Código o ID
                     foreach (DataGridViewRow fila in dataGridProducto.Rows)
                     {
-                        if (fila.Cells[0].Value != null && fila.Cells[0].Value.ToString() == formProducto.Codigo)
+                        if (fila.IsNewRow) continue;
+                        int prodIdFila = 0;
+                        if (fila.Tag is ItemVentaTag t) prodIdFila = t.IdProducto;
+
+                        if ((fila.Cells[0].Value != null && fila.Cells[0].Value.ToString() == formProducto.Codigo) ||
+                            (prodIdFila > 0 && prodIdFila == formProducto.IdProducto))
                         {
                             int cantidadActual = Convert.ToInt32(fila.Cells[5].Value ?? 0);
 
@@ -263,7 +406,11 @@ namespace ProyectoIntegrador.Formularios.Ventas
                         formProducto.PrecioVenta
                     );
 
-                    dataGridProducto.Rows[indiceFila].Tag = formProducto.Stock;
+                    dataGridProducto.Rows[indiceFila].Tag = new ItemVentaTag
+                    {
+                        IdProducto = formProducto.IdProducto,
+                        StockDisponible = formProducto.Stock
+                    };
                     ActualizarTotalGeneral();
                 }
             }
@@ -271,45 +418,48 @@ namespace ProyectoIntegrador.Formularios.Ventas
 
         private void BNuevoCliente_Click(object sender, EventArgs e)
         {
-            //FormClientes.InicializarClientesSiEsNecesario();
-
             using (FormClientesABM modalCliente = new FormClientesABM())
             {
-                
-                // Pasamos la lista de DNIs ya registrados en el sistema
-               //modalCliente.DnisExistentes = FormClientes.ListaClientes.Select(c => c.DNI).ToList();
-
-                if (modalCliente.ShowDialog() == DialogResult.OK && modalCliente.ClienteCreado != null)
+                if (modalCliente.ShowDialog() == DialogResult.OK)
                 {
-                /*
-                    // Validación preventiva de unicidad de DNI
-                    string dniNuevo = modalCliente.ClienteCreado.DNI?.Trim();
-                    if (!string.IsNullOrEmpty(dniNuevo) && FormClientes.ListaClientes.Any(c => c.DNI != null && c.DNI.Trim() == dniNuevo))
+                    idClienteSeleccionado = modalCliente.IdClienteGenerado;
+                    if (modalCliente.ClienteRegistrado != null)
                     {
-                        MessageBox.Show("Ese DNI ya se encuentra registrado en el sistema.", "DNI Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
+                        string nombreCompleto = $"{modalCliente.ClienteRegistrado.Nombre} {modalCliente.ClienteRegistrado.Apellido}".Trim();
+                        TBCliente.Text = nombreCompleto;
+                        TBCondicionIVA.Text = modalCliente.ClienteCreado?.CondicionIVA ?? "Consumidor Final";
                     }
-
-                    // Se agrega a los datos estáticos compartidos de clientes
-                    FormClientes.ListaClientes.Add(modalCliente.ClienteCreado);
-                    */
-
-                // Se cargan automáticamente los datos en los TextBox correspondientes
-                string nombreCompleto = $"{modalCliente.ClienteCreado.Nombre} {modalCliente.ClienteCreado.Apellido}".Trim();
-                    TBCliente.Text = nombreCompleto;
-                    TBCondicionIVA.Text = modalCliente.ClienteCreado.CondicionIVA;
+                    else if (modalCliente.ClienteCreado != null)
+                    {
+                        string nombreCompleto = $"{modalCliente.ClienteCreado.Nombre} {modalCliente.ClienteCreado.Apellido}".Trim();
+                        TBCliente.Text = nombreCompleto;
+                        TBCondicionIVA.Text = modalCliente.ClienteCreado.CondicionIVA;
+                    }
                 }
             }
         }
-        
+
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            base.OnFormClosed(e);
+
+            if (this.MdiParent != null && !this.MdiParent.IsDisposed)
+            {
+                Form formPadre = this.MdiParent;
+                bool yaExisteOpciones = formPadre.MdiChildren.Any(h => h is FormOpcionesVenta && h.Visible);
+                if (!yaExisteOpciones)
+                {
+                    string user = !string.IsNullOrWhiteSpace(usuarioLogueado) ? usuarioLogueado : SesionActual.LoginUsuario;
+                    FormOpcionesVenta opciones = new FormOpcionesVenta(user);
+                    opciones.MdiParent = formPadre;
+                    opciones.WindowState = FormWindowState.Maximized;
+                    opciones.Show();
+                }
+            }
+        }
 
         private void TBVendedor_TextChanged(object sender, EventArgs e)
         {
-
         }
     }
 }
-
-    
-    
-

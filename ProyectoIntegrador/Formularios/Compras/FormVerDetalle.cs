@@ -57,7 +57,7 @@ namespace ProyectoIntegrador.Formularios.Compras
             EstiloUI.AplicarEstiloBoton(BCerrar);
             EstiloUI.CentrarControl(panelCard, this);
 
-            if (idCompra > 0 && (string.IsNullOrWhiteSpace(usuarioEmisor) || string.IsNullOrWhiteSpace(usuarioReceptor)))
+            if (idCompra > 0)
             {
                 try
                 {
@@ -65,10 +65,14 @@ namespace ProyectoIntegrador.Formularios.Compras
                     if (dtCab.Rows.Count > 0)
                     {
                         DataRow rowCab = dtCab.Rows[0];
-                        if (string.IsNullOrWhiteSpace(usuarioEmisor))
-                            usuarioEmisor = rowCab["UsuarioEmisor"] != DBNull.Value ? rowCab["UsuarioEmisor"].ToString() : "";
-                        if (string.IsNullOrWhiteSpace(usuarioReceptor))
-                            usuarioReceptor = rowCab["UsuarioReceptor"] != DBNull.Value ? rowCab["UsuarioReceptor"].ToString() : "Pendiente";
+                        if (rowCab.Table.Columns.Contains("UsuarioEmisor") && rowCab["UsuarioEmisor"] != DBNull.Value)
+                            usuarioEmisor = rowCab["UsuarioEmisor"].ToString();
+                        if (rowCab.Table.Columns.Contains("UsuarioReceptor") && rowCab["UsuarioReceptor"] != DBNull.Value)
+                            usuarioReceptor = rowCab["UsuarioReceptor"].ToString();
+                        if (rowCab.Table.Columns.Contains("FechaRecepcion") && rowCab["FechaRecepcion"] != DBNull.Value)
+                            fechaRecepcion = Convert.ToDateTime(rowCab["FechaRecepcion"]).ToString("dd/MM/yyyy");
+                        if (rowCab.Table.Columns.Contains("Observacion") && rowCab["Observacion"] != DBNull.Value)
+                            observacion = rowCab["Observacion"].ToString();
                     }
                 }
                 catch { }

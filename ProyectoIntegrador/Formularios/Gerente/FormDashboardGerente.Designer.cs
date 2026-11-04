@@ -66,8 +66,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.DGProductosCriticos = new System.Windows.Forms.DataGridView();
             this.cardAcciones = new System.Windows.Forms.Panel();
             this.LTituloAcciones = new System.Windows.Forms.Label();
-            this.BNuevaVenta = new System.Windows.Forms.Button();
-            this.BIngresoStock = new System.Windows.Forms.Button();
+            this.BVerHistorial = new System.Windows.Forms.Button();
             this.BDevoluciones = new System.Windows.Forms.Button();
             this.BVerInformes = new System.Windows.Forms.Button();
             this.panelTopHeader.SuspendLayout();
@@ -475,10 +474,9 @@ namespace ProyectoIntegrador.Formularios.Gerente
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cardAcciones.BackColor = System.Drawing.Color.White;
             this.cardAcciones.Controls.Add(this.LTituloAcciones);
-            this.cardAcciones.Controls.Add(this.BNuevaVenta);
-            this.cardAcciones.Controls.Add(this.BIngresoStock);
             this.cardAcciones.Controls.Add(this.BDevoluciones);
             this.cardAcciones.Controls.Add(this.BVerInformes);
+            this.cardAcciones.Controls.Add(this.BVerHistorial);
             this.cardAcciones.Location = new System.Drawing.Point(870, 0);
             this.cardAcciones.Name = "cardAcciones";
             this.cardAcciones.Size = new System.Drawing.Size(230, 240);
@@ -494,43 +492,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.LTituloAcciones.Size = new System.Drawing.Size(135, 17);
             this.LTituloAcciones.TabIndex = 0;
             this.LTituloAcciones.Text = "Acciones Rápidas";
-            // 
-            // BNuevaVenta
-            // 
-            this.BNuevaVenta.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.BNuevaVenta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.BNuevaVenta.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BNuevaVenta.FlatAppearance.BorderSize = 0;
-            this.BNuevaVenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BNuevaVenta.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BNuevaVenta.ForeColor = System.Drawing.Color.White;
-            this.BNuevaVenta.Location = new System.Drawing.Point(14, 38);
-            this.BNuevaVenta.Name = "BNuevaVenta";
-            this.BNuevaVenta.Size = new System.Drawing.Size(202, 38);
-            this.BNuevaVenta.TabIndex = 1;
-            this.BNuevaVenta.Text = "+ Nueva Venta";
-            this.BNuevaVenta.UseVisualStyleBackColor = false;
-            this.BNuevaVenta.Click += new System.EventHandler(this.BNuevaVenta_Click);
-            // 
-            // BIngresoStock
-            // 
-            this.BIngresoStock.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.BIngresoStock.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.BIngresoStock.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BIngresoStock.FlatAppearance.BorderSize = 0;
-            this.BIngresoStock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BIngresoStock.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BIngresoStock.ForeColor = System.Drawing.Color.White;
-            this.BIngresoStock.Location = new System.Drawing.Point(14, 82);
-            this.BIngresoStock.Name = "BIngresoStock";
-            this.BIngresoStock.Size = new System.Drawing.Size(202, 38);
-            this.BIngresoStock.TabIndex = 2;
-            this.BIngresoStock.Text = "⚖ Ajuste de Stock";
-            this.BIngresoStock.UseVisualStyleBackColor = false;
-            this.BIngresoStock.Click += new System.EventHandler(this.BIngresoStock_Click);
-            // 
+                                    // 
             // BDevoluciones
             // 
             this.BDevoluciones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -560,13 +522,31 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.BVerInformes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BVerInformes.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BVerInformes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.BVerInformes.Location = new System.Drawing.Point(14, 126);
+            this.BVerInformes.Location = new System.Drawing.Point(14, 38);
             this.BVerInformes.Name = "BVerInformes";
             this.BVerInformes.Size = new System.Drawing.Size(202, 38);
             this.BVerInformes.TabIndex = 4;
             this.BVerInformes.Text = "📊 Ver Informes";
             this.BVerInformes.UseVisualStyleBackColor = false;
             this.BVerInformes.Click += new System.EventHandler(this.BVerInformes_Click);
+            // 
+            // BVerHistorial
+            // 
+            this.BVerHistorial.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BVerHistorial.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.BVerHistorial.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BVerHistorial.FlatAppearance.BorderSize = 0;
+            this.BVerHistorial.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BVerHistorial.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BVerHistorial.ForeColor = System.Drawing.Color.White;
+            this.BVerHistorial.Location = new System.Drawing.Point(14, 84);
+            this.BVerHistorial.Name = "BVerHistorial";
+            this.BVerHistorial.Size = new System.Drawing.Size(202, 38);
+            this.BVerHistorial.TabIndex = 2;
+            this.BVerHistorial.Text = "💳 Historial de Ventas";
+            this.BVerHistorial.UseVisualStyleBackColor = false;
+            this.BVerHistorial.Click += new System.EventHandler(this.BVerHistorial_Click);
             // 
             // FormDashboardGerente
             // 
@@ -647,8 +627,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
         private System.Windows.Forms.DataGridView DGProductosCriticos;
         private System.Windows.Forms.Panel cardAcciones;
         private System.Windows.Forms.Label LTituloAcciones;
-        private System.Windows.Forms.Button BNuevaVenta;
-        private System.Windows.Forms.Button BIngresoStock;
+        private System.Windows.Forms.Button BVerHistorial;
         private System.Windows.Forms.Button BDevoluciones;
         private System.Windows.Forms.Button BVerInformes;
     }

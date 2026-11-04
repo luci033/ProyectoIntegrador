@@ -1,5 +1,4 @@
 using ProyectoIntegrador.Formularios.Gerente;
-using ProyectoIntegrador.Formularios.Inventario;
 using ProyectoIntegrador.Formularios.Ventas;
 using System;
 using System.Drawing;
@@ -25,7 +24,6 @@ namespace ProyectoIntegrador.Formularios.Principal
 
             EstiloUI.AplicarBordesRedondeados(BDashboard, 8);
             EstiloUI.AplicarBordesRedondeados(BInformes, 8);
-            EstiloUI.AplicarBordesRedondeados(BAjusteStock, 8);
             EstiloUI.AplicarBordesRedondeados(BHistorialVentas, 8);
             EstiloUI.AplicarBordesRedondeados(BCerrarSesion, 8);
         }
@@ -53,7 +51,7 @@ namespace ProyectoIntegrador.Formularios.Principal
             Color colorBotonActivo = Color.FromArgb(85, 22, 32);
             Color colorTextoActivo = Color.White;
 
-            Button[] botones = { BDashboard, BInformes, BAjusteStock, BHistorialVentas };
+            Button[] botones = { BDashboard, BInformes, BHistorialVentas };
             foreach (Button b in botones)
             {
                 b.BackColor = colorBotonNormal;
@@ -120,26 +118,7 @@ namespace ProyectoIntegrador.Formularios.Principal
             AbrirFormulario<FormInformesEstadisticos>(BInformes);
         }
 
-        private void BAjusteStock_Click(object sender, EventArgs e)
-        {
-            ResaltarBotonActivo(BAjusteStock);
-
-            // Verificamos si ya está abierto para traerlo al frente
-            Form formAbierto = this.MdiChildren.FirstOrDefault(x => x is FormAjusteStock);
-            if (formAbierto != null)
-            {
-                formAbierto.BringToFront();
-                return;
-            }
-
-            CerrarFormulariosHijos();
-
-            // Abrimos FormAjusteStock pasándole el usuario logueado
-            FormAjusteStock nuevoForm = new FormAjusteStock(nombreUsuarioLogueado);
-            nuevoForm.MdiParent = this;
-            nuevoForm.WindowState = FormWindowState.Maximized;
-            nuevoForm.Show();
-        }
+        
 
         private void BVentas_Click(object sender, EventArgs e)
         {
