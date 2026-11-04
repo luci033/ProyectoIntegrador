@@ -62,9 +62,20 @@ namespace CapaNegocio
             return objProveedor.EditarProveedor(obj, out mensaje);
         }
 
-        public List<Proveedor> ListarProveedores()
+        public bool CambiarEstado(int idProveedor, bool activo, out string mensaje)
         {
-            return objProveedor.ListarProveedores();
+            mensaje = string.Empty;
+            if (idProveedor <= 0)
+            {
+                mensaje = "El proveedor seleccionado no es válido.";
+                return false;
+            }
+            return objProveedor.CambiarEstado(idProveedor, activo, out mensaje);
+        }
+
+        public List<Proveedor> ListarProveedores(bool soloActivos = false)
+        {
+            return objProveedor.ListarProveedores(soloActivos);
         }
     }
 }

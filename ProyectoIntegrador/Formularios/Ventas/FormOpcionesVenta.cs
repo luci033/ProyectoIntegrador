@@ -83,7 +83,20 @@ namespace ProyectoIntegrador.Formularios.Ventas
 
         private void BHistorialVenta_Click(object sender, EventArgs e)
         {
-            AbrirFormularioDesdeOpciones<FHistorialVentas>();
+            Form formPadre = this.MdiParent;
+
+            if (formPadre != null)
+            {
+                foreach (Form hijo in formPadre.MdiChildren.ToList())
+                {
+                    hijo.Close();
+                }
+
+                FHistorialVentas nuevoForm = new FHistorialVentas(usuarioLogueado);
+                nuevoForm.MdiParent = formPadre;
+                nuevoForm.WindowState = FormWindowState.Maximized;
+                nuevoForm.Show();
+            }
         }
     }
 }

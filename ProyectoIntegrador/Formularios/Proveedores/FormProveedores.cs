@@ -35,7 +35,7 @@ namespace ProyectoIntegrador.Formularios.Proveedores
             DGProveedores.Rows.Clear();
             try
             {
-                List<Proveedor> lista = new CN_Proveedor().ListarProveedores();
+                List<Proveedor> lista = new CN_Proveedor().ListarProveedores(false);
                 foreach (var prov in lista)
                 {
                     int indice = DGProveedores.Rows.Add(
@@ -45,11 +45,22 @@ namespace ProyectoIntegrador.Formularios.Proveedores
                         prov.Telefono,
                         prov.CorreoElectronico,
                         "Editar",
-                        "Desactivar"
+                        prov.Activo ? "Desactivar" : "Activar"
                     );
 
-                    DGProveedores.Rows[indice].Cells[5].Style.BackColor = Color.LightGoldenrodYellow;
-                    DGProveedores.Rows[indice].Cells[6].Style.BackColor = Color.LightCoral;
+                    if (prov.Activo)
+                    {
+                        DGProveedores.Rows[indice].Cells[5].Style.BackColor = Color.LightGoldenrodYellow;
+                        DGProveedores.Rows[indice].Cells[6].Style.BackColor = Color.LightCoral;
+                    }
+                    else
+                    {
+                        DGProveedores.Rows[indice].Cells[5].Style.BackColor = Color.LightGray;
+                        DGProveedores.Rows[indice].Cells[6].Style.BackColor = Color.LightGreen;
+                        DGProveedores.Rows[indice].Cells[6].Style.ForeColor = Color.Black;
+                        DGProveedores.Rows[indice].DefaultCellStyle.BackColor = Color.WhiteSmoke;
+                        DGProveedores.Rows[indice].DefaultCellStyle.ForeColor = Color.DarkGray;
+                    }
                 }
             }
             catch (Exception ex)
@@ -105,6 +116,7 @@ namespace ProyectoIntegrador.Formularios.Proveedores
             // --- BOTÓN DESACTIVAR (Índice 6) ---
             else if (e.ColumnIndex == 6)
             {
+                int idProveedor = Convert.ToInt32(fila.Cells[0].Value ?? 0);
                 DataGridViewCell celdaDesactivar = fila.Cells[6];
                 DataGridViewCell celdaModificar = fila.Cells[5];
                 string accion = celdaDesactivar.Value?.ToString() ?? "Desactivar";
@@ -113,7 +125,10 @@ namespace ProyectoIntegrador.Formularios.Proveedores
 
                 if (confirmacion == DialogResult.Yes)
                 {
-                    if (accion == "Desactivar")
+                    bool nuevoEstado = accion != "Desactivar";
+                    new CN_Proveedor().CambiarEstado(idProveedor, nuevoEstado, out _);
+
+                    if (!nuevoEstado)
                     {
                         celdaDesactivar.Value = "Activar";
                         celdaDesactivar.Style.BackColor = Color.LightGreen;

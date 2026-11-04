@@ -1,5 +1,6 @@
 using CapaEntidades;
 using CapaNegocio;
+using ProyectoIntegrador.Formularios.Principal;
 using ProyectoIntegrador.ModelosSimulados;
 using System;
 using System.Collections.Generic;
@@ -18,10 +19,62 @@ namespace ProyectoIntegrador.Formularios.Ventas
         private List<VentaHistorica> listaVentasCompleta = new List<VentaHistorica>();
         private List<VentaHistorica> listaVentasActuales = new List<VentaHistorica>();
         private bool inicializando = true;
+        private string usuarioLogueado;
 
         public FHistorialVentas()
         {
             InitializeComponent();
+        }
+
+        public FHistorialVentas(string nombreUsuario) : this()
+        {
+            usuarioLogueado = nombreUsuario;
+        }
+
+        private bool EsRolVendedor()
+        {
+            if (this.MdiParent is FormPrincipalAdministrador || this.MdiParent is FormPrincipalGerente)
+                return false;
+
+            if (this.MdiParent is FormPrincipalVendedor)
+                return true;
+
+            if (string.Equals(SesionActual.Rol, "Administrador", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(SesionActual.Rol, "Gerente", StringComparison.OrdinalIgnoreCase))
+                return false;
+
+            return string.Equals(SesionActual.Rol, "Vendedor", StringComparison.OrdinalIgnoreCase);
+        }
+
+        private int? ObtenerIdVendedorFiltro()
+        {
+            if (!EsRolVendedor())
+                return null;
+
+            if (SesionActual.UsuarioLogueado != null && SesionActual.IdUsuario > 0)
+            {
+                return SesionActual.IdUsuario;
+            }
+
+            string loginBuscado = !string.IsNullOrWhiteSpace(usuarioLogueado)
+                ? usuarioLogueado
+                : SesionActual.LoginUsuario;
+
+            if (!string.IsNullOrWhiteSpace(loginBuscado))
+            {
+                try
+                {
+                    var usuarioObj = new CN_Usuario().Listar().FirstOrDefault(u =>
+                        (u.User != null && u.User.Equals(loginBuscado, StringComparison.OrdinalIgnoreCase)) ||
+                        ($"{u.NombreUsuario} {u.ApellidoUsuario}".Trim().Equals(loginBuscado, StringComparison.OrdinalIgnoreCase)));
+
+                    if (usuarioObj != null)
+                        return usuarioObj.IdUsuario;
+                }
+                catch { }
+            }
+
+            return SesionActual.IdUsuario;
         }
 
         private void FHistorialVentas_Load(object sender, EventArgs e)
@@ -61,7 +114,10 @@ namespace ProyectoIntegrador.Formularios.Ventas
             // Configuración de combos de búsqueda
             cmbBuscar.Items.Clear();
             cmbBuscar.Items.Add("Nro. Venta");
-            cmbBuscar.Items.Add("Vendedor");
+            if (!EsRolVendedor())
+            {
+                cmbBuscar.Items.Add("Vendedor");
+            }
             cmbBuscar.Items.Add("Cliente");
             cmbBuscar.SelectedIndex = 0;
 
@@ -106,11 +162,15 @@ namespace ProyectoIntegrador.Formularios.Ventas
         private void CargarDatosDesdeMemoria()
         {
             listaVentasCompleta = new List<VentaHistorica>();
+            bool consultaExitosa = false;
+            int? idVendedorFiltro = ObtenerIdVendedorFiltro();
+
             try
             {
-                DataTable dtVentas = new CN_Venta().ListarVentas();
+                DataTable dtVentas = new CN_Venta().ListarVentas(null, null, idVendedorFiltro);
                 if (dtVentas != null)
                 {
+                    consultaExitosa = true;
                     foreach (DataRow r in dtVentas.Rows)
                     {
                         listaVentasCompleta.Add(new VentaHistorica
@@ -131,8 +191,8 @@ namespace ProyectoIntegrador.Formularios.Ventas
                 MessageBox.Show("Error al cargar historial desde la base de datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            // Si aún no hay ventas registradas en la base de datos, mostramos las de prueba
-            if (listaVentasCompleta.Count == 0)
+            // Si aún no hay ventas registradas en la base de datos y no es un vendedor con historial vacío en BD, mostramos las de prueba
+            if (!consultaExitosa && listaVentasCompleta.Count == 0 && !EsRolVendedor())
             {
                 var simuladas = EstadisticasSimuladas.ObtenerHistorialVentas();
                 if (simuladas != null && simuladas.Count > 0)
@@ -500,7 +560,9 @@ namespace ProyectoIntegrador.Formularios.Ventas
                 bool yaExisteOpciones = formPadre.MdiChildren.Any(h => h is FormOpcionesVenta && h.Visible);
                 if (!yaExisteOpciones)
                 {
-                    string user = !string.IsNullOrWhiteSpace(SesionActual.LoginUsuario) ? SesionActual.LoginUsuario : "Operador";
+                    string user = !string.IsNullOrWhiteSpace(usuarioLogueado)
+                        ? usuarioLogueado
+                        : (!string.IsNullOrWhiteSpace(SesionActual.LoginUsuario) ? SesionActual.LoginUsuario : "Operador");
                     FormOpcionesVenta opciones = new FormOpcionesVenta(user);
                     opciones.MdiParent = formPadre;
                     opciones.WindowState = FormWindowState.Maximized;

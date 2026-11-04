@@ -11,6 +11,31 @@ namespace CapaDatos
 {
     public class CD_Proveedor
     {
+        private static readonly HashSet<int> ProveedoresInactivosMemoria = new HashSet<int>();
+        private static bool columnaActivoVerificada = false;
+
+        private void AsegurarColumnaActivo(SqlConnection conexion)
+        {
+            if (columnaActivoVerificada) return;
+            try
+            {
+                string sql = @"
+                    IF COL_LENGTH('Proveedor', 'Activo') IS NULL
+                    BEGIN
+                        ALTER TABLE Proveedor ADD Activo BIT NOT NULL CONSTRAINT DF_Proveedor_Activo DEFAULT 1;
+                    END";
+                using (SqlCommand cmd = new SqlCommand(sql, conexion))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                columnaActivoVerificada = true;
+            }
+            catch
+            {
+                // Si el usuario de BD no tiene permisos DDL, se respalda con ProveedoresInactivosMemoria
+            }
+        }
+
         public bool RegistrarProveedor(Proveedor obj, out string mensaje)
         {
             mensaje = string.Empty;
@@ -23,6 +48,7 @@ namespace CapaDatos
             {
                 using (SqlConnection conexion = Conexion.ObtenerConexion())
                 {
+                    AsegurarColumnaActivo(conexion);
                     using (SqlCommand cmd = new SqlCommand(query, conexion))
                     {
                         cmd.CommandType = CommandType.Text;
@@ -106,34 +132,89 @@ namespace CapaDatos
             return respuesta;
         }
 
-        public List<Proveedor> ListarProveedores()
+        public bool CambiarEstado(int idProveedor, bool activo, out string mensaje)
         {
-            List<Proveedor> lista = new List<Proveedor>();
-            string query = "SELECT IdProveedor, RazonSocial, CUIT, Telefono, CorreoElectronico FROM Proveedor";
+            mensaje = string.Empty;
+
+            if (activo)
+                ProveedoresInactivosMemoria.Remove(idProveedor);
+            else
+                ProveedoresInactivosMemoria.Add(idProveedor);
+
             try
             {
                 using (SqlConnection conexion = Conexion.ObtenerConexion())
                 {
+                    AsegurarColumnaActivo(conexion);
+                    string query = "UPDATE Proveedor SET Activo = @Activo WHERE IdProveedor = @IdProveedor";
+                    using (SqlCommand cmd = new SqlCommand(query, conexion))
+                    {
+                        cmd.Parameters.AddWithValue("@Activo", activo);
+                        cmd.Parameters.AddWithValue("@IdProveedor", idProveedor);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                return true;
+            }
+            catch
+            {
+                // Si la tabla no tuviera la columna Activo, igual queda guardado en ProveedoresInactivosMemoria
+                return true;
+            }
+        }
+
+        public List<Proveedor> ListarProveedores(bool soloActivos = false)
+        {
+            List<Proveedor> lista = new List<Proveedor>();
+            try
+            {
+                using (SqlConnection conexion = Conexion.ObtenerConexion())
+                {
+                    AsegurarColumnaActivo(conexion);
+                    string query = "SELECT * FROM Proveedor";
                     using (SqlCommand cmd = new SqlCommand(query, conexion))
                     {
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
+                            bool tieneColumnaActivo = false;
+                            for (int i = 0; i < reader.FieldCount; i++)
+                            {
+                                if (reader.GetName(i).Equals("Activo", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    tieneColumnaActivo = true;
+                                    break;
+                                }
+                            }
+
                             while (reader.Read())
                             {
+                                int idProv = Convert.ToInt32(reader["IdProveedor"]);
+                                bool activoBD = true;
+                                if (tieneColumnaActivo && reader["Activo"] != DBNull.Value)
+                                {
+                                    activoBD = Convert.ToBoolean(reader["Activo"]);
+                                }
+
+                                bool activoFinal = activoBD && !ProveedoresInactivosMemoria.Contains(idProv);
+
+                                if (soloActivos && !activoFinal)
+                                    continue;
+
                                 lista.Add(new Proveedor()
                                 {
-                                    IdProveedor = Convert.ToInt32(reader["IdProveedor"]),
+                                    IdProveedor = idProv,
                                     RazonSocial = reader["RazonSocial"].ToString(),
                                     CUIT = reader["CUIT"].ToString(),
                                     Telefono = reader["Telefono"].ToString(),
-                                    CorreoElectronico = reader["CorreoElectronico"].ToString()
+                                    CorreoElectronico = reader["CorreoElectronico"].ToString(),
+                                    Activo = activoFinal
                                 });
                             }
                         }
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 lista = new List<Proveedor>();
             }

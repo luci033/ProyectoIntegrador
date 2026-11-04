@@ -74,9 +74,9 @@ namespace CapaNegocio
             return objcd_Venta.RegistrarVenta(obj, out idComprobanteGenerado, out mensaje);
         }
 
-        public DataTable ListarVentas(DateTime? fechaDesde = null, DateTime? fechaHasta = null)
+        public DataTable ListarVentas(DateTime? fechaDesde = null, DateTime? fechaHasta = null, int? idUsuario = null)
         {
-            return objcd_Venta.ListarVentas(fechaDesde, fechaHasta);
+            return objcd_Venta.ListarVentas(fechaDesde, fechaHasta, idUsuario);
         }
 
         public DataTable ObtenerDetalleVenta(int idComprobante)

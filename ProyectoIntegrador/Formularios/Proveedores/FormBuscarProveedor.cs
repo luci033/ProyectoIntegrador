@@ -50,20 +50,10 @@ namespace ProyectoIntegrador.Formularios.Compras
             EstiloUI.AplicarEstiloBotonSecundario(BCancelar);
             EstiloUI.AplicarEstiloGrilla(DGProveedores);
 
-            /*DGProveedores.Rows.Clear();
             try
             {
-                var lista = new CN_Proveedor().ListarProveedores();
-                foreach (var prov in lista)
-                {
-                    int idx = DGProveedores.Rows.Add(prov.RazonSocial, prov.CUIT, prov.Telefono, prov.CorreoElectronico);
-                    DGProveedores.Rows[idx].Tag = prov.IdProveedor;
-                }
-            }*/
-            try
-            {
-                // 1. Guardamos la lista completa en la variable global
-                listaProveedores = new CN_Proveedor().ListarProveedores();
+                // Solo listamos proveedores activos para la selección en órdenes de compra
+                listaProveedores = new CN_Proveedor().ListarProveedores(true);
                 CargarGrilla(listaProveedores);
             }
             catch { }

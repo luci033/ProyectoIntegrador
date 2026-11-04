@@ -35,10 +35,15 @@ namespace ProyectoIntegrador.Formularios.Productos
             EstiloUI.AplicarEstiloTextBox(TBBuscarProducto);
 
             bool esVendedor = this.MdiParent is FormPrincipalVendedor;
+            bool esLogistica = this.MdiParent is FormPrincipalLogistica;
             if (esVendedor)
             {
                 BNuevo.Visible = false;
                 BGestionarCategorias.Visible = false;
+            }
+
+            if (esVendedor || esLogistica)
+            {
                 if (dataGridCatalogoProd.Columns.Contains("colModificar"))
                     dataGridCatalogoProd.Columns["colModificar"].Visible = false;
                 if (dataGridCatalogoProd.Columns.Contains("colEliminar"))
@@ -126,7 +131,7 @@ namespace ProyectoIntegrador.Formularios.Productos
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-            if (this.MdiParent is FormPrincipalVendedor) return;
+            if (this.MdiParent is FormPrincipalVendedor || this.MdiParent is FormPrincipalLogistica) return;
 
             string nombreColumna = dataGridCatalogoProd.Columns[e.ColumnIndex].Name;
 

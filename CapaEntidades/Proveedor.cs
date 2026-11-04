@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing.Printing;
 using System.Linq;
@@ -14,5 +14,6 @@ namespace CapaEntidades
         public string CUIT { get; set; }
         public string Telefono { get; set; }
         public string CorreoElectronico { get; set; }
+        public bool Activo { get; set; } = true;
     }
 }

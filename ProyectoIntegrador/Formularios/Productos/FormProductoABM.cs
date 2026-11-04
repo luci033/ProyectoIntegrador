@@ -70,8 +70,16 @@ namespace ProyectoIntegrador
             combGenero.DisplayMember = "NombreGenero";
             combGenero.ValueMember = "IdGenero";
 
-            // ComboBox Proveedor 
-            cmbProveedor.DataSource = new CN_Proveedor().ListarProveedores();
+            // ComboBox Proveedor (solo activos al crear, o incluyendo el actual al editar/ver detalle)
+            var proveedores = new CN_Proveedor().ListarProveedores(!esDetalle);
+            if (esModificacion && !string.IsNullOrEmpty(proveedorSeleccionado) &&
+                !proveedores.Any(p => string.Equals(p.RazonSocial, proveedorSeleccionado, StringComparison.OrdinalIgnoreCase)))
+            {
+                var todos = new CN_Proveedor().ListarProveedores(false);
+                var actual = todos.FirstOrDefault(p => string.Equals(p.RazonSocial, proveedorSeleccionado, StringComparison.OrdinalIgnoreCase));
+                if (actual != null) proveedores.Add(actual);
+            }
+            cmbProveedor.DataSource = proveedores;
             cmbProveedor.DisplayMember = "RazonSocial";
             cmbProveedor.ValueMember = "IdProveedor";
 

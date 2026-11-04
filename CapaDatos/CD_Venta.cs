@@ -91,7 +91,7 @@ namespace CapaDatos
             }
         }
 
-        public DataTable ListarVentas(DateTime? fechaDesde = null, DateTime? fechaHasta = null)
+        public DataTable ListarVentas(DateTime? fechaDesde = null, DateTime? fechaHasta = null, int? idUsuario = null)
         {
             DataTable tabla = new DataTable();
             string query = @"
@@ -129,6 +129,7 @@ namespace CapaDatos
                 ) tot ON c.IdComprobante = tot.IdComprobante
                 WHERE (@FechaDesde IS NULL OR c.FechaComprobante >= @FechaDesde)
                   AND (@FechaHasta IS NULL OR c.FechaComprobante <= @FechaHasta)
+                  AND (@IdUsuario IS NULL OR c.IdUsuario = @IdUsuario)
                 ORDER BY c.IdComprobante DESC;";
 
             using (SqlConnection conexion = Conexion.ObtenerConexion())
@@ -137,6 +138,7 @@ namespace CapaDatos
                 {
                     cmd.Parameters.AddWithValue("@FechaDesde", (object)fechaDesde ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@FechaHasta", (object)fechaHasta ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@IdUsuario", (object)idUsuario ?? DBNull.Value);
 
                     using (SqlDataAdapter adaptador = new SqlDataAdapter(cmd))
                     {
