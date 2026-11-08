@@ -117,6 +117,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             if (!EsRolVendedor())
             {
                 cmbBuscar.Items.Add("Vendedor");
+                cmbBuscar.Items.Add("Método de Pago");
             }
             cmbBuscar.Items.Add("Cliente");
             cmbBuscar.SelectedIndex = 0;
@@ -153,6 +154,30 @@ namespace ProyectoIntegrador.Formularios.Ventas
                 DataGridHistorialVenta.Columns["Fecha"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             }
 
+            if (DataGridHistorialVenta.Columns.Contains("colMetodoPago"))
+            {
+                DataGridHistorialVenta.Columns["colMetodoPago"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                DataGridHistorialVenta.Columns["colMetodoPago"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
+
+            // Visibilidad de columnas según el rol
+            if (EsRolVendedor())
+            {
+                if (DataGridHistorialVenta.Columns.Contains("colVendedor"))
+                    DataGridHistorialVenta.Columns["colVendedor"].Visible = false;
+
+                if (DataGridHistorialVenta.Columns.Contains("colMetodoPago"))
+                    DataGridHistorialVenta.Columns["colMetodoPago"].Visible = true;
+            }
+            else
+            {
+                if (DataGridHistorialVenta.Columns.Contains("colVendedor"))
+                    DataGridHistorialVenta.Columns["colVendedor"].Visible = true;
+
+                if (DataGridHistorialVenta.Columns.Contains("colMetodoPago"))
+                    DataGridHistorialVenta.Columns["colMetodoPago"].Visible = true;
+            }
+
             if (DataGridHistorialVenta.Columns.Contains("colAccion"))
             {
                 DataGridHistorialVenta.Columns["colAccion"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -179,6 +204,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
                             Fecha = Convert.ToDateTime(r["FechaComprobante"]),
                             Cliente = r["Cliente"]?.ToString() ?? "",
                             Vendedor = r["UsuarioVendedor"]?.ToString() ?? r["NombreUsuario"]?.ToString() ?? "Vendedor",
+                            MetodoPago = r["MedioPago"]?.ToString() ?? "Contado",
                             Total = Convert.ToDecimal(r["Total"] ?? 0),
                             CantidadArticulos = Convert.ToInt32(r["CantidadArticulos"] ?? 0),
                             CategoriaPrincipal = "General"
@@ -324,6 +350,10 @@ namespace ProyectoIntegrador.Formularios.Ventas
                 {
                     query = query.Where(v => v.Cliente != null && v.Cliente.ToLower().Contains(texto));
                 }
+                else if (criterio == "Método de Pago")
+                {
+                    query = query.Where(v => v.MetodoPago != null && v.MetodoPago.ToLower().Contains(texto));
+                }
             }
 
             listaVentasActuales = query.OrderByDescending(v => v.Fecha).ToList();
@@ -346,6 +376,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
                     venta.Fecha.ToString("dd/MM/yyyy HH:mm"),
                     venta.Cliente,
                     venta.Vendedor ?? "Vendedor Local",
+                    venta.MetodoPago ?? "Contado",
                     venta.Total.ToString("C2")
                 );
 

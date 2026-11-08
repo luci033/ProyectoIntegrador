@@ -62,6 +62,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colVendedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMetodoPago = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LTotal = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
@@ -410,6 +411,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.Fecha,
             this.colCliente,
             this.colVendedor,
+            this.colMetodoPago,
             this.total});
             this.DataGridHistorialVenta.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DataGridHistorialVenta.Location = new System.Drawing.Point(10, 10);
@@ -465,6 +467,13 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.colVendedor.HeaderText = "Vendedor";
             this.colVendedor.Name = "colVendedor";
             this.colVendedor.ReadOnly = true;
+            // 
+            // colMetodoPago
+            // 
+            this.colMetodoPago.FillWeight = 70F;
+            this.colMetodoPago.HeaderText = "Método de Pago";
+            this.colMetodoPago.Name = "colMetodoPago";
+            this.colMetodoPago.ReadOnly = true;
             // 
             // total
             // 
@@ -584,6 +593,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn colVendedor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMetodoPago;
         private System.Windows.Forms.DataGridViewTextBoxColumn total;
         private System.Windows.Forms.Label LTotal;
         private System.Windows.Forms.ErrorProvider errorProvider1;

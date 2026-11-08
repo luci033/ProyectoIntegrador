@@ -14,6 +14,7 @@ namespace ProyectoIntegrador.ModelosSimulados
         public decimal Total { get; set; }
         public int CantidadArticulos { get; set; }
         public string Vendedor { get; set; }
+        public string MetodoPago { get; set; } = "Contado";
     }
 
     public class MetricaCategoria
