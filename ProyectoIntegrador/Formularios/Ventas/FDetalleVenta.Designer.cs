@@ -29,6 +29,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
         private void InitializeComponent()
         {
             this.panelCard = new System.Windows.Forms.Panel();
+            this.BImprimir = new System.Windows.Forms.Button();
             this.LTotal = new System.Windows.Forms.Label();
             this.TBTotal = new System.Windows.Forms.TextBox();
             this.LInfoVenta = new System.Windows.Forms.Label();
@@ -41,6 +42,8 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.colSubTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BCerrar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.TBVendedor = new System.Windows.Forms.TextBox();
+            this.LVendedor = new System.Windows.Forms.Label();
             this.LJoyeria = new System.Windows.Forms.Label();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.TBNroVenta = new System.Windows.Forms.TextBox();
@@ -71,16 +74,34 @@ namespace ProyectoIntegrador.Formularios.Ventas
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelCard.BackColor = System.Drawing.Color.White;
+            this.panelCard.Controls.Add(this.BImprimir);
             this.panelCard.Controls.Add(this.LTotal);
             this.panelCard.Controls.Add(this.TBTotal);
             this.panelCard.Controls.Add(this.LInfoVenta);
             this.panelCard.Controls.Add(this.LSubtitulo);
             this.panelCard.Controls.Add(this.dataGridDetalle);
             this.panelCard.Controls.Add(this.BCerrar);
-            this.panelCard.Location = new System.Drawing.Point(22, 266);
+            this.panelCard.Location = new System.Drawing.Point(22, 280);
             this.panelCard.Name = "panelCard";
-            this.panelCard.Size = new System.Drawing.Size(753, 404);
+            this.panelCard.Size = new System.Drawing.Size(753, 390);
             this.panelCard.TabIndex = 0;
+            // 
+            // BImprimir
+            // 
+            this.BImprimir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BImprimir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(208)))), ((int)(((byte)(201)))));
+            this.BImprimir.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BImprimir.FlatAppearance.BorderSize = 0;
+            this.BImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BImprimir.Font = new System.Drawing.Font("Georgia", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BImprimir.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.BImprimir.Location = new System.Drawing.Point(455, 346);
+            this.BImprimir.Name = "BImprimir";
+            this.BImprimir.Size = new System.Drawing.Size(156, 34);
+            this.BImprimir.TabIndex = 8;
+            this.BImprimir.Text = "Imprimir Factura";
+            this.BImprimir.UseVisualStyleBackColor = false;
+            this.BImprimir.Click += new System.EventHandler(this.BImprimir_Click);
             // 
             // LTotal
             // 
@@ -88,7 +109,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.LTotal.AutoSize = true;
             this.LTotal.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.LTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.LTotal.Location = new System.Drawing.Point(563, 326);
+            this.LTotal.Location = new System.Drawing.Point(563, 312);
             this.LTotal.Name = "LTotal";
             this.LTotal.Size = new System.Drawing.Size(54, 19);
             this.LTotal.TabIndex = 6;
@@ -99,7 +120,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.TBTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.TBTotal.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TBTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.TBTotal.Location = new System.Drawing.Point(623, 321);
+            this.TBTotal.Location = new System.Drawing.Point(623, 307);
             this.TBTotal.Name = "TBTotal";
             this.TBTotal.ReadOnly = true;
             this.TBTotal.Size = new System.Drawing.Size(110, 27);
@@ -151,7 +172,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.dataGridDetalle.ReadOnly = true;
             this.dataGridDetalle.RowHeadersVisible = false;
             this.dataGridDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridDetalle.Size = new System.Drawing.Size(713, 236);
+            this.dataGridDetalle.Size = new System.Drawing.Size(713, 222);
             this.dataGridDetalle.TabIndex = 2;
             // 
             // colIdProducto
@@ -196,7 +217,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.BCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BCerrar.Font = new System.Drawing.Font("Georgia", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BCerrar.ForeColor = System.Drawing.Color.White;
-            this.BCerrar.Location = new System.Drawing.Point(623, 360);
+            this.BCerrar.Location = new System.Drawing.Point(623, 346);
             this.BCerrar.Name = "BCerrar";
             this.BCerrar.Size = new System.Drawing.Size(110, 34);
             this.BCerrar.TabIndex = 3;
@@ -209,6 +230,8 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.TBVendedor);
+            this.panel1.Controls.Add(this.LVendedor);
             this.panel1.Controls.Add(this.LJoyeria);
             this.panel1.Controls.Add(this.textBox5);
             this.panel1.Controls.Add(this.TBNroVenta);
@@ -218,15 +241,37 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.panel1.Controls.Add(this.LALBA);
             this.panel1.Location = new System.Drawing.Point(22, 16);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(753, 110);
+            this.panel1.Size = new System.Drawing.Size(753, 126);
             this.panel1.TabIndex = 1;
+            // 
+            // TBVendedor
+            // 
+            this.TBVendedor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TBVendedor.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.TBVendedor.Location = new System.Drawing.Point(544, 91);
+            this.TBVendedor.Name = "TBVendedor";
+            this.TBVendedor.ReadOnly = true;
+            this.TBVendedor.Size = new System.Drawing.Size(185, 24);
+            this.TBVendedor.TabIndex = 13;
+            // 
+            // LVendedor
+            // 
+            this.LVendedor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LVendedor.AutoSize = true;
+            this.LVendedor.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.LVendedor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LVendedor.Location = new System.Drawing.Point(448, 94);
+            this.LVendedor.Name = "LVendedor";
+            this.LVendedor.Size = new System.Drawing.Size(64, 15);
+            this.LVendedor.TabIndex = 12;
+            this.LVendedor.Text = "Vendedor:";
             // 
             // LJoyeria
             // 
             this.LJoyeria.AutoSize = true;
             this.LJoyeria.Font = new System.Drawing.Font("Georgia", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LJoyeria.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(45)))), ((int)(((byte)(59)))));
-            this.LJoyeria.Location = new System.Drawing.Point(26, 62);
+            this.LJoyeria.Location = new System.Drawing.Point(26, 70);
             this.LJoyeria.Name = "LJoyeria";
             this.LJoyeria.Size = new System.Drawing.Size(152, 16);
             this.LJoyeria.TabIndex = 11;
@@ -236,7 +281,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             // 
             this.textBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox5.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.textBox5.Location = new System.Drawing.Point(544, 73);
+            this.textBox5.Location = new System.Drawing.Point(544, 62);
             this.textBox5.Name = "textBox5";
             this.textBox5.ReadOnly = true;
             this.textBox5.Size = new System.Drawing.Size(185, 24);
@@ -246,7 +291,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             // 
             this.TBNroVenta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TBNroVenta.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.TBNroVenta.Location = new System.Drawing.Point(544, 43);
+            this.TBNroVenta.Location = new System.Drawing.Point(544, 33);
             this.TBNroVenta.Name = "TBNroVenta";
             this.TBNroVenta.ReadOnly = true;
             this.TBNroVenta.Size = new System.Drawing.Size(185, 24);
@@ -258,7 +303,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.LFechaEmision.AutoSize = true;
             this.LFechaEmision.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.LFechaEmision.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.LFechaEmision.Location = new System.Drawing.Point(448, 76);
+            this.LFechaEmision.Location = new System.Drawing.Point(448, 65);
             this.LFechaEmision.Name = "LFechaEmision";
             this.LFechaEmision.Size = new System.Drawing.Size(87, 15);
             this.LFechaEmision.TabIndex = 3;
@@ -270,7 +315,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.LNroVenta.AutoSize = true;
             this.LNroVenta.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.LNroVenta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.LNroVenta.Location = new System.Drawing.Point(448, 46);
+            this.LNroVenta.Location = new System.Drawing.Point(448, 36);
             this.LNroVenta.Name = "LNroVenta";
             this.LNroVenta.Size = new System.Drawing.Size(69, 15);
             this.LNroVenta.TabIndex = 2;
@@ -282,7 +327,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.LComrprobanteVenta.AutoSize = true;
             this.LComrprobanteVenta.Font = new System.Drawing.Font("Georgia", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LComrprobanteVenta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.LComrprobanteVenta.Location = new System.Drawing.Point(448, 16);
+            this.LComrprobanteVenta.Location = new System.Drawing.Point(448, 9);
             this.LComrprobanteVenta.Name = "LComrprobanteVenta";
             this.LComrprobanteVenta.Size = new System.Drawing.Size(226, 18);
             this.LComrprobanteVenta.TabIndex = 1;
@@ -293,7 +338,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.LALBA.AutoSize = true;
             this.LALBA.Font = new System.Drawing.Font("Georgia", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LALBA.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.LALBA.Location = new System.Drawing.Point(24, 20);
+            this.LALBA.Location = new System.Drawing.Point(24, 28);
             this.LALBA.Name = "LALBA";
             this.LALBA.Size = new System.Drawing.Size(111, 38);
             this.LALBA.TabIndex = 0;
@@ -418,7 +463,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
             this.panel2.Controls.Add(this.TBRazonSocial);
             this.panel2.Controls.Add(this.TBCondicionIVA);
             this.panel2.Controls.Add(this.textBox3);
-            this.panel2.Location = new System.Drawing.Point(22, 134);
+            this.panel2.Location = new System.Drawing.Point(22, 150);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(753, 122);
             this.panel2.TabIndex = 2;
@@ -457,6 +502,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
         private System.Windows.Forms.Label LSubtitulo;
         private System.Windows.Forms.DataGridView dataGridDetalle;
         private System.Windows.Forms.Button BCerrar;
+        private System.Windows.Forms.Button BImprimir;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIdProducto;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProducto;
@@ -467,6 +513,8 @@ namespace ProyectoIntegrador.Formularios.Ventas
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.TextBox TBNroVenta;
+        private System.Windows.Forms.TextBox TBVendedor;
+        private System.Windows.Forms.Label LVendedor;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox TBCondicionIVA;
         private System.Windows.Forms.TextBox TBRazonSocial;
