@@ -280,5 +280,39 @@ namespace CapaDatos
 
             return venta;
         }
+
+        public DataTable ListarVentasPorCategoria(DateTime? fechaDesde = null, DateTime? fechaHasta = null)
+        {
+            DataTable tabla = new DataTable();
+            string query = @"
+                SELECT 
+                    ISNULL(cat.NombreCategoria, 'Sin Categoría') AS Categoria,
+                    ISNULL(SUM(dc.Cantidad), 0) AS UnidadesVendidas,
+                    ISNULL(SUM(dc.Cantidad * dc.PrecioUnitario), 0) AS TotalRecaudado
+                FROM DetalleComprobante dc
+                INNER JOIN Comprobante c ON dc.IdComprobante = c.IdComprobante
+                INNER JOIN Producto p ON dc.IdProducto = p.IdProducto
+                LEFT JOIN Categoria cat ON p.IdCategoria = cat.IdCategoria
+                WHERE (@FechaDesde IS NULL OR c.FechaComprobante >= @FechaDesde)
+                  AND (@FechaHasta IS NULL OR c.FechaComprobante <= @FechaHasta)
+                GROUP BY cat.NombreCategoria
+                ORDER BY TotalRecaudado DESC;";
+
+            using (SqlConnection conexion = Conexion.ObtenerConexion())
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conexion))
+                {
+                    cmd.Parameters.AddWithValue("@FechaDesde", (object)fechaDesde ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@FechaHasta", (object)fechaHasta ?? DBNull.Value);
+
+                    using (SqlDataAdapter adaptador = new SqlDataAdapter(cmd))
+                    {
+                        adaptador.Fill(tabla);
+                    }
+                }
+            }
+
+            return tabla;
+        }
     }
 }

@@ -91,6 +91,11 @@ namespace CapaNegocio
             return objcd_Venta.ObtenerVentaPorId(idComprobante);
         }
 
+        public DataTable ListarVentasPorCategoria(DateTime? fechaDesde = null, DateTime? fechaHasta = null)
+        {
+            return objcd_Venta.ListarVentasPorCategoria(fechaDesde, fechaHasta);
+        }
+
         public int DeterminarTipoComprobante(string condicionIva)
         {
             if (string.IsNullOrWhiteSpace(condicionIva)) return 2; // Factura B por defecto

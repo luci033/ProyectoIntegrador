@@ -34,6 +34,8 @@ namespace ProyectoIntegrador.Formularios.Gerente
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panelTopHeader = new System.Windows.Forms.Panel();
+            this.LFiltroPeriodo = new System.Windows.Forms.Label();
+            this.CBFiltroPeriodo = new System.Windows.Forms.ComboBox();
             this.LTitulo = new System.Windows.Forms.Label();
             this.LSubtitulo = new System.Windows.Forms.Label();
             this.BRefrescar = new System.Windows.Forms.Button();
@@ -66,9 +68,9 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.DGProductosCriticos = new System.Windows.Forms.DataGridView();
             this.cardAcciones = new System.Windows.Forms.Panel();
             this.LTituloAcciones = new System.Windows.Forms.Label();
-            this.BVerHistorial = new System.Windows.Forms.Button();
             this.BDevoluciones = new System.Windows.Forms.Button();
             this.BVerInformes = new System.Windows.Forms.Button();
+            this.BVerHistorial = new System.Windows.Forms.Button();
             this.panelTopHeader.SuspendLayout();
             this.panelKpis.SuspendLayout();
             this.cardVentasDia.SuspendLayout();
@@ -92,6 +94,8 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.panelTopHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTopHeader.BackColor = System.Drawing.Color.Transparent;
+            this.panelTopHeader.Controls.Add(this.LFiltroPeriodo);
+            this.panelTopHeader.Controls.Add(this.CBFiltroPeriodo);
             this.panelTopHeader.Controls.Add(this.LTitulo);
             this.panelTopHeader.Controls.Add(this.LSubtitulo);
             this.panelTopHeader.Controls.Add(this.BRefrescar);
@@ -99,6 +103,30 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.panelTopHeader.Name = "panelTopHeader";
             this.panelTopHeader.Size = new System.Drawing.Size(1100, 62);
             this.panelTopHeader.TabIndex = 0;
+            // 
+            // LFiltroPeriodo
+            // 
+            this.LFiltroPeriodo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LFiltroPeriodo.AutoSize = true;
+            this.LFiltroPeriodo.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
+            this.LFiltroPeriodo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LFiltroPeriodo.Location = new System.Drawing.Point(600, 17);
+            this.LFiltroPeriodo.Name = "LFiltroPeriodo";
+            this.LFiltroPeriodo.Size = new System.Drawing.Size(102, 17);
+            this.LFiltroPeriodo.TabIndex = 3;
+            this.LFiltroPeriodo.Text = "Vista / Período:";
+            // 
+            // CBFiltroPeriodo
+            // 
+            this.CBFiltroPeriodo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.CBFiltroPeriodo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CBFiltroPeriodo.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.CBFiltroPeriodo.FormattingEnabled = true;
+            this.CBFiltroPeriodo.Location = new System.Drawing.Point(708, 14);
+            this.CBFiltroPeriodo.Name = "CBFiltroPeriodo";
+            this.CBFiltroPeriodo.Size = new System.Drawing.Size(200, 25);
+            this.CBFiltroPeriodo.TabIndex = 4;
+            this.CBFiltroPeriodo.SelectedIndexChanged += new System.EventHandler(this.CBFiltroPeriodo_SelectedIndexChanged);
             // 
             // LTitulo
             // 
@@ -492,7 +520,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.LTituloAcciones.Size = new System.Drawing.Size(135, 17);
             this.LTituloAcciones.TabIndex = 0;
             this.LTituloAcciones.Text = "Acciones Rápidas";
-                                    // 
+            // 
             // BDevoluciones
             // 
             this.BDevoluciones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -595,6 +623,8 @@ namespace ProyectoIntegrador.Formularios.Gerente
         #endregion
 
         private System.Windows.Forms.Panel panelTopHeader;
+        private System.Windows.Forms.Label LFiltroPeriodo;
+        private System.Windows.Forms.ComboBox CBFiltroPeriodo;
         private System.Windows.Forms.Label LTitulo;
         private System.Windows.Forms.Label LSubtitulo;
         private System.Windows.Forms.Button BRefrescar;

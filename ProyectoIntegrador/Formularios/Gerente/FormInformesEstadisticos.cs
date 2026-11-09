@@ -1,6 +1,7 @@
-using ProyectoIntegrador.ModelosSimulados;
+using CapaNegocio;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace ProyectoIntegrador.Formularios.Gerente
 {
     public partial class FormInformesEstadisticos : Form
     {
+        private CN_Venta objNegocioVenta = new CN_Venta();
+
         public FormInformesEstadisticos()
         {
             InitializeComponent();
@@ -79,7 +82,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
                 return;
             }
 
-            var datos = EstadisticasSimuladas.ObtenerInformeCategorias(desde, hasta);
+            DataTable tabla = objNegocioVenta.ListarVentasPorCategoria(desde, hasta);
 
             DGInforme.Rows.Clear();
             decimal totalFacturacion = 0;
@@ -87,22 +90,31 @@ namespace ProyectoIntegrador.Formularios.Gerente
             string categoriaLider = "-";
             decimal maxRecaudacion = -1;
 
-            foreach (var item in datos)
+            foreach (DataRow row in tabla.Rows)
             {
-                totalFacturacion += item.TotalRecaudado;
-                totalUnidades += item.UnidadesVendidas;
+                totalFacturacion += Convert.ToDecimal(row["TotalRecaudado"]);
+                totalUnidades += Convert.ToInt32(row["UnidadesVendidas"]);
+            }
 
-                if (item.TotalRecaudado > maxRecaudacion)
+            foreach (DataRow row in tabla.Rows)
+            {
+                string categoria = row["Categoria"].ToString();
+                int unidades = Convert.ToInt32(row["UnidadesVendidas"]);
+                decimal recaudado = Convert.ToDecimal(row["TotalRecaudado"]);
+
+                if (recaudado > maxRecaudacion && recaudado > 0)
                 {
-                    maxRecaudacion = item.TotalRecaudado;
-                    categoriaLider = item.Categoria;
+                    maxRecaudacion = recaudado;
+                    categoriaLider = categoria;
                 }
 
+                decimal porcentaje = totalFacturacion > 0 ? (recaudado * 100m / totalFacturacion) : 0;
+
                 DGInforme.Rows.Add(
-                    item.Categoria,
-                    item.UnidadesVendidas + " piezas",
-                    item.TotalRecaudado.ToString("C0"),
-                    item.Porcentaje.ToString("F1") + "%"
+                    categoria,
+                    unidades + " piezas",
+                    recaudado.ToString("C0"),
+                    porcentaje.ToString("F1") + "%"
                 );
             }
 
@@ -117,7 +129,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
 
         private void BExportar_Click(object sender, EventArgs e)
         {
-            /*if (DGInforme.Rows.Count == 0)
+            if (DGInforme.Rows.Count == 0)
             {
                 MessageBox.Show("No hay datos en el informe para exportar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -161,7 +173,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
                         MessageBox.Show("Error al exportar el archivo: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-            }*/
+            }
         }
     }
 }
