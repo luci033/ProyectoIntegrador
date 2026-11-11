@@ -33,6 +33,8 @@ namespace ProyectoIntegrador.Formularios.Gerente
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panelTopHeader = new System.Windows.Forms.Panel();
             this.LFiltroPeriodo = new System.Windows.Forms.Label();
             this.CBFiltroPeriodo = new System.Windows.Forms.ComboBox();
@@ -59,6 +61,12 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.cardChartCategorias = new System.Windows.Forms.Panel();
             this.LTituloChartCategorias = new System.Windows.Forms.Label();
             this.chartCategorias = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.panelGraficoSecundario = new System.Windows.Forms.Panel();
+            this.cardChartSecundario = new System.Windows.Forms.Panel();
+            this.LTituloChartSecundario = new System.Windows.Forms.Label();
+            this.LFiltroChartSecundario = new System.Windows.Forms.Label();
+            this.CBFiltroChartSecundario = new System.Windows.Forms.ComboBox();
+            this.chartSecundario = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panelInferior = new System.Windows.Forms.Panel();
             this.cardUltimasVentas = new System.Windows.Forms.Panel();
             this.LTituloUltimasVentas = new System.Windows.Forms.Label();
@@ -81,6 +89,9 @@ namespace ProyectoIntegrador.Formularios.Gerente
             ((System.ComponentModel.ISupportInitialize)(this.chartEvolucion)).BeginInit();
             this.cardChartCategorias.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartCategorias)).BeginInit();
+            this.panelGraficoSecundario.SuspendLayout();
+            this.cardChartSecundario.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartSecundario)).BeginInit();
             this.panelInferior.SuspendLayout();
             this.cardUltimasVentas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGUltimasVentas)).BeginInit();
@@ -402,19 +413,93 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.chartCategorias.Size = new System.Drawing.Size(480, 205);
             this.chartCategorias.TabIndex = 1;
             // 
+            // panelGraficoSecundario
+            // 
+            this.panelGraficoSecundario.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelGraficoSecundario.BackColor = System.Drawing.Color.Transparent;
+            this.panelGraficoSecundario.Controls.Add(this.cardChartSecundario);
+            this.panelGraficoSecundario.Location = new System.Drawing.Point(20, 445);
+            this.panelGraficoSecundario.Name = "panelGraficoSecundario";
+            this.panelGraficoSecundario.Size = new System.Drawing.Size(1100, 260);
+            this.panelGraficoSecundario.TabIndex = 3;
+            // 
+            // cardChartSecundario
+            // 
+            this.cardChartSecundario.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cardChartSecundario.BackColor = System.Drawing.Color.White;
+            this.cardChartSecundario.Controls.Add(this.CBFiltroChartSecundario);
+            this.cardChartSecundario.Controls.Add(this.LFiltroChartSecundario);
+            this.cardChartSecundario.Controls.Add(this.LTituloChartSecundario);
+            this.cardChartSecundario.Controls.Add(this.chartSecundario);
+            this.cardChartSecundario.Location = new System.Drawing.Point(0, 0);
+            this.cardChartSecundario.Name = "cardChartSecundario";
+            this.cardChartSecundario.Size = new System.Drawing.Size(1100, 255);
+            this.cardChartSecundario.TabIndex = 0;
+            // 
+            // LTituloChartSecundario
+            // 
+            this.LTituloChartSecundario.AutoSize = true;
+            this.LTituloChartSecundario.Font = new System.Drawing.Font("Georgia", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LTituloChartSecundario.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LTituloChartSecundario.Location = new System.Drawing.Point(16, 12);
+            this.LTituloChartSecundario.Name = "LTituloChartSecundario";
+            this.LTituloChartSecundario.Size = new System.Drawing.Size(348, 18);
+            this.LTituloChartSecundario.TabIndex = 0;
+            this.LTituloChartSecundario.Text = "Análisis de Recaudación por Período (Semana)";
+            // 
+            // LFiltroChartSecundario
+            // 
+            this.LFiltroChartSecundario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LFiltroChartSecundario.AutoSize = true;
+            this.LFiltroChartSecundario.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.LFiltroChartSecundario.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LFiltroChartSecundario.Location = new System.Drawing.Point(820, 13);
+            this.LFiltroChartSecundario.Name = "LFiltroChartSecundario";
+            this.LFiltroChartSecundario.Size = new System.Drawing.Size(68, 15);
+            this.LFiltroChartSecundario.TabIndex = 1;
+            this.LFiltroChartSecundario.Text = "Ver según:";
+            // 
+            // CBFiltroChartSecundario
+            // 
+            this.CBFiltroChartSecundario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.CBFiltroChartSecundario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CBFiltroChartSecundario.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.CBFiltroChartSecundario.FormattingEnabled = true;
+            this.CBFiltroChartSecundario.Location = new System.Drawing.Point(894, 9);
+            this.CBFiltroChartSecundario.Name = "CBFiltroChartSecundario";
+            this.CBFiltroChartSecundario.Size = new System.Drawing.Size(190, 23);
+            this.CBFiltroChartSecundario.TabIndex = 2;
+            this.CBFiltroChartSecundario.SelectedIndexChanged += new System.EventHandler(this.CBFiltroChartSecundario_SelectedIndexChanged);
+            // 
+            // chartSecundario
+            // 
+            this.chartSecundario.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            chartArea3.Name = "ChartAreaSecundario";
+            this.chartSecundario.ChartAreas.Add(chartArea3);
+            this.chartSecundario.Location = new System.Drawing.Point(10, 38);
+            this.chartSecundario.Name = "chartSecundario";
+            series3.ChartArea = "ChartAreaSecundario";
+            series3.Name = "RecaudacionSecundaria";
+            this.chartSecundario.Series.Add(series3);
+            this.chartSecundario.Size = new System.Drawing.Size(1080, 205);
+            this.chartSecundario.TabIndex = 3;
+            // 
             // panelInferior
             // 
-            this.panelInferior.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.panelInferior.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelInferior.BackColor = System.Drawing.Color.Transparent;
             this.panelInferior.Controls.Add(this.cardUltimasVentas);
             this.panelInferior.Controls.Add(this.cardProductosCriticos);
             this.panelInferior.Controls.Add(this.cardAcciones);
-            this.panelInferior.Location = new System.Drawing.Point(20, 440);
+            this.panelInferior.Location = new System.Drawing.Point(20, 715);
             this.panelInferior.Name = "panelInferior";
-            this.panelInferior.Size = new System.Drawing.Size(1100, 245);
-            this.panelInferior.TabIndex = 3;
+            this.panelInferior.Size = new System.Drawing.Size(1100, 250);
+            this.panelInferior.TabIndex = 4;
             // 
             // cardUltimasVentas
             // 
@@ -581,9 +666,11 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.AutoScrollMargin = new System.Drawing.Size(0, 20);
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(236)))), ((int)(((byte)(232)))));
             this.ClientSize = new System.Drawing.Size(1140, 710);
             this.Controls.Add(this.panelInferior);
+            this.Controls.Add(this.panelGraficoSecundario);
             this.Controls.Add(this.panelGraficos);
             this.Controls.Add(this.panelKpis);
             this.Controls.Add(this.panelTopHeader);
@@ -607,6 +694,10 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.cardChartCategorias.ResumeLayout(false);
             this.cardChartCategorias.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartCategorias)).EndInit();
+            this.panelGraficoSecundario.ResumeLayout(false);
+            this.cardChartSecundario.ResumeLayout(false);
+            this.cardChartSecundario.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartSecundario)).EndInit();
             this.panelInferior.ResumeLayout(false);
             this.cardUltimasVentas.ResumeLayout(false);
             this.cardUltimasVentas.PerformLayout();
@@ -648,6 +739,12 @@ namespace ProyectoIntegrador.Formularios.Gerente
         private System.Windows.Forms.Panel cardChartCategorias;
         private System.Windows.Forms.Label LTituloChartCategorias;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartCategorias;
+        private System.Windows.Forms.Panel panelGraficoSecundario;
+        private System.Windows.Forms.Panel cardChartSecundario;
+        private System.Windows.Forms.Label LTituloChartSecundario;
+        private System.Windows.Forms.Label LFiltroChartSecundario;
+        private System.Windows.Forms.ComboBox CBFiltroChartSecundario;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartSecundario;
         private System.Windows.Forms.Panel panelInferior;
         private System.Windows.Forms.Panel cardUltimasVentas;
         private System.Windows.Forms.Label LTituloUltimasVentas;

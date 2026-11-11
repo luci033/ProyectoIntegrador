@@ -62,6 +62,11 @@ namespace CapaNegocio
                 mensaje = "El precio de venta no puede ser igual a cero";
                 return false;
             }
+            if (obj.PrecioCompra.HasValue && obj.PrecioCompra.Value > 0 && obj.PrecioVenta.HasValue && obj.PrecioVenta.Value < obj.PrecioCompra.Value)
+            {
+                mensaje = $"El precio de venta (${obj.PrecioVenta.Value:N2}) no puede ser menor al costo de compra (${obj.PrecioCompra.Value:N2}).";
+                return false;
+            }
             if (obj.MargenGanancia.HasValue && obj.MargenGanancia.Value < 1)
             {
                 mensaje = "El margen de ganancia debe ser un número entero mayor o igual a 1.";
@@ -132,9 +137,15 @@ namespace CapaNegocio
                 mensaje = "El precio de venta no puede ser igual a cero";
                 return false;
             }
-            if (obj.MargenGanancia.HasValue && obj.MargenGanancia.Value < 1)
+            if (obj.PrecioCompra.HasValue && obj.PrecioCompra.Value > 0 && obj.PrecioVenta.HasValue && obj.PrecioVenta.Value < obj.PrecioCompra.Value)
             {
-                mensaje = "El margen de ganancia debe ser un número entero mayor o igual a 1.";
+                mensaje = $"El precio de venta (${obj.PrecioVenta.Value:N2}) no puede ser menor al costo de compra (${obj.PrecioCompra.Value:N2}).";
+                return false;
+            }
+            int minMargen = (obj.PrecioCompra.HasValue && obj.PrecioCompra.Value > 0) ? 0 : 1;
+            if (obj.MargenGanancia.HasValue && obj.MargenGanancia.Value < minMargen)
+            {
+                mensaje = $"El margen de ganancia debe ser un número entero mayor o igual a {minMargen}.";
                 return false;
             }
 

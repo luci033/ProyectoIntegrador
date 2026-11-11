@@ -197,14 +197,27 @@ namespace ProyectoIntegrador
                     textPrecio.SelectAll();
                     return false;
                 }
+
+                if (esModificacion && precioCompraActual > 0 && p < precioCompraActual)
+                {
+                    MessageBox.Show(
+                        $"El precio de venta (${p:N2}) no puede ser menor al costo de compra (${precioCompraActual:N2}).",
+                        "Precio Inválido",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    textPrecio.Focus();
+                    textPrecio.SelectAll();
+                    return false;
+                }
             }
 
             // 7. Validar Margen de Ganancia (sólo si se ingresó texto)
             if (!string.IsNullOrWhiteSpace(textMargenGanancia.Text))
             {
-                if (!int.TryParse(textMargenGanancia.Text.Trim(), out int margen) || margen < 1)
+                int minMargen = (esModificacion && precioCompraActual > 0) ? 0 : 1;
+                if (!int.TryParse(textMargenGanancia.Text.Trim(), out int margen) || margen < minMargen)
                 {
-                    MessageBox.Show("El margen de ganancia debe ser un número entero mayor o igual a 1.", "Margen Inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show($"El margen de ganancia debe ser un número entero mayor o igual a {minMargen}.", "Margen Inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     textMargenGanancia.Focus();
                     textMargenGanancia.SelectAll();
                     return false;
@@ -248,7 +261,8 @@ namespace ProyectoIntegrador
             }
 
             int? margenNullable = null;
-            if (int.TryParse(textMargenGanancia.Text.Trim(), out int mg) && mg >= 1)
+            int minMargenGuardar = (esModificacion && precioCompraActual > 0) ? 0 : 1;
+            if (int.TryParse(textMargenGanancia.Text.Trim(), out int mg) && mg >= minMargenGuardar)
             {
                 margenNullable = mg;
             }
@@ -260,7 +274,7 @@ namespace ProyectoIntegrador
                 Descripcion = textDescripcion.Text.Trim(),
                 StockMinimo = Convert.ToInt32(textStockMinimo.Text.Trim()),
                 StockActual = 0,
-                PrecioCompra = null,
+                PrecioCompra = (esModificacion && precioCompraActual > 0) ? (decimal?)precioCompraActual : null,
                 PrecioVenta = precioVenta,
                 MargenGanancia = margenNullable,
                 IdCategoria = idCategoria,

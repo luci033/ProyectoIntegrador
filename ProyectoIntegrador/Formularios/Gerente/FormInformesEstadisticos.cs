@@ -145,27 +145,27 @@ namespace ProyectoIntegrador.Formularios.Gerente
                     try
                     {
                         StringBuilder sb = new StringBuilder();
-                        sb.AppendLine("INFORME ESTADISTICO DE VENTAS - JOYERIA ALBA");
-                        sb.AppendLine($"Periodo,{DTPDesde.Value:dd/MM/yyyy} al {DTPHasta.Value:dd/MM/yyyy}");
-                        sb.AppendLine($"Fecha Emision,{DateTime.Now:dd/MM/yyyy HH:mm}");
-                        sb.AppendLine($"Facturacion Total,{LTotalValor.Text.Replace(",", "")}");
-                        sb.AppendLine($"Total Unidades,{LUnidadesValor.Text}");
-                        sb.AppendLine($"Ticket Promedio,{LPromedioValor.Text.Replace(",", "")}");
-                        sb.AppendLine($"Categoria Lider,{LLiderValor.Text}");
+                        sb.AppendLine("INFORME ESTADÍSTICO DE VENTAS - JOYERÍA ALBA");
+                        sb.AppendLine($"Período;{DTPDesde.Value:dd/MM/yyyy} al {DTPHasta.Value:dd/MM/yyyy}");
+                        sb.AppendLine($"Fecha Emisión;{DateTime.Now:dd/MM/yyyy HH:mm}");
+                        sb.AppendLine($"Facturación Total;\"{LTotalValor.Text}\"");
+                        sb.AppendLine($"Total Unidades;\"{LUnidadesValor.Text}\"");
+                        sb.AppendLine($"Ticket Promedio;\"{LPromedioValor.Text}\"");
+                        sb.AppendLine($"Categoría Líder;\"{LLiderValor.Text}\"");
                         sb.AppendLine();
-                        sb.AppendLine("Categoria,Unidades Vendidas,Facturacion Total,Participacion %");
+                        sb.AppendLine("Categoría;Unidades Vendidas;Facturación Total;Participación %");
 
                         foreach (DataGridViewRow row in DGInforme.Rows)
                         {
                             if (row.IsNewRow) continue;
                             string cat = row.Cells[0].Value?.ToString();
                             string uni = row.Cells[1].Value?.ToString();
-                            string tot = row.Cells[2].Value?.ToString().Replace(",", "").Replace("$", "").Trim();
+                            string tot = row.Cells[2].Value?.ToString().Replace("$", "").Trim();
                             string pct = row.Cells[3].Value?.ToString();
-                            sb.AppendLine($"\"{cat}\",\"{uni}\",\"{tot}\",\"{pct}\"");
+                            sb.AppendLine($"\"{cat}\";\"{uni}\";\"{tot}\";\"{pct}\"");
                         }
 
-                        File.WriteAllText(sfd.FileName, sb.ToString(), Encoding.UTF8);
+                        File.WriteAllText(sfd.FileName, sb.ToString(), new UTF8Encoding(true));
                         MessageBox.Show($"Informe exportado con éxito en:\n{sfd.FileName}", "Exportación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)

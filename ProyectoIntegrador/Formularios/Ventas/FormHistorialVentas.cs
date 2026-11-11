@@ -498,7 +498,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
 
         private void BExportar_Click(object sender, EventArgs e)
         {
-            /*if (listaVentasActuales == null || listaVentasActuales.Count == 0)
+            if (listaVentasActuales == null || listaVentasActuales.Count == 0)
             {
                 MessageBox.Show(
                     "No hay ventas para exportar con los filtros actuales.",
@@ -519,15 +519,38 @@ namespace ProyectoIntegrador.Formularios.Ventas
                 {
                     try
                     {
-                        StringBuilder sb = new StringBuilder();
-                        sb.AppendLine("Nro Comprobante;Fecha;Cliente;Vendedor;Total Facturado");
+                        bool esVendedor = EsRolVendedor();
+                        decimal totalFacturado = listaVentasActuales.Sum(v => v.Total);
+                        int cantidadOps = listaVentasActuales.Count;
+                        decimal ticketPromedio = cantidadOps > 0 ? totalFacturado / cantidadOps : 0m;
 
-                        foreach (var v in listaVentasActuales)
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine("HISTORIAL DE VENTAS - JOYERÍA ALBA");
+                        sb.AppendLine($"Período;{DTPFechaDesde.Value:dd/MM/yyyy} al {DTPFechaHasta.Value:dd/MM/yyyy}");
+                        sb.AppendLine($"Fecha de Emisión;{DateTime.Now:dd/MM/yyyy HH:mm}");
+                        sb.AppendLine($"Total Facturado;{totalFacturado:F2}");
+                        sb.AppendLine($"Cantidad de Operaciones;{cantidadOps}");
+                        sb.AppendLine($"Ticket Promedio;{ticketPromedio:F2}");
+                        sb.AppendLine();
+
+                        if (esVendedor)
                         {
-                            sb.AppendLine($"#{v.NroVenta:D5};{v.Fecha:dd/MM/yyyy HH:mm};\"{v.Cliente}\";\"{v.Vendedor}\";{v.Total:F2}");
+                            sb.AppendLine("Nro Comprobante;Fecha;Cliente;Método de Pago;Total Facturado");
+                            foreach (var v in listaVentasActuales)
+                            {
+                                sb.AppendLine($"#{v.NroVenta:D5};{v.Fecha:dd/MM/yyyy HH:mm};\"{v.Cliente}\";\"{v.MetodoPago}\";{v.Total:F2}");
+                            }
+                        }
+                        else
+                        {
+                            sb.AppendLine("Nro Comprobante;Fecha;Cliente;Vendedor;Método de Pago;Total Facturado");
+                            foreach (var v in listaVentasActuales)
+                            {
+                                sb.AppendLine($"#{v.NroVenta:D5};{v.Fecha:dd/MM/yyyy HH:mm};\"{v.Cliente}\";\"{v.Vendedor}\";\"{v.MetodoPago}\";{v.Total:F2}");
+                            }
                         }
 
-                        File.WriteAllText(sfd.FileName, sb.ToString(), Encoding.UTF8);
+                        File.WriteAllText(sfd.FileName, sb.ToString(), new UTF8Encoding(true));
 
                         MessageBox.Show(
                             $"Historial exportado exitosamente ({listaVentasActuales.Count} registros).\nGuardado en:\n{sfd.FileName}",
@@ -546,7 +569,7 @@ namespace ProyectoIntegrador.Formularios.Ventas
                         );
                     }
                 }
-            }*/
+            }
         }
 
         private void FHistorialVentas_Resize(object sender, EventArgs e)

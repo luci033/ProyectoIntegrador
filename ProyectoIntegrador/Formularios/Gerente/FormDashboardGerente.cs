@@ -16,6 +16,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
         private string nombreUsuarioLogueado;
         private CN_Venta objNegocioVenta = new CN_Venta();
         private CN_Producto objNegocioProducto = new CN_Producto();
+        private bool inicializandoCombos = false;
 
         public FormDashboardGerente(string nombreUsuario)
         {
@@ -43,6 +44,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
             // Estilos de Cards de Gráficos
             EstiloUI.AplicarEstiloCard(cardChartEvolucion, 12);
             EstiloUI.AplicarEstiloCard(cardChartCategorias, 12);
+            EstiloUI.AplicarEstiloCard(cardChartSecundario, 12);
 
             // Estilos de Cards inferiores
             EstiloUI.AplicarEstiloCard(cardUltimasVentas, 12);
@@ -61,6 +63,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
             ConfigurarGrillas();
             ConfigurarGraficos();
 
+            inicializandoCombos = true;
             CBFiltroPeriodo.Items.Clear();
             CBFiltroPeriodo.Items.Add("Por Semana (Últimos 7 días)");
             CBFiltroPeriodo.Items.Add("Mes Actual (Por Semanas)");
@@ -68,6 +71,14 @@ namespace ProyectoIntegrador.Formularios.Gerente
             CBFiltroPeriodo.Items.Add("Comparar Años");
             CBFiltroPeriodo.SelectedIndex = 0;
 
+            CBFiltroChartSecundario.Items.Clear();
+            CBFiltroChartSecundario.Items.Add("Por Semana");
+            CBFiltroChartSecundario.Items.Add("Por Mes");
+            CBFiltroChartSecundario.Items.Add("Por Año");
+            CBFiltroChartSecundario.SelectedIndex = 1; // Por defecto "Por Mes" (para contrastar con los últimos 7 días de arriba)
+            inicializandoCombos = false;
+
+            CargarDatosDashboard();
             AjustarLayoutResponsive();
         }
 
@@ -134,6 +145,25 @@ namespace ProyectoIntegrador.Formularios.Gerente
             legend.Alignment = StringAlignment.Center;
             legend.Font = new Font("Segoe UI", 8.5f);
             legend.BackColor = Color.Transparent;
+
+            // 3. Gráfico Secundario de Evolución de Recaudación con filtro propio (Semana / Mes / Año)
+            chartSecundario.BackColor = Color.White;
+            var areaSec = chartSecundario.ChartAreas["ChartAreaSecundario"];
+            areaSec.BackColor = Color.White;
+            areaSec.AxisX.MajorGrid.LineColor = Color.FromArgb(240, 235, 230);
+            areaSec.AxisY.MajorGrid.LineColor = Color.FromArgb(240, 235, 230);
+            areaSec.AxisX.LabelStyle.Font = new Font("Segoe UI", 8.5f);
+            areaSec.AxisY.LabelStyle.Font = new Font("Segoe UI", 8.5f);
+            areaSec.AxisY.LabelStyle.Format = "${0:N0}";
+
+            var serieSec = chartSecundario.Series["RecaudacionSecundaria"];
+            serieSec.ChartType = SeriesChartType.SplineArea;
+            serieSec.BorderWidth = 3;
+            serieSec.Color = Color.FromArgb(180, 42, 8, 12); // Borgoña ALBA traslúcido
+            serieSec.BorderColor = EstiloUI.ColorBorgoña;
+            serieSec.MarkerStyle = MarkerStyle.Circle;
+            serieSec.MarkerSize = 6;
+            serieSec.MarkerColor = EstiloUI.ColorBorgoña;
         }
 
         public void CargarDatosDashboard()
@@ -195,25 +225,37 @@ namespace ProyectoIntegrador.Formularios.Gerente
             DGProductosCriticos.Rows.Clear();
             DataTable tablaProductos = objNegocioProducto.Listar();
 
-            foreach (DataRow row in tablaProductos.Rows)
+            var filasCriticas = new List<DataRow>();
+            if (tablaProductos != null)
             {
-                bool activo = Convert.ToBoolean(row["Estado"]);
-                int stockActual = Convert.ToInt32(row["StockActual"]);
-                int stockMinimo = Convert.ToInt32(row["StockMinimo"]);
-
-                if (activo && stockActual <= stockMinimo)
+                foreach (DataRow row in tablaProductos.Rows)
                 {
-                    cantAlertas++;
-                    int rowIdx = DGProductosCriticos.Rows.Add(
-                        row["IdProducto"].ToString(),
-                        row["NombreProducto"].ToString(),
-                        stockActual,
-                        stockMinimo
-                    );
+                    bool activo = row["Estado"] != DBNull.Value && Convert.ToBoolean(row["Estado"]);
+                    int stockActual = row["StockActual"] != DBNull.Value ? Convert.ToInt32(row["StockActual"]) : 0;
+                    int stockMinimo = row["StockMinimo"] != DBNull.Value ? Convert.ToInt32(row["StockMinimo"]) : 0;
 
-                    DGProductosCriticos.Rows[rowIdx].Cells["colStock"].Style.ForeColor = Color.FromArgb(179, 38, 30);
-                    DGProductosCriticos.Rows[rowIdx].Cells["colStock"].Style.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
+                    if (activo && stockActual <= stockMinimo)
+                    {
+                        filasCriticas.Add(row);
+                    }
                 }
+            }
+
+            foreach (DataRow row in filasCriticas.OrderBy(r => r["StockActual"] != DBNull.Value ? Convert.ToInt32(r["StockActual"]) : 0))
+            {
+                int stockActual = row["StockActual"] != DBNull.Value ? Convert.ToInt32(row["StockActual"]) : 0;
+                int stockMinimo = row["StockMinimo"] != DBNull.Value ? Convert.ToInt32(row["StockMinimo"]) : 0;
+
+                cantAlertas++;
+                int rowIdx = DGProductosCriticos.Rows.Add(
+                    row["IdProducto"].ToString(),
+                    row["NombreProducto"].ToString(),
+                    stockActual,
+                    stockMinimo
+                );
+
+                DGProductosCriticos.Rows[rowIdx].Cells["colStock"].Style.ForeColor = Color.FromArgb(179, 38, 30);
+                DGProductosCriticos.Rows[rowIdx].Cells["colStock"].Style.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
             }
 
             LAlertasStockCant.Text = $"{cantAlertas} Joyas";
@@ -346,11 +388,97 @@ namespace ProyectoIntegrador.Formularios.Gerente
                 serieCat.Points[ptIndex].LegendText = $"{nombreCat} ({pct:F1}%)";
                 colorIdx++;
             }
+
+            // C. Gráfico Secundario de Evolución de Recaudación (por Semana, Mes o Año)
+            CargarGraficoSecundario(tablaVentas, hoy);
+        }
+
+        private void CargarGraficoSecundario(DataTable tablaVentas, DateTime hoy)
+        {
+            if (tablaVentas == null)
+            {
+                tablaVentas = objNegocioVenta.ListarVentas();
+            }
+
+            string filtroSec = CBFiltroChartSecundario.SelectedItem != null
+                ? CBFiltroChartSecundario.SelectedItem.ToString()
+                : "Por Semana";
+
+            var serieSec = chartSecundario.Series["RecaudacionSecundaria"];
+            serieSec.Points.Clear();
+            chartSecundario.ChartAreas["ChartAreaSecundario"].AxisX.Interval = 1;
+
+            if (filtroSec == "Por Semana")
+            {
+                LTituloChartSecundario.Text = "Evolución de Recaudación por Semana (Últimos 7 días)";
+
+                for (int i = 6; i >= 0; i--)
+                {
+                    DateTime dia = hoy.AddDays(-i);
+                    decimal totalDia = 0;
+
+                    foreach (DataRow row in tablaVentas.Rows)
+                    {
+                        DateTime fecha = Convert.ToDateTime(row["FechaComprobante"]);
+                        if (fecha.Date == dia.Date)
+                        {
+                            totalDia += Convert.ToDecimal(row["Total"]);
+                        }
+                    }
+                    serieSec.Points.AddXY(dia.ToString("dd/MM"), (double)totalDia);
+                }
+            }
+            else if (filtroSec == "Por Mes")
+            {
+                LTituloChartSecundario.Text = $"Evolución de Recaudación por Mes ({hoy.Year})";
+                string[] nombresMeses = { "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" };
+
+                for (int mes = 1; mes <= 12; mes++)
+                {
+                    decimal totalMes = 0;
+
+                    foreach (DataRow row in tablaVentas.Rows)
+                    {
+                        DateTime fecha = Convert.ToDateTime(row["FechaComprobante"]);
+                        if (fecha.Year == hoy.Year && fecha.Month == mes)
+                        {
+                            totalMes += Convert.ToDecimal(row["Total"]);
+                        }
+                    }
+                    serieSec.Points.AddXY(nombresMeses[mes - 1], (double)totalMes);
+                }
+            }
+            else if (filtroSec == "Por Año")
+            {
+                LTituloChartSecundario.Text = "Evolución de Recaudación por Año";
+
+                for (int anio = hoy.Year - 2; anio <= hoy.Year; anio++)
+                {
+                    decimal totalAnio = 0;
+
+                    foreach (DataRow row in tablaVentas.Rows)
+                    {
+                        DateTime fecha = Convert.ToDateTime(row["FechaComprobante"]);
+                        if (fecha.Year == anio)
+                        {
+                            totalAnio += Convert.ToDecimal(row["Total"]);
+                        }
+                    }
+                    serieSec.Points.AddXY(anio.ToString(), (double)totalAnio);
+                }
+            }
         }
 
         private void CBFiltroPeriodo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (inicializandoCombos) return;
             CargarDatosDashboard();
+        }
+
+        private void CBFiltroChartSecundario_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (inicializandoCombos) return;
+            CargarGraficoSecundario(null, DateTime.Today);
         }
 
         private void AjustarLayoutResponsive()
@@ -366,13 +494,21 @@ namespace ProyectoIntegrador.Formularios.Gerente
             cardAlertasStock.Left = cardRecaudacionMes.Right + 20;
             cardAlertasStock.Width = anchoCardKpi;
 
-            // Bloque 2: Gráficos
+            // Bloque 2: Gráficos Superiores
             int anchoGraficos = (anchoTotal - 20) / 2;
             cardChartEvolucion.Width = anchoGraficos;
             cardChartCategorias.Left = cardChartEvolucion.Right + 20;
             cardChartCategorias.Width = anchoGraficos;
 
+            // Bloque 2.5: Gráfico Secundario (Ancho Completo)
+            panelGraficoSecundario.Top = panelGraficos.Bottom + 12;
+            panelGraficoSecundario.Width = anchoTotal;
+            cardChartSecundario.Width = anchoTotal;
+            CBFiltroChartSecundario.Left = cardChartSecundario.Width - CBFiltroChartSecundario.Width - 16;
+            LFiltroChartSecundario.Left = CBFiltroChartSecundario.Left - LFiltroChartSecundario.Width - 8;
+
             // Bloque 3: Inferior (Grilla ventas 38%, Críticos 38%, Acciones 24%)
+            panelInferior.Top = panelGraficoSecundario.Bottom + 12;
             int espacioInferior = anchoTotal - 40;
             int anchoGrillas = (int)(espacioInferior * 0.38);
             int anchoAcciones = espacioInferior - (anchoGrillas * 2);

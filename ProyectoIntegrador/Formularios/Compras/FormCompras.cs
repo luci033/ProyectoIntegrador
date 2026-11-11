@@ -16,6 +16,8 @@ namespace ProyectoIntegrador.Formularios.Compras
     {
         private string nombreUsuarioLogueado;
         private int idUsuarioLogueado = 1;
+        private DataTable dtComprasCompleta;
+        private bool inicializandoFiltros = false;
 
         public FormCompras(string nombreUsuario)
         {
@@ -59,59 +61,144 @@ namespace ProyectoIntegrador.Formularios.Compras
             EstiloUI.AplicarEstiloFormulario(this);
             EstiloUI.AplicarEstiloTitulo(LTitulo);
             EstiloUI.AplicarEstiloBoton(BAgregarOrden);
+            EstiloUI.AplicarEstiloPanelSeccion(panelFiltro, 10);
+            EstiloUI.AplicarEstiloTextBox(TBBuscar);
+            EstiloUI.AplicarEstiloBotonSecundario(BLimpiar);
+
+            inicializandoFiltros = true;
+            cmbBuscar.Items.Clear();
+            cmbBuscar.Items.AddRange(new object[] { "Nro. Orden", "Proveedor", "Observación" });
+            cmbBuscar.SelectedIndex = 0;
+
+            cmbEstado.Items.Clear();
+            cmbEstado.Items.AddRange(new object[] { "Todos", "Pendiente", "Recibido Conforme", "Recibido Disconforme" });
+            cmbEstado.SelectedIndex = 0;
+            inicializandoFiltros = false;
 
             CargarCompras();
         }
 
         private void CargarCompras()
         {
-            DGCompras.Rows.Clear();
             try
             {
                 CN_Compra negocio = new CN_Compra();
-                DataTable dt = negocio.Listar();
-
-                foreach (DataRow row in dt.Rows)
-                {
-                    int idCompra = Convert.ToInt32(row["IdCompra"]);
-                    DateTime fechaCompra = Convert.ToDateTime(row["FechaCompra"]);
-                    string fechaStr = fechaCompra.ToString("dd/MM/yyyy");
-                    string proveedor = row["Proveedor"] != DBNull.Value ? row["Proveedor"].ToString() : "";
-                    int idEstado = Convert.ToInt32(row["IdEstadoCompra"]);
-                    string nombreEstado = row["Estado"] != DBNull.Value ? row["Estado"].ToString() : "";
-
-                    string textoRecepcion;
-                    if (idEstado == 1) // Pendiente
-                    {
-                        textoRecepcion = "Registrar Recepción";
-                    }
-                    else
-                    {
-                        if (row["FechaRecepcion"] != DBNull.Value)
-                        {
-                            textoRecepcion = Convert.ToDateTime(row["FechaRecepcion"]).ToString("dd/MM/yyyy");
-                        }
-                        else
-                        {
-                            textoRecepcion = nombreEstado;
-                        }
-                    }
-
-                    string observacion = row["Observacion"] != DBNull.Value ? row["Observacion"].ToString() : "";
-                    decimal total = row["Total"] != DBNull.Value ? Convert.ToDecimal(row["Total"]) : 0.00m;
-                    string totalStr = total.ToString("C2");
-
-                    string usuarioEmisor = (row.Table.Columns.Contains("UsuarioEmisor") && row["UsuarioEmisor"] != DBNull.Value) ? row["UsuarioEmisor"].ToString() : "";
-                    string usuarioReceptor = (row.Table.Columns.Contains("UsuarioReceptor") && row["UsuarioReceptor"] != DBNull.Value) ? row["UsuarioReceptor"].ToString() : "Pendiente";
-
-                    int idx = DGCompras.Rows.Add(idCompra, fechaStr, proveedor, textoRecepcion, observacion, totalStr, "Ver...");
-                    DGCompras.Rows[idx].Tag = new Tuple<int, string, string>(idCompra, usuarioEmisor, usuarioReceptor);
-                }
+                dtComprasCompleta = negocio.Listar();
+                AplicarFiltrosCompras();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al cargar las órdenes de compra: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void AplicarFiltrosCompras()
+        {
+            DGCompras.Rows.Clear();
+            if (dtComprasCompleta == null) return;
+
+            string criterio = cmbBuscar.SelectedItem != null ? cmbBuscar.SelectedItem.ToString() : "Nro. Orden";
+            string texto = TBBuscar.Text != null ? TBBuscar.Text.Trim().ToLowerInvariant() : "";
+            string estadoFiltro = cmbEstado.SelectedItem != null ? cmbEstado.SelectedItem.ToString() : "Todos";
+
+            foreach (DataRow row in dtComprasCompleta.Rows)
+            {
+                int idCompra = Convert.ToInt32(row["IdCompra"]);
+                DateTime fechaCompra = Convert.ToDateTime(row["FechaCompra"]);
+                string fechaStr = fechaCompra.ToString("dd/MM/yyyy");
+                string proveedor = row["Proveedor"] != DBNull.Value ? row["Proveedor"].ToString() : "";
+                int idEstado = Convert.ToInt32(row["IdEstadoCompra"]);
+                string nombreEstado = row["Estado"] != DBNull.Value ? row["Estado"].ToString() : "";
+                string observacion = row["Observacion"] != DBNull.Value ? row["Observacion"].ToString() : "";
+
+                // Filtro por Estado
+                if (estadoFiltro != "Todos")
+                {
+                    bool coincideEstado = false;
+                    if (estadoFiltro == "Pendiente" && idEstado == 1) coincideEstado = true;
+                    else if (estadoFiltro == "Recibido Conforme" && idEstado == 2) coincideEstado = true;
+                    else if (estadoFiltro == "Recibido Disconforme" && idEstado == 3) coincideEstado = true;
+                    else if (string.Equals(nombreEstado, estadoFiltro, StringComparison.OrdinalIgnoreCase)) coincideEstado = true;
+
+                    if (!coincideEstado) continue;
+                }
+
+                // Filtro por Texto según criterio
+                if (!string.IsNullOrEmpty(texto))
+                {
+                    if (criterio == "Nro. Orden")
+                    {
+                        string idStr = idCompra.ToString();
+                        string idPadded = idCompra.ToString("D5");
+                        if (!idStr.Contains(texto) && !idPadded.Contains(texto))
+                            continue;
+                    }
+                    else if (criterio == "Proveedor")
+                    {
+                        if (!proveedor.ToLowerInvariant().Contains(texto))
+                            continue;
+                    }
+                    else if (criterio == "Observación")
+                    {
+                        if (!observacion.ToLowerInvariant().Contains(texto))
+                            continue;
+                    }
+                }
+
+                string textoRecepcion;
+                if (idEstado == 1) // Pendiente
+                {
+                    textoRecepcion = "Registrar Recepción";
+                }
+                else
+                {
+                    if (row["FechaRecepcion"] != DBNull.Value)
+                    {
+                        textoRecepcion = Convert.ToDateTime(row["FechaRecepcion"]).ToString("dd/MM/yyyy");
+                    }
+                    else
+                    {
+                        textoRecepcion = nombreEstado;
+                    }
+                }
+
+                decimal total = row["Total"] != DBNull.Value ? Convert.ToDecimal(row["Total"]) : 0.00m;
+                string totalStr = total.ToString("C2");
+
+                string usuarioEmisor = (row.Table.Columns.Contains("UsuarioEmisor") && row["UsuarioEmisor"] != DBNull.Value) ? row["UsuarioEmisor"].ToString() : "";
+                string usuarioReceptor = (row.Table.Columns.Contains("UsuarioReceptor") && row["UsuarioReceptor"] != DBNull.Value) ? row["UsuarioReceptor"].ToString() : "Pendiente";
+
+                int idx = DGCompras.Rows.Add(idCompra, fechaStr, proveedor, textoRecepcion, observacion, totalStr, "Ver...");
+                DGCompras.Rows[idx].Tag = new Tuple<int, string, string>(idCompra, usuarioEmisor, usuarioReceptor);
+            }
+        }
+
+        private void TBBuscar_TextChanged(object sender, EventArgs e)
+        {
+            if (inicializandoFiltros) return;
+            AplicarFiltrosCompras();
+        }
+
+        private void cmbBuscar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (inicializandoFiltros) return;
+            AplicarFiltrosCompras();
+        }
+
+        private void cmbEstado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (inicializandoFiltros) return;
+            AplicarFiltrosCompras();
+        }
+
+        private void BLimpiar_Click(object sender, EventArgs e)
+        {
+            inicializandoFiltros = true;
+            TBBuscar.Clear();
+            cmbBuscar.SelectedIndex = 0;
+            cmbEstado.SelectedIndex = 0;
+            inicializandoFiltros = false;
+            AplicarFiltrosCompras();
         }
 
         private void BAgregarOrden_Click(object sender, EventArgs e)
