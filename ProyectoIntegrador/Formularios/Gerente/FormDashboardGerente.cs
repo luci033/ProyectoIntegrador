@@ -521,6 +521,18 @@ namespace ProyectoIntegrador.Formularios.Gerente
             int anchoTotal = this.ClientSize.Width - 40;
             if (anchoTotal < 800) anchoTotal = 800;
 
+            // Ajustar el ancho de todos los paneles contenedores al mismo anchoTotal
+            panelTopHeader.Width = anchoTotal;
+            panelKpis.Width = anchoTotal;
+            panelGraficos.Width = anchoTotal;
+            panelGraficoSecundario.Width = anchoTotal;
+            panelInferior.Width = anchoTotal;
+
+            // Reubicar controles de la cabecera a la derecha
+            BRefrescar.Left = panelTopHeader.Width - BRefrescar.Width;
+            CBFiltroPeriodo.Left = BRefrescar.Left - CBFiltroPeriodo.Width - 12;
+            LFiltroPeriodo.Left = CBFiltroPeriodo.Left - LFiltroPeriodo.Width - 6;
+
             // Bloque 1: KPIs
             int anchoCardKpi = (anchoTotal - 40) / 3;
             cardVentasDia.Width = anchoCardKpi;
@@ -532,12 +544,12 @@ namespace ProyectoIntegrador.Formularios.Gerente
             // Bloque 2: Gráficos Superiores
             int anchoGraficos = (anchoTotal - 20) / 2;
             cardChartEvolucion.Width = anchoGraficos;
+            cardChartCategorias.Anchor = AnchorStyles.Top | AnchorStyles.Left;
             cardChartCategorias.Left = cardChartEvolucion.Right + 20;
             cardChartCategorias.Width = anchoGraficos;
 
             // Bloque 2.5: Gráfico Secundario (Ancho Completo)
             panelGraficoSecundario.Top = panelGraficos.Bottom + 12;
-            panelGraficoSecundario.Width = anchoTotal;
             cardChartSecundario.Width = anchoTotal;
             CBFiltroChartSecundario.Left = cardChartSecundario.Width - CBFiltroChartSecundario.Width - 16;
             LFiltroChartSecundario.Left = CBFiltroChartSecundario.Left - LFiltroChartSecundario.Width - 8;
@@ -551,6 +563,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
             cardUltimasVentas.Width = anchoGrillas;
             cardProductosCriticos.Left = cardUltimasVentas.Right + 20;
             cardProductosCriticos.Width = anchoGrillas;
+            cardAcciones.Anchor = AnchorStyles.Top | AnchorStyles.Left;
             cardAcciones.Left = cardProductosCriticos.Right + 20;
             cardAcciones.Width = anchoAcciones;
         }
