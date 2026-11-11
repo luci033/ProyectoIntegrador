@@ -63,9 +63,9 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.chartCategorias = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panelGraficoSecundario = new System.Windows.Forms.Panel();
             this.cardChartSecundario = new System.Windows.Forms.Panel();
-            this.LTituloChartSecundario = new System.Windows.Forms.Label();
-            this.LFiltroChartSecundario = new System.Windows.Forms.Label();
             this.CBFiltroChartSecundario = new System.Windows.Forms.ComboBox();
+            this.LFiltroChartSecundario = new System.Windows.Forms.Label();
+            this.LTituloChartSecundario = new System.Windows.Forms.Label();
             this.chartSecundario = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panelInferior = new System.Windows.Forms.Panel();
             this.cardUltimasVentas = new System.Windows.Forms.Panel();
@@ -112,7 +112,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.panelTopHeader.Controls.Add(this.BRefrescar);
             this.panelTopHeader.Location = new System.Drawing.Point(20, 2);
             this.panelTopHeader.Name = "panelTopHeader";
-            this.panelTopHeader.Size = new System.Drawing.Size(1100, 62);
+            this.panelTopHeader.Size = new System.Drawing.Size(1066, 62);
             this.panelTopHeader.TabIndex = 0;
             // 
             // LFiltroPeriodo
@@ -121,9 +121,9 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.LFiltroPeriodo.AutoSize = true;
             this.LFiltroPeriodo.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
             this.LFiltroPeriodo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.LFiltroPeriodo.Location = new System.Drawing.Point(600, 17);
+            this.LFiltroPeriodo.Location = new System.Drawing.Point(566, 17);
             this.LFiltroPeriodo.Name = "LFiltroPeriodo";
-            this.LFiltroPeriodo.Size = new System.Drawing.Size(102, 17);
+            this.LFiltroPeriodo.Size = new System.Drawing.Size(105, 17);
             this.LFiltroPeriodo.TabIndex = 3;
             this.LFiltroPeriodo.Text = "Vista / Período:";
             // 
@@ -133,7 +133,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.CBFiltroPeriodo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CBFiltroPeriodo.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             this.CBFiltroPeriodo.FormattingEnabled = true;
-            this.CBFiltroPeriodo.Location = new System.Drawing.Point(708, 14);
+            this.CBFiltroPeriodo.Location = new System.Drawing.Point(674, 14);
             this.CBFiltroPeriodo.Name = "CBFiltroPeriodo";
             this.CBFiltroPeriodo.Size = new System.Drawing.Size(200, 25);
             this.CBFiltroPeriodo.TabIndex = 4;
@@ -170,7 +170,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.BRefrescar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BRefrescar.Font = new System.Drawing.Font("Georgia", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BRefrescar.ForeColor = System.Drawing.Color.White;
-            this.BRefrescar.Location = new System.Drawing.Point(920, 8);
+            this.BRefrescar.Location = new System.Drawing.Point(886, 8);
             this.BRefrescar.Name = "BRefrescar";
             this.BRefrescar.Size = new System.Drawing.Size(180, 36);
             this.BRefrescar.TabIndex = 2;
@@ -188,7 +188,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.panelKpis.Controls.Add(this.cardAlertasStock);
             this.panelKpis.Location = new System.Drawing.Point(20, 70);
             this.panelKpis.Name = "panelKpis";
-            this.panelKpis.Size = new System.Drawing.Size(1100, 100);
+            this.panelKpis.Size = new System.Drawing.Size(1066, 100);
             this.panelKpis.TabIndex = 1;
             // 
             // cardVentasDia
@@ -332,7 +332,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.panelGraficos.Controls.Add(this.cardChartCategorias);
             this.panelGraficos.Location = new System.Drawing.Point(20, 175);
             this.panelGraficos.Name = "panelGraficos";
-            this.panelGraficos.Size = new System.Drawing.Size(1100, 260);
+            this.panelGraficos.Size = new System.Drawing.Size(1066, 260);
             this.panelGraficos.TabIndex = 2;
             // 
             // cardChartEvolucion
@@ -380,7 +380,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.cardChartCategorias.Controls.Add(this.chartCategorias);
             this.cardChartCategorias.Location = new System.Drawing.Point(600, 0);
             this.cardChartCategorias.Name = "cardChartCategorias";
-            this.cardChartCategorias.Size = new System.Drawing.Size(500, 255);
+            this.cardChartCategorias.Size = new System.Drawing.Size(466, 255);
             this.cardChartCategorias.TabIndex = 1;
             // 
             // LTituloChartCategorias
@@ -410,7 +410,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
             series2.Legend = "LegendCategorias";
             series2.Name = "Categorias";
             this.chartCategorias.Series.Add(series2);
-            this.chartCategorias.Size = new System.Drawing.Size(480, 205);
+            this.chartCategorias.Size = new System.Drawing.Size(446, 205);
             this.chartCategorias.TabIndex = 1;
             // 
             // panelGraficoSecundario
@@ -421,7 +421,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.panelGraficoSecundario.Controls.Add(this.cardChartSecundario);
             this.panelGraficoSecundario.Location = new System.Drawing.Point(20, 445);
             this.panelGraficoSecundario.Name = "panelGraficoSecundario";
-            this.panelGraficoSecundario.Size = new System.Drawing.Size(1100, 260);
+            this.panelGraficoSecundario.Size = new System.Drawing.Size(1066, 260);
             this.panelGraficoSecundario.TabIndex = 3;
             // 
             // cardChartSecundario
@@ -435,8 +435,32 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.cardChartSecundario.Controls.Add(this.chartSecundario);
             this.cardChartSecundario.Location = new System.Drawing.Point(0, 0);
             this.cardChartSecundario.Name = "cardChartSecundario";
-            this.cardChartSecundario.Size = new System.Drawing.Size(1100, 255);
+            this.cardChartSecundario.Size = new System.Drawing.Size(1066, 255);
             this.cardChartSecundario.TabIndex = 0;
+            // 
+            // CBFiltroChartSecundario
+            // 
+            this.CBFiltroChartSecundario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.CBFiltroChartSecundario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CBFiltroChartSecundario.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.CBFiltroChartSecundario.FormattingEnabled = true;
+            this.CBFiltroChartSecundario.Location = new System.Drawing.Point(860, 9);
+            this.CBFiltroChartSecundario.Name = "CBFiltroChartSecundario";
+            this.CBFiltroChartSecundario.Size = new System.Drawing.Size(190, 23);
+            this.CBFiltroChartSecundario.TabIndex = 2;
+            this.CBFiltroChartSecundario.SelectedIndexChanged += new System.EventHandler(this.CBFiltroChartSecundario_SelectedIndexChanged);
+            // 
+            // LFiltroChartSecundario
+            // 
+            this.LFiltroChartSecundario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LFiltroChartSecundario.AutoSize = true;
+            this.LFiltroChartSecundario.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.LFiltroChartSecundario.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
+            this.LFiltroChartSecundario.Location = new System.Drawing.Point(786, 13);
+            this.LFiltroChartSecundario.Name = "LFiltroChartSecundario";
+            this.LFiltroChartSecundario.Size = new System.Drawing.Size(65, 15);
+            this.LFiltroChartSecundario.TabIndex = 1;
+            this.LFiltroChartSecundario.Text = "Ver según:";
             // 
             // LTituloChartSecundario
             // 
@@ -445,33 +469,9 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.LTituloChartSecundario.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
             this.LTituloChartSecundario.Location = new System.Drawing.Point(16, 12);
             this.LTituloChartSecundario.Name = "LTituloChartSecundario";
-            this.LTituloChartSecundario.Size = new System.Drawing.Size(348, 18);
+            this.LTituloChartSecundario.Size = new System.Drawing.Size(365, 18);
             this.LTituloChartSecundario.TabIndex = 0;
             this.LTituloChartSecundario.Text = "Análisis de Recaudación por Período (Semana)";
-            // 
-            // LFiltroChartSecundario
-            // 
-            this.LFiltroChartSecundario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LFiltroChartSecundario.AutoSize = true;
-            this.LFiltroChartSecundario.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.LFiltroChartSecundario.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
-            this.LFiltroChartSecundario.Location = new System.Drawing.Point(820, 13);
-            this.LFiltroChartSecundario.Name = "LFiltroChartSecundario";
-            this.LFiltroChartSecundario.Size = new System.Drawing.Size(68, 15);
-            this.LFiltroChartSecundario.TabIndex = 1;
-            this.LFiltroChartSecundario.Text = "Ver según:";
-            // 
-            // CBFiltroChartSecundario
-            // 
-            this.CBFiltroChartSecundario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.CBFiltroChartSecundario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CBFiltroChartSecundario.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.CBFiltroChartSecundario.FormattingEnabled = true;
-            this.CBFiltroChartSecundario.Location = new System.Drawing.Point(894, 9);
-            this.CBFiltroChartSecundario.Name = "CBFiltroChartSecundario";
-            this.CBFiltroChartSecundario.Size = new System.Drawing.Size(190, 23);
-            this.CBFiltroChartSecundario.TabIndex = 2;
-            this.CBFiltroChartSecundario.SelectedIndexChanged += new System.EventHandler(this.CBFiltroChartSecundario_SelectedIndexChanged);
             // 
             // chartSecundario
             // 
@@ -485,7 +485,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
             series3.ChartArea = "ChartAreaSecundario";
             series3.Name = "RecaudacionSecundaria";
             this.chartSecundario.Series.Add(series3);
-            this.chartSecundario.Size = new System.Drawing.Size(1080, 205);
+            this.chartSecundario.Size = new System.Drawing.Size(1046, 205);
             this.chartSecundario.TabIndex = 3;
             // 
             // panelInferior
@@ -498,7 +498,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.panelInferior.Controls.Add(this.cardAcciones);
             this.panelInferior.Location = new System.Drawing.Point(20, 715);
             this.panelInferior.Name = "panelInferior";
-            this.panelInferior.Size = new System.Drawing.Size(1100, 250);
+            this.panelInferior.Size = new System.Drawing.Size(1066, 250);
             this.panelInferior.TabIndex = 4;
             // 
             // cardUltimasVentas
@@ -592,7 +592,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.cardAcciones.Controls.Add(this.BVerHistorial);
             this.cardAcciones.Location = new System.Drawing.Point(870, 0);
             this.cardAcciones.Name = "cardAcciones";
-            this.cardAcciones.Size = new System.Drawing.Size(230, 240);
+            this.cardAcciones.Size = new System.Drawing.Size(196, 240);
             this.cardAcciones.TabIndex = 2;
             // 
             // LTituloAcciones
@@ -618,7 +618,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.BDevoluciones.ForeColor = System.Drawing.Color.White;
             this.BDevoluciones.Location = new System.Drawing.Point(14, 170);
             this.BDevoluciones.Name = "BDevoluciones";
-            this.BDevoluciones.Size = new System.Drawing.Size(202, 38);
+            this.BDevoluciones.Size = new System.Drawing.Size(168, 38);
             this.BDevoluciones.TabIndex = 3;
             this.BDevoluciones.Text = "🔄 Devoluciones";
             this.BDevoluciones.UseVisualStyleBackColor = false;
@@ -637,7 +637,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.BVerInformes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(8)))), ((int)(((byte)(12)))));
             this.BVerInformes.Location = new System.Drawing.Point(14, 38);
             this.BVerInformes.Name = "BVerInformes";
-            this.BVerInformes.Size = new System.Drawing.Size(202, 38);
+            this.BVerInformes.Size = new System.Drawing.Size(168, 38);
             this.BVerInformes.TabIndex = 4;
             this.BVerInformes.Text = "📊 Ver Informes";
             this.BVerInformes.UseVisualStyleBackColor = false;
@@ -655,7 +655,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
             this.BVerHistorial.ForeColor = System.Drawing.Color.White;
             this.BVerHistorial.Location = new System.Drawing.Point(14, 84);
             this.BVerHistorial.Name = "BVerHistorial";
-            this.BVerHistorial.Size = new System.Drawing.Size(202, 38);
+            this.BVerHistorial.Size = new System.Drawing.Size(168, 38);
             this.BVerHistorial.TabIndex = 2;
             this.BVerHistorial.Text = "💳 Historial de Ventas";
             this.BVerHistorial.UseVisualStyleBackColor = false;

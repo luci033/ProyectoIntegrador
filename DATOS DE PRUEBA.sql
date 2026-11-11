@@ -395,6 +395,7 @@ GO
 -- 5. LOTE DE 100 ÓRDENES DE COMPRA DISTRIBUIDAS A LO LARGO DEL AÑO 2026
 -- ==============================================================================
 SET NOCOUNT ON;
+SET DATEFORMAT ymd;
 
 IF (SELECT COUNT(*) FROM Compra) < 50
 BEGIN
@@ -773,6 +774,7 @@ GO
 -- 6. LOTE INICIAL DE 150 VENTAS DISTRIBUIDAS A LO LARGO DEL AÑO 2026
 -- ==============================================================================
 SET NOCOUNT ON;
+SET DATEFORMAT ymd;
 
 IF (SELECT COUNT(*) FROM Comprobante) < 50
 BEGIN
@@ -1270,6 +1272,7 @@ GO
 -- 7. LOTE DE 70 VENTAS DEL NUEVO VENDEDOR (vendedor2 - Sofía Vendedora) EN 2026
 -- ==============================================================================
 SET NOCOUNT ON;
+SET DATEFORMAT ymd;
 
 DECLARE @IdVendedorNuevo INT = (SELECT TOP 1 IdUsuario FROM Usuarios WHERE Usuario = 'vendedor2');
 IF @IdVendedorNuevo IS NULL
@@ -1557,5 +1560,152 @@ BEGIN
     DROP TABLE #VentasV2Lote;
 
     PRINT '¡Lote de 70 ventas del nuevo vendedor (vendedor2) cargado exitosamente!';
+END
+GO
+
+
+-- ==============================================================================
+-- 8. LOTE DE VENTAS HISTÓRICAS (AÑOS 2024 Y 2025) PARA COMPARACIÓN ANUAL
+-- ==============================================================================
+SET NOCOUNT ON;
+SET DATEFORMAT ymd;
+
+IF NOT EXISTS (SELECT 1 FROM Comprobante WHERE YEAR(FechaComprobante) IN (2024, 2025))
+BEGIN
+    IF OBJECT_ID('tempdb..#VentasHistLote') IS NOT NULL DROP TABLE #VentasHistLote;
+    IF OBJECT_ID('tempdb..#DetallesHistLote') IS NOT NULL DROP TABLE #DetallesHistLote;
+
+    CREATE TABLE #VentasHistLote (
+        IdLote INT PRIMARY KEY,
+        FechaComprobante DATETIME NOT NULL,
+        IdMedioPago INT NOT NULL,
+        DNICUITCliente VARCHAR(20) NOT NULL,
+        IdUsuario INT NOT NULL
+    );
+
+    CREATE TABLE #DetallesHistLote (
+        IdLote INT NOT NULL,
+        NombreProducto VARCHAR(100) NOT NULL,
+        Cantidad INT NOT NULL
+    );
+
+    INSERT INTO #VentasHistLote (IdLote, FechaComprobante, IdMedioPago, DNICUITCliente, IdUsuario) VALUES
+    -- Año 2024
+    (1, '2024-02-14 11:20:00', 1, '38452109', 3),
+    (2, '2024-03-19 16:40:00', 2, '20358941203', 3),
+    (3, '2024-05-10 10:15:00', 2, '42105698', 3),
+    (4, '2024-06-22 18:05:00', 1, '20412304561', 1),
+    (5, '2024-08-15 12:30:00', 2, '39784512', 3),
+    (6, '2024-09-28 17:45:00', 1, '36952147', 3),
+    (7, '2024-10-18 11:10:00', 2, '27376541234', 3),
+    (8, '2024-11-25 19:00:00', 2, '34562189', 1),
+    (9, '2024-12-18 15:20:00', 1, '40123987', 3),
+    (10, '2024-12-23 18:50:00', 2, '20339874562', 3),
+    -- Año 2025
+    (11, '2025-01-16 10:30:00', 1, '41852963', 3),
+    (12, '2025-02-14 17:15:00', 2, '37410258', 3),
+    (13, '2025-03-22 11:45:00', 2, '27436521478', 1),
+    (14, '2025-04-19 16:20:00', 1, '35964123', 3),
+    (15, '2025-05-24 12:10:00', 2, '27361245890', 3),
+    (16, '2025-06-17 18:30:00', 2, '38452109', 3),
+    (17, '2025-07-12 10:50:00', 1, '20358941203', 1),
+    (18, '2025-08-21 15:40:00', 2, '42105698', 3),
+    (19, '2025-09-14 11:25:00', 1, '20412304561', 3),
+    (20, '2025-10-18 17:55:00', 2, '39784512', 3),
+    (21, '2025-11-11 14:15:00', 2, '36952147', 3),
+    (22, '2025-11-27 18:10:00', 1, '27376541234', 1),
+    (23, '2025-12-15 16:45:00', 2, '34562189', 3),
+    (24, '2025-12-22 19:30:00', 2, '40123987', 3);
+
+    INSERT INTO #DetallesHistLote (IdLote, NombreProducto, Cantidad) VALUES
+    (1, 'Alianza de Compromiso Lisa', 2),
+    (2, 'Cadena Figaro 3x1 Oro Blanco', 1),
+    (2, 'Pulsera Tennis Circonias', 1),
+    (3, 'Collar Gargantilla Perlas Cultivadas', 2),
+    (4, 'Alianza Bicolor Oro y Plata', 2),
+    (5, 'Cadena Tourbillon Maciza 60cm', 2),
+    (6, 'Pulsera Cadena Marina Maciza', 2),
+    (7, 'Anillo Chevalier Ónix Negro', 2),
+    (8, 'Cadena Figaro 3x1 Oro Blanco', 2),
+    (9, 'Alianza de Compromiso Lisa', 2),
+    (10, 'Collar Gargantilla Perlas Cultivadas', 2),
+    (10, 'Pulsera Tennis Circonias', 2),
+    (11, 'Alianza de Compromiso Lisa', 2),
+    (12, 'Cadena Figaro 3x1 Oro Blanco', 2),
+    (13, 'Collar Gargantilla Perlas Cultivadas', 2),
+    (14, 'Pulsera Tennis Circonias', 2),
+    (15, 'Alianza Bicolor Oro y Plata', 2),
+    (15, 'Collar Árbol de la Vida Nácar', 2),
+    (16, 'Cadena Tourbillon Maciza 60cm', 2),
+    (17, 'Pulsera Cadena Marina Maciza', 2),
+    (18, 'Cadena Figaro 3x1 Oro Blanco', 2),
+    (19, 'Alianza de Compromiso Lisa', 2),
+    (20, 'Collar Gargantilla Perlas Cultivadas', 2),
+    (21, 'Pulsera Eslabón Cubano Pavé', 2),
+    (22, 'Cadena Figaro 3x1 Oro Blanco', 2),
+    (23, 'Alianza de Compromiso Lisa', 2),
+    (24, 'Cadena Figaro 3x1 Oro Blanco', 2),
+    (24, 'Pulsera Tennis Circonias', 2);
+
+    DECLARE @TotalHist INT = (SELECT COUNT(*) FROM #VentasHistLote);
+    DECLARE @h INT = 1;
+
+    WHILE @h <= @TotalHist
+    BEGIN
+        DECLARE @FVentaH DATETIME, @MedioPagoH INT, @DNIClienteH VARCHAR(20), @UsuarioVendedorH INT;
+        DECLARE @IdClienteH INT, @IdCondIVAH INT, @TipoCompH INT, @IdCompGenH INT;
+
+        SELECT 
+            @FVentaH = FechaComprobante,
+            @MedioPagoH = IdMedioPago,
+            @DNIClienteH = DNICUITCliente,
+            @UsuarioVendedorH = IdUsuario
+        FROM #VentasHistLote
+        WHERE IdLote = @h;
+
+        SET @IdClienteH = NULL;
+        SET @IdCondIVAH = NULL;
+
+        SELECT TOP 1 @IdClienteH = IdCliente, @IdCondIVAH = IdCondicionIVA FROM Cliente WHERE DNICUIT = @DNIClienteH;
+        IF @IdClienteH IS NULL
+            SELECT TOP 1 @IdClienteH = IdCliente, @IdCondIVAH = IdCondicionIVA FROM Cliente ORDER BY IdCliente;
+
+        IF @IdCondIVAH = 4 SET @TipoCompH = 1; ELSE SET @TipoCompH = 2;
+
+        INSERT INTO Comprobante (FechaComprobante, IdMedioPago, IdTipoComprobante, IdCliente, IdUsuario)
+        VALUES (@FVentaH, @MedioPagoH, @TipoCompH, @IdClienteH, @UsuarioVendedorH);
+        SET @IdCompGenH = SCOPE_IDENTITY();
+
+        DECLARE @NomProdH VARCHAR(100), @CantH INT, @IdProdH INT, @PrecioH DECIMAL(10,2);
+
+        DECLARE curDetHist CURSOR LOCAL FAST_FORWARD FOR
+            SELECT NombreProducto, Cantidad FROM #DetallesHistLote WHERE IdLote = @h;
+
+        OPEN curDetHist;
+        FETCH NEXT FROM curDetHist INTO @NomProdH, @CantH;
+
+        WHILE @@FETCH_STATUS = 0
+        BEGIN
+            SET @IdProdH = NULL;
+            SELECT TOP 1 @IdProdH = IdProducto, @PrecioH = PrecioVenta FROM Producto WHERE NombreProducto = @NomProdH;
+            IF @IdProdH IS NULL
+                SELECT TOP 1 @IdProdH = IdProducto, @PrecioH = PrecioVenta FROM Producto ORDER BY IdProducto;
+
+            INSERT INTO DetalleComprobante (IdComprobante, Cantidad, PrecioUnitario, IdProducto)
+            VALUES (@IdCompGenH, @CantH, @PrecioH, @IdProdH);
+
+            FETCH NEXT FROM curDetHist INTO @NomProdH, @CantH;
+        END
+
+        CLOSE curDetHist;
+        DEALLOCATE curDetHist;
+
+        SET @h = @h + 1;
+    END;
+
+    DROP TABLE #DetallesHistLote;
+    DROP TABLE #VentasHistLote;
+
+    PRINT '¡Lote de ventas históricas (2024 y 2025) cargado exitosamente!';
 END
 GO

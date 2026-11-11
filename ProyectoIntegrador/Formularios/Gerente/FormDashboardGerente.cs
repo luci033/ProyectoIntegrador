@@ -1,4 +1,4 @@
-using CapaNegocio;
+﻿using CapaNegocio;
 using ProyectoIntegrador.Formularios.Devoluciones;
 using ProyectoIntegrador.Formularios.Ventas;
 using System;
@@ -66,16 +66,16 @@ namespace ProyectoIntegrador.Formularios.Gerente
             inicializandoCombos = true;
             CBFiltroPeriodo.Items.Clear();
             CBFiltroPeriodo.Items.Add("Por Semana (Últimos 7 días)");
-            CBFiltroPeriodo.Items.Add("Mes Actual (Por Semanas)");
-            CBFiltroPeriodo.Items.Add("Comparar Meses (Año Actual)");
-            CBFiltroPeriodo.Items.Add("Comparar Años");
+            CBFiltroPeriodo.Items.Add("Por Mes (Semanas del Mes Actual)");
+            CBFiltroPeriodo.Items.Add("Por Año (Meses del Año Actual)");
             CBFiltroPeriodo.SelectedIndex = 0;
 
+            CBFiltroChartSecundario.Width = 230;
             CBFiltroChartSecundario.Items.Clear();
-            CBFiltroChartSecundario.Items.Add("Por Semana");
-            CBFiltroChartSecundario.Items.Add("Por Mes");
-            CBFiltroChartSecundario.Items.Add("Por Año");
-            CBFiltroChartSecundario.SelectedIndex = 1; // Por defecto "Por Mes" (para contrastar con los últimos 7 días de arriba)
+            CBFiltroChartSecundario.Items.Add("Comparar Meses (Actual vs Anterior)");
+            CBFiltroChartSecundario.Items.Add("Comparar Años Mes a Mes");
+            CBFiltroChartSecundario.Items.Add("Comparar Totales Anuales");
+            CBFiltroChartSecundario.SelectedIndex = 1; // Por defecto compara Año Actual vs Año Anterior mes a mes
             inicializandoCombos = false;
 
             CargarDatosDashboard();
@@ -146,7 +146,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
             legend.Font = new Font("Segoe UI", 8.5f);
             legend.BackColor = Color.Transparent;
 
-            // 3. Gráfico Secundario de Evolución de Recaudación con filtro propio (Semana / Mes / Año)
+            // 3. Gráfico Secundario Comparativo (Barras / Columnas)
             chartSecundario.BackColor = Color.White;
             var areaSec = chartSecundario.ChartAreas["ChartAreaSecundario"];
             areaSec.BackColor = Color.White;
@@ -156,14 +156,15 @@ namespace ProyectoIntegrador.Formularios.Gerente
             areaSec.AxisY.LabelStyle.Font = new Font("Segoe UI", 8.5f);
             areaSec.AxisY.LabelStyle.Format = "${0:N0}";
 
-            var serieSec = chartSecundario.Series["RecaudacionSecundaria"];
-            serieSec.ChartType = SeriesChartType.SplineArea;
-            serieSec.BorderWidth = 3;
-            serieSec.Color = Color.FromArgb(180, 42, 8, 12); // Borgoña ALBA traslúcido
-            serieSec.BorderColor = EstiloUI.ColorBorgoña;
-            serieSec.MarkerStyle = MarkerStyle.Circle;
-            serieSec.MarkerSize = 6;
-            serieSec.MarkerColor = EstiloUI.ColorBorgoña;
+            if (chartSecundario.Legends.Count == 0)
+            {
+                Legend legSec = new Legend("LegendSecundario");
+                legSec.Docking = Docking.Top;
+                legSec.Alignment = StringAlignment.Far;
+                legSec.Font = new Font("Segoe UI", 8.5f);
+                legSec.BackColor = Color.Transparent;
+                chartSecundario.Legends.Add(legSec);
+            }
         }
 
         public void CargarDatosDashboard()
@@ -262,7 +263,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
             LAlertasStockSub.Text = cantAlertas > 0 ? "Requieren reposición urgente" : "Stock en niveles óptimos";
 
             // --- 2. GRÁFICOS ESTADÍSTICOS ---
-            // A. Evolución y Comparación de Recaudación según el filtro seleccionado
+            // A. Evolución de Recaudación según el filtro seleccionado
             string filtro = CBFiltroPeriodo.SelectedItem != null ? CBFiltroPeriodo.SelectedItem.ToString() : "Por Semana (Últimos 7 días)";
             var serieEvo = chartEvolucion.Series["Recaudacion"];
             serieEvo.Points.Clear();
@@ -288,9 +289,9 @@ namespace ProyectoIntegrador.Formularios.Gerente
                     serieEvo.Points.AddXY(dia.ToString("dd/MM"), (double)totalDia);
                 }
             }
-            else if (filtro == "Mes Actual (Por Semanas)")
+            else if (filtro == "Por Mes (Semanas del Mes Actual)")
             {
-                LTituloChartEvolucion.Text = "Recaudación del Mes por Semanas";
+                LTituloChartEvolucion.Text = "Evolución del Mes por Semanas";
 
                 for (int semana = 1; semana <= 4; semana++)
                 {
@@ -313,9 +314,9 @@ namespace ProyectoIntegrador.Formularios.Gerente
                     serieEvo.Points.AddXY("Sem. " + semana, (double)totalSemana);
                 }
             }
-            else if (filtro == "Comparar Meses (Año Actual)")
+            else if (filtro == "Por Año (Meses del Año Actual)")
             {
-                LTituloChartEvolucion.Text = "Comparación Mensual de Recaudación (" + hoy.Year + ")";
+                LTituloChartEvolucion.Text = "Evolución Mensual de Recaudación (" + hoy.Year + ")";
                 string[] nombresMeses = { "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" };
 
                 for (int mes = 1; mes <= 12; mes++)
@@ -331,25 +332,6 @@ namespace ProyectoIntegrador.Formularios.Gerente
                         }
                     }
                     serieEvo.Points.AddXY(nombresMeses[mes - 1], (double)totalMes);
-                }
-            }
-            else if (filtro == "Comparar Años")
-            {
-                LTituloChartEvolucion.Text = "Comparación Anual de Recaudación";
-
-                for (int anio = hoy.Year - 2; anio <= hoy.Year; anio++)
-                {
-                    decimal totalAnio = 0;
-
-                    foreach (DataRow row in tablaVentas.Rows)
-                    {
-                        DateTime fecha = Convert.ToDateTime(row["FechaComprobante"]);
-                        if (fecha.Year == anio)
-                        {
-                            totalAnio += Convert.ToDecimal(row["Total"]);
-                        }
-                    }
-                    serieEvo.Points.AddXY(anio.ToString(), (double)totalAnio);
                 }
             }
 
@@ -389,7 +371,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
                 colorIdx++;
             }
 
-            // C. Gráfico Secundario de Evolución de Recaudación (por Semana, Mes o Año)
+            // C. Gráfico Secundario Comparativo (Barras)
             CargarGraficoSecundario(tablaVentas, hoy);
         }
 
@@ -402,55 +384,105 @@ namespace ProyectoIntegrador.Formularios.Gerente
 
             string filtroSec = CBFiltroChartSecundario.SelectedItem != null
                 ? CBFiltroChartSecundario.SelectedItem.ToString()
-                : "Por Semana";
+                : "Comparar Años Mes a Mes";
 
-            var serieSec = chartSecundario.Series["RecaudacionSecundaria"];
-            serieSec.Points.Clear();
+            chartSecundario.Series.Clear();
             chartSecundario.ChartAreas["ChartAreaSecundario"].AxisX.Interval = 1;
 
-            if (filtroSec == "Por Semana")
+            if (filtroSec == "Comparar Meses (Actual vs Anterior)")
             {
-                LTituloChartSecundario.Text = "Evolución de Recaudación por Semana (Últimos 7 días)";
+                DateTime mesAnt = hoy.AddMonths(-1);
+                LTituloChartSecundario.Text = "Comparación por Semanas: Mes Anterior vs Mes Actual";
 
-                for (int i = 6; i >= 0; i--)
+                Series serieAnterior = new Series("Mes Anterior (" + mesAnt.ToString("MM/yyyy") + ")");
+                serieAnterior.ChartType = SeriesChartType.Column;
+                serieAnterior.Color = Color.FromArgb(197, 160, 89); // Dorado ALBA
+
+                Series serieActual = new Series("Mes Actual (" + hoy.ToString("MM/yyyy") + ")");
+                serieActual.ChartType = SeriesChartType.Column;
+                serieActual.Color = EstiloUI.ColorBorgoña; // Borgoña ALBA
+
+                for (int semana = 1; semana <= 4; semana++)
                 {
-                    DateTime dia = hoy.AddDays(-i);
-                    decimal totalDia = 0;
+                    decimal totalSemAnt = 0;
+                    decimal totalSemAct = 0;
 
                     foreach (DataRow row in tablaVentas.Rows)
                     {
                         DateTime fecha = Convert.ToDateTime(row["FechaComprobante"]);
-                        if (fecha.Date == dia.Date)
+                        int nroSemana = ((fecha.Day - 1) / 7) + 1;
+                        if (nroSemana > 4) nroSemana = 4;
+
+                        if (nroSemana == semana)
                         {
-                            totalDia += Convert.ToDecimal(row["Total"]);
+                            if (fecha.Month == mesAnt.Month && fecha.Year == mesAnt.Year)
+                            {
+                                totalSemAnt += Convert.ToDecimal(row["Total"]);
+                            }
+                            else if (fecha.Month == hoy.Month && fecha.Year == hoy.Year)
+                            {
+                                totalSemAct += Convert.ToDecimal(row["Total"]);
+                            }
                         }
                     }
-                    serieSec.Points.AddXY(dia.ToString("dd/MM"), (double)totalDia);
+
+                    serieAnterior.Points.AddXY("Semana " + semana, (double)totalSemAnt);
+                    serieActual.Points.AddXY("Semana " + semana, (double)totalSemAct);
                 }
+
+                chartSecundario.Series.Add(serieAnterior);
+                chartSecundario.Series.Add(serieActual);
             }
-            else if (filtroSec == "Por Mes")
+            else if (filtroSec == "Comparar Años Mes a Mes")
             {
-                LTituloChartSecundario.Text = $"Evolución de Recaudación por Mes ({hoy.Year})";
+                int anioAnt = hoy.Year - 1;
+                int anioAct = hoy.Year;
+                LTituloChartSecundario.Text = "Comparación Mensual de Recaudación (" + anioAnt + " vs " + anioAct + ")";
                 string[] nombresMeses = { "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" };
+
+                Series serieAnioAnt = new Series("Año " + anioAnt);
+                serieAnioAnt.ChartType = SeriesChartType.Column;
+                serieAnioAnt.Color = Color.FromArgb(197, 160, 89); // Dorado ALBA
+
+                Series serieAnioAct = new Series("Año " + anioAct);
+                serieAnioAct.ChartType = SeriesChartType.Column;
+                serieAnioAct.Color = EstiloUI.ColorBorgoña; // Borgoña ALBA
 
                 for (int mes = 1; mes <= 12; mes++)
                 {
-                    decimal totalMes = 0;
+                    decimal totalMesAnt = 0;
+                    decimal totalMesAct = 0;
 
                     foreach (DataRow row in tablaVentas.Rows)
                     {
                         DateTime fecha = Convert.ToDateTime(row["FechaComprobante"]);
-                        if (fecha.Year == hoy.Year && fecha.Month == mes)
+                        if (fecha.Month == mes)
                         {
-                            totalMes += Convert.ToDecimal(row["Total"]);
+                            if (fecha.Year == anioAnt)
+                            {
+                                totalMesAnt += Convert.ToDecimal(row["Total"]);
+                            }
+                            else if (fecha.Year == anioAct)
+                            {
+                                totalMesAct += Convert.ToDecimal(row["Total"]);
+                            }
                         }
                     }
-                    serieSec.Points.AddXY(nombresMeses[mes - 1], (double)totalMes);
+
+                    serieAnioAnt.Points.AddXY(nombresMeses[mes - 1], (double)totalMesAnt);
+                    serieAnioAct.Points.AddXY(nombresMeses[mes - 1], (double)totalMesAct);
                 }
+
+                chartSecundario.Series.Add(serieAnioAnt);
+                chartSecundario.Series.Add(serieAnioAct);
             }
-            else if (filtroSec == "Por Año")
+            else if (filtroSec == "Comparar Totales Anuales")
             {
-                LTituloChartSecundario.Text = "Evolución de Recaudación por Año";
+                LTituloChartSecundario.Text = "Comparación de Recaudación Total por Año";
+
+                Series serieAnual = new Series("Recaudación Anual");
+                serieAnual.ChartType = SeriesChartType.Column;
+                serieAnual.Color = EstiloUI.ColorBorgoña;
 
                 for (int anio = hoy.Year - 2; anio <= hoy.Year; anio++)
                 {
@@ -464,8 +496,11 @@ namespace ProyectoIntegrador.Formularios.Gerente
                             totalAnio += Convert.ToDecimal(row["Total"]);
                         }
                     }
-                    serieSec.Points.AddXY(anio.ToString(), (double)totalAnio);
+
+                    serieAnual.Points.AddXY(anio.ToString(), (double)totalAnio);
                 }
+
+                chartSecundario.Series.Add(serieAnual);
             }
         }
 
