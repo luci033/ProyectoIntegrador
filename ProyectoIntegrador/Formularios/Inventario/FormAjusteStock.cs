@@ -129,40 +129,6 @@ namespace ProyectoIntegrador.Formularios.Inventario
                 );
                 LimpiarCamposProducto();
             }
-
-            /*
-            // Buscar en el catálogo estático en memoria
-            var producto = StockSimulado.BuscarPorCodigo(codigoIngresado);
-
-            if (producto != null)
-            {
-                TBCodigoProducto.Text = producto.Codigo;
-                TBNombreProducto.Text = producto.Nombre;
-                TBStockActual.Text = producto.StockActual.ToString();
-                TBCantidadAjustar.Focus();
-            }
-            else
-            {
-                DialogResult res = MessageBox.Show(
-                    $"No se encontró ningún producto activo con el código '{codigoIngresado}'.\n\n¿Desea abrir el catálogo de búsqueda de productos para seleccionarlo?",
-                    "Producto no encontrado",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question
-                );
-
-                if (res == DialogResult.Yes)
-                {
-                    AbrirSelectorProductoModal();
-                }
-                else
-                {
-                    TBNombreProducto.Clear();
-                    TBStockActual.Clear();
-                    TBCodigoProducto.Focus();
-                    TBCodigoProducto.SelectAll();
-                }
-            }
-            */
         }
 
         private void LimpiarCamposProducto()
@@ -182,6 +148,7 @@ namespace ProyectoIntegrador.Formularios.Inventario
 
                 if (formBuscar.ShowDialog() == DialogResult.OK)
                 {
+                    IdProductoSeleccionado = formBuscar.IdProducto;
                     TBCodigoProducto.Text = formBuscar.Codigo;
                     TBNombreProducto.Text = formBuscar.Nombre;
                     TBStockActual.Text = formBuscar.Stock.ToString();

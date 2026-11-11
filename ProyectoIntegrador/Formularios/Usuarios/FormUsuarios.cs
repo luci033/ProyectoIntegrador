@@ -90,7 +90,7 @@ namespace ProyectoIntegrador.Formularios.Usuarios
             }
 
             // Opciones para Rol
-            CBRol.Items.AddRange(new string[] { "Todos", "Administrador", "Vendedor", "Logística" });
+            CBRol.Items.AddRange(new string[] { "Todos", "Administrador", "Gerente", "Vendedor", "Logística" });
             CBRol.SelectedIndex = 0; // Deja "Todos" seleccionado por defecto
 
             // Opciones para Estado
@@ -204,24 +204,8 @@ namespace ProyectoIntegrador.Formularios.Usuarios
             {
                 int idUsuario = Convert.ToInt32(dataGridRegistroUsuario.Rows[e.RowIndex].Cells[0].Value);
 
-                /*
-                // Leemos los datos exactos según el orden de tu código
-                 dni = Convert.ToString(dataGridRegistroUsuario.Rows[e.RowIndex].Cells[1].Value);
-                string nombre = Convert.ToString(dataGridRegistroUsuario.Rows[e.RowIndex].Cells[2].Value);
-                string apellido = Convert.ToString(dataGridRegistroUsuario.Rows[e.RowIndex].Cells[3].Value);
-                string nombreUsuario = Convert.ToString(dataGridRegistroUsuario.Rows[e.RowIndex].Cells[4].Value);
-                string rol = Convert.ToString(dataGridRegistroUsuario.Rows[e.RowIndex].Cells[5].Value);
-                
-                string telefono = Convert.ToString(dataGridRegistroUsuario.Rows[e.RowIndex].Cells[6].Value);
-                string domicilio = Convert.ToString(dataGridRegistroUsuario.Rows[e.RowIndex].Cells[7].Value);
-                */
-
-
                 FormUsuarioABM modalABM = new FormUsuarioABM();
                 modalABM.ConfigurarModoEdicionPorId(idUsuario);
-                /*
-                modalABM.ConfigurarModoEdicion(dni, nombre, apellido, nombreUsuario, rol telefono, domicilio);
-                */
 
                 if (modalABM.ShowDialog() == DialogResult.OK)
                 {
@@ -302,9 +286,9 @@ namespace ProyectoIntegrador.Formularios.Usuarios
             {
                 string nombreRol = "Desconocido";
                 if (item.IdRol == 1) nombreRol = "Administrador";
-                else if (item.IdRol == 2) nombreRol = "Vendedor";
-                else if (item.IdRol == 3) nombreRol = "Logística";
-                else if (item.IdRol == 4) nombreRol = "Gerente";
+                else if (item.IdRol == 2) nombreRol = "Gerente";
+                else if (item.IdRol == 3) nombreRol = "Vendedor";
+                else if (item.IdRol == 4) nombreRol = "Logística";
 
                 int indiceFila = dataGridRegistroUsuario.Rows.Add(
                     item.IdUsuario,
@@ -329,6 +313,3 @@ namespace ProyectoIntegrador.Formularios.Usuarios
         }
     }
 }
-    
-
-

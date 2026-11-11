@@ -122,6 +122,8 @@ namespace ProyectoIntegrador.Formularios.Principal
 
         private void BVentas_Click(object sender, EventArgs e)
         {
+            ResaltarBotonActivo(BHistorialVentas);
+
             // Verificamos si ya está abierto para traerlo al frente
             Form formAbierto = this.MdiChildren.FirstOrDefault(x => x is FHistorialVentas);
 

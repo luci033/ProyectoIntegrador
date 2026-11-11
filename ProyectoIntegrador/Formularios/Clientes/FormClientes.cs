@@ -173,6 +173,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
             else if (nombreColumna == "colHistorial")
             {
                 // 1. Atrapamos todos los datos de la fila seleccionada
+                int idClienteSeleccionado = Convert.ToInt32(DGClientes.Rows[e.RowIndex].Cells[0].Value);
                 string nombre = Convert.ToString(DGClientes.Rows[e.RowIndex].Cells[2].Value);
                 string apellido = Convert.ToString(DGClientes.Rows[e.RowIndex].Cells[3].Value);
                 string dni = Convert.ToString(DGClientes.Rows[e.RowIndex].Cells[4].Value);
@@ -190,8 +191,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
                     // 3. Unimos el nombre y apellido para que se vea más completo en la caja de texto
                     string nombreCompleto = nombre + " " + apellido;
 
-
-                    formDetalle.CargarDatosCliente(nombreCompleto, correo, condicionIVA, dni);
+                    formDetalle.CargarDatosCliente(idClienteSeleccionado, nombreCompleto, correo, condicionIVA, dni);
 
                     // 5. Mostramos la pantalla
                     formDetalle.ShowDialog();

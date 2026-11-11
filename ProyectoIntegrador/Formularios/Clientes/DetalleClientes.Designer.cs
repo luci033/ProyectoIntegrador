@@ -353,6 +353,7 @@ namespace ProyectoIntegrador.Formularios.Clientes
             this.BPDF.TabIndex = 5;
             this.BPDF.Text = "Exportar PDF";
             this.BPDF.UseVisualStyleBackColor = true;
+            this.BPDF.Click += new System.EventHandler(this.BPDF_Click);
             // 
             // BCerrar
             // 
