@@ -32,6 +32,9 @@ namespace ProyectoIntegrador.Formularios.Gerente
 
         private void FormDashboardGerente_Load(object sender, EventArgs e)
         {
+            this.AutoScroll = true;
+            this.AutoScrollMargin = new Size(0, 20);
+
             EstiloUI.AplicarEstiloFormulario(this);
             EstiloUI.AplicarEstiloTitulo(LTitulo);
             EstiloUI.AplicarEstiloBoton(BRefrescar);
@@ -66,8 +69,9 @@ namespace ProyectoIntegrador.Formularios.Gerente
             inicializandoCombos = true;
             CBFiltroPeriodo.Items.Clear();
             CBFiltroPeriodo.Items.Add("Por Semana (Últimos 7 días)");
-            CBFiltroPeriodo.Items.Add("Por Mes (Semanas del Mes Actual)");
-            CBFiltroPeriodo.Items.Add("Por Año (Meses del Año Actual)");
+            CBFiltroPeriodo.Items.Add("Mes Actual (Por Semanas)");
+            CBFiltroPeriodo.Items.Add("Comparar Meses (Año Actual)");
+            CBFiltroPeriodo.Items.Add("Comparar Años");
             CBFiltroPeriodo.SelectedIndex = 0;
 
             CBFiltroChartSecundario.Width = 230;
@@ -75,7 +79,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
             CBFiltroChartSecundario.Items.Add("Comparar Meses (Actual vs Anterior)");
             CBFiltroChartSecundario.Items.Add("Comparar Años Mes a Mes");
             CBFiltroChartSecundario.Items.Add("Comparar Totales Anuales");
-            CBFiltroChartSecundario.SelectedIndex = 1; // Por defecto compara Año Actual vs Año Anterior mes a mes
+            CBFiltroChartSecundario.SelectedIndex = 1; // Por defecto "Comparar Años Mes a Mes"
             inicializandoCombos = false;
 
             CargarDatosDashboard();
@@ -146,7 +150,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
             legend.Font = new Font("Segoe UI", 8.5f);
             legend.BackColor = Color.Transparent;
 
-            // 3. Gráfico Secundario Comparativo (Barras / Columnas)
+            // 3. Gráfico Secundario Grande Comparativo (Barras / Columnas)
             chartSecundario.BackColor = Color.White;
             var areaSec = chartSecundario.ChartAreas["ChartAreaSecundario"];
             areaSec.BackColor = Color.White;
@@ -289,9 +293,9 @@ namespace ProyectoIntegrador.Formularios.Gerente
                     serieEvo.Points.AddXY(dia.ToString("dd/MM"), (double)totalDia);
                 }
             }
-            else if (filtro == "Por Mes (Semanas del Mes Actual)")
+            else if (filtro == "Mes Actual (Por Semanas)")
             {
-                LTituloChartEvolucion.Text = "Evolución del Mes por Semanas";
+                LTituloChartEvolucion.Text = "Recaudación del Mes por Semanas";
 
                 for (int semana = 1; semana <= 4; semana++)
                 {
@@ -314,9 +318,9 @@ namespace ProyectoIntegrador.Formularios.Gerente
                     serieEvo.Points.AddXY("Sem. " + semana, (double)totalSemana);
                 }
             }
-            else if (filtro == "Por Año (Meses del Año Actual)")
+            else if (filtro == "Comparar Meses (Año Actual)")
             {
-                LTituloChartEvolucion.Text = "Evolución Mensual de Recaudación (" + hoy.Year + ")";
+                LTituloChartEvolucion.Text = "Comparación Mensual de Recaudación (" + hoy.Year + ")";
                 string[] nombresMeses = { "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" };
 
                 for (int mes = 1; mes <= 12; mes++)
@@ -332,6 +336,25 @@ namespace ProyectoIntegrador.Formularios.Gerente
                         }
                     }
                     serieEvo.Points.AddXY(nombresMeses[mes - 1], (double)totalMes);
+                }
+            }
+            else if (filtro == "Comparar Años")
+            {
+                LTituloChartEvolucion.Text = "Comparación Anual de Recaudación";
+
+                for (int anio = hoy.Year - 2; anio <= hoy.Year; anio++)
+                {
+                    decimal totalAnio = 0;
+
+                    foreach (DataRow row in tablaVentas.Rows)
+                    {
+                        DateTime fecha = Convert.ToDateTime(row["FechaComprobante"]);
+                        if (fecha.Year == anio)
+                        {
+                            totalAnio += Convert.ToDecimal(row["Total"]);
+                        }
+                    }
+                    serieEvo.Points.AddXY(anio.ToString(), (double)totalAnio);
                 }
             }
 
@@ -371,7 +394,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
                 colorIdx++;
             }
 
-            // C. Gráfico Secundario Comparativo (Barras)
+            // C. Gráfico Secundario Grande Comparativo (Barras)
             CargarGraficoSecundario(tablaVentas, hoy);
         }
 
@@ -521,14 +544,14 @@ namespace ProyectoIntegrador.Formularios.Gerente
             int anchoTotal = this.ClientSize.Width - 40;
             if (anchoTotal < 800) anchoTotal = 800;
 
-            // Ajustar el ancho de todos los paneles contenedores al mismo anchoTotal
+            // 1. Asignar el ancho completo a TODOS los paneles contenedores
             panelTopHeader.Width = anchoTotal;
             panelKpis.Width = anchoTotal;
             panelGraficos.Width = anchoTotal;
             panelGraficoSecundario.Width = anchoTotal;
             panelInferior.Width = anchoTotal;
 
-            // Reubicar controles de la cabecera a la derecha
+            // Reubicar botones y combos de la cabecera
             BRefrescar.Left = panelTopHeader.Width - BRefrescar.Width;
             CBFiltroPeriodo.Left = BRefrescar.Left - CBFiltroPeriodo.Width - 12;
             LFiltroPeriodo.Left = CBFiltroPeriodo.Left - LFiltroPeriodo.Width - 6;
@@ -544,13 +567,19 @@ namespace ProyectoIntegrador.Formularios.Gerente
             // Bloque 2: Gráficos Superiores
             int anchoGraficos = (anchoTotal - 20) / 2;
             cardChartEvolucion.Width = anchoGraficos;
+            chartEvolucion.Width = cardChartEvolucion.Width - 20;
+
             cardChartCategorias.Anchor = AnchorStyles.Top | AnchorStyles.Left;
             cardChartCategorias.Left = cardChartEvolucion.Right + 20;
             cardChartCategorias.Width = anchoGraficos;
+            chartCategorias.Left = 10;
+            chartCategorias.Width = cardChartCategorias.Width - 20;
 
-            // Bloque 2.5: Gráfico Secundario (Ancho Completo)
+            // Bloque 2.5: Gráfico Grande Comparativo en Barras (Ancho Completo)
             panelGraficoSecundario.Top = panelGraficos.Bottom + 12;
             cardChartSecundario.Width = anchoTotal;
+            chartSecundario.Width = cardChartSecundario.Width - 20;
+
             CBFiltroChartSecundario.Left = cardChartSecundario.Width - CBFiltroChartSecundario.Width - 16;
             LFiltroChartSecundario.Left = CBFiltroChartSecundario.Left - LFiltroChartSecundario.Width - 8;
 

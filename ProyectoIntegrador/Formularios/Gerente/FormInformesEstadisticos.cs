@@ -1,4 +1,4 @@
-using CapaNegocio;
+﻿using CapaNegocio;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,6 +13,7 @@ namespace ProyectoIntegrador.Formularios.Gerente
     public partial class FormInformesEstadisticos : Form
     {
         private CN_Venta objNegocioVenta = new CN_Venta();
+        private bool inicializando = false;
 
         public FormInformesEstadisticos()
         {
@@ -35,43 +36,82 @@ namespace ProyectoIntegrador.Formularios.Gerente
             EstiloUI.AplicarEstiloCard(cardPromedio, 10);
             EstiloUI.AplicarEstiloCard(cardLider, 10);
 
-            CBPeriodo.SelectedIndex = 0; // "Mes Actual" por defecto
-            GenerarInforme();
+            inicializando = true;
+            CBPeriodo.Items.Clear();
+            CBPeriodo.Items.Add("Histórico Completo");
+            CBPeriodo.Items.Add("Año Actual");
+            CBPeriodo.Items.Add("Mes Actual");
+            CBPeriodo.Items.Add("Últimos 7 días");
+            CBPeriodo.Items.Add("Hoy");
+            CBPeriodo.Items.Add("Personalizado");
+            CBPeriodo.SelectedIndex = 0; // Histórico Completo por defecto para que siempre tenga datos de entrada
+
+            DTPDesde.ValueChanged += DTPFechas_ValueChanged;
+            DTPHasta.ValueChanged += DTPFechas_ValueChanged;
+            inicializando = false;
+
+            AplicarFiltroPeriodo();
+            GenerarInforme(false);
+        }
+
+        private void DTPFechas_ValueChanged(object sender, EventArgs e)
+        {
+            if (inicializando) return;
+            if (CBPeriodo.SelectedItem?.ToString() != "Personalizado")
+            {
+                inicializando = true;
+                CBPeriodo.SelectedItem = "Personalizado";
+                inicializando = false;
+            }
         }
 
         private void CBPeriodo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (inicializando) return;
+            AplicarFiltroPeriodo();
+            GenerarInforme(false);
+        }
+
+        private void AplicarFiltroPeriodo()
+        {
             DateTime hoy = DateTime.Today;
-            string seleccion = CBPeriodo.SelectedItem?.ToString() ?? "Mes Actual";
+            string seleccion = CBPeriodo.SelectedItem != null ? CBPeriodo.SelectedItem.ToString() : "Histórico Completo";
 
-            switch (seleccion)
+            inicializando = true;
+            if (seleccion == "Hoy")
             {
-                case "Hoy":
-                    DTPDesde.Value = hoy;
-                    DTPHasta.Value = hoy;
-                    break;
-                case "Últimos 7 días":
-                    DTPDesde.Value = hoy.AddDays(-6);
-                    DTPHasta.Value = hoy;
-                    break;
-                case "Mes Actual":
-                    DTPDesde.Value = new DateTime(hoy.Year, hoy.Month, 1);
-                    DTPHasta.Value = hoy;
-                    break;
-                case "Personalizado":
-                    // El usuario define las fechas manualmente
-                    break;
+                DTPDesde.Value = hoy;
+                DTPHasta.Value = hoy;
             }
-
-            GenerarInforme();
+            else if (seleccion == "Últimos 7 días")
+            {
+                DTPDesde.Value = hoy.AddDays(-6);
+                DTPHasta.Value = hoy;
+            }
+            else if (seleccion == "Mes Actual")
+            {
+                DTPDesde.Value = new DateTime(hoy.Year, hoy.Month, 1);
+                DTPHasta.Value = hoy;
+            }
+            else if (seleccion == "Año Actual")
+            {
+                DTPDesde.Value = new DateTime(hoy.Year, 1, 1);
+                DTPHasta.Value = hoy;
+            }
+            else if (seleccion == "Histórico Completo")
+            {
+                DTPDesde.Value = new DateTime(2020, 1, 1);
+                DTPHasta.Value = hoy;
+            }
+            inicializando = false;
         }
 
         private void BGenerar_Click(object sender, EventArgs e)
         {
-            GenerarInforme();
+            GenerarInforme(true);
         }
 
-        private void GenerarInforme()
+        private void GenerarInforme(bool esManual = false)
         {
             DateTime desde = DTPDesde.Value.Date;
             DateTime hasta = DTPHasta.Value.Date.AddDays(1).AddSeconds(-1);
@@ -90,32 +130,35 @@ namespace ProyectoIntegrador.Formularios.Gerente
             string categoriaLider = "-";
             decimal maxRecaudacion = -1;
 
-            foreach (DataRow row in tabla.Rows)
+            if (tabla != null && tabla.Rows.Count > 0)
             {
-                totalFacturacion += Convert.ToDecimal(row["TotalRecaudado"]);
-                totalUnidades += Convert.ToInt32(row["UnidadesVendidas"]);
-            }
-
-            foreach (DataRow row in tabla.Rows)
-            {
-                string categoria = row["Categoria"].ToString();
-                int unidades = Convert.ToInt32(row["UnidadesVendidas"]);
-                decimal recaudado = Convert.ToDecimal(row["TotalRecaudado"]);
-
-                if (recaudado > maxRecaudacion && recaudado > 0)
+                foreach (DataRow row in tabla.Rows)
                 {
-                    maxRecaudacion = recaudado;
-                    categoriaLider = categoria;
+                    totalFacturacion += Convert.ToDecimal(row["TotalRecaudado"]);
+                    totalUnidades += Convert.ToInt32(row["UnidadesVendidas"]);
                 }
 
-                decimal porcentaje = totalFacturacion > 0 ? (recaudado * 100m / totalFacturacion) : 0;
+                foreach (DataRow row in tabla.Rows)
+                {
+                    string categoria = row["Categoria"].ToString();
+                    int unidades = Convert.ToInt32(row["UnidadesVendidas"]);
+                    decimal recaudado = Convert.ToDecimal(row["TotalRecaudado"]);
 
-                DGInforme.Rows.Add(
-                    categoria,
-                    unidades + " piezas",
-                    recaudado.ToString("C0"),
-                    porcentaje.ToString("F1") + "%"
-                );
+                    if (recaudado > maxRecaudacion && recaudado > 0)
+                    {
+                        maxRecaudacion = recaudado;
+                        categoriaLider = categoria;
+                    }
+
+                    decimal porcentaje = totalFacturacion > 0 ? (recaudado * 100m / totalFacturacion) : 0;
+
+                    DGInforme.Rows.Add(
+                        categoria,
+                        unidades + " piezas",
+                        recaudado.ToString("C0"),
+                        porcentaje.ToString("F1") + "%"
+                    );
+                }
             }
 
             // Actualizar tarjetas de métricas consolidadas
@@ -125,6 +168,28 @@ namespace ProyectoIntegrador.Formularios.Gerente
             decimal ticketPromedio = totalUnidades > 0 ? (totalFacturacion / totalUnidades) : 0;
             LPromedioValor.Text = ticketPromedio.ToString("C0");
             LLiderValor.Text = categoriaLider;
+
+            if (esManual)
+            {
+                if (tabla == null || tabla.Rows.Count == 0)
+                {
+                    MessageBox.Show(
+                        $"No se registraron ventas en el rango seleccionado ({DTPDesde.Value:dd/MM/yyyy} al {DTPHasta.Value:dd/MM/yyyy}).\n\nPruebe seleccionando 'Histórico Completo' o 'Año Actual'.",
+                        "Informe Estadístico",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
+                }
+                else
+                {
+                    MessageBox.Show(
+                        $"Informe generado con éxito para el período {DTPDesde.Value:dd/MM/yyyy} al {DTPHasta.Value:dd/MM/yyyy}.\n\nSe consolidaron {tabla.Rows.Count} categorías con un total de {totalFacturacion:C0}.",
+                        "Informe Estadístico",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
+                }
+            }
         }
 
         private void BExportar_Click(object sender, EventArgs e)
